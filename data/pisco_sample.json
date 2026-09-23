@@ -1,0 +1,1458 @@
+[
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-05",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-06",
+    "precipMm": 13.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-07",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-08",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-09",
+    "precipMm": 16.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-11",
+    "precipMm": 4.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-05",
+    "precipMm": 10.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-06",
+    "precipMm": 2.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-07",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-08",
+    "precipMm": 14.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-09",
+    "precipMm": 12.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-10",
+    "precipMm": 8.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-11",
+    "precipMm": 13.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-05",
+    "precipMm": 21.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-06",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-07",
+    "precipMm": 11.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-08",
+    "precipMm": 10.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-09",
+    "precipMm": 6.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-10",
+    "precipMm": 11.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-11",
+    "precipMm": 4.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-05",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-06",
+    "precipMm": 14.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-07",
+    "precipMm": 14.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-08",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-09",
+    "precipMm": 4.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-10",
+    "precipMm": 6.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-11",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-05",
+    "precipMm": 2.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-06",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-07",
+    "precipMm": 6.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-08",
+    "precipMm": 8.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-09",
+    "precipMm": 5.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-10",
+    "precipMm": 5.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-11",
+    "precipMm": 7.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-05",
+    "precipMm": 6.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-06",
+    "precipMm": 4.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-07",
+    "precipMm": 15.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-08",
+    "precipMm": 13.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-09",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-10",
+    "precipMm": 3.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-11",
+    "precipMm": 8.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-05",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-06",
+    "precipMm": 14.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-07",
+    "precipMm": 4.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-08",
+    "precipMm": 3.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-09",
+    "precipMm": 10.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-10",
+    "precipMm": 9.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-11",
+    "precipMm": 9.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-05",
+    "precipMm": 14.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-06",
+    "precipMm": 11.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-07",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08",
+    "precipMm": 4.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09",
+    "precipMm": 5.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10",
+    "precipMm": 6.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-11",
+    "precipMm": 14.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-05",
+    "precipMm": 9.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-06",
+    "precipMm": 3.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-07",
+    "precipMm": 18.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09",
+    "precipMm": 4.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-11",
+    "precipMm": 8.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-05",
+    "precipMm": 11.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-06",
+    "precipMm": 12.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-07",
+    "precipMm": 8.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-08",
+    "precipMm": 14.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-09",
+    "precipMm": 1.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-10",
+    "precipMm": 7.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-11",
+    "precipMm": 3.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-05",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-06",
+    "precipMm": 16.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-07",
+    "precipMm": 9.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-08",
+    "precipMm": 6.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-09",
+    "precipMm": 3.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-10",
+    "precipMm": 11.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-11",
+    "precipMm": 5.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-05",
+    "precipMm": 10.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-06",
+    "precipMm": 22.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-07",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-08",
+    "precipMm": 2.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-09",
+    "precipMm": 4.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-10",
+    "precipMm": 11.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-11",
+    "precipMm": 11.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-05",
+    "precipMm": 4.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-06",
+    "precipMm": 14.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-07",
+    "precipMm": 20.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-08",
+    "precipMm": 4.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-09",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-11",
+    "precipMm": 4.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-05",
+    "precipMm": 22.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-06",
+    "precipMm": 4.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-07",
+    "precipMm": 11.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-08",
+    "precipMm": 11.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-09",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-10",
+    "precipMm": 16.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-11",
+    "precipMm": 9.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-05",
+    "precipMm": 3.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-06",
+    "precipMm": 9.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-07",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-08",
+    "precipMm": 10.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-09",
+    "precipMm": 17.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-10",
+    "precipMm": 1.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-11",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-05",
+    "precipMm": 13.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-06",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-07",
+    "precipMm": 20.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-08",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-09",
+    "precipMm": 15.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-11",
+    "precipMm": 0.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-05",
+    "precipMm": 11.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-06",
+    "precipMm": 3.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-07",
+    "precipMm": 9.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-08",
+    "precipMm": 13.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-09",
+    "precipMm": 7.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-11",
+    "precipMm": 6.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-05",
+    "precipMm": 10.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-06",
+    "precipMm": 14.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-07",
+    "precipMm": 8.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-08",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-09",
+    "precipMm": 18.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-10",
+    "precipMm": 1.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-11",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-05",
+    "precipMm": 7.1,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-06",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-07",
+    "precipMm": 10.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-08",
+    "precipMm": 0.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-09",
+    "precipMm": 5.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-10",
+    "precipMm": 16.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-11",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-05",
+    "precipMm": 1.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-06",
+    "precipMm": 9.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-07",
+    "precipMm": 5.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-08",
+    "precipMm": 14.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-09",
+    "precipMm": 8.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-11",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-05",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-06",
+    "precipMm": 14.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-07",
+    "precipMm": 3.9,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-08",
+    "precipMm": 2.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-09",
+    "precipMm": 2.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-11",
+    "precipMm": 10.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-05",
+    "precipMm": 17.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-06",
+    "precipMm": 10.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-07",
+    "precipMm": 15.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-08",
+    "precipMm": 4.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-09",
+    "precipMm": 11.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-10",
+    "precipMm": 2.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-11",
+    "precipMm": 13.8,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-05",
+    "precipMm": 11.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-06",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-07",
+    "precipMm": 3.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-08",
+    "precipMm": 17.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-09",
+    "precipMm": 11.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-10",
+    "precipMm": 4.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-11",
+    "precipMm": 7.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-05",
+    "precipMm": 8.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-06",
+    "precipMm": 7.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-07",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08",
+    "precipMm": 4.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-11",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-05",
+    "precipMm": 7.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-06",
+    "precipMm": 0.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-07",
+    "precipMm": 0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08",
+    "precipMm": 8.3,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09",
+    "precipMm": 12.0,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10",
+    "precipMm": 12.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-11",
+    "precipMm": 0.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-05",
+    "precipMm": 18.2,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-06",
+    "precipMm": 12.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-07",
+    "precipMm": 0.7,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-08",
+    "precipMm": 14.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-09",
+    "precipMm": 19.4,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-10",
+    "precipMm": 9.5,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-11",
+    "precipMm": 0.6,
+    "fuente": "PISCO-light-recorte-26cuencas",
+    "resolucion": "degradada",
+    "version": "lite-v0"
+  }
+]

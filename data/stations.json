@@ -1,0 +1,122 @@
+[
+  {
+    "id": "socsi",
+    "n": 8,
+    "cuenca": "Cañete",
+    "estacion": "Socsi",
+    "rio": "Cañete",
+    "codigoAuto": "472191AC",
+    "codigoConvencional": "203302",
+    "dz": "DZ4",
+    "escalaTemporal": "Diario",
+    "region": "Pacifico",
+    "lat": -13.03051,
+    "lon": -76.20027,
+    "isEstimated": false,
+    "fuente": "Estaciones.xlsx",
+    "poblados": [
+      "Cañete",
+      "Nuevo Imperial"
+    ],
+    "pobladosGeo": [
+      { "nombre": "Cañete", "lat": -13.0778, "lon": -76.3874 },
+      { "nombre": "Nuevo Imperial", "lat": -12.9453, "lon": -76.2527 }
+    ],
+    "polygon": null,
+    "cota": 302,
+    "cotaFuente": "inventario-altitud",
+    "departamento": "Lima",
+    "provincia": ["Cañete"],
+    "distritos": ["Nuevo Imperial", "Cañete"]
+  },
+  {
+    "id": "chosica",
+    "n": 9,
+    "cuenca": "Rimac",
+    "estacion": "Chosica",
+    "rio": "Rímac",
+    "codigoAuto": "47278214",
+    "codigoConvencional": "202906",
+    "dz": "DZ4",
+    "escalaTemporal": "Diario",
+    "region": "Pacifico",
+    "lat": -11.92986,
+    "lon": -76.68964,
+    "isEstimated": false,
+    "fuente": "Estaciones.xlsx",
+    "poblados": [
+      "Chosica",
+      "Lurigancho-Chosica"
+    ],
+    "pobladosGeo": [
+      { "nombre": "Chosica", "lat": -11.9368, "lon": -76.6969 },
+      { "nombre": "Lurigancho-Chosica", "lat": -11.9488, "lon": -76.7627 }
+    ],
+    "polygon": null,
+    "cota": 867,
+    "cotaFuente": "inventario-altitud",
+    "departamento": "Lima",
+    "provincia": ["Lima"],
+    "distritos": ["Lurigancho-Chosica"]
+  },
+  {
+    "id": "pisac",
+    "n": 24,
+    "cuenca": "Vilcanota",
+    "estacion": "Pisac",
+    "rio": "Vilcanota",
+    "codigoAuto": "472A6280",
+    "codigoConvencional": "250303",
+    "dz": "DZ12",
+    "escalaTemporal": "Diario",
+    "region": "Amazonas",
+    "lat": -13.4195,
+    "lon": -71.8509,
+    "isEstimated": false,
+    "fuente": "Estaciones.xlsx",
+    "poblados": [
+      "Pisac",
+      "Coya"
+    ],
+    "pobladosGeo": [
+      { "nombre": "Pisac", "lat": -13.421, "lon": -71.8505 },
+      { "nombre": "Coya", "lat": -13.3983, "lon": -71.9191 }
+    ],
+    "polygon": null,
+    "cota": 3002,
+    "cotaFuente": "inventario-altitud",
+    "departamento": "Cusco",
+    "provincia": ["Calca"],
+    "distritos": ["Pisac", "Lamay"]
+  },
+  {
+    "id": "puente-ramis",
+    "n": 25,
+    "cuenca": "Ramis",
+    "estacion": "Puente Ramis",
+    "rio": "Ramis",
+    "codigoAuto": "47251282",
+    "codigoConvencional": "210101",
+    "dz": "DZ13",
+    "escalaTemporal": "Diario",
+    "region": "Titicaca",
+    "lat": -15.255309,
+    "lon": -69.873786,
+    "isEstimated": false,
+    "fuente": "Estaciones.xlsx",
+    "poblados": [
+      "Arapa",
+      "Taraco"
+    ],
+    "pobladosGeo": [
+      { "nombre": "Arapa", "lat": -15.1391, "lon": -70.1096 },
+      { "nombre": "Taraco", "lat": -15.2978, "lon": -69.9783 }
+    ],
+    "polygon": null,
+    "cota": 3825,
+    "cotaFuente": "inventario-altitud",
+    "departamento": "Puno",
+    "provincia": ["Azángaro", "Huancané"],
+    "distritos": ["Arapa", "Taraco"]
+  }
+]

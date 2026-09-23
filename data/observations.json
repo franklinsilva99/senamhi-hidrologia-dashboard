@@ -1,0 +1,1640 @@
+[
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-05",
+    "nivel": 1.99,
+    "caudal": 152.6,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-06",
+    "nivel": 1.99,
+    "caudal": 153.0,
+    "precipitacionPisco": 13.1,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-07",
+    "nivel": 2.11,
+    "caudal": 171.4,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-08",
+    "nivel": 1.78,
+    "caudal": 121.2,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-09",
+    "nivel": 2.31,
+    "caudal": 203.3,
+    "precipitacionPisco": 16.0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-10",
+    "nivel": 1.91,
+    "caudal": 141.2,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-11",
+    "nivel": 1.76,
+    "caudal": 118.3,
+    "precipitacionPisco": 4.7,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-05",
+    "nivel": 2.37,
+    "caudal": 89.1,
+    "precipitacionPisco": 10.5,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-06",
+    "nivel": 2.2,
+    "caudal": 77.8,
+    "precipitacionPisco": 2.0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-07",
+    "nivel": 2.01,
+    "caudal": 65.4,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-08",
+    "nivel": 2.54,
+    "caudal": 100.0,
+    "precipitacionPisco": 14.8,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-09",
+    "nivel": 2.31,
+    "caudal": 84.7,
+    "precipitacionPisco": 12.9,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-10",
+    "nivel": 2.0,
+    "caudal": 65.1,
+    "precipitacionPisco": 8.4,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-11",
+    "nivel": 2.57,
+    "caudal": 101.9,
+    "precipitacionPisco": 13.3,
+    "origen": "validado-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-05",
+    "nivel": 2.2,
+    "caudal": 285.6,
+    "precipitacionPisco": 21.8,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-06",
+    "nivel": 2.0,
+    "caudal": 237.8,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-07",
+    "nivel": 2.36,
+    "caudal": 323.5,
+    "precipitacionPisco": 11.8,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-08",
+    "nivel": 2.25,
+    "caudal": 297.7,
+    "precipitacionPisco": 10.9,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-09",
+    "nivel": 2.08,
+    "caudal": 258.2,
+    "precipitacionPisco": 6.4,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-10",
+    "nivel": 1.84,
+    "caudal": 199.6,
+    "precipitacionPisco": 11.9,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-11",
+    "nivel": 2.31,
+    "caudal": 311.2,
+    "precipitacionPisco": 4.3,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-05",
+    "nivel": 2.02,
+    "caudal": 134.8,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-06",
+    "nivel": 2.42,
+    "caudal": 187.5,
+    "precipitacionPisco": 14.3,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-07",
+    "nivel": 1.97,
+    "caudal": 128.4,
+    "precipitacionPisco": 14.3,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-08",
+    "nivel": 2.27,
+    "caudal": 167.4,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-09",
+    "nivel": 2.3,
+    "caudal": 170.9,
+    "precipitacionPisco": 4.1,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-10",
+    "nivel": 2.2,
+    "caudal": 158.0,
+    "precipitacionPisco": 6.4,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-11",
+    "nivel": 1.95,
+    "caudal": 124.7,
+    "precipitacionPisco": 0,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-05",
+    "nivel": 2.24,
+    "caudal": 2143.2,
+    "precipitacionPisco": 2.3,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-06",
+    "nivel": 1.98,
+    "caudal": 1693.7,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-07",
+    "nivel": 1.73,
+    "caudal": 1274.2,
+    "precipitacionPisco": 6.0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-08",
+    "nivel": 2.04,
+    "caudal": 1809.0,
+    "precipitacionPisco": 8.9,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-09",
+    "nivel": 2.13,
+    "caudal": 1956.6,
+    "precipitacionPisco": 5.2,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-10",
+    "nivel": 1.76,
+    "caudal": 1311.1,
+    "precipitacionPisco": 5.5,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-11",
+    "nivel": 1.91,
+    "caudal": 1584.9,
+    "precipitacionPisco": 7.8,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-05",
+    "nivel": 2.66,
+    "caudal": 26.1,
+    "precipitacionPisco": 6.8,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-06",
+    "nivel": 2.45,
+    "caudal": 22.7,
+    "precipitacionPisco": 4.4,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-07",
+    "nivel": 3.58,
+    "caudal": 40.4,
+    "precipitacionPisco": 15.1,
+    "origen": "auto-estimado",
+    "estado": "roja"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-08",
+    "nivel": 3.17,
+    "caudal": 34.0,
+    "precipitacionPisco": 13.7,
+    "origen": "auto-estimado",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-09",
+    "nivel": 1.99,
+    "caudal": 15.5,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-10",
+    "nivel": 2.38,
+    "caudal": 21.7,
+    "precipitacionPisco": 3.0,
+    "origen": "manual-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-11",
+    "nivel": 2.68,
+    "caudal": 26.4,
+    "precipitacionPisco": 8.0,
+    "origen": "validado-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-05",
+    "nivel": 1.75,
+    "caudal": 25.0,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-06",
+    "nivel": 2.74,
+    "caudal": 58.3,
+    "precipitacionPisco": 14.5,
+    "origen": "auto-estimado",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-07",
+    "nivel": 2.33,
+    "caudal": 44.4,
+    "precipitacionPisco": 4.3,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-08",
+    "nivel": 2.35,
+    "caudal": 45.1,
+    "precipitacionPisco": 3.8,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-09",
+    "nivel": 2.47,
+    "caudal": 49.3,
+    "precipitacionPisco": 10.0,
+    "origen": "manual-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-10",
+    "nivel": 2.21,
+    "caudal": 40.6,
+    "precipitacionPisco": 9.3,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-11",
+    "nivel": 2.65,
+    "caudal": 55.2,
+    "precipitacionPisco": 9.6,
+    "origen": "validado-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-05",
+    "nivel": 2.43,
+    "caudal": 45.0,
+    "precipitacionPisco": 14.1,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-06",
+    "nivel": 2.33,
+    "caudal": 41.7,
+    "precipitacionPisco": 11.6,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-07",
+    "nivel": 2.09,
+    "caudal": 34.2,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08",
+    "nivel": 1.99,
+    "caudal": 31.2,
+    "precipitacionPisco": 4.7,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09",
+    "nivel": 2.42,
+    "caudal": 44.6,
+    "precipitacionPisco": 5.7,
+    "origen": "manual-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10",
+    "nivel": 2.31,
+    "caudal": 41.2,
+    "precipitacionPisco": 6.7,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-11",
+    "nivel": 2.89,
+    "caudal": 59.2,
+    "precipitacionPisco": 14.1,
+    "origen": "validado-dz",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-05",
+    "nivel": 2.07,
+    "caudal": 45.7,
+    "precipitacionPisco": 9.9,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-06",
+    "nivel": 2.05,
+    "caudal": 45.2,
+    "precipitacionPisco": 3.2,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-07",
+    "nivel": 2.53,
+    "caudal": 65.7,
+    "precipitacionPisco": 18.6,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08",
+    "nivel": 2.12,
+    "caudal": 47.9,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09",
+    "nivel": 2.25,
+    "caudal": 53.5,
+    "precipitacionPisco": 4.3,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10",
+    "nivel": 2.0,
+    "caudal": 42.7,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-11",
+    "nivel": 2.03,
+    "caudal": 44.3,
+    "precipitacionPisco": 8.1,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-05",
+    "nivel": 2.47,
+    "caudal": 75.2,
+    "precipitacionPisco": 11.2,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-06",
+    "nivel": 2.11,
+    "caudal": 56.8,
+    "precipitacionPisco": 12.4,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-07",
+    "nivel": 2.24,
+    "caudal": 63.7,
+    "precipitacionPisco": 8.6,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-08",
+    "nivel": 2.18,
+    "caudal": 60.3,
+    "precipitacionPisco": 14.6,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-09",
+    "nivel": 2.04,
+    "caudal": 53.5,
+    "precipitacionPisco": 1.2,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-10",
+    "nivel": 1.98,
+    "caudal": 50.4,
+    "precipitacionPisco": 7.8,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-11",
+    "nivel": 2.32,
+    "caudal": 67.5,
+    "precipitacionPisco": 3.6,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-05",
+    "nivel": 2.04,
+    "caudal": 52.4,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-06",
+    "nivel": 2.55,
+    "caudal": 77.9,
+    "precipitacionPisco": 16.8,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-07",
+    "nivel": 2.37,
+    "caudal": 68.7,
+    "precipitacionPisco": 9.2,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-08",
+    "nivel": 2.25,
+    "caudal": 62.5,
+    "precipitacionPisco": 6.8,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-09",
+    "nivel": 2.21,
+    "caudal": 60.5,
+    "precipitacionPisco": 3.5,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-10",
+    "nivel": 2.25,
+    "caudal": 62.6,
+    "precipitacionPisco": 11.7,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-11",
+    "nivel": 2.26,
+    "caudal": 63.0,
+    "precipitacionPisco": 5.6,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-05",
+    "nivel": 2.48,
+    "caudal": 45.0,
+    "precipitacionPisco": 10.2,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-06",
+    "nivel": 2.86,
+    "caudal": 56.3,
+    "precipitacionPisco": 22.9,
+    "origen": "auto-estimado",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-07",
+    "nivel": 2.08,
+    "caudal": 32.6,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-08",
+    "nivel": 2.15,
+    "caudal": 35.0,
+    "precipitacionPisco": 2.6,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-09",
+    "nivel": 2.24,
+    "caudal": 37.5,
+    "precipitacionPisco": 4.6,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-10",
+    "nivel": 2.3,
+    "caudal": 39.4,
+    "precipitacionPisco": 11.0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-11",
+    "nivel": 2.43,
+    "caudal": 43.3,
+    "precipitacionPisco": 11.5,
+    "origen": "validado-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-05",
+    "nivel": 2.11,
+    "caudal": 81.5,
+    "precipitacionPisco": 4.1,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-06",
+    "nivel": 2.19,
+    "caudal": 86.8,
+    "precipitacionPisco": 14.4,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-07",
+    "nivel": 2.44,
+    "caudal": 105.3,
+    "precipitacionPisco": 20.4,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-08",
+    "nivel": 2.19,
+    "caudal": 87.3,
+    "precipitacionPisco": 4.5,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-09",
+    "nivel": 1.78,
+    "caudal": 56.9,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-10",
+    "nivel": 2.22,
+    "caudal": 89.4,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-11",
+    "nivel": 2.24,
+    "caudal": 90.4,
+    "precipitacionPisco": 4.5,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-05",
+    "nivel": 2.66,
+    "caudal": 66.1,
+    "precipitacionPisco": 22.7,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-06",
+    "nivel": 2.1,
+    "caudal": 43.7,
+    "precipitacionPisco": 4.9,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-07",
+    "nivel": 2.54,
+    "caudal": 61.3,
+    "precipitacionPisco": 11.4,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-08",
+    "nivel": 2.3,
+    "caudal": 51.8,
+    "precipitacionPisco": 11.7,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-09",
+    "nivel": 2.24,
+    "caudal": 49.2,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-10",
+    "nivel": 2.83,
+    "caudal": 72.6,
+    "precipitacionPisco": 16.8,
+    "origen": "manual-dz",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-11",
+    "nivel": 2.11,
+    "caudal": 43.9,
+    "precipitacionPisco": 9.6,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-05",
+    "nivel": 2.37,
+    "caudal": 84.8,
+    "precipitacionPisco": 3.9,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-06",
+    "nivel": 2.05,
+    "caudal": 64.5,
+    "precipitacionPisco": 9.7,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-07",
+    "nivel": 2.04,
+    "caudal": 64.1,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-08",
+    "nivel": 2.04,
+    "caudal": 64.0,
+    "precipitacionPisco": 10.5,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-09",
+    "nivel": 2.23,
+    "caudal": 75.8,
+    "precipitacionPisco": 17.5,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-10",
+    "nivel": 1.78,
+    "caudal": 48.4,
+    "precipitacionPisco": 1.9,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-11",
+    "nivel": 1.96,
+    "caudal": 59.5,
+    "precipitacionPisco": 0,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-05",
+    "nivel": 2.51,
+    "caudal": 39.5,
+    "precipitacionPisco": 13.4,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-06",
+    "nivel": 2.27,
+    "caudal": 33.3,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-07",
+    "nivel": 2.89,
+    "caudal": 49.3,
+    "precipitacionPisco": 20.0,
+    "origen": "auto-estimado",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-08",
+    "nivel": 2.1,
+    "caudal": 28.8,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-09",
+    "nivel": 2.81,
+    "caudal": 47.2,
+    "precipitacionPisco": 15.4,
+    "origen": "manual-dz",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-10",
+    "nivel": 2.28,
+    "caudal": 33.4,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-11",
+    "nivel": 2.15,
+    "caudal": 30.0,
+    "precipitacionPisco": 0.0,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-05",
+    "nivel": 2.32,
+    "caudal": 44.1,
+    "precipitacionPisco": 11.3,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-06",
+    "nivel": 2.33,
+    "caudal": 44.5,
+    "precipitacionPisco": 3.4,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-07",
+    "nivel": 2.25,
+    "caudal": 41.8,
+    "precipitacionPisco": 9.6,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-08",
+    "nivel": 2.85,
+    "caudal": 61.9,
+    "precipitacionPisco": 13.4,
+    "origen": "auto-estimado",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-09",
+    "nivel": 2.45,
+    "caudal": 48.4,
+    "precipitacionPisco": 7.7,
+    "origen": "manual-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-10",
+    "nivel": 2.14,
+    "caudal": 38.1,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-11",
+    "nivel": 2.39,
+    "caudal": 46.6,
+    "precipitacionPisco": 6.1,
+    "origen": "validado-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-05",
+    "nivel": 1.94,
+    "caudal": 21565.6,
+    "precipitacionPisco": 10.7,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-06",
+    "nivel": 1.83,
+    "caudal": 19156.6,
+    "precipitacionPisco": 14.8,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-07",
+    "nivel": 2.25,
+    "caudal": 28635.9,
+    "precipitacionPisco": 8.2,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-08",
+    "nivel": 2.22,
+    "caudal": 28001.5,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-09",
+    "nivel": 1.85,
+    "caudal": 19469.6,
+    "precipitacionPisco": 18.0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-10",
+    "nivel": 1.88,
+    "caudal": 20180.1,
+    "precipitacionPisco": 1.7,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-11",
+    "nivel": 1.76,
+    "caudal": 17416.4,
+    "precipitacionPisco": 0,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-05",
+    "nivel": 2.02,
+    "caudal": 1350.3,
+    "precipitacionPisco": 7.1,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-06",
+    "nivel": 2.11,
+    "caudal": 1469.1,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-07",
+    "nivel": 1.74,
+    "caudal": 987.8,
+    "precipitacionPisco": 10.0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-08",
+    "nivel": 2.22,
+    "caudal": 1619.5,
+    "precipitacionPisco": 0.0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-09",
+    "nivel": 2.29,
+    "caudal": 1708.6,
+    "precipitacionPisco": 5.3,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-10",
+    "nivel": 1.76,
+    "caudal": 1005.6,
+    "precipitacionPisco": 16.5,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-11",
+    "nivel": 2.17,
+    "caudal": 1550.5,
+    "precipitacionPisco": 0,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-05",
+    "nivel": 1.97,
+    "caudal": 948.8,
+    "precipitacionPisco": 1.8,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-06",
+    "nivel": 2.25,
+    "caudal": 1220.7,
+    "precipitacionPisco": 9.9,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-07",
+    "nivel": 1.84,
+    "caudal": 816.3,
+    "precipitacionPisco": 5.6,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-08",
+    "nivel": 2.04,
+    "caudal": 1014.2,
+    "precipitacionPisco": 14.2,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-09",
+    "nivel": 2.19,
+    "caudal": 1166.3,
+    "precipitacionPisco": 8.4,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-10",
+    "nivel": 2.14,
+    "caudal": 1114.7,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-11",
+    "nivel": 1.83,
+    "caudal": 811.8,
+    "precipitacionPisco": 0,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-05",
+    "nivel": 2.25,
+    "caudal": 1880.8,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-06",
+    "nivel": 2.09,
+    "caudal": 1644.2,
+    "precipitacionPisco": 14.2,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-07",
+    "nivel": 2.24,
+    "caudal": 1868.7,
+    "precipitacionPisco": 3.9,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-08",
+    "nivel": 2.01,
+    "caudal": 1526.1,
+    "precipitacionPisco": 2.5,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-09",
+    "nivel": 2.12,
+    "caudal": 1690.8,
+    "precipitacionPisco": 2.5,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-10",
+    "nivel": 2.04,
+    "caudal": 1563.3,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-11",
+    "nivel": 1.95,
+    "caudal": 1426.8,
+    "precipitacionPisco": 10.2,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-05",
+    "nivel": 2.16,
+    "caudal": 2110.4,
+    "precipitacionPisco": 17.0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-06",
+    "nivel": 1.96,
+    "caudal": 1744.1,
+    "precipitacionPisco": 10.8,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-07",
+    "nivel": 2.21,
+    "caudal": 2197.0,
+    "precipitacionPisco": 15.2,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-08",
+    "nivel": 2.17,
+    "caudal": 2130.4,
+    "precipitacionPisco": 4.2,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-09",
+    "nivel": 2.07,
+    "caudal": 1954.0,
+    "precipitacionPisco": 11.2,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-10",
+    "nivel": 2.11,
+    "caudal": 2012.5,
+    "precipitacionPisco": 2.2,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-11",
+    "nivel": 2.02,
+    "caudal": 1858.3,
+    "precipitacionPisco": 13.8,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-05",
+    "nivel": 2.24,
+    "caudal": 205.5,
+    "precipitacionPisco": 11.5,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-06",
+    "nivel": 2.1,
+    "caudal": 181.0,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-07",
+    "nivel": 2.1,
+    "caudal": 182.5,
+    "precipitacionPisco": 3.5,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-08",
+    "nivel": 1.93,
+    "caudal": 153.6,
+    "precipitacionPisco": 17.5,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-09",
+    "nivel": 2.0,
+    "caudal": 165.3,
+    "precipitacionPisco": 11.6,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-10",
+    "nivel": 2.22,
+    "caudal": 201.4,
+    "precipitacionPisco": 4.3,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-11",
+    "nivel": 2.35,
+    "caudal": 223.0,
+    "precipitacionPisco": 7.5,
+    "origen": "validado-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-05",
+    "nivel": 2.15,
+    "caudal": 169.5,
+    "precipitacionPisco": 8.0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-06",
+    "nivel": 2.3,
+    "caudal": 191.2,
+    "precipitacionPisco": 7.0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-07",
+    "nivel": 2.05,
+    "caudal": 154.5,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08",
+    "nivel": 1.99,
+    "caudal": 146.2,
+    "precipitacionPisco": 4.4,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09",
+    "nivel": 1.8,
+    "caudal": 118.2,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10",
+    "nivel": 2.21,
+    "caudal": 178.5,
+    "precipitacionPisco": 0,
+    "origen": "manual-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-11",
+    "nivel": 2.23,
+    "caudal": 180.7,
+    "precipitacionPisco": 0,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-05",
+    "nivel": 2.46,
+    "caudal": 53.6,
+    "precipitacionPisco": 7.0,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-06",
+    "nivel": 2.14,
+    "caudal": 41.6,
+    "precipitacionPisco": 0.5,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-07",
+    "nivel": 2.24,
+    "caudal": 45.5,
+    "precipitacionPisco": 0,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08",
+    "nivel": 2.13,
+    "caudal": 41.2,
+    "precipitacionPisco": 8.3,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09",
+    "nivel": 2.51,
+    "caudal": 55.4,
+    "precipitacionPisco": 12.0,
+    "origen": "manual-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10",
+    "nivel": 2.56,
+    "caudal": 56.9,
+    "precipitacionPisco": 12.6,
+    "origen": "manual-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-11",
+    "nivel": 1.99,
+    "caudal": 36.3,
+    "precipitacionPisco": 0.5,
+    "origen": "validado-dz",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-05",
+    "nivel": 2.84,
+    "caudal": 76.9,
+    "precipitacionPisco": 18.2,
+    "origen": "auto-estimado",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-06",
+    "nivel": 2.69,
+    "caudal": 70.7,
+    "precipitacionPisco": 12.6,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-07",
+    "nivel": 2.0,
+    "caudal": 41.8,
+    "precipitacionPisco": 0.7,
+    "origen": "auto-estimado",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-08",
+    "nivel": 2.5,
+    "caudal": 62.7,
+    "precipitacionPisco": 14.6,
+    "origen": "auto-estimado",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-09",
+    "nivel": 2.84,
+    "caudal": 77.1,
+    "precipitacionPisco": 19.4,
+    "origen": "manual-dz",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-10",
+    "nivel": 2.5,
+    "caudal": 62.9,
+    "precipitacionPisco": 9.5,
+    "origen": "manual-dz",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-11",
+    "nivel": 2.02,
+    "caudal": 42.5,
+    "precipitacionPisco": 0.6,
+    "origen": "validado-dz",
+    "estado": "normal"
+  }
+]

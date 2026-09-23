@@ -1,0 +1,704 @@
+[
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 136.6,
+    "nivelPrevisto": 1.73,
+    "lluviaPiscoMm": 7.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 133.8,
+    "nivelPrevisto": 1.88,
+    "lluviaPiscoMm": 14.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 130.4,
+    "nivelPrevisto": 1.71,
+    "lluviaPiscoMm": 10.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 107.8,
+    "nivelPrevisto": 2.58,
+    "lluviaPiscoMm": 8.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 97.1,
+    "nivelPrevisto": 2.72,
+    "lluviaPiscoMm": 3.2,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cabo-inga",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 118.2,
+    "nivelPrevisto": 2.7,
+    "lluviaPiscoMm": 13.8,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 358.6,
+    "nivelPrevisto": 2.37,
+    "lluviaPiscoMm": 8.3,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 325.0,
+    "nivelPrevisto": 2.48,
+    "lluviaPiscoMm": 6.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-nacara",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 355.3,
+    "nivelPrevisto": 2.45,
+    "lluviaPiscoMm": 4.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 145.3,
+    "nivelPrevisto": 2.04,
+    "lluviaPiscoMm": 13.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 141.4,
+    "nivelPrevisto": 1.92,
+    "lluviaPiscoMm": 11.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cirato",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 127.4,
+    "nivelPrevisto": 1.95,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 1714.4,
+    "nivelPrevisto": 2.02,
+    "lluviaPiscoMm": 0.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 1790.8,
+    "nivelPrevisto": 2.06,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "cumba",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 1660.9,
+    "nivelPrevisto": 1.98,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 28.9,
+    "nivelPrevisto": 2.7,
+    "lluviaPiscoMm": 3.8,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 37.5,
+    "nivelPrevisto": 2.66,
+    "lluviaPiscoMm": 10.0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "salinar",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 31.2,
+    "nivelPrevisto": 2.66,
+    "lluviaPiscoMm": 3.7,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 76.1,
+    "nivelPrevisto": 2.66,
+    "lluviaPiscoMm": 11.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 64.9,
+    "nivelPrevisto": 2.68,
+    "lluviaPiscoMm": 3.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "yonan",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 71.2,
+    "nivelPrevisto": 2.59,
+    "lluviaPiscoMm": 7.0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 59.9,
+    "nivelPrevisto": 3.11,
+    "lluviaPiscoMm": 4.7,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 67.4,
+    "nivelPrevisto": 3.06,
+    "lluviaPiscoMm": 8.7,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 71.4,
+    "nivelPrevisto": 2.84,
+    "lluviaPiscoMm": 7.4,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 54.7,
+    "nivelPrevisto": 2.05,
+    "lluviaPiscoMm": 3.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 51.8,
+    "nivelPrevisto": 2.03,
+    "lluviaPiscoMm": 7.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 47.8,
+    "nivelPrevisto": 2.13,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 63.5,
+    "nivelPrevisto": 2.3,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 70.5,
+    "nivelPrevisto": 2.48,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "obrajillo",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 67.1,
+    "nivelPrevisto": 2.49,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 81.8,
+    "nivelPrevisto": 2.22,
+    "lluviaPiscoMm": 10.0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 86.8,
+    "nivelPrevisto": 2.24,
+    "lluviaPiscoMm": 15.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "santo-domingo",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 71.5,
+    "nivelPrevisto": 2.31,
+    "lluviaPiscoMm": 1.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 39.4,
+    "nivelPrevisto": 2.48,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 52.7,
+    "nivelPrevisto": 2.31,
+    "lluviaPiscoMm": 5.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "la-capilla",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 49.3,
+    "nivelPrevisto": 2.46,
+    "lluviaPiscoMm": 4.8,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 102.6,
+    "nivelPrevisto": 2.26,
+    "lluviaPiscoMm": 0.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 96.5,
+    "nivelPrevisto": 2.18,
+    "lluviaPiscoMm": 9.7,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "letrayoc",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 95.3,
+    "nivelPrevisto": 2.4,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 54.7,
+    "nivelPrevisto": 2.13,
+    "lluviaPiscoMm": 5.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 56.6,
+    "nivelPrevisto": 2.07,
+    "lluviaPiscoMm": 11.3,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "los-molinos",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 49.8,
+    "nivelPrevisto": 2.08,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 62.0,
+    "nivelPrevisto": 2.03,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 71.2,
+    "nivelPrevisto": 1.99,
+    "lluviaPiscoMm": 10.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "ocona",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 62.8,
+    "nivelPrevisto": 1.93,
+    "lluviaPiscoMm": 3.3,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 46.1,
+    "nivelPrevisto": 2.21,
+    "lluviaPiscoMm": 14.2,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 47.1,
+    "nivelPrevisto": 2.1,
+    "lluviaPiscoMm": 13.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "huatiapa",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 29.9,
+    "nivelPrevisto": 2.16,
+    "lluviaPiscoMm": 0.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 50.0,
+    "nivelPrevisto": 2.49,
+    "lluviaPiscoMm": 2.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 53.4,
+    "nivelPrevisto": 2.28,
+    "lluviaPiscoMm": 5.2,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "coruca",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 50.8,
+    "nivelPrevisto": 2.48,
+    "lluviaPiscoMm": 5.0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 17298.2,
+    "nivelPrevisto": 1.8,
+    "lluviaPiscoMm": 13.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 18071.2,
+    "nivelPrevisto": 1.75,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 17682.3,
+    "nivelPrevisto": 1.74,
+    "lluviaPiscoMm": 26.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 1527.8,
+    "nivelPrevisto": 2.27,
+    "lluviaPiscoMm": 8.4,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 1785.8,
+    "nivelPrevisto": 2.26,
+    "lluviaPiscoMm": 18.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "huayabamba",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 1515.9,
+    "nivelPrevisto": 2.23,
+    "lluviaPiscoMm": 11.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 906.1,
+    "nivelPrevisto": 1.88,
+    "lluviaPiscoMm": 17.7,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 814.9,
+    "nivelPrevisto": 1.82,
+    "lluviaPiscoMm": 20.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "taruca",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 798.4,
+    "nivelPrevisto": 1.91,
+    "lluviaPiscoMm": 5.4,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 1313.8,
+    "nivelPrevisto": 1.93,
+    "lluviaPiscoMm": 8.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 1631.1,
+    "nivelPrevisto": 2.01,
+    "lluviaPiscoMm": 8.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-tocache",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 1297.0,
+    "nivelPrevisto": 1.92,
+    "lluviaPiscoMm": 7.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 1899.3,
+    "nivelPrevisto": 2.01,
+    "lluviaPiscoMm": 3.7,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 2087.4,
+    "nivelPrevisto": 1.95,
+    "lluviaPiscoMm": 12.2,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "tingo-maria",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 1709.9,
+    "nivelPrevisto": 2.05,
+    "lluviaPiscoMm": 5.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 209.2,
+    "nivelPrevisto": 2.48,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 256.0,
+    "nivelPrevisto": 2.26,
+    "lluviaPiscoMm": 2.0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-brena",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 232.4,
+    "nivelPrevisto": 2.41,
+    "lluviaPiscoMm": 7.1,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 209.6,
+    "nivelPrevisto": 2.34,
+    "lluviaPiscoMm": 15.9,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 176.1,
+    "nivelPrevisto": 2.29,
+    "lluviaPiscoMm": 0,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 203.0,
+    "nivelPrevisto": 2.28,
+    "lluviaPiscoMm": 17.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 61.8,
+    "nivelPrevisto": 2.09,
+    "lluviaPiscoMm": 23.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 54.7,
+    "nivelPrevisto": 1.96,
+    "lluviaPiscoMm": 13.6,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 51.5,
+    "nivelPrevisto": 1.93,
+    "lluviaPiscoMm": 11.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-12",
+    "caudalPrevisto": 54.0,
+    "nivelPrevisto": 2.1,
+    "lluviaPiscoMm": 9.5,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-13",
+    "caudalPrevisto": 47.6,
+    "nivelPrevisto": 1.99,
+    "lluviaPiscoMm": 5.2,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  },
+  {
+    "stationId": "puente-huancane",
+    "fecha": "2026-09-14",
+    "caudalPrevisto": 56.1,
+    "nivelPrevisto": 1.94,
+    "lluviaPiscoMm": 7.3,
+    "modelo": "PISCO-light+persistencia",
+    "precision": "reducida-contingencia"
+  }
+]

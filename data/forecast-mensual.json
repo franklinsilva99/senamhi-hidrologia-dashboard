@@ -1,0 +1,184 @@
+[
+  {
+    "stationId": "el-tigre",
+    "mes": "2026-09",
+    "anomaliaPct": -14.8,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "cabo-inga",
+    "mes": "2026-09",
+    "anomaliaPct": -12.8,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "puente-nacara",
+    "mes": "2026-09",
+    "anomaliaPct": 21.4,
+    "categoria": "sobre",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "cirato",
+    "mes": "2026-09",
+    "anomaliaPct": 8.3,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "cumba",
+    "mes": "2026-09",
+    "anomaliaPct": 22.3,
+    "categoria": "sobre",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "salinar",
+    "mes": "2026-09",
+    "anomaliaPct": -17.1,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "yonan",
+    "mes": "2026-09",
+    "anomaliaPct": -22.5,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "socsi",
+    "mes": "2026-09",
+    "anomaliaPct": -15.4,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "chosica",
+    "mes": "2026-09",
+    "anomaliaPct": -20.3,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "obrajillo",
+    "mes": "2026-09",
+    "anomaliaPct": -12.7,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "santo-domingo",
+    "mes": "2026-09",
+    "anomaliaPct": -20.8,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "la-capilla",
+    "mes": "2026-09",
+    "anomaliaPct": -26.1,
+    "categoria": "muy debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "letrayoc",
+    "mes": "2026-09",
+    "anomaliaPct": 21.5,
+    "categoria": "sobre",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "los-molinos",
+    "mes": "2026-09",
+    "anomaliaPct": 8.7,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "ocona",
+    "mes": "2026-09",
+    "anomaliaPct": 23.6,
+    "categoria": "sobre",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "huatiapa",
+    "mes": "2026-09",
+    "anomaliaPct": 29.9,
+    "categoria": "muy sobre",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "coruca",
+    "mes": "2026-09",
+    "anomaliaPct": -1.5,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "tamshiyacu",
+    "mes": "2026-09",
+    "anomaliaPct": 0.5,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "huayabamba",
+    "mes": "2026-09",
+    "anomaliaPct": -10.2,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "taruca",
+    "mes": "2026-09",
+    "anomaliaPct": -3.8,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "puente-tocache",
+    "mes": "2026-09",
+    "anomaliaPct": -12.3,
+    "categoria": "debajo",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "tingo-maria",
+    "mes": "2026-09",
+    "anomaliaPct": 5.1,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "puente-brena",
+    "mes": "2026-09",
+    "anomaliaPct": -1.5,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "pisac",
+    "mes": "2026-09",
+    "anomaliaPct": 8.9,
+    "categoria": "normal",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "puente-ramis",
+    "mes": "2026-09",
+    "anomaliaPct": 27.8,
+    "categoria": "muy sobre",
+    "modelo": "climatologia+PISCO-light"
+  },
+  {
+    "stationId": "puente-huancane",
+    "mes": "2026-09",
+    "anomaliaPct": 17.7,
+    "categoria": "sobre",
+    "modelo": "climatologia+PISCO-light"
+  }
+]

@@ -1,0 +1,187 @@
+"use client";
+import {
+  ComposedChart, Line, XAxis, YAxis, Tooltip,
+  ReferenceArea, ResponsiveContainer,
+} from "recharts";
+import ChartTooltip from "@/components/ChartTooltip";
+import type { Observation, TipoAviso } from "@/lib/types";
+
+const C_AMARILLO = "#ffeb3b";
+const C_NARANJA = "#fca326";
+const C_ROJO = "#ee3d43";
+const C_LINEA = "#0000ff";
+
+const MESES = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+// Formato real SENAMHI: en 00:00 → "9. Sep"; en 12:00 → "12:00"
+function formatTick(fecha: string): string {
+  const d = new Date(fecha.replace(" ", "T"));
+  if (isNaN(d.getTime())) return fecha;
+  const h = d.getHours();
+  if (h === 0) return `${d.getDate()}. ${MESES[d.getMonth()]}`;
+  return `${String(h).padStart(2, "0")}:00`;
+}
+
+// Eje Y: hasta 2 decimales (recorta ceros: 60.00 → 60, 3201.50 → 3201.5)
+function formatAxisNum(v: number): string {
+  return String(Number(Number(v).toFixed(2)));
+}
+
+export default function ChartAviso({
+  series,
+  titulo,
+  estacion,
+  preferencia = "caudal",
+  tipo = "avenida",
+  cota = null,
+  umbralRoja,
+  umbralNaranja,
+  umbralAmarilla,
+}: {
+  series: Observation[];
+  titulo?: string;
+  estacion?: string;
+  preferencia?: "caudal" | "nivel";
+  tipo?: TipoAviso;
+  cota?: number | null;
+  umbralRoja?: number;
+  umbralNaranja?: number;
+  umbralAmarilla?: number;
+}) {
+  const isNivel = preferencia === "nivel";
+  const tieneCota = isNivel && cota != null;
+  const offset = tieneCota ? (cota as number) : 0;
+  const unidad = isNivel ? (tieneCota ? "m.s.n.m." : "m") : "m³/s";
+  const varName = isNivel ? "Nivel" : "Caudal";
+  const varTitle = isNivel ? "NIVEL" : "CAUDAL";
+
+  // Nivel absoluto = Nivel relativo + Cota
+  const realData = series.map((o) => ({
+    fecha: o.fecha,
+    valor: (isNivel ? o.nivel : o.caudal) + offset,
+  }));
+
+  // Puntos fantasma al final: las bandas llegan al borde derecho pero la línea termina antes
+  const PHANTOM_HORAS = 6;
+  const data: { fecha: string; valor: number | null }[] = [...realData];
+  if (realData.length > 0) {
+    const last = new Date(realData[realData.length - 1].fecha.replace(" ", "T"));
+    for (let i = 1; i <= PHANTOM_HORAS; i++) {
+      const d = new Date(last.getTime() + i * 3600 * 1000);
+      data.push({ fecha: d.toISOString().slice(0, 16), valor: null });
+    }
+  }
+
+  // Ticks cada 12 h (paridad con el gráfico real)
+  const ticks = realData.filter((_, i) => i % 12 === 0).map((d) => d.fecha);
+
+  const a = (umbralAmarilla ?? 0) + offset;
+  const n = (umbralNaranja ?? 0) + offset;
+  const r = (umbralRoja ?? 0) + offset;
+
+  const valores = realData.map((d) => d.valor);
+  const dMin = valores.length ? Math.min(...valores) : a;
+  const dMax = valores.length ? Math.max(...valores) : r;
+  const pad = 0.05 * Math.abs(r - a) || Math.abs(r) * 0.02 || 1;
+  // El rojo no tiene tope (solo inicio de peligro) → siempre más ancho (1.4× el naranja)
+  const bottom = tipo === "vigilancia" ? r - 1.4 * (n - r) : Math.min(dMin, a) - pad;
+  const top = tipo === "vigilancia" ? Math.max(dMax, a) + pad : r + 1.4 * (r - n);
+
+  const chartTitle = titulo ?? `HIDROGRAMA DE ${varTitle} DEL RÍO`;
+  const subtitle = estacion ? `ESTACIÓN ${estacion}` : undefined;
+
+  return (
+    <div className="w-full">
+      {/* Título */}
+      <div className="text-center mb-2">
+        <h3 className="text-base font-semibold text-slate-800 uppercase">
+          {chartTitle}
+        </h3>
+        {subtitle && (
+          <p className="text-xs text-slate-500 mt-0.5 uppercase">{subtitle}</p>
+        )}
+      </div>
+
+      <div className="h-80 w-full relative">
+        {/* Menú (≡) — paridad visual con el gráfico real */}
+        <button
+          type="button"
+          aria-label="Opciones del gráfico"
+          className="absolute top-1 right-1 z-10 p-1 text-slate-400 hover:text-slate-600"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <ResponsiveContainer>
+          <ComposedChart data={data} margin={{ top: 10, right: 20, left: 10, bottom: 5 }}>
+            <XAxis
+              dataKey="fecha"
+              ticks={ticks}
+              interval={0}
+              tickFormatter={formatTick}
+              tick={{ fontSize: 11 }}
+            />
+            <YAxis
+              domain={[bottom, top]}
+              tickFormatter={formatAxisNum}
+              tick={{ fontSize: 11 }}
+              label={{
+                value: `${varName} (${unidad})`,
+                angle: -90,
+                position: "insideLeft",
+                offset: 0,
+                style: { fontSize: 11, fill: "#64748b" },
+              }}
+            />
+
+            <Tooltip content={<ChartTooltip varName={varName} unidad={unidad} a={a} n={n} r={r} />} />
+
+            {/* Bandas de umbral — avenida (ascendente) vs vigilancia (invertida) */}
+            {tipo === "vigilancia" ? (
+              <>
+                <ReferenceArea y1={bottom} y2={r} fill={C_ROJO} fillOpacity={0.85} stroke="none" />
+                <ReferenceArea y1={r} y2={n} fill={C_NARANJA} fillOpacity={0.85} stroke="none" />
+                <ReferenceArea y1={n} y2={a} fill={C_AMARILLO} fillOpacity={0.85} stroke="none" />
+              </>
+            ) : (
+              <>
+                <ReferenceArea y1={a} y2={n} fill={C_AMARILLO} fillOpacity={0.85} stroke="none" />
+                <ReferenceArea y1={n} y2={r} fill={C_NARANJA} fillOpacity={0.85} stroke="none" />
+                <ReferenceArea y1={r} y2={top} fill={C_ROJO} fillOpacity={0.85} stroke="none" />
+              </>
+            )}
+
+            {/* Línea de datos real — spline */}
+            <Line
+              type="monotone"
+              dataKey="valor"
+              name={varName}
+              stroke={C_LINEA}
+              fill="none"
+              strokeWidth={1.5}
+              dot={false}
+              connectNulls={false}
+            />
+          </ComposedChart>
+        </ResponsiveContainer>
+
+        {/* Watermark SENAMHI */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="text-6xl font-black text-slate-900/[0.09] select-none uppercase tracking-widest">
+            SENAMHI
+          </span>
+        </div>
+      </div>
+
+      {/* Leyenda manual (paridad con el gráfico real) */}
+      <div className="flex flex-wrap items-center justify-center gap-5 mt-3 text-xs text-slate-600">
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: C_AMARILLO }} /> Umbral Amarillo</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: C_NARANJA }} /> Umbral Naranja</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: C_ROJO }} /> Umbral Rojo</span>
+        <span className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block" style={{ backgroundColor: C_LINEA }} /> {varName} ({unidad})</span>
+      </div>
+    </div>
+  );
+}

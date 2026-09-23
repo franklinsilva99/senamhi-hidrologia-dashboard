@@ -1,0 +1,2306 @@
+[
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T00:00",
+    "nivel": 1.98,
+    "caudal": 30.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T01:00",
+    "nivel": 1.99,
+    "caudal": 30.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T02:00",
+    "nivel": 1.99,
+    "caudal": 30.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T03:00",
+    "nivel": 1.99,
+    "caudal": 30.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T04:00",
+    "nivel": 2,
+    "caudal": 30.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T05:00",
+    "nivel": 2.01,
+    "caudal": 30.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T06:00",
+    "nivel": 2.02,
+    "caudal": 30.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T07:00",
+    "nivel": 2.02,
+    "caudal": 30.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T08:00",
+    "nivel": 2.04,
+    "caudal": 31.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T09:00",
+    "nivel": 2.05,
+    "caudal": 31.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T10:00",
+    "nivel": 2.06,
+    "caudal": 31.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T11:00",
+    "nivel": 2.08,
+    "caudal": 31.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T12:00",
+    "nivel": 2.1,
+    "caudal": 32,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T13:00",
+    "nivel": 2.11,
+    "caudal": 32.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T14:00",
+    "nivel": 2.12,
+    "caudal": 32.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T15:00",
+    "nivel": 2.14,
+    "caudal": 32.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T16:00",
+    "nivel": 2.15,
+    "caudal": 32.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T17:00",
+    "nivel": 2.16,
+    "caudal": 32.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T18:00",
+    "nivel": 2.16,
+    "caudal": 33,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T19:00",
+    "nivel": 2.17,
+    "caudal": 33.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T20:00",
+    "nivel": 2.18,
+    "caudal": 33.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T21:00",
+    "nivel": 2.21,
+    "caudal": 33.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T22:00",
+    "nivel": 2.23,
+    "caudal": 34.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-08T23:00",
+    "nivel": 2.26,
+    "caudal": 34.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T00:00",
+    "nivel": 2.29,
+    "caudal": 35,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T01:00",
+    "nivel": 2.33,
+    "caudal": 35.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T02:00",
+    "nivel": 2.37,
+    "caudal": 36.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T03:00",
+    "nivel": 2.4,
+    "caudal": 36.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T04:00",
+    "nivel": 2.44,
+    "caudal": 37.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T05:00",
+    "nivel": 2.48,
+    "caudal": 37.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T06:00",
+    "nivel": 2.71,
+    "caudal": 41.3,
+    "origen": "cuarentena",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T07:00",
+    "nivel": 2.54,
+    "caudal": 38.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T08:00",
+    "nivel": 2.56,
+    "caudal": 39,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T09:00",
+    "nivel": 2.58,
+    "caudal": 39.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T10:00",
+    "nivel": 2.59,
+    "caudal": 39.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T11:00",
+    "nivel": 2.6,
+    "caudal": 39.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T12:00",
+    "nivel": 2.6,
+    "caudal": 39.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T13:00",
+    "nivel": 2.61,
+    "caudal": 39.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T14:00",
+    "nivel": 2.63,
+    "caudal": 40.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T15:00",
+    "nivel": 2.66,
+    "caudal": 40.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T16:00",
+    "nivel": 2.7,
+    "caudal": 41.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T17:00",
+    "nivel": 2.76,
+    "caudal": 42.1,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T18:00",
+    "nivel": 2.82,
+    "caudal": 43,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T19:00",
+    "nivel": 2.88,
+    "caudal": 44,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T20:00",
+    "nivel": 2.96,
+    "caudal": 45.1,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T21:00",
+    "nivel": 3.03,
+    "caudal": 46.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T22:00",
+    "nivel": 3.11,
+    "caudal": 47.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-09T23:00",
+    "nivel": 3.17,
+    "caudal": 48.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T00:00",
+    "nivel": 3.24,
+    "caudal": 49.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T01:00",
+    "nivel": 3.29,
+    "caudal": 50.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T02:00",
+    "nivel": 3.34,
+    "caudal": 50.9,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T03:00",
+    "nivel": 3.37,
+    "caudal": 51.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T04:00",
+    "nivel": 3.39,
+    "caudal": 51.8,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T05:00",
+    "nivel": 3.41,
+    "caudal": 52,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T06:00",
+    "nivel": 3.41,
+    "caudal": 52,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T07:00",
+    "nivel": 3.41,
+    "caudal": 52.1,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T08:00",
+    "nivel": 3.45,
+    "caudal": 52.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T09:00",
+    "nivel": 3.51,
+    "caudal": 53.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T10:00",
+    "nivel": 3.58,
+    "caudal": 54.6,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T11:00",
+    "nivel": 3.67,
+    "caudal": 56,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T12:00",
+    "nivel": 3.77,
+    "caudal": 57.5,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T13:00",
+    "nivel": 3.87,
+    "caudal": 59.1,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T14:00",
+    "nivel": 3.97,
+    "caudal": 60.6,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T15:00",
+    "nivel": 4.06,
+    "caudal": 61.9,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T16:00",
+    "nivel": 4.12,
+    "caudal": 62.9,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T17:00",
+    "nivel": 4.17,
+    "caudal": 63.7,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T18:00",
+    "nivel": 4.19,
+    "caudal": 64,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T19:00",
+    "nivel": 4.17,
+    "caudal": 63.6,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T20:00",
+    "nivel": 4.08,
+    "caudal": 62.2,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T21:00",
+    "nivel": 3.96,
+    "caudal": 60.4,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T22:00",
+    "nivel": 3.87,
+    "caudal": 59,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-10T23:00",
+    "nivel": 3.83,
+    "caudal": 58.4,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T00:00",
+    "nivel": 1.96,
+    "caudal": 36.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T01:00",
+    "nivel": 1.96,
+    "caudal": 36.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T02:00",
+    "nivel": 1.96,
+    "caudal": 36.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T03:00",
+    "nivel": 1.97,
+    "caudal": 36.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T04:00",
+    "nivel": 1.97,
+    "caudal": 36.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T05:00",
+    "nivel": 1.98,
+    "caudal": 36.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T06:00",
+    "nivel": 1.99,
+    "caudal": 36.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T07:00",
+    "nivel": 2,
+    "caudal": 37,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T08:00",
+    "nivel": 2.01,
+    "caudal": 37.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T09:00",
+    "nivel": 2.03,
+    "caudal": 37.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T10:00",
+    "nivel": 2.04,
+    "caudal": 37.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T11:00",
+    "nivel": 2.05,
+    "caudal": 38,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T12:00",
+    "nivel": 2.07,
+    "caudal": 38.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T13:00",
+    "nivel": 2.09,
+    "caudal": 38.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T14:00",
+    "nivel": 2.1,
+    "caudal": 38.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T15:00",
+    "nivel": 2.12,
+    "caudal": 39.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T16:00",
+    "nivel": 2.14,
+    "caudal": 39.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T17:00",
+    "nivel": 2.15,
+    "caudal": 39.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T18:00",
+    "nivel": 2.16,
+    "caudal": 39.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T19:00",
+    "nivel": 2.17,
+    "caudal": 40.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T20:00",
+    "nivel": 2.17,
+    "caudal": 40.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T21:00",
+    "nivel": 2.18,
+    "caudal": 40.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T22:00",
+    "nivel": 2.18,
+    "caudal": 40.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-08T23:00",
+    "nivel": 2.19,
+    "caudal": 40.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T00:00",
+    "nivel": 2.21,
+    "caudal": 40.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T01:00",
+    "nivel": 2.22,
+    "caudal": 41,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T02:00",
+    "nivel": 2.23,
+    "caudal": 41.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T03:00",
+    "nivel": 2.25,
+    "caudal": 41.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T04:00",
+    "nivel": 2.26,
+    "caudal": 41.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T05:00",
+    "nivel": 2.28,
+    "caudal": 42.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T06:00",
+    "nivel": 2.3,
+    "caudal": 42.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T07:00",
+    "nivel": 2.31,
+    "caudal": 42.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T08:00",
+    "nivel": 2.33,
+    "caudal": 43.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T09:00",
+    "nivel": 2.35,
+    "caudal": 43.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T10:00",
+    "nivel": 2.36,
+    "caudal": 43.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T11:00",
+    "nivel": 2.37,
+    "caudal": 43.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T12:00",
+    "nivel": 2.39,
+    "caudal": 44.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T13:00",
+    "nivel": 2.4,
+    "caudal": 44.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T14:00",
+    "nivel": 2.41,
+    "caudal": 44.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T15:00",
+    "nivel": 2.42,
+    "caudal": 44.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T16:00",
+    "nivel": 2.42,
+    "caudal": 44.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T17:00",
+    "nivel": 2.43,
+    "caudal": 45,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T18:00",
+    "nivel": 2.44,
+    "caudal": 45.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T19:00",
+    "nivel": 2.46,
+    "caudal": 45.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T20:00",
+    "nivel": 2.62,
+    "caudal": 48.5,
+    "origen": "cuarentena",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T21:00",
+    "nivel": 2.51,
+    "caudal": 46.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T22:00",
+    "nivel": 2.55,
+    "caudal": 47.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-09T23:00",
+    "nivel": 2.58,
+    "caudal": 47.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T00:00",
+    "nivel": 2.61,
+    "caudal": 48.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T01:00",
+    "nivel": 2.64,
+    "caudal": 48.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T02:00",
+    "nivel": 2.67,
+    "caudal": 49.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T03:00",
+    "nivel": 2.7,
+    "caudal": 50,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T04:00",
+    "nivel": 2.73,
+    "caudal": 50.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T05:00",
+    "nivel": 2.75,
+    "caudal": 50.9,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T06:00",
+    "nivel": 2.77,
+    "caudal": 51.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T07:00",
+    "nivel": 2.78,
+    "caudal": 51.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T08:00",
+    "nivel": 2.79,
+    "caudal": 51.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T09:00",
+    "nivel": 2.79,
+    "caudal": 51.7,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T10:00",
+    "nivel": 2.79,
+    "caudal": 51.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T11:00",
+    "nivel": 2.79,
+    "caudal": 51.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T12:00",
+    "nivel": 2.78,
+    "caudal": 51.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T13:00",
+    "nivel": 2.78,
+    "caudal": 51.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T14:00",
+    "nivel": 2.78,
+    "caudal": 51.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T15:00",
+    "nivel": 2.78,
+    "caudal": 51.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T16:00",
+    "nivel": 2.78,
+    "caudal": 51.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T17:00",
+    "nivel": 2.77,
+    "caudal": 51.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T18:00",
+    "nivel": 2.77,
+    "caudal": 51.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T19:00",
+    "nivel": 2.77,
+    "caudal": 51.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T20:00",
+    "nivel": 2.77,
+    "caudal": 51.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T21:00",
+    "nivel": 2.77,
+    "caudal": 51.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T22:00",
+    "nivel": 2.78,
+    "caudal": 51.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-10T23:00",
+    "nivel": 2.78,
+    "caudal": 51.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T00:00",
+    "nivel": 1.99,
+    "caudal": 118.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T01:00",
+    "nivel": 1.99,
+    "caudal": 119,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T02:00",
+    "nivel": 2,
+    "caudal": 119.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T03:00",
+    "nivel": 2,
+    "caudal": 119.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T04:00",
+    "nivel": 2.01,
+    "caudal": 119.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T05:00",
+    "nivel": 2.02,
+    "caudal": 120.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T06:00",
+    "nivel": 2.03,
+    "caudal": 121,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T07:00",
+    "nivel": 2.04,
+    "caudal": 121.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T08:00",
+    "nivel": 2.05,
+    "caudal": 122.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T09:00",
+    "nivel": 2.07,
+    "caudal": 123.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T10:00",
+    "nivel": 2.08,
+    "caudal": 124.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T11:00",
+    "nivel": 2.1,
+    "caudal": 125.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T12:00",
+    "nivel": 2.11,
+    "caudal": 126,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T13:00",
+    "nivel": 2.13,
+    "caudal": 126.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T14:00",
+    "nivel": 2.14,
+    "caudal": 127.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T15:00",
+    "nivel": 2.15,
+    "caudal": 128.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T16:00",
+    "nivel": 2.16,
+    "caudal": 129.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T17:00",
+    "nivel": 2.17,
+    "caudal": 129.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T18:00",
+    "nivel": 2.18,
+    "caudal": 130,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T19:00",
+    "nivel": 2.18,
+    "caudal": 130.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T20:00",
+    "nivel": 2.2,
+    "caudal": 131.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T21:00",
+    "nivel": 2.21,
+    "caudal": 132.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T22:00",
+    "nivel": 2.23,
+    "caudal": 133.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-08T23:00",
+    "nivel": 2.25,
+    "caudal": 134.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T00:00",
+    "nivel": 2.28,
+    "caudal": 136.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T01:00",
+    "nivel": 2.3,
+    "caudal": 137.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T02:00",
+    "nivel": 2.43,
+    "caudal": 145.2,
+    "origen": "cuarentena",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T03:00",
+    "nivel": 2.36,
+    "caudal": 140.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T04:00",
+    "nivel": 2.38,
+    "caudal": 142.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T05:00",
+    "nivel": 2.41,
+    "caudal": 143.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T06:00",
+    "nivel": 2.43,
+    "caudal": 145,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T07:00",
+    "nivel": 2.45,
+    "caudal": 146.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T08:00",
+    "nivel": 2.46,
+    "caudal": 147.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T09:00",
+    "nivel": 2.48,
+    "caudal": 147.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T10:00",
+    "nivel": 2.49,
+    "caudal": 148.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T11:00",
+    "nivel": 2.49,
+    "caudal": 148.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T12:00",
+    "nivel": 2.49,
+    "caudal": 148.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T13:00",
+    "nivel": 2.5,
+    "caudal": 149,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T14:00",
+    "nivel": 2.5,
+    "caudal": 149.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T15:00",
+    "nivel": 2.52,
+    "caudal": 150.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T16:00",
+    "nivel": 2.54,
+    "caudal": 151.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T17:00",
+    "nivel": 2.56,
+    "caudal": 152.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T18:00",
+    "nivel": 2.59,
+    "caudal": 154.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T19:00",
+    "nivel": 2.62,
+    "caudal": 156.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T20:00",
+    "nivel": 2.65,
+    "caudal": 158.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T21:00",
+    "nivel": 2.68,
+    "caudal": 160.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T22:00",
+    "nivel": 2.72,
+    "caudal": 162.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-09T23:00",
+    "nivel": 2.75,
+    "caudal": 164.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T00:00",
+    "nivel": 2.79,
+    "caudal": 166.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T01:00",
+    "nivel": 2.82,
+    "caudal": 168.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T02:00",
+    "nivel": 2.85,
+    "caudal": 170.1,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T03:00",
+    "nivel": 2.88,
+    "caudal": 171.7,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T04:00",
+    "nivel": 2.9,
+    "caudal": 173.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T05:00",
+    "nivel": 2.92,
+    "caudal": 174.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T06:00",
+    "nivel": 2.94,
+    "caudal": 175.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T07:00",
+    "nivel": 2.96,
+    "caudal": 176.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T08:00",
+    "nivel": 2.97,
+    "caudal": 177.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T09:00",
+    "nivel": 2.98,
+    "caudal": 177.8,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T10:00",
+    "nivel": 2.98,
+    "caudal": 178.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T11:00",
+    "nivel": 2.99,
+    "caudal": 178.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T12:00",
+    "nivel": 2.99,
+    "caudal": 178.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T13:00",
+    "nivel": 2.99,
+    "caudal": 178.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T14:00",
+    "nivel": 2.99,
+    "caudal": 178.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T15:00",
+    "nivel": 2.99,
+    "caudal": 178.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T16:00",
+    "nivel": 2.98,
+    "caudal": 178.1,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T17:00",
+    "nivel": 2.98,
+    "caudal": 177.9,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T18:00",
+    "nivel": 2.98,
+    "caudal": 177.7,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T19:00",
+    "nivel": 2.97,
+    "caudal": 177.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T20:00",
+    "nivel": 2.97,
+    "caudal": 177.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T21:00",
+    "nivel": 2.97,
+    "caudal": 177.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T22:00",
+    "nivel": 2.97,
+    "caudal": 177.3,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-10T23:00",
+    "nivel": 2.97,
+    "caudal": 177.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T00:00",
+    "nivel": 2,
+    "caudal": 25.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T01:00",
+    "nivel": 2,
+    "caudal": 25.2,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T02:00",
+    "nivel": 1.99,
+    "caudal": 25.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T03:00",
+    "nivel": 1.98,
+    "caudal": 25,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T04:00",
+    "nivel": 1.97,
+    "caudal": 24.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T05:00",
+    "nivel": 1.95,
+    "caudal": 24.6,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T06:00",
+    "nivel": 1.94,
+    "caudal": 24.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T07:00",
+    "nivel": 1.91,
+    "caudal": 24.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T08:00",
+    "nivel": 1.9,
+    "caudal": 23.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T09:00",
+    "nivel": 1.88,
+    "caudal": 23.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T10:00",
+    "nivel": 1.87,
+    "caudal": 23.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T11:00",
+    "nivel": 1.85,
+    "caudal": 23.3,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T12:00",
+    "nivel": 1.83,
+    "caudal": 23.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T13:00",
+    "nivel": 1.83,
+    "caudal": 23,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T14:00",
+    "nivel": 1.82,
+    "caudal": 22.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T15:00",
+    "nivel": 1.82,
+    "caudal": 22.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T16:00",
+    "nivel": 1.82,
+    "caudal": 22.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T17:00",
+    "nivel": 1.82,
+    "caudal": 22.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T18:00",
+    "nivel": 1.82,
+    "caudal": 22.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T19:00",
+    "nivel": 1.82,
+    "caudal": 22.9,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T20:00",
+    "nivel": 1.81,
+    "caudal": 22.8,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T21:00",
+    "nivel": 1.8,
+    "caudal": 22.7,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T22:00",
+    "nivel": 1.79,
+    "caudal": 22.5,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-08T23:00",
+    "nivel": 1.78,
+    "caudal": 22.4,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T00:00",
+    "nivel": 1.75,
+    "caudal": 22.1,
+    "origen": "qc1-ok",
+    "estado": "normal"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T01:00",
+    "nivel": 1.74,
+    "caudal": 21.9,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T02:00",
+    "nivel": 1.71,
+    "caudal": 21.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T03:00",
+    "nivel": 1.7,
+    "caudal": 21.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T04:00",
+    "nivel": 1.67,
+    "caudal": 21.1,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T05:00",
+    "nivel": 1.66,
+    "caudal": 20.9,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T06:00",
+    "nivel": 1.63,
+    "caudal": 20.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T07:00",
+    "nivel": 1.62,
+    "caudal": 20.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T08:00",
+    "nivel": 1.6,
+    "caudal": 20.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T09:00",
+    "nivel": 1.59,
+    "caudal": 20,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T10:00",
+    "nivel": 1.58,
+    "caudal": 19.9,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T11:00",
+    "nivel": 1.58,
+    "caudal": 19.9,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T12:00",
+    "nivel": 1.57,
+    "caudal": 19.8,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T13:00",
+    "nivel": 1.57,
+    "caudal": 19.8,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T14:00",
+    "nivel": 1.57,
+    "caudal": 19.8,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T15:00",
+    "nivel": 1.57,
+    "caudal": 19.8,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T16:00",
+    "nivel": 1.56,
+    "caudal": 19.7,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T17:00",
+    "nivel": 1.56,
+    "caudal": 19.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T18:00",
+    "nivel": 1.55,
+    "caudal": 19.5,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T19:00",
+    "nivel": 1.54,
+    "caudal": 19.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T20:00",
+    "nivel": 1.52,
+    "caudal": 19.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T21:00",
+    "nivel": 1.51,
+    "caudal": 19,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T22:00",
+    "nivel": 1.49,
+    "caudal": 18.8,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-09T23:00",
+    "nivel": 1.48,
+    "caudal": 18.6,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T00:00",
+    "nivel": 1.46,
+    "caudal": 18.4,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T01:00",
+    "nivel": 1.44,
+    "caudal": 18.2,
+    "origen": "qc1-ok",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T02:00",
+    "nivel": 1.59,
+    "caudal": 20,
+    "origen": "cuarentena",
+    "estado": "amarilla"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T03:00",
+    "nivel": 1.41,
+    "caudal": 17.8,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T04:00",
+    "nivel": 1.4,
+    "caudal": 17.6,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T05:00",
+    "nivel": 1.38,
+    "caudal": 17.4,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T06:00",
+    "nivel": 1.37,
+    "caudal": 17.2,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T07:00",
+    "nivel": 1.36,
+    "caudal": 17.1,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T08:00",
+    "nivel": 1.35,
+    "caudal": 17,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T09:00",
+    "nivel": 1.34,
+    "caudal": 16.9,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T10:00",
+    "nivel": 1.34,
+    "caudal": 16.9,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T11:00",
+    "nivel": 1.34,
+    "caudal": 16.9,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T12:00",
+    "nivel": 1.33,
+    "caudal": 16.8,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T13:00",
+    "nivel": 1.33,
+    "caudal": 16.7,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T14:00",
+    "nivel": 1.33,
+    "caudal": 16.7,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T15:00",
+    "nivel": 1.32,
+    "caudal": 16.6,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T16:00",
+    "nivel": 1.31,
+    "caudal": 16.5,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T17:00",
+    "nivel": 1.3,
+    "caudal": 16.4,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T18:00",
+    "nivel": 1.29,
+    "caudal": 16.3,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T19:00",
+    "nivel": 1.29,
+    "caudal": 16.2,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T20:00",
+    "nivel": 1.29,
+    "caudal": 16.2,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T21:00",
+    "nivel": 1.28,
+    "caudal": 16.1,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T22:00",
+    "nivel": 1.28,
+    "caudal": 16.1,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-10T23:00",
+    "nivel": 1.28,
+    "caudal": 16.1,
+    "origen": "qc1-ok",
+    "estado": "naranja"
+  }
+]

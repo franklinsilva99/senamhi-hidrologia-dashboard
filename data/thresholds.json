@@ -1,0 +1,110 @@
+[
+  {
+    "stationId": "socsi",
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "nivel": {
+      "amarilla": 1.95,
+      "naranja": 3.06,
+      "roja": 4.42,
+      "unidad": "m"
+    },
+    "caudal": {
+      "amarilla": 42.0,
+      "naranja": 54.0,
+      "roja": 69.0,
+      "unidad": "m3/s"
+    },
+    "duracionHoras": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    },
+    "qc1": {
+      "min": 9.0,
+      "max": 90.0,
+      "deltaMax": 18.0
+    }
+  },
+  {
+    "stationId": "chosica",
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "nivel": {
+      "amarilla": 2.65,
+      "naranja": 3.25,
+      "roja": 3.9,
+      "unidad": "m"
+    },
+    "caudal": {
+      "amarilla": 49.0,
+      "naranja": 60.0,
+      "roja": 72.0,
+      "unidad": "m3/s"
+    },
+    "duracionHoras": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    },
+    "qc1": {
+      "min": 10.5,
+      "max": 105.0,
+      "deltaMax": 21.0
+    }
+  },
+  {
+    "stationId": "pisac",
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "nivel": {
+      "amarilla": 2.85,
+      "naranja": 3.45,
+      "roja": 4.1,
+      "unidad": "m"
+    },
+    "caudal": {
+      "amarilla": 170.0,
+      "naranja": 205.0,
+      "roja": 245.0,
+      "unidad": "m3/s"
+    },
+    "duracionHoras": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    },
+    "qc1": {
+      "min": 36.0,
+      "max": 360.0,
+      "deltaMax": 72.0
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "preferencia": "caudal",
+    "tipo": "vigilancia",
+    "nivel": {
+      "amarilla": 1.8,
+      "naranja": 1.5,
+      "roja": 1.2,
+      "unidad": "m"
+    },
+    "caudal": {
+      "amarilla": 22.0,
+      "naranja": 18.0,
+      "roja": 15.0,
+      "unidad": "m3/s"
+    },
+    "duracionHoras": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    },
+    "qc1": {
+      "min": 7.5,
+      "max": 75.0,
+      "deltaMax": 15.0
+    }
+  }
+]

@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-open-sans);
+
+  --color-senamhi-bg: #f7f9fa;
+  --color-senamhi-text: #333333;
+  --color-senamhi-navy: #003366;
+  --color-senamhi-blue: #00539b;
+  --color-senamhi-lightblue: #0070ba;
+  --color-senamhi-accent: #ebf4fa;
+  --color-senamhi-title: #dc2626;
+
+  --color-umbral-rojo: #ee3d43;
+  --color-umbral-naranja: #fca326;
+  --color-umbral-amarillo: #ffeb3b;
+  --color-umbral-rojo-text: #dc2626;
+  --color-umbral-naranja-text: #ea580c;
+  --color-umbral-amarillo-text: #d97706;
+  --color-umbral-rojo-strong: #ff0000;
+  --color-umbral-naranja-strong: #ff9900;
+  --color-umbral-amarillo-strong: #ffff00;
+  --color-linea: #0000ff;
+}
+
+body {
+  background: #f7f9fa;
+  color: #333333;
+  font-family: var(--font-open-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Banner con textura de agua (paridad con el diseño Stitch) */
+.water-banner {
+  background:
+    linear-gradient(135deg, rgba(0, 51, 102, 0.96) 0%, rgba(0, 83, 155, 0.88) 100%),
+    radial-gradient(ellipse at 20% 50%, rgba(2, 132, 199, 0.5) 0%, transparent 60%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 2px, transparent 2px, transparent 8px);
+  background-color: #003366;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Mapa: flecha en el área, puntero solo sobre estaciones/poblados ── */
+.leaflet-container.leaflet-grab {
+  cursor: default !important;
+}
+.leaflet-container .leaflet-interactive {
+  cursor: pointer !important;
+}
+
+/* ── Iconos de estación (doble anillo) y pin de centro poblado ── */
+.marker-station,
+.marker-pin {
+  background: none;
+  border: none;
+}
+.marker-station svg,
+.marker-pin svg {
+  display: block;
+  transition: transform 0.15s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+.marker-station:hover svg,
+.marker-pin:hover svg {
+  transform: scale(1.15);
+}

@@ -1,6 +1,7 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import { avisoTabClass } from "@/lib/tabs";
 import type { Alert, NivelAlerta, Observation, Station, TipoAviso } from "@/lib/types";
 
 const MapHydro = dynamic(() => import("@/components/MapHydro"), { ssr: false });
@@ -29,6 +30,12 @@ export default function AvisosTabs({
   const [page, setPage] = useState(1);
   const [sortKey, setSortKey] = useState<SortKey>("inicio");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+
+  // Abre la vista indicada por ?tab=mapa|lista (enlaces desde la página del aviso)
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get("tab");
+    if (t === "mapa" || t === "lista") setTab(t);
+  }, []);
 
   const counts = useMemo(() => ({
     todos: alerts.length,
@@ -133,12 +140,7 @@ export default function AvisosTabs({
   );
 
   const tabBtn = (k: "mapa" | "lista", label: string) => (
-    <button
-      onClick={() => setTab(k)}
-      className={`px-5 py-2.5 text-sm rounded-t-md ${tab === k
-        ? "font-semibold bg-white text-senamhi-navy border-t-2 border-senamhi-blue border-l border-r border-gray-200 -mb-px shadow-sm"
-        : "font-medium text-senamhi-blue hover:text-senamhi-navy hover:bg-gray-100"}`}
-    >
+    <button onClick={() => setTab(k)} className={avisoTabClass(tab === k)}>
       {label}
     </button>
   );
@@ -146,11 +148,11 @@ export default function AvisosTabs({
   return (
     <div className="space-y-4">
       {/* Tabs */}
-      <nav aria-label="Tabs" className="border-b border-gray-200">
-        <div className="flex gap-1 sm:gap-2">
-          {tabBtn("mapa", "Mapa")}
-          {tabBtn("lista", "Lista")}
-        </div>
+      <nav aria-label="Pestañas de navegación" className="border-b border-gray-300 mb-6">
+        <ul className="flex space-x-1 text-sm">
+          <li>{tabBtn("mapa", "Mapa")}</li>
+          <li>{tabBtn("lista", "Lista")}</li>
+        </ul>
       </nav>
 
       {tab === "mapa" ? (

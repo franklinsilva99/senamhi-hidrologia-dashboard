@@ -7,6 +7,7 @@ import ChartAviso from "@/components/ChartAviso";
 import TablaDatosAviso from "@/components/TablaDatosAviso";
 import LeyendaNiveles from "@/components/LeyendaNiveles";
 import SectionHeader from "@/components/SectionHeader";
+import { avisoTabClass } from "@/lib/tabs";
 import type { Alert, Observation } from "@/lib/types";
 
 const badge: Record<string, string> = {
@@ -60,22 +61,24 @@ export default function AvisoDetalle() {
       <SectionHeader title="Hidrologia / Avisos Hidrológicos" />
 
       <div className="max-w-5xl mx-auto px-4 py-4 space-y-4">
-        <nav className="flex gap-0 text-sm border-b border-slate-300">
-          <a
-            href="/avisos"
-            className="px-5 py-2.5 border border-b-0 border-slate-300 bg-white hover:bg-slate-50 text-[#00539b] font-medium rounded-t"
-          >
-            Mapa
-          </a>
-          <a
-            href="/avisos"
-            className="px-5 py-2.5 border border-b-0 border-slate-300 bg-white hover:bg-slate-50 text-[#00539b] font-medium rounded-t"
-          >
-            Lista
-          </a>
-          <span className="px-5 py-2.5 border border-b-0 border-slate-300 bg-white text-slate-600 font-medium rounded-t">
-            Aviso # {aviso.nro}
-          </span>
+        <nav aria-label="Pestañas de navegación" className="border-b border-gray-300 mb-6">
+          <ul className="flex space-x-1 text-sm">
+            <li>
+              <a href="/avisos?tab=mapa" className={avisoTabClass(false)}>
+                Mapa
+              </a>
+            </li>
+            <li>
+              <a href="/avisos?tab=lista" className={avisoTabClass(false)}>
+                Lista
+              </a>
+            </li>
+            <li>
+              <a href="/avisos" className={avisoTabClass(true)}>
+                Aviso # {aviso.nro}
+              </a>
+            </li>
+          </ul>
         </nav>
 
         <section className="bg-white rounded-b-xl rounded-tr border border-slate-300 p-5 sm:p-8 space-y-5">

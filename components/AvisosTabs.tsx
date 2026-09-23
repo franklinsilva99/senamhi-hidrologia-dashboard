@@ -57,6 +57,13 @@ export default function AvisosTabs({
     return m;
   }, [alerts]);
 
+  // Id del aviso vigente por estación (ca-ce) para enlazar al detalle
+  const avisoIdPorEstacion = useMemo(() => {
+    const m: Record<string, string> = {};
+    for (const a of alerts) if (a.vigente) m[a.stationId] = `${a.ca}-${a.ce}`;
+    return m;
+  }, [alerts]);
+
   const tipoDefault = useMemo<TipoAviso>(() => {
     const tipos = Object.values(tipoPorEstacion);
     const vigilancia = tipos.filter((t) => t === "vigilancia").length;
@@ -154,6 +161,7 @@ export default function AvisosTabs({
           vigenteIds={vigenteIds}
           tipoPorEstacion={tipoPorEstacion}
           nivelPorEstacion={nivelPorEstacion}
+          avisoIdPorEstacion={avisoIdPorEstacion}
           tipoDefault={tipoDefault}
           mostrarNiveles
         />

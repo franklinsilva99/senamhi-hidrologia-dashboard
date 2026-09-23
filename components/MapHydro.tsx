@@ -95,6 +95,7 @@ export default function MapHydro({
   vigenteIds,
   tipoPorEstacion,
   nivelPorEstacion,
+  avisoIdPorEstacion,
   tipoDefault = "avenida",
   mostrarNiveles = false,
 }: {
@@ -104,6 +105,7 @@ export default function MapHydro({
   vigenteIds?: Set<string>;
   tipoPorEstacion?: Record<string, TipoAviso>;
   nivelPorEstacion?: Record<string, NivelAlerta>;
+  avisoIdPorEstacion?: Record<string, string>;
   tipoDefault?: TipoAviso;
   mostrarNiveles?: boolean;
 }) {
@@ -150,6 +152,7 @@ export default function MapHydro({
   const enDetalle = !!(selected && vigenteIds?.has(selected.id) && mostrarNiveles);
   const nivelSeleccionado =
     (selected && nivelPorEstacion?.[selected.id]) || null;
+  const avisoId = selected && enDetalle ? avisoIdPorEstacion?.[selected.id] : undefined;
 
   return (
     <div className={`relative${mostrarNiveles ? " overflow-hidden" : ""}`}>
@@ -302,6 +305,14 @@ export default function MapHydro({
                 {RECOMENDACION[tipoActivo][nivelActivo]}
               </p>
             </div>
+            {avisoId && (
+              <a
+                href={`/avisos/${avisoId}`}
+                className="mt-2 block w-full rounded bg-[#00539b] px-3 py-1.5 text-center text-[11px] font-bold text-white transition-colors hover:bg-[#003366]"
+              >
+                Ver detalle
+              </a>
+            )}
           </div>
           <button
             type="button"

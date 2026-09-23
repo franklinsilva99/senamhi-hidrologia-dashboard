@@ -5,34 +5,36 @@ export default function LeyendaNiveles({ tipo = "avenida" }: { tipo?: TipoAviso 
   const textos = PELIGRO[tipo];
 
   return (
-    <div className="space-y-0 border border-slate-300 rounded overflow-hidden">
-      {/* ROJO */}
-      <div className="flex items-stretch border-b border-slate-300">
-        <div className="flex items-center justify-center w-28 bg-[#ff0000] flex-shrink-0">
-          <span className="text-white font-bold text-sm">ROJO</span>
+    <div className="border border-gray-200 rounded-sm overflow-hidden text-xs sm:text-[13px]">
+      <div className="divide-y divide-gray-200">
+        {/* ROJO */}
+        <div className="flex flex-col sm:flex-row items-stretch">
+          <div className="w-full sm:w-28 bg-[#FF0000] text-white flex items-center justify-center py-3.5 px-2 font-bold tracking-wider text-sm flex-shrink-0">
+            ROJO
+          </div>
+          <div className="p-3 sm:px-4 sm:py-3.5 text-gray-700 bg-white flex items-center flex-grow leading-snug">
+            {textos.ROJO}
+          </div>
         </div>
-        <div className="flex-1 p-3 text-sm text-justify text-slate-700">
-          {textos.ROJO}
-        </div>
-      </div>
 
-      {/* NARANJA */}
-      <div className="flex items-stretch border-b border-slate-300">
-        <div className="flex items-center justify-center w-28 bg-[#ff9900] flex-shrink-0">
-          <span className="text-white font-bold text-sm">NARANJA</span>
+        {/* NARANJA */}
+        <div className="flex flex-col sm:flex-row items-stretch">
+          <div className="w-full sm:w-28 bg-[#FF9900] text-white flex items-center justify-center py-3.5 px-2 font-bold tracking-wider text-sm flex-shrink-0">
+            NARANJA
+          </div>
+          <div className="p-3 sm:px-4 sm:py-3.5 text-gray-700 bg-white flex items-center flex-grow leading-snug">
+            {textos.NARANJA}
+          </div>
         </div>
-        <div className="flex-1 p-3 text-sm text-justify text-slate-700">
-          {textos.NARANJA}
-        </div>
-      </div>
 
-      {/* AMARILLO */}
-      <div className="flex items-stretch">
-        <div className="flex items-center justify-center w-28 bg-[#ffff00] flex-shrink-0">
-          <span className="text-black font-bold text-sm">AMARILLO</span>
-        </div>
-        <div className="flex-1 p-3 text-sm text-justify text-slate-700">
-          {textos.AMARILLO}
+        {/* AMARILLO */}
+        <div className="flex flex-col sm:flex-row items-stretch">
+          <div className="w-full sm:w-28 bg-[#FFFF00] text-black flex items-center justify-center py-3.5 px-2 font-extrabold tracking-wider text-sm flex-shrink-0">
+            AMARILLO
+          </div>
+          <div className="p-3 sm:px-4 sm:py-3.5 text-gray-700 bg-white flex items-center flex-grow leading-snug">
+            {textos.AMARILLO}
+          </div>
         </div>
       </div>
     </div>

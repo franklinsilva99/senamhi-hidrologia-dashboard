@@ -32,23 +32,23 @@ export default function TablaDatosAviso({
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-sm border border-slate-200">
+      <table className="w-full text-center text-xs sm:text-sm border-collapse">
         <thead>
-          <tr className="bg-[#00539b] text-white text-center">
-            <th className="p-2 align-middle">Cuerpo de Agua</th>
-            <th className="p-2 align-middle">Estación</th>
-            <th className="p-2 align-middle">Distrito</th>
-            <th className="p-2 align-middle">{etiquetaActual}</th>
-            <th className="p-2 align-middle bg-[#ee3d43]">Umbral Rojo ({unidad})</th>
+          <tr className="bg-[#0070c0] text-white divide-x divide-blue-400 font-bold">
+            <th className="py-2.5 px-3 uppercase tracking-tight">Cuerpo de Agua</th>
+            <th className="py-2.5 px-3 uppercase tracking-tight">Estación</th>
+            <th className="py-2.5 px-3 uppercase tracking-tight">Distrito</th>
+            <th className="py-2.5 px-3 uppercase tracking-tight">{etiquetaActual}</th>
+            <th className="py-2.5 px-3 uppercase tracking-tight">Umbral Rojo ({unidad})</th>
           </tr>
         </thead>
-        <tbody>
-          <tr className="text-center">
-            <td className="p-2 align-middle">{station.rio.toUpperCase()}</td>
-            <td className="p-2 align-middle">{station.estacion.toUpperCase()}</td>
-            <td className="p-2 align-middle">{station.distritos.join(", ").toUpperCase() || "—"}</td>
-            <td className="p-2 align-middle font-bold">{valorActual?.toFixed(2)}</td>
-            <td className="p-2 align-middle font-bold text-[#ee3d43]">{umbralRojo?.toFixed(2)}</td>
+        <tbody className="divide-y divide-gray-200 text-gray-800 bg-white">
+          <tr className="divide-x divide-gray-200 text-xs sm:text-[13px]">
+            <td className="py-2 px-3 font-medium">{station.rio.toUpperCase()}</td>
+            <td className="py-2 px-3">{station.estacion.toUpperCase()}</td>
+            <td className="py-2 px-3">{station.distritos.join(", ").toUpperCase() || "—"}</td>
+            <td className="py-2 px-3 font-semibold">{valorActual?.toFixed(2)}</td>
+            <td className="py-2 px-3 font-semibold">{umbralRojo?.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>

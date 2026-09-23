@@ -92,28 +92,28 @@ export default function ChartAviso({
 
   return (
     <div className="w-full">
-      {/* Título */}
-      <div className="text-center mb-2">
-        <h3 className="text-base font-semibold text-slate-800 uppercase">
-          {chartTitle}
-        </h3>
-        {subtitle && (
-          <p className="text-xs text-slate-500 mt-0.5 uppercase">{subtitle}</p>
-        )}
-      </div>
-
-      <div className="h-80 w-full relative">
-        {/* Menú (≡) — paridad visual con el gráfico real */}
+      {/* Encabezado del gráfico con título y menú */}
+      <div className="flex justify-between items-start mb-2 px-6">
+        <div className="w-full text-center">
+          <h3 className="text-sm font-bold tracking-wide text-gray-700 uppercase">
+            {chartTitle}
+          </h3>
+          {subtitle && (
+            <p className="text-[11px] text-gray-500 font-semibold uppercase">{subtitle}</p>
+          )}
+        </div>
         <button
           type="button"
-          aria-label="Opciones del gráfico"
-          className="absolute top-1 right-1 z-10 p-1 text-slate-400 hover:text-slate-600"
+          aria-label="Exportar gráfico"
+          className="text-gray-600 hover:text-gray-900 p-1 focus:outline-none"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
+      </div>
 
+      <div className="h-80 w-full relative">
         <ResponsiveContainer>
           <ComposedChart data={data} margin={{ top: 10, right: 20, left: 10, bottom: 5 }}>
             <XAxis
@@ -176,11 +176,23 @@ export default function ChartAviso({
       </div>
 
       {/* Leyenda manual (paridad con el gráfico real) */}
-      <div className="flex flex-wrap items-center justify-center gap-5 mt-3 text-xs text-slate-600">
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: C_AMARILLO }} /> Umbral Amarillo</span>
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: C_NARANJA }} /> Umbral Naranja</span>
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full inline-block" style={{ backgroundColor: C_ROJO }} /> Umbral Rojo</span>
-        <span className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block" style={{ backgroundColor: C_LINEA }} /> {varName} ({unidad})</span>
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-4 text-[12px] text-gray-700">
+        <div className="flex items-center space-x-1.5">
+          <span className="w-3 h-3 rounded-full bg-[#ee3d43] inline-block" />
+          <span>Umbral Rojo</span>
+        </div>
+        <div className="flex items-center space-x-1.5">
+          <span className="w-3 h-3 rounded-full bg-[#fca326] inline-block" />
+          <span>Umbral Naranja</span>
+        </div>
+        <div className="flex items-center space-x-1.5">
+          <span className="w-3 h-3 rounded-full bg-[#ffeb3b] inline-block border border-gray-300" />
+          <span>Umbral Amarillo</span>
+        </div>
+        <div className="flex items-center space-x-1.5">
+          <span className="w-4 h-0.5 bg-[#0000FF] inline-block" />
+          <span>{varName} ({unidad})</span>
+        </div>
       </div>
     </div>
   );

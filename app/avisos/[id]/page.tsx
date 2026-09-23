@@ -11,9 +11,9 @@ import { avisoTabClass } from "@/lib/tabs";
 import type { Alert, Observation } from "@/lib/types";
 
 const badge: Record<string, string> = {
-  AMARILLO: "bg-[#ffeb3b] text-black",
-  NARANJA: "bg-[#fca326] text-white",
-  ROJO: "bg-[#ee3d43] text-white",
+  AMARILLO: "bg-[#FFFF00] text-black",
+  NARANJA: "bg-[#FF9900] text-white",
+  ROJO: "bg-[#FF0000] text-white",
 };
 
 function formatFechaES(dateStr: string): string {
@@ -60,7 +60,7 @@ export default function AvisoDetalle() {
     <div className="min-h-screen bg-senamhi-bg">
       <SectionHeader title="Hidrologia / Avisos Hidrológicos" />
 
-      <div className="max-w-5xl mx-auto px-4 py-4 space-y-4">
+      <main className="w-full max-w-5xl bg-white min-h-[900px] shadow-sm my-4 md:my-6 p-4 sm:p-8 md:p-10 border border-gray-200 mx-auto">
         <nav aria-label="Pestañas de navegación" className="border-b border-gray-300 mb-6">
           <ul className="flex space-x-1 text-sm">
             <li>
@@ -81,36 +81,42 @@ export default function AvisoDetalle() {
           </ul>
         </nav>
 
-        <section className="bg-white rounded-b-xl rounded-tr border border-slate-300 p-5 sm:p-8 space-y-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-2xl font-bold text-slate-800">
+        {/* Cabecera del aviso */}
+        <section className="bg-[#f0f2f5] p-2 flex justify-end items-center mb-1">
+          <div className="flex items-center space-x-3">
+            <span className="text-xl font-bold text-black tracking-tight">
               Aviso N°{aviso.nro}
-            </h2>
-            <span className={`px-5 py-2 rounded text-sm font-bold ${badge[aviso.nivel]}`}>
-              {aviso.nivel}
             </span>
+            <div className={`${badge[aviso.nivel]} font-extrabold text-base px-6 py-1 tracking-wider shadow-sm select-none`}>
+              {aviso.nivel}
+            </div>
           </div>
+        </section>
+        <div className="text-right text-xs text-gray-600 mb-6 font-normal">
+          Fecha de emisión: {aviso.fechaEmision}
+        </div>
 
-          <div className="text-right text-sm text-slate-500">
-            Fecha de emisión: {aviso.fechaEmision}
-          </div>
-
-          <h1 className="text-xl sm:text-2xl font-bold text-center text-[#dc2626] leading-snug">
+        {/* Título */}
+        <section className="text-center mb-8 px-2">
+          <h2 className="text-red-600 font-extrabold text-2xl md:text-[28px] leading-tight tracking-normal uppercase">
             {aviso.titulo}
-          </h1>
+          </h2>
+        </section>
 
-          <div className="space-y-1 text-sm mt-4">
-            <p><strong>Fecha de inicio: </strong>{formatFechaES(aviso.inicio)}</p>
-            <p><strong>Fecha de final: </strong>{formatFechaES(aviso.fin)}</p>
-            <p><strong>Plazo: </strong>Plazo {aviso.plazo}</p>
+        {/* Metadatos y descripción */}
+        <section className="mb-8 text-sm text-gray-800 leading-relaxed max-w-4xl mx-auto">
+          <div className="space-y-1 mb-5">
+            <p><strong className="font-bold text-gray-900">Fecha de inicio:</strong> {formatFechaES(aviso.inicio)}</p>
+            <p><strong className="font-bold text-gray-900">Fecha de final:</strong> {formatFechaES(aviso.fin)}</p>
+            <p><strong className="font-bold text-gray-900">Plazo:</strong> {aviso.plazo === "extendido" ? "Extendido" : "Normal"}</p>
           </div>
-
-          <p className="text-sm text-justify leading-relaxed mt-4">
+          <p className="text-justify text-gray-700 leading-normal text-[13.5px]">
             {aviso.descripcion}
           </p>
         </section>
 
-        <section className="bg-white rounded-xl border border-slate-300 p-5 sm:p-8">
+        {/* Hidrograma */}
+        <section className="w-full max-w-4xl mx-auto mb-10 border border-gray-100 p-2 sm:p-4 rounded">
           <ChartAviso
             series={serie}
             titulo={`HIDROGRAMA DE ${aviso.cuerpoAgua}`}
@@ -122,13 +128,14 @@ export default function AvisoDetalle() {
             umbralNaranja={aviso.preferencia === "nivel" ? th?.nivel.naranja : th?.caudal.naranja}
             umbralRoja={aviso.preferencia === "nivel" ? th?.nivel.roja : th?.caudal.roja}
           />
-          <p className="text-xs text-slate-400 italic mt-2">
+          <p className="text-center text-[11px] text-gray-500 italic mt-3">
             Nota: Información en tiempo casi real, sujeto a revisión y validación
           </p>
         </section>
 
+        {/* Tabla resumen */}
         {st && (
-          <section className="bg-white rounded-xl border border-slate-300 p-5 sm:p-8">
+          <section className="max-w-3xl mx-auto mb-8 overflow-hidden rounded-sm shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
             <TablaDatosAviso
               station={st}
               thresholds={th}
@@ -141,14 +148,15 @@ export default function AvisoDetalle() {
           </section>
         )}
 
-        <section className="bg-white rounded-xl border border-slate-300 p-5 sm:p-8">
+        {/* Leyenda de umbrales */}
+        <section className="max-w-4xl mx-auto mb-10">
           <LeyendaNiveles tipo={aviso.tipo} />
         </section>
 
-        <div className="flex justify-center py-4">
-          <div className="w-16 h-1 bg-[#00539b] rounded" />
-        </div>
-      </div>
+        <footer className="flex justify-center pt-2 pb-4">
+          <div className="w-16 h-1 bg-[#0070c0] rounded-full" />
+        </footer>
+      </main>
     </div>
   );
 }

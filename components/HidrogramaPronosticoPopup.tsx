@@ -151,9 +151,14 @@ export default function HidrogramaPronosticoPopup({
       })
       .sort((a, b) => a.fecha.localeCompare(b.fecha));
 
-    // Encadena la línea punteada desde el último día pasado
+    // Encadena la línea punteada y la banda desde el último día pasado
     const lastPast = [...arr].reverse().find((d) => d.real != null);
-    if (lastPast && arr.some((d) => d.pron != null)) lastPast.pron = lastPast.real;
+    if (lastPast && arr.some((d) => d.pron != null)) {
+      lastPast.pron = lastPast.real;
+      if (lastPast.min != null && lastPast.max != null) {
+        lastPast.rango = [lastPast.min, lastPast.max];
+      }
+    }
     return arr;
   }, [forecast, minMaxPorDia, hoyISO]);
 

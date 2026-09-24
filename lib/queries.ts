@@ -45,7 +45,7 @@ export function getForecastDiario(stationId?: string): ForecastDiario[] {
 
 // ── Flujo Bizagi: Detección de avisos ──
 
-function clasificarUmbral(valor: number, th: Thresholds, preferencia: "caudal" | "nivel"): NivelAlerta | null {
+export function clasificarUmbral(valor: number, th: Thresholds, preferencia: "caudal" | "nivel"): NivelAlerta | null {
   const u = preferencia === "caudal" ? th.caudal : th.nivel;
   if (th.tipo === "vigilancia") {
     // Vigilancia: menor valor = mayor severidad (descenso del nivel/caudal)

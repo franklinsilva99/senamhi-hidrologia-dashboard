@@ -1,9 +1,10 @@
 "use client";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  ComposedChart, Line, XAxis, YAxis, Tooltip,
+  ComposedChart, Area, Line, XAxis, YAxis, Tooltip,
   ReferenceLine, CartesianGrid, ResponsiveContainer,
 } from "recharts";
+import { toPng, toJpeg } from "html-to-image";
 import type { ForecastDiario, ForecastInput, Station } from "@/lib/types";
 
 const C_ROJO = "#e60000";
@@ -39,6 +40,7 @@ type Punto = {
   pron: number | null;
   min?: number;
   max?: number;
+  rango?: [number, number] | null;
 };
 
 function fila(color: string, txt: string, val: string) {
@@ -99,6 +101,26 @@ export default function HidrogramaPronosticoPopup({
   onClose: () => void;
 }) {
   const hoyISO = new Date().toISOString().slice(0, 10);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [descargando, setDescargando] = useState(false);
+
+  useEffect(() => {
+    const onFs = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener("fullscreenchange", onFs);
+    return () => document.removeEventListener("fullscreenchange", onFs);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (!t.closest("[data-menu-root]")) setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [menuOpen]);
 
   const minMaxPorDia = useMemo(() => {
     const m = new Map<string, number[]>();
@@ -124,6 +146,7 @@ export default function HidrogramaPronosticoPopup({
           pron: esPasado ? null : f.caudalPrevisto,
           min,
           max,
+          rango: esPasado ? null : ([min, max] as [number, number]),
         };
       })
       .sort((a, b) => a.fecha.localeCompare(b.fecha));
@@ -134,19 +157,49 @@ export default function HidrogramaPronosticoPopup({
     return arr;
   }, [forecast, minMaxPorDia, hoyISO]);
 
-  const valores = data.flatMap((d) => [d.real, d.pron, d.min, d.max]).filter((v): v is number => v != null);
+  // Ventana: todos los días pronosticados (futuros); si son <6, se completan con pasados
+  const nFuturos = forecast.filter((f) => f.fecha > hoyISO).length;
+  const ventana = Math.max(6, nFuturos);
+  const visibles = data.slice(-ventana);
+
+  const valores = visibles.flatMap((d) => [d.real, d.pron, d.min, d.max]).filter((v): v is number => v != null);
   const yMax = Math.max(umbrales.roja, umbrales.naranja, umbrales.amarilla, ...valores) * 1.12;
 
-  const etiquetaUmbral = (v: number, color: string) => ({
-    value: String(Number(v.toFixed(2))),
-    position: "right" as const,
-    fill: color,
-    fontSize: 10,
-    fontWeight: 600,
-  });
+  const toggleFullscreen = () => {
+    setMenuOpen(false);
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+    } else if (cardRef.current) {
+      void cardRef.current.requestFullscreen();
+    }
+  };
+
+  const descargar = async (formato: "png" | "jpg") => {
+    setMenuOpen(false);
+    if (!cardRef.current || descargando) return;
+    setDescargando(true);
+    try {
+      const opts = { backgroundColor: "#ffffff", pixelRatio: 2, cacheBust: true };
+      const url =
+        formato === "png"
+          ? await toPng(cardRef.current, opts)
+          : await toJpeg(cardRef.current, { ...opts, quality: 0.95 });
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `hidrograma-${station.rio.toLowerCase()}-${hoyISO}.${formato}`;
+      a.click();
+    } finally {
+      setDescargando(false);
+    }
+  };
 
   return (
-    <div className="w-[640px] max-w-[92vw] bg-white rounded-lg shadow-2xl border border-gray-300 relative flex flex-col overflow-hidden text-gray-800">
+    <div
+      ref={cardRef}
+      className={`bg-white shadow-2xl border border-gray-300 relative flex flex-col text-gray-800 ${
+        isFullscreen ? "w-screen h-screen rounded-none overflow-auto" : "w-[640px] max-w-[92vw] rounded-lg overflow-hidden"
+      }`}
+    >
       <button
         type="button"
         onClick={onClose}
@@ -159,11 +212,41 @@ export default function HidrogramaPronosticoPopup({
       {/* Barra: fecha + opciones */}
       <div className="pt-3 px-4 pb-1 flex items-center justify-between text-[12px] text-gray-600">
         <span>Fecha: {hoyISO}</span>
-        <button type="button" title="Opciones de gráfico" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 p-1 rounded">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path className="fill-current" d="M3 5h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2z" />
-          </svg>
-        </button>
+        <div className="relative" data-menu-root>
+          <button
+            type="button"
+            title="Opciones de gráfico"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 p-1 rounded"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path className="fill-current" d="M3 5h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2z" />
+            </svg>
+          </button>
+          {menuOpen && (
+            <div className="absolute right-0 mt-1 w-44 bg-white border border-gray-200 rounded shadow-lg z-40 text-[12px] text-gray-700 overflow-hidden">
+              <button type="button" onClick={toggleFullscreen} className="block w-full text-left px-3 py-2 hover:bg-gray-100">
+                {isFullscreen ? "Salir de pantalla completa" : "Pantalla completa"}
+              </button>
+              <button
+                type="button"
+                onClick={() => descargar("png")}
+                disabled={descargando}
+                className="block w-full text-left px-3 py-2 hover:bg-gray-100 disabled:opacity-50"
+              >
+                {descargando ? "Generando…" : "Descargar PNG"}
+              </button>
+              <button
+                type="button"
+                onClick={() => descargar("jpg")}
+                disabled={descargando}
+                className="block w-full text-left px-3 py-2 hover:bg-gray-100 disabled:opacity-50"
+              >
+                {descargando ? "Generando…" : "Descargar JPG"}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Título / subtítulo */}
@@ -178,7 +261,7 @@ export default function HidrogramaPronosticoPopup({
 
       {/* Gráfico */}
       <div className="relative px-3 pt-2">
-        <div className="h-[210px] w-full relative">
+        <div className={`w-full relative ${isFullscreen ? "h-[70vh]" : "h-[210px]"}`}>
           {/* Marca de agua SENAMHI (detrás) */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none">
             <span className="text-4xl font-black text-slate-900/[0.07] uppercase tracking-widest">Senamhi</span>
@@ -188,7 +271,7 @@ export default function HidrogramaPronosticoPopup({
           </div>
 
           <ResponsiveContainer>
-            <ComposedChart data={data} margin={{ top: 8, right: 34, left: 8, bottom: 4 }}>
+            <ComposedChart data={visibles} margin={{ top: 8, right: 34, left: 8, bottom: 4 }}>
               <CartesianGrid stroke="#f0f0f0" vertical={false} />
               <XAxis dataKey="label" interval={0} tick={{ fontSize: 10, fill: "#4d4d4d" }} />
               <YAxis
@@ -198,11 +281,12 @@ export default function HidrogramaPronosticoPopup({
                 label={{ value: "CAUDAL(m3/s)", angle: -90, position: "insideLeft", offset: 6, style: { fontSize: 10, fill: "#4d4d4d" } }}
               />
               <Tooltip content={<TooltipBox umbrales={umbrales} />} />
-              <ReferenceLine y={umbrales.roja} stroke={C_ROJO} strokeWidth={2} label={etiquetaUmbral(umbrales.roja, C_ROJO)} />
-              <ReferenceLine y={umbrales.naranja} stroke={C_NARANJA} strokeWidth={2} label={etiquetaUmbral(umbrales.naranja, C_NARANJA)} />
-              <ReferenceLine y={umbrales.amarilla} stroke={C_AMARILLO} strokeWidth={2} label={etiquetaUmbral(umbrales.amarilla, C_AMARILLO)} />
-              <Line type="monotone" dataKey="real" stroke={C_OBS} strokeWidth={2.2} dot={false} connectNulls={false} />
-              <Line type="monotone" dataKey="pron" stroke={C_PRON} strokeWidth={2.2} strokeDasharray="2 3" dot={false} connectNulls />
+              <ReferenceLine y={umbrales.roja} stroke={C_ROJO} strokeWidth={2} />
+              <ReferenceLine y={umbrales.naranja} stroke={C_NARANJA} strokeWidth={2} />
+              <ReferenceLine y={umbrales.amarilla} stroke={C_AMARILLO} strokeWidth={2} />
+              <Area type="monotone" dataKey="rango" stroke="none" fill={C_PRON} fillOpacity={0.18} zIndex={500} />
+              <Line type="monotone" dataKey="real" stroke={C_OBS} strokeWidth={2.2} dot={false} connectNulls={false} zIndex={500} />
+              <Line type="monotone" dataKey="pron" stroke={C_PRON} strokeWidth={2.2} strokeDasharray="2 3" dot={false} connectNulls zIndex={500} />
             </ComposedChart>
           </ResponsiveContainer>
         </div>

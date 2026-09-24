@@ -60,7 +60,7 @@ export default function MapPronostico({
       </MapContainer>
 
       {selected && (
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-[1100]">
+        <div className="absolute top-2 inset-x-0 flex justify-center z-[1100] px-2">
           <HidrogramaPronosticoPopup
             station={selected}
             umbrales={umbralesPorEstacion[selected.id] ?? { amarilla: 0, naranja: 0, roja: 0 }}

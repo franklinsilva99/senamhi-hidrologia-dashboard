@@ -1,7 +1,7 @@
 import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/tabs";
-import { getForecastDiario, getStations, getThresholds, getForecastInputs, clasificarUmbral } from "@/lib/queries";
+import { getForecastDiario, getStations, getThresholds, getForecastInputs } from "@/lib/queries";
 import type { ForecastDiario, ForecastInput } from "@/lib/types";
 
 export default function PronosticoPage() {
@@ -14,20 +14,7 @@ export default function PronosticoPage() {
   const forecastPorEstacion: Record<string, ForecastDiario[]> = {};
   for (const s of conPronostico) forecastPorEstacion[s.id] = byStation(s.id);
 
-  // Nivel pronosticado (interino: día más severo contra umbrales de caudal)
   const thMap = Object.fromEntries(getThresholds().map((t) => [t.stationId, t]));
-  const nivelPorEstacion: Record<string, string> = {};
-  for (const s of conPronostico) {
-    const f = forecastPorEstacion[s.id];
-    const th = thMap[s.id];
-    if (!f.length || !th) {
-      nivelPorEstacion[s.id] = "normal";
-      continue;
-    }
-    const valores = f.map((x) => x.caudalPrevisto);
-    const severo = th.tipo === "vigilancia" ? Math.min(...valores) : Math.max(...valores);
-    nivelPorEstacion[s.id] = clasificarUmbral(severo, th, "caudal") ?? "normal";
-  }
 
   // Inputs (modelos) por estación → Min–Max del popup
   const inputs = getForecastInputs();
@@ -73,7 +60,6 @@ export default function PronosticoPage() {
             stations={conPronostico}
             forecastPorEstacion={forecastPorEstacion}
             inputsPorEstacion={inputsPorEstacion}
-            nivelPorEstacion={nivelPorEstacion}
             umbralesPorEstacion={umbralesPorEstacion}
           />
         </section>

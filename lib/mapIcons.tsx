@@ -55,6 +55,22 @@ export function pinIcon() {
   });
 }
 
+// Punto de estación para el mapa de pronóstico (relleno #4682B4, borde #073763)
+function dotGlyph(r: number) {
+  return `<svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="14" cy="14" r="${r}" fill="#4682B4" stroke="#073763" stroke-width="1.5"/>
+    </svg>`;
+}
+
+export function stationDotIcon(selected = false) {
+  return L.divIcon({
+    className: "marker-station",
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    html: dotGlyph(selected ? 9.5 : 8.5),
+  });
+}
+
 export function MapController({ target }: { target: FlyTarget | null }) {
   const map = useMap();
   useEffect(() => {

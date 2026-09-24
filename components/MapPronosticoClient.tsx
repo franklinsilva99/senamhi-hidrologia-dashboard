@@ -8,7 +8,6 @@ export default function MapPronosticoClient(props: {
   stations: Station[];
   forecastPorEstacion: Record<string, ForecastDiario[]>;
   inputsPorEstacion: Record<string, ForecastInput[]>;
-  nivelPorEstacion: Record<string, string>;
   umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }>;
   heightClass?: string;
 }) {

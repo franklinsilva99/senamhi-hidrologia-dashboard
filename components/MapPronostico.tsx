@@ -2,29 +2,20 @@
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { ESTADO_COLOR, PERU_BOUNDS, stationIcon } from "@/lib/mapIcons";
+import { PERU_BOUNDS, stationDotIcon } from "@/lib/mapIcons";
 import HidrogramaPronosticoPopup from "@/components/HidrogramaPronosticoPopup";
 import type { ForecastDiario, ForecastInput, Station } from "@/lib/types";
-
-const NIVEL_COLOR: Record<string, string> = {
-  ROJO: "#ee3d43",
-  NARANJA: "#fca326",
-  AMARILLO: "#ffeb3b",
-  normal: "#16a34a",
-};
 
 export default function MapPronostico({
   stations,
   forecastPorEstacion,
   inputsPorEstacion,
-  nivelPorEstacion,
   umbralesPorEstacion,
   heightClass = "h-[960px]",
 }: {
   stations: Station[];
   forecastPorEstacion: Record<string, ForecastDiario[]>;
   inputsPorEstacion: Record<string, ForecastInput[]>;
-  nivelPorEstacion: Record<string, string>;
   umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }>;
   heightClass?: string;
 }) {
@@ -44,13 +35,12 @@ export default function MapPronostico({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {stations.map((s) => {
-          const nivel = nivelPorEstacion[s.id] ?? "normal";
           const sel = selectedId === s.id;
           return (
             <Marker
               key={s.id}
               position={[s.lat, s.lon]}
-              icon={stationIcon(NIVEL_COLOR[nivel] ?? ESTADO_COLOR.normal, sel)}
+              icon={stationDotIcon(sel)}
               eventHandlers={{ click: () => setSelectedId(s.id) }}
             >
               <Tooltip direction="top" offset={[0, -28]}>{s.estacion}</Tooltip>

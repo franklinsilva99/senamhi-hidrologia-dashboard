@@ -1,5 +1,8 @@
 import TopicBanner from "@/components/TopicBanner";
-import { getForecastDiario, getStations } from "@/lib/queries";
+import MapPronosticoClient from "@/components/MapPronosticoClient";
+import { avisoTabClass } from "@/lib/tabs";
+import { getForecastDiario, getStations, getThresholds, clasificarUmbral } from "@/lib/queries";
+import type { ForecastDiario } from "@/lib/types";
 
 export default function PronosticoPage() {
   const stations = getStations();
@@ -7,25 +10,59 @@ export default function PronosticoPage() {
   const byStation = (id: string) => diario.filter((f) => f.stationId === id);
   const fechas = Array.from(new Set(diario.map((f) => f.fecha))).sort();
 
+  // Estaciones con pronóstico + su serie D+1..3
+  const conPronostico = stations.filter((s) => diario.some((f) => f.stationId === s.id));
+  const forecastPorEstacion: Record<string, ForecastDiario[]> = {};
+  for (const s of conPronostico) forecastPorEstacion[s.id] = byStation(s.id);
+
+  // Nivel pronosticado (interino: día más severo contra umbrales de caudal)
+  const thMap = Object.fromEntries(getThresholds().map((t) => [t.stationId, t]));
+  const nivelPorEstacion: Record<string, string> = {};
+  for (const s of conPronostico) {
+    const f = forecastPorEstacion[s.id];
+    const th = thMap[s.id];
+    if (!f.length || !th) {
+      nivelPorEstacion[s.id] = "normal";
+      continue;
+    }
+    const valores = f.map((x) => x.caudalPrevisto);
+    const severo = th.tipo === "vigilancia" ? Math.min(...valores) : Math.max(...valores);
+    nivelPorEstacion[s.id] = clasificarUmbral(severo, th, "caudal") ?? "normal";
+  }
+
   return (
-    <div className="min-h-screen bg-senamhi-bg">
+    <div className="min-h-screen bg-white">
       <TopicBanner
         subtitle="Sistema de Pronóstico Hidrológico"
         title="Hidrología / Pronóstico Hidrológico"
         description="Pronóstico hidrológico diario (D+1 a D+3) como promedio de los modelos ingresados por las direcciones zonales, para los principales ríos y cuencas del país."
       />
 
-      <main className="w-full max-w-5xl bg-white shadow-sm my-4 md:my-6 p-4 sm:p-8 md:p-10 border border-gray-200 mx-auto">
-        <h2 className="text-red-600 font-extrabold text-2xl md:text-[28px] leading-tight tracking-normal uppercase text-center mb-4">
-          Pronóstico hidrológico — Diario (promedio de modelos)
-        </h2>
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <nav aria-label="Pestañas de pronóstico" className="border-b border-gray-300 mb-6">
+          <ul className="flex space-x-1 text-sm">
+            <li><a className={avisoTabClass(true)}>Diario</a></li>
+            <li><span className={`${avisoTabClass(false)} pointer-events-none opacity-50 cursor-not-allowed`} title="No disponible en contingencia">Mensual</span></li>
+            <li><span className={`${avisoTabClass(false)} pointer-events-none opacity-50 cursor-not-allowed`} title="No disponible en contingencia">Horario</span></li>
+          </ul>
+        </nav>
 
-        <p className="text-sm text-gray-700 text-justify max-w-4xl mx-auto mb-6">
-          Regla: <b>0 modelos → no se publica</b> · <b>1 modelo → se muestra ese valor</b> · <b>2+ → promedio aritmético simple</b>.
-          Solo Diario D+1..3. Mensual y Horario no disponibles en contingencia.
-        </p>
+        <section className="w-full mb-6">
+          <h2 className="text-center text-lg font-bold text-gray-800 uppercase tracking-tight">
+            Pronóstico Hidrológico a nivel nacional
+          </h2>
+          <p className="text-justify text-sm text-gray-700 mt-2 mb-4">
+            Pronóstico diario de caudales en cuencas con modelos hidrológicos implementados,
+            considerando las previsiones de lluvia con horizonte de 3 días.
+          </p>
+          <MapPronosticoClient
+            stations={conPronostico}
+            forecastPorEstacion={forecastPorEstacion}
+            nivelPorEstacion={nivelPorEstacion}
+          />
+        </section>
 
-        <section className="w-full max-w-4xl mx-auto mb-6 border border-gray-100 p-2 sm:p-4 rounded">
+        <section className="w-full mb-6">
           <h3 className="text-sm font-bold tracking-wide text-gray-700 uppercase text-center mb-3">
             Diario — 3 días (promedio modelos ingresados)
           </h3>

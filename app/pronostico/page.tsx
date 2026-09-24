@@ -1,14 +1,14 @@
 import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/tabs";
-import { getForecastDiario, getStations, getThresholds, clasificarUmbral } from "@/lib/queries";
-import type { ForecastDiario } from "@/lib/types";
+import { getForecastDiario, getStations, getThresholds, getForecastInputs, clasificarUmbral } from "@/lib/queries";
+import type { ForecastDiario, ForecastInput } from "@/lib/types";
 
 export default function PronosticoPage() {
   const stations = getStations();
   const diario = getForecastDiario();
   const byStation = (id: string) => diario.filter((f) => f.stationId === id);
-  const fechas = Array.from(new Set(diario.map((f) => f.fecha))).sort();
+  const fechas = Array.from(new Set(diario.map((f) => f.fecha))).sort().slice(0, 6);
 
   // Estaciones con pronóstico + su serie D+1..3
   const conPronostico = stations.filter((s) => diario.some((f) => f.stationId === s.id));
@@ -28,6 +28,20 @@ export default function PronosticoPage() {
     const valores = f.map((x) => x.caudalPrevisto);
     const severo = th.tipo === "vigilancia" ? Math.min(...valores) : Math.max(...valores);
     nivelPorEstacion[s.id] = clasificarUmbral(severo, th, "caudal") ?? "normal";
+  }
+
+  // Inputs (modelos) por estación → Min–Max del popup
+  const inputs = getForecastInputs();
+  const inputsPorEstacion: Record<string, ForecastInput[]> = {};
+  for (const s of conPronostico) inputsPorEstacion[s.id] = inputs.filter((i) => i.stationId === s.id);
+
+  // Umbrales según preferencia de la estación (caudal o nivel)
+  const umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }> = {};
+  for (const s of conPronostico) {
+    const th = thMap[s.id];
+    if (!th) continue;
+    const u = th.preferencia === "nivel" ? th.nivel : th.caudal;
+    umbralesPorEstacion[s.id] = { amarilla: u.amarilla, naranja: u.naranja, roja: u.roja };
   }
 
   return (
@@ -58,13 +72,15 @@ export default function PronosticoPage() {
           <MapPronosticoClient
             stations={conPronostico}
             forecastPorEstacion={forecastPorEstacion}
+            inputsPorEstacion={inputsPorEstacion}
             nivelPorEstacion={nivelPorEstacion}
+            umbralesPorEstacion={umbralesPorEstacion}
           />
         </section>
 
         <section className="w-full mb-6">
           <h3 className="text-sm font-bold tracking-wide text-gray-700 uppercase text-center mb-3">
-            Diario — 3 días (promedio modelos ingresados)
+            Diario — 6 días de pronóstico (promedio modelos ingresados)
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full text-center text-xs sm:text-sm border-collapse">
@@ -115,7 +131,7 @@ export default function PronosticoPage() {
         </section>
 
         <p className="text-xs text-gray-500 text-center">
-          Ejemplo: Socsi promedia 3 modelos, Chosica 1 modelo (valor directo), Pisac 4, Puente Ramis 0 (no se publica).
+          Cada día de pronóstico es el promedio de los modelos ingresados (ETA32, GFS0.25, PISCO-light). Haga clic en una estación del mapa para ver su hidrograma.
         </p>
 
         <footer className="flex justify-center pt-4 pb-2">

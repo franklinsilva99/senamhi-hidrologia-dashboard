@@ -178,11 +178,13 @@ export default function MapHydro({
               icon={stationIcon(color[est] ?? color.normal, sel)}
               eventHandlers={{ click: () => handleStationClick(s) }}
             >
+              <Tooltip direction="top" offset={[0, -28]}> Estación: {s.estacion}</Tooltip>
               <Popup>
-                <b>{s.rio} — {s.estacion}</b>
-                <br />Q: {o?.caudal} m³/s · N: {o?.nivel} m
-                <br />Estado: {est} · QC1: {o?.origen}
-                <br />DZ: {s.dz ?? "—"} · {s.poblados.join(", ")}
+                <b> Estación: {s.estacion}</b>
+                <br />Rio: {s.rio}
+                <br />Q: {o?.caudal} m³/s
+                <br />N: {o?.nivel} m
+                <br />Nivel: {est}
               </Popup>
             </Marker>
           );
@@ -197,8 +199,8 @@ export default function MapHydro({
                 <Tooltip direction="top" offset={[0, -28]}>{p.nombre}</Tooltip>
                 <Popup>
                   <b>{p.nombre}</b>
-                  <br />Centro poblado afectado
-                  <br />Estación {selected.estacion}
+                  <br />Localidad afectada
+                  <br />por el río {selected.rio}
                 </Popup>
               </Marker>
             ))

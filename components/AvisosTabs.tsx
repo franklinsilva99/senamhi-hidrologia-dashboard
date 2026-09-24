@@ -156,17 +156,23 @@ export default function AvisosTabs({
       </nav>
 
       {tab === "mapa" ? (
-        <MapHydro
-          stations={stations}
-          latest={latest}
-          heightClass="h-[840px]"
-          vigenteIds={vigenteIds}
-          tipoPorEstacion={tipoPorEstacion}
-          nivelPorEstacion={nivelPorEstacion}
-          avisoIdPorEstacion={avisoIdPorEstacion}
-          tipoDefault={tipoDefault}
-          mostrarNiveles
-        />
+        <>
+          <p className="text-sm text-gray-600">
+            Los Avisos Hidrológicos son pronósticos de carácter preventivo ante eventos severos, indicando las áreas que podrían verse afectadas y el nivel de peligrosidad.
+          </p>
+
+          <MapHydro
+            stations={stations}
+            latest={latest}
+            heightClass="h-[840px]"
+            vigenteIds={vigenteIds}
+            tipoPorEstacion={tipoPorEstacion}
+            nivelPorEstacion={nivelPorEstacion}
+            avisoIdPorEstacion={avisoIdPorEstacion}
+            tipoDefault={tipoDefault}
+            mostrarNiveles
+          />
+        </>
       ) : (
         <>
           {/* Filtro rápido */}
@@ -257,36 +263,7 @@ export default function AvisosTabs({
               ))}
               <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={pageClamped >= totalPages} className="px-3 py-1.5 border border-gray-300 bg-white text-senamhi-lightblue hover:bg-gray-50 disabled:opacity-50">siguiente</button>
             </nav>
-          </div>
-
-          {/* Avisos anteriores + Leyenda */}
-          <div className="mt-4 pt-6 border-t border-gray-200 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
-              <h2 className="text-base font-bold text-gray-900 mb-3">Avisos Anteriores</h2>
-              <ul className="list-disc list-inside space-y-2 text-sm text-gray-700">
-                <li><a className="text-senamhi-lightblue hover:underline font-medium" href="#">Avisos Hidrológicos Anteriores</a></li>
-                <li><a className="text-senamhi-lightblue hover:underline font-medium" href="#">Reporte de Estiajes y Crecidas Históricas</a></li>
-                <li><a className="text-senamhi-lightblue hover:underline font-medium" href="#">Boletines Hidrológicos Mensuales</a></li>
-              </ul>
-            </div>
-            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm lg:col-span-2">
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">Significado de los Niveles de Avisos Hidrológicos</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="p-3 bg-red-50 border-l-4 border-red-600 rounded-r">
-                  <div className="font-bold text-xs text-red-700 uppercase">Nivel Rojo</div>
-                  <p className="text-xs text-red-900 mt-1">Condición crítica. Posible desborde inminente o estiaje severo con afectación alta en riberas y actividades.</p>
-                </div>
-                <div className="p-3 bg-orange-50 border-l-4 border-orange-500 rounded-r">
-                  <div className="font-bold text-xs text-orange-700 uppercase">Nivel Naranja</div>
-                  <p className="text-xs text-orange-900 mt-1">Condición importante de riesgo. Incremento o descenso pronunciado que requiere preparación activa.</p>
-                </div>
-                <div className="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r">
-                  <div className="font-bold text-xs text-yellow-800 uppercase">Nivel Amarillo</div>
-                  <p className="text-xs text-yellow-900 mt-1">Condición anómala. Variación ligera en los caudales normales; mantenerse informado ante evolución.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          </div>         
         </>
       )}
     </div>

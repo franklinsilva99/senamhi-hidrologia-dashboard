@@ -1,11 +1,10 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   ComposedChart, Line, XAxis, YAxis, Tooltip,
   ReferenceLine, CartesianGrid, ResponsiveContainer,
 } from "recharts";
-import { getSeriesMerged } from "@/lib/data";
-import type { ForecastDiario, ForecastInput, Observation, Station } from "@/lib/types";
+import type { ForecastDiario, ForecastInput, Station } from "@/lib/types";
 
 const C_ROJO = "#e60000";
 const C_NARANJA = "#ff9900";
@@ -14,18 +13,11 @@ const C_OBS = "#001eff";
 const C_PRON = "#1d4ed8";
 
 const MESES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 function fmtCorto(fecha: string): string {
   const d = new Date(fecha + "T00:00:00");
   if (isNaN(d.getTime())) return fecha;
   return `${d.getDate()}. ${MESES[d.getMonth()]}`;
-}
-
-function fmtLargo(fecha: string): string {
-  const d = new Date(fecha + "T00:00:00");
-  if (isNaN(d.getTime())) return fecha;
-  return `${DIAS[d.getDay()]}, ${d.getDate()} ${MESES[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 const num = (v?: number | null) => (v == null ? "—" : String(Number(Number(v).toFixed(2))));
@@ -67,8 +59,8 @@ function TooltipBox({
         {fila(C_ROJO, "Rojo", num(umbrales.roja))}
         {fila(C_NARANJA, "Naranja", num(umbrales.naranja))}
         {fila(C_AMARILLO, "Amarillo", num(umbrales.amarilla))}
-        {fila(C_OBS, "Caudal Promedio", num(p?.real))}
         {fila(C_PRON, "Min - Max", `${num(p?.min)} - ${num(p?.max)}`)}
+        {fila(C_OBS, "Caudal Promedio", num(p?.real))}
         {fila(C_PRON, "Caudal Pronosticado", num(p?.pron))}
       </div>
     </div>
@@ -88,69 +80,43 @@ export default function HidrogramaPronosticoPopup({
   inputs: ForecastInput[];
   onClose: () => void;
 }) {
-  const [serie, setSerie] = useState<Observation[]>([]);
-  useEffect(() => {
-    setSerie(getSeriesMerged(station.id));
-  }, [station.id]);
+  const hoyISO = new Date().toISOString().slice(0, 10);
 
-  // Observado agregado por día (curva sólida "Caudal Promedio")
-  const obsPorDia = useMemo(() => {
+  const minMaxPorDia = useMemo(() => {
     const m = new Map<string, number[]>();
-    for (const o of serie) {
-      const dia = o.fecha.slice(0, 10);
-      if (!m.has(dia)) m.set(dia, []);
-      m.get(dia)!.push(o.caudal);
-    }
-    return [...m.entries()]
-      .map(([fecha, vals]) => ({ fecha, prom: vals.reduce((a, b) => a + b, 0) / vals.length }))
-      .sort((a, b) => a.fecha.localeCompare(b.fecha));
-  }, [serie]);
-
-  // Pronóstico: 6 días visibles + Min/Max de modelos por día
-  const pronPorDia = useMemo(() => {
-    const byDia = new Map<string, number[]>();
     for (const i of inputs) {
-      if (!byDia.has(i.fecha)) byDia.set(i.fecha, []);
-      byDia.get(i.fecha)!.push(i.valor);
+      if (!m.has(i.fecha)) m.set(i.fecha, []);
+      m.get(i.fecha)!.push(i.valor);
     }
-    return forecast.slice(0, 6).map((f) => {
-      const vals = byDia.get(f.fecha) ?? [];
-      return {
-        fecha: f.fecha,
-        prom: f.caudalPrevisto,
-        min: vals.length ? Math.min(...vals) : f.caudalPrevisto,
-        max: vals.length ? Math.max(...vals) : f.caudalPrevisto,
-      };
-    });
-  }, [forecast, inputs]);
+    return m;
+  }, [inputs]);
 
   const data: Punto[] = useMemo(() => {
-    const obs: Punto[] = obsPorDia.map((o) => ({
-      fecha: o.fecha,
-      label: fmtCorto(o.fecha),
-      real: Math.round(o.prom * 10) / 10,
-      pron: null,
-    }));
-    const pro: Punto[] = pronPorDia.map((p) => ({
-      fecha: p.fecha,
-      label: fmtCorto(p.fecha),
-      real: null,
-      pron: p.prom,
-      min: p.min,
-      max: p.max,
-    }));
-    const all = [...obs, ...pro];
-    // Conecta la línea punteada desde el último punto observado
-    if (obs.length && pro.length) {
-      const last = all.find((d) => d.fecha === obs[obs.length - 1].fecha);
-      if (last) last.pron = last.real;
-    }
-    return all;
-  }, [obsPorDia, pronPorDia]);
+    const arr: Punto[] = forecast
+      .map((f) => {
+        const vals = minMaxPorDia.get(f.fecha) ?? [];
+        const min = vals.length ? Math.min(...vals) : f.caudalPrevisto;
+        const max = vals.length ? Math.max(...vals) : f.caudalPrevisto;
+        const esPasado = f.fecha <= hoyISO;
+        return {
+          fecha: f.fecha,
+          label: fmtCorto(f.fecha),
+          real: esPasado ? f.caudalPrevisto : null,
+          pron: esPasado ? null : f.caudalPrevisto,
+          min,
+          max,
+        };
+      })
+      .sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+    // Encadena la línea punteada desde el último día pasado
+    const lastPast = [...arr].reverse().find((d) => d.real != null);
+    if (lastPast && arr.some((d) => d.pron != null)) lastPast.pron = lastPast.real;
+    return arr;
+  }, [forecast, minMaxPorDia, hoyISO]);
 
   const valores = data.flatMap((d) => [d.real, d.pron, d.min, d.max]).filter((v): v is number => v != null);
   const yMax = Math.max(umbrales.roja, umbrales.naranja, umbrales.amarilla, ...valores) * 1.12;
-  const fechaRef = obsPorDia.length ? obsPorDia[obsPorDia.length - 1].fecha : pronPorDia[0]?.fecha;
 
   return (
     <div className="w-[640px] max-w-[92vw] bg-white rounded-lg shadow-2xl border border-gray-300 relative flex flex-col overflow-hidden text-gray-800">
@@ -165,7 +131,7 @@ export default function HidrogramaPronosticoPopup({
 
       {/* Barra: fecha + opciones */}
       <div className="pt-3 px-4 pb-1 flex items-center justify-between text-[12px] text-gray-600">
-        <span>Fecha: {fechaRef ?? "—"}</span>
+        <span>Fecha: {hoyISO}</span>
         <button type="button" title="Opciones de gráfico" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 p-1 rounded">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path className="fill-current" d="M3 5h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2zm0 4h14a1 1 0 010 2H3a1 1 0 110-2z" />

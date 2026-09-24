@@ -19,7 +19,7 @@ export default function MapPronostico({
   inputsPorEstacion,
   nivelPorEstacion,
   umbralesPorEstacion,
-  heightClass = "h-[480px]",
+  heightClass = "h-[960px]",
 }: {
   stations: Station[];
   forecastPorEstacion: Record<string, ForecastDiario[]>;

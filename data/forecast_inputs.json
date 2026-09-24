@@ -3,168 +3,756 @@
     "stationId": "socsi",
     "fecha": "2026-09-12",
     "modelo": "ETA32",
-    "valor": 35.5,
+    "valor": 58.8,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-12",
     "modelo": "GFS0.25",
-    "valor": 32.1,
+    "valor": 60.6,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-12",
     "modelo": "PISCO-light",
-    "valor": 33.5,
+    "valor": 61.9,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-13",
     "modelo": "ETA32",
-    "valor": 30.0,
+    "valor": 58.3,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-13",
     "modelo": "GFS0.25",
-    "valor": 34.4,
+    "valor": 59.7,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-13",
     "modelo": "PISCO-light",
-    "valor": 27.8,
+    "valor": 61.2,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-14",
     "modelo": "ETA32",
-    "valor": 28.3,
+    "valor": 55.8,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-14",
     "modelo": "GFS0.25",
-    "valor": 27.8,
+    "valor": 57.9,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-09-14",
     "modelo": "PISCO-light",
-    "valor": 33.1,
+    "valor": 59.8,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-15",
+    "modelo": "ETA32",
+    "valor": 54.4,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-15",
+    "modelo": "GFS0.25",
+    "valor": 55.5,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-15",
+    "modelo": "PISCO-light",
+    "valor": 57.7,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-16",
+    "modelo": "ETA32",
+    "valor": 53.5,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-16",
+    "modelo": "GFS0.25",
+    "valor": 55.4,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-16",
+    "modelo": "PISCO-light",
+    "valor": 57.5,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-17",
+    "modelo": "ETA32",
+    "valor": 55,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-17",
+    "modelo": "GFS0.25",
+    "valor": 56.2,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-17",
+    "modelo": "PISCO-light",
+    "valor": 57.7,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-18",
+    "modelo": "ETA32",
+    "valor": 56.9,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-18",
+    "modelo": "GFS0.25",
+    "valor": 58.4,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-18",
+    "modelo": "PISCO-light",
+    "valor": 59.6,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-19",
+    "modelo": "ETA32",
+    "valor": 57,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-19",
+    "modelo": "GFS0.25",
+    "valor": 59.1,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-19",
+    "modelo": "PISCO-light",
+    "valor": 60.5,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-20",
+    "modelo": "ETA32",
+    "valor": 56.7,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-20",
+    "modelo": "GFS0.25",
+    "valor": 58,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "socsi",
+    "fecha": "2026-09-20",
+    "modelo": "PISCO-light",
+    "valor": 60,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-09-12",
     "modelo": "ETA32",
-    "valor": 38.9,
+    "valor": 50.8,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-12",
+    "modelo": "GFS0.25",
+    "valor": 51.6,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-12",
+    "modelo": "PISCO-light",
+    "valor": 52.7,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-09-13",
     "modelo": "ETA32",
-    "valor": 33.4,
+    "valor": 51.2,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-13",
+    "modelo": "GFS0.25",
+    "valor": 52.1,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-13",
+    "modelo": "PISCO-light",
+    "valor": 53.4,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-09-14",
     "modelo": "ETA32",
-    "valor": 35.7,
+    "valor": 51,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-14",
+    "modelo": "GFS0.25",
+    "valor": 51.8,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-14",
+    "modelo": "PISCO-light",
+    "valor": 52.7,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-15",
+    "modelo": "ETA32",
+    "valor": 50.2,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-15",
+    "modelo": "GFS0.25",
+    "valor": 51,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-15",
+    "modelo": "PISCO-light",
+    "valor": 52.2,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-16",
+    "modelo": "ETA32",
+    "valor": 49.4,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-16",
+    "modelo": "GFS0.25",
+    "valor": 50.1,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-16",
+    "modelo": "PISCO-light",
+    "valor": 51,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-17",
+    "modelo": "ETA32",
+    "valor": 49,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-17",
+    "modelo": "GFS0.25",
+    "valor": 49.6,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-17",
+    "modelo": "PISCO-light",
+    "valor": 50.7,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-18",
+    "modelo": "ETA32",
+    "valor": 49.5,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-18",
+    "modelo": "GFS0.25",
+    "valor": 49.9,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-18",
+    "modelo": "PISCO-light",
+    "valor": 50.8,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-19",
+    "modelo": "ETA32",
+    "valor": 49.9,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-19",
+    "modelo": "GFS0.25",
+    "valor": 51.2,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-19",
+    "modelo": "PISCO-light",
+    "valor": 51.7,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-20",
+    "modelo": "ETA32",
+    "valor": 50.5,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-20",
+    "modelo": "GFS0.25",
+    "valor": 51.6,
+    "usuario": "operador-DZ4"
+  },
+  {
+    "stationId": "chosica",
+    "fecha": "2026-09-20",
+    "modelo": "PISCO-light",
+    "valor": 52.1,
     "usuario": "operador-DZ4"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-12",
     "modelo": "ETA32",
-    "valor": 138.1,
+    "valor": 175,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-12",
     "modelo": "GFS0.25",
-    "valor": 129.3,
+    "valor": 178.8,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-12",
     "modelo": "PISCO-light",
-    "valor": 111.2,
-    "usuario": "operador-DZ12"
-  },
-  {
-    "stationId": "pisac",
-    "fecha": "2026-09-12",
-    "modelo": "ECMWF",
-    "valor": 116.2,
+    "valor": 185,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-13",
     "modelo": "ETA32",
-    "valor": 113.7,
+    "valor": 178.2,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-13",
     "modelo": "GFS0.25",
-    "valor": 112.5,
+    "valor": 180.5,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-13",
     "modelo": "PISCO-light",
-    "valor": 122.6,
-    "usuario": "operador-DZ12"
-  },
-  {
-    "stationId": "pisac",
-    "fecha": "2026-09-13",
-    "modelo": "ECMWF",
-    "valor": 110.6,
+    "valor": 185,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-14",
     "modelo": "ETA32",
-    "valor": 141.1,
+    "valor": 175.7,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-14",
     "modelo": "GFS0.25",
-    "valor": 123.4,
+    "valor": 180.2,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-09-14",
     "modelo": "PISCO-light",
-    "valor": 126.4,
+    "valor": 184.6,
     "usuario": "operador-DZ12"
   },
   {
     "stationId": "pisac",
-    "fecha": "2026-09-14",
-    "modelo": "ECMWF",
-    "valor": 131.3,
+    "fecha": "2026-09-15",
+    "modelo": "ETA32",
+    "valor": 171.7,
     "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-15",
+    "modelo": "GFS0.25",
+    "valor": 173.9,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-15",
+    "modelo": "PISCO-light",
+    "valor": 180.1,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-16",
+    "modelo": "ETA32",
+    "valor": 165,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-16",
+    "modelo": "GFS0.25",
+    "valor": 170.9,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-16",
+    "modelo": "PISCO-light",
+    "valor": 174.8,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-17",
+    "modelo": "ETA32",
+    "valor": 162,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-17",
+    "modelo": "GFS0.25",
+    "valor": 166.8,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-17",
+    "modelo": "PISCO-light",
+    "valor": 172.6,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-18",
+    "modelo": "ETA32",
+    "valor": 163.9,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-18",
+    "modelo": "GFS0.25",
+    "valor": 170.1,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-18",
+    "modelo": "PISCO-light",
+    "valor": 172.8,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-19",
+    "modelo": "ETA32",
+    "valor": 167.6,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-19",
+    "modelo": "GFS0.25",
+    "valor": 172.1,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-19",
+    "modelo": "PISCO-light",
+    "valor": 177.3,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-20",
+    "modelo": "ETA32",
+    "valor": 171,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-20",
+    "modelo": "GFS0.25",
+    "valor": 176,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "pisac",
+    "fecha": "2026-09-20",
+    "modelo": "PISCO-light",
+    "valor": 179.2,
+    "usuario": "operador-DZ12"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-12",
+    "modelo": "ETA32",
+    "valor": 16.1,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-12",
+    "modelo": "GFS0.25",
+    "valor": 16.5,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-12",
+    "modelo": "PISCO-light",
+    "valor": 16.9,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-13",
+    "modelo": "ETA32",
+    "valor": 16.1,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-13",
+    "modelo": "GFS0.25",
+    "valor": 16.4,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-13",
+    "modelo": "PISCO-light",
+    "valor": 16.9,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-14",
+    "modelo": "ETA32",
+    "valor": 15.7,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-14",
+    "modelo": "GFS0.25",
+    "valor": 16.1,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-14",
+    "modelo": "PISCO-light",
+    "valor": 16.6,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-15",
+    "modelo": "ETA32",
+    "valor": 15.4,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-15",
+    "modelo": "GFS0.25",
+    "valor": 15.6,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-15",
+    "modelo": "PISCO-light",
+    "valor": 16.1,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-16",
+    "modelo": "ETA32",
+    "valor": 15.1,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-16",
+    "modelo": "GFS0.25",
+    "valor": 15.4,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-16",
+    "modelo": "PISCO-light",
+    "valor": 15.7,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-17",
+    "modelo": "ETA32",
+    "valor": 15.2,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-17",
+    "modelo": "GFS0.25",
+    "valor": 15.6,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-17",
+    "modelo": "PISCO-light",
+    "valor": 16,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-18",
+    "modelo": "ETA32",
+    "valor": 15.6,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-18",
+    "modelo": "GFS0.25",
+    "valor": 16,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-18",
+    "modelo": "PISCO-light",
+    "valor": 16.2,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-19",
+    "modelo": "ETA32",
+    "valor": 15.9,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-19",
+    "modelo": "GFS0.25",
+    "valor": 16.2,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-19",
+    "modelo": "PISCO-light",
+    "valor": 16.6,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-20",
+    "modelo": "ETA32",
+    "valor": 15.9,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-20",
+    "modelo": "GFS0.25",
+    "valor": 16.2,
+    "usuario": "operador-DZ13"
+  },
+  {
+    "stationId": "puente-ramis",
+    "fecha": "2026-09-20",
+    "modelo": "PISCO-light",
+    "valor": 16.4,
+    "usuario": "operador-DZ13"
   }
 ]

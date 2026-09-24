@@ -13,6 +13,7 @@ const C_OBS = "#001eff";
 const C_PRON = "#1d4ed8";
 
 const MESES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 function fmtCorto(fecha: string): string {
   const d = new Date(fecha + "T00:00:00");
@@ -20,31 +21,28 @@ function fmtCorto(fecha: string): string {
   return `${d.getDate()}. ${MESES[d.getMonth()]}`;
 }
 
+function fmtLargo(fecha: string): string {
+  const d = new Date(fecha + "T00:00:00");
+  if (isNaN(d.getTime())) return fecha;
+  return `${DIAS[d.getDay()]}, ${MESES[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
 const num = (v?: number | null) => (v == null ? "—" : String(Number(Number(v).toFixed(2))));
+
+type Umbrales = { amarilla: number; naranja: number; roja: number };
 
 type Punto = {
   fecha: string;
   label: string;
+  fechaLarga: string;
   real: number | null;
   pron: number | null;
   min?: number;
   max?: number;
 };
 
-function TooltipBox({
-  active,
-  payload,
-  label,
-  umbrales,
-}: {
-  active?: boolean;
-  payload?: ReadonlyArray<{ payload?: Punto }>;
-  label?: string | number;
-  umbrales: { amarilla: number; naranja: number; roja: number };
-}) {
-  if (!active || !payload || payload.length === 0) return null;
-  const p = payload[0].payload as Punto | undefined;
-  const fila = (color: string, txt: string, val: string) => (
+function fila(color: string, txt: string, val: string) {
+  return (
     <div className="flex items-center gap-1.5">
       <span className="w-2 h-2 rounded-full inline-block shrink-0" style={{ backgroundColor: color }} />
       <span className="text-gray-700">
@@ -52,19 +50,39 @@ function TooltipBox({
       </span>
     </div>
   );
+}
+
+// Contenido compartido por el tooltip de hover y la caja fija
+function ContenidoTooltip({ punto, umbrales }: { punto: Punto; umbrales: Umbrales }) {
   return (
     <div className="bg-white/95 border border-[#4572a7] rounded shadow-md p-2 text-[11px] leading-tight pointer-events-none">
-      <div className="font-bold text-gray-800 pb-1 mb-1 border-b border-gray-100">{label}</div>
+      <div className="font-bold text-gray-800 pb-1 mb-1 border-b border-gray-100">{punto.fechaLarga}</div>
       <div className="space-y-1">
         {fila(C_ROJO, "Rojo", num(umbrales.roja))}
         {fila(C_NARANJA, "Naranja", num(umbrales.naranja))}
         {fila(C_AMARILLO, "Amarillo", num(umbrales.amarilla))}
-        {fila(C_PRON, "Min - Max", `${num(p?.min)} - ${num(p?.max)}`)}
-        {fila(C_OBS, "Caudal Promedio", num(p?.real))}
-        {fila(C_PRON, "Caudal Pronosticado", num(p?.pron))}
+        {fila(C_PRON, "Min - Max", `${num(punto.min)} - ${num(punto.max)}`)}
+        {fila(C_OBS, "Caudal Promedio", num(punto.real))}
+        {fila(C_PRON, "Caudal Pronosticado", num(punto.pron))}
       </div>
     </div>
   );
+}
+
+function TooltipBox({
+  active,
+  payload,
+  umbrales,
+}: {
+  active?: boolean;
+  payload?: ReadonlyArray<{ payload?: Punto }>;
+  label?: string | number;
+  umbrales: Umbrales;
+}) {
+  if (!active || !payload || payload.length === 0) return null;
+  const p = payload[0].payload as Punto | undefined;
+  if (!p) return null;
+  return <ContenidoTooltip punto={p} umbrales={umbrales} />;
 }
 
 export default function HidrogramaPronosticoPopup({
@@ -75,7 +93,7 @@ export default function HidrogramaPronosticoPopup({
   onClose,
 }: {
   station: Station;
-  umbrales: { amarilla: number; naranja: number; roja: number };
+  umbrales: Umbrales;
   forecast: ForecastDiario[];
   inputs: ForecastInput[];
   onClose: () => void;
@@ -101,6 +119,7 @@ export default function HidrogramaPronosticoPopup({
         return {
           fecha: f.fecha,
           label: fmtCorto(f.fecha),
+          fechaLarga: fmtLargo(f.fecha),
           real: esPasado ? f.caudalPrevisto : null,
           pron: esPasado ? null : f.caudalPrevisto,
           min,
@@ -117,6 +136,14 @@ export default function HidrogramaPronosticoPopup({
 
   const valores = data.flatMap((d) => [d.real, d.pron, d.min, d.max]).filter((v): v is number => v != null);
   const yMax = Math.max(umbrales.roja, umbrales.naranja, umbrales.amarilla, ...valores) * 1.12;
+
+  const etiquetaUmbral = (v: number, color: string) => ({
+    value: String(Number(v.toFixed(2))),
+    position: "right" as const,
+    fill: color,
+    fontSize: 10,
+    fontWeight: 600,
+  });
 
   return (
     <div className="w-[640px] max-w-[92vw] bg-white rounded-lg shadow-2xl border border-gray-300 relative flex flex-col overflow-hidden text-gray-800">
@@ -151,9 +178,17 @@ export default function HidrogramaPronosticoPopup({
 
       {/* Gráfico */}
       <div className="relative px-3 pt-2">
-        <div className="h-[210px] w-full">
+        <div className="h-[210px] w-full relative">
+          {/* Marca de agua SENAMHI (detrás) */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none">
+            <span className="text-4xl font-black text-slate-900/[0.07] uppercase tracking-widest">Senamhi</span>
+            <span className="mt-0.5 text-[7px] font-semibold tracking-wider text-slate-500/40 uppercase text-center">
+              Servicio Nacional de Meteorología e Hidrología del Perú
+            </span>
+          </div>
+
           <ResponsiveContainer>
-            <ComposedChart data={data} margin={{ top: 8, right: 16, left: 8, bottom: 4 }}>
+            <ComposedChart data={data} margin={{ top: 8, right: 34, left: 8, bottom: 4 }}>
               <CartesianGrid stroke="#f0f0f0" vertical={false} />
               <XAxis dataKey="label" interval={0} tick={{ fontSize: 10, fill: "#4d4d4d" }} />
               <YAxis
@@ -163,9 +198,9 @@ export default function HidrogramaPronosticoPopup({
                 label={{ value: "CAUDAL(m3/s)", angle: -90, position: "insideLeft", offset: 6, style: { fontSize: 10, fill: "#4d4d4d" } }}
               />
               <Tooltip content={<TooltipBox umbrales={umbrales} />} />
-              <ReferenceLine y={umbrales.roja} stroke={C_ROJO} strokeWidth={2} />
-              <ReferenceLine y={umbrales.naranja} stroke={C_NARANJA} strokeWidth={2} />
-              <ReferenceLine y={umbrales.amarilla} stroke={C_AMARILLO} strokeWidth={2} />
+              <ReferenceLine y={umbrales.roja} stroke={C_ROJO} strokeWidth={2} label={etiquetaUmbral(umbrales.roja, C_ROJO)} />
+              <ReferenceLine y={umbrales.naranja} stroke={C_NARANJA} strokeWidth={2} label={etiquetaUmbral(umbrales.naranja, C_NARANJA)} />
+              <ReferenceLine y={umbrales.amarilla} stroke={C_AMARILLO} strokeWidth={2} label={etiquetaUmbral(umbrales.amarilla, C_AMARILLO)} />
               <Line type="monotone" dataKey="real" stroke={C_OBS} strokeWidth={2.2} dot={false} connectNulls={false} />
               <Line type="monotone" dataKey="pron" stroke={C_PRON} strokeWidth={2.2} strokeDasharray="2 3" dot={false} connectNulls />
             </ComposedChart>

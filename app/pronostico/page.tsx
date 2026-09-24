@@ -1,4 +1,4 @@
-import SectionHeader from "@/components/SectionHeader";
+import TopicBanner from "@/components/TopicBanner";
 import { getForecastDiario, getStations } from "@/lib/queries";
 
 export default function PronosticoPage() {
@@ -9,7 +9,11 @@ export default function PronosticoPage() {
 
   return (
     <div className="min-h-screen bg-senamhi-bg">
-      <SectionHeader title="Hidrología / Pronóstico Hidrológico" />
+      <TopicBanner
+        subtitle="Sistema de Pronóstico Hidrológico"
+        title="Hidrología / Pronóstico Hidrológico"
+        description="Pronóstico hidrológico diario (D+1 a D+3) como promedio de los modelos ingresados por las direcciones zonales, para los principales ríos y cuencas del país."
+      />
 
       <main className="w-full max-w-5xl bg-white shadow-sm my-4 md:my-6 p-4 sm:p-8 md:p-10 border border-gray-200 mx-auto">
         <h2 className="text-red-600 font-extrabold text-2xl md:text-[28px] leading-tight tracking-normal uppercase text-center mb-4">

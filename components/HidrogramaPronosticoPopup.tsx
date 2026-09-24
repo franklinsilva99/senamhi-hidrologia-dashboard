@@ -217,7 +217,7 @@ export default function HidrogramaPronosticoPopup({
       {/* Barra: fecha + opciones */}
       <div className="pt-3 px-4 pb-1 flex items-center justify-between text-[12px] text-gray-600">
         <span>Fecha: {hoyISO}</span>
-        <div className="relative" data-menu-root>
+        <div className="relative mt-3" data-menu-root>
           <button
             type="button"
             title="Opciones de gráfico"

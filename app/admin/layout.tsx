@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/admin", label: "Página Principal", icon: "🏠", exact: true },
-  { href: "/admin/config", label: "Configuración General", icon: "⚙️", disabled: true },
+  { href: "/admin/config", label: "Configuración General", icon: "⚙️" },
   { href: "/admin/avisos", label: "Avisos", icon: "📋", hasDropdown: true },
   { href: "/monitoreo", label: "Monitoreo", icon: "📈" },
   { href: "/admin/info-diaria", label: "Información Diaria", icon: "📅", hasDropdown: true, disabled: true },

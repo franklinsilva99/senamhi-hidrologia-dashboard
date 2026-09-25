@@ -24,13 +24,12 @@ export default function MonitoreoPage() {
         </nav>
 
         <section className="w-full mb-6">
-          <h2 className="text-center text-lg font-bold text-gray-800 uppercase tracking-tight">
+          <h2 className="text-justify text-lg font-bold text-gray-800 uppercase tracking-tight">
             Monitoreo Hidrológico a nivel nacional
           </h2>
           <p className="text-justify text-sm text-gray-700 mt-2 mb-4">
             Información disponible de niveles y/o caudales de la red de monitoreo hidrológico del
-            Servicio Nacional de Meteorología e Hidrología del Perú (SENAMHI). Haga clic en una estación
-            para ver su hidrograma.
+            Servicio Nacional de Meteorología e Hidrología del Perú (SENAMHI).
           </p>
           <MapMonitoreoClient stations={stations} />
         </section>

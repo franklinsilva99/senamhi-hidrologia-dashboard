@@ -21,6 +21,8 @@ export interface Station {
   polygon: number[][][] | null;
   cota: number | null;
   cotaFuente?: "oficial" | "inventario-altitud" | "dem";
+  variables?: ("caudal" | "nivel")[];
+  estado?: "activa" | "mantenimiento";
 }
 
 export type TipoAviso = "avenida" | "vigilancia";

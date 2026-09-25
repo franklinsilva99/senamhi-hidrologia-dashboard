@@ -19,15 +19,33 @@
       "Nuevo Imperial"
     ],
     "pobladosGeo": [
-      { "nombre": "Cañete", "lat": -13.0778, "lon": -76.3874 },
-      { "nombre": "Nuevo Imperial", "lat": -12.9453, "lon": -76.2527 }
+      {
+        "nombre": "Cañete",
+        "lat": -13.0778,
+        "lon": -76.3874
+      },
+      {
+        "nombre": "Nuevo Imperial",
+        "lat": -12.9453,
+        "lon": -76.2527
+      }
     ],
     "polygon": null,
     "cota": 302,
     "cotaFuente": "inventario-altitud",
     "departamento": "Lima",
-    "provincia": ["Cañete"],
-    "distritos": ["Nuevo Imperial", "Cañete"]
+    "provincia": [
+      "Cañete"
+    ],
+    "distritos": [
+      "Nuevo Imperial",
+      "Cañete"
+    ],
+    "variables": [
+      "caudal",
+      "nivel"
+    ],
+    "estado": "activa"
   },
   {
     "id": "chosica",
@@ -49,15 +67,32 @@
       "Lurigancho-Chosica"
     ],
     "pobladosGeo": [
-      { "nombre": "Chosica", "lat": -11.9368, "lon": -76.6969 },
-      { "nombre": "Lurigancho-Chosica", "lat": -11.9488, "lon": -76.7627 }
+      {
+        "nombre": "Chosica",
+        "lat": -11.9368,
+        "lon": -76.6969
+      },
+      {
+        "nombre": "Lurigancho-Chosica",
+        "lat": -11.9488,
+        "lon": -76.7627
+      }
     ],
     "polygon": null,
     "cota": 867,
     "cotaFuente": "inventario-altitud",
     "departamento": "Lima",
-    "provincia": ["Lima"],
-    "distritos": ["Lurigancho-Chosica"]
+    "provincia": [
+      "Lima"
+    ],
+    "distritos": [
+      "Lurigancho-Chosica"
+    ],
+    "variables": [
+      "caudal",
+      "nivel"
+    ],
+    "estado": "activa"
   },
   {
     "id": "pisac",
@@ -79,15 +114,33 @@
       "Coya"
     ],
     "pobladosGeo": [
-      { "nombre": "Pisac", "lat": -13.421, "lon": -71.8505 },
-      { "nombre": "Coya", "lat": -13.3983, "lon": -71.9191 }
+      {
+        "nombre": "Pisac",
+        "lat": -13.421,
+        "lon": -71.8505
+      },
+      {
+        "nombre": "Coya",
+        "lat": -13.3983,
+        "lon": -71.9191
+      }
     ],
     "polygon": null,
     "cota": 3002,
     "cotaFuente": "inventario-altitud",
     "departamento": "Cusco",
-    "provincia": ["Calca"],
-    "distritos": ["Pisac", "Lamay"]
+    "provincia": [
+      "Calca"
+    ],
+    "distritos": [
+      "Pisac",
+      "Lamay"
+    ],
+    "variables": [
+      "caudal",
+      "nivel"
+    ],
+    "estado": "activa"
   },
   {
     "id": "puente-ramis",
@@ -109,15 +162,34 @@
       "Taraco"
     ],
     "pobladosGeo": [
-      { "nombre": "Arapa", "lat": -15.1391, "lon": -70.1096 },
-      { "nombre": "Taraco", "lat": -15.2978, "lon": -69.9783 }
+      {
+        "nombre": "Arapa",
+        "lat": -15.1391,
+        "lon": -70.1096
+      },
+      {
+        "nombre": "Taraco",
+        "lat": -15.2978,
+        "lon": -69.9783
+      }
     ],
     "polygon": null,
     "cota": 3825,
     "cotaFuente": "inventario-altitud",
     "departamento": "Puno",
-    "provincia": ["Azángaro", "Huancané"],
-    "distritos": ["Arapa", "Taraco"]
+    "provincia": [
+      "Azángaro",
+      "Huancané"
+    ],
+    "distritos": [
+      "Arapa",
+      "Taraco"
+    ],
+    "variables": [
+      "caudal",
+      "nivel"
+    ],
+    "estado": "activa"
   },
   {
     "id": "el-tigre",
@@ -134,15 +206,30 @@
     "lon": -80.4568,
     "isEstimated": false,
     "fuente": "SENAMHI-PHISIS-WFS",
-    "poblados": ["San Jacinto"],
+    "poblados": [
+      "San Jacinto"
+    ],
     "pobladosGeo": [
-      { "nombre": "San Jacinto", "lat": -3.7688, "lon": -80.4568 }
+      {
+        "nombre": "San Jacinto",
+        "lat": -3.7688,
+        "lon": -80.4568
+      }
     ],
     "polygon": null,
     "cota": null,
     "departamento": "Tumbes",
-    "provincia": ["Tumbes"],
-    "distritos": ["San Jacinto"]
+    "provincia": [
+      "Tumbes"
+    ],
+    "distritos": [
+      "San Jacinto"
+    ],
+    "variables": [
+      "caudal",
+      "nivel"
+    ],
+    "estado": "activa"
   },
   {
     "id": "cirato",
@@ -159,15 +246,30 @@
     "lon": -79.07384,
     "isEstimated": false,
     "fuente": "SENAMHI-PHISIS-WFS",
-    "poblados": ["Catache"],
+    "poblados": [
+      "Catache"
+    ],
     "pobladosGeo": [
-      { "nombre": "Catache", "lat": -6.65583, "lon": -79.07384 }
+      {
+        "nombre": "Catache",
+        "lat": -6.65583,
+        "lon": -79.07384
+      }
     ],
     "polygon": null,
     "cota": null,
     "departamento": "Cajamarca",
-    "provincia": ["Santa Cruz"],
-    "distritos": ["Catache"]
+    "provincia": [
+      "Santa Cruz"
+    ],
+    "distritos": [
+      "Catache"
+    ],
+    "variables": [
+      "caudal",
+      "nivel"
+    ],
+    "estado": "activa"
   },
   {
     "id": "santo-domingo",
@@ -184,14 +286,29 @@
     "lon": -77.0503,
     "isEstimated": false,
     "fuente": "SENAMHI-PHISIS-WFS",
-    "poblados": ["Huaral"],
+    "poblados": [
+      "Huaral"
+    ],
     "pobladosGeo": [
-      { "nombre": "Huaral", "lat": -11.3836, "lon": -77.0503 }
+      {
+        "nombre": "Huaral",
+        "lat": -11.3836,
+        "lon": -77.0503
+      }
     ],
     "polygon": null,
     "cota": null,
     "departamento": "Lima",
-    "provincia": ["Huaral"],
-    "distritos": ["Huaral"]
+    "provincia": [
+      "Huaral"
+    ],
+    "distritos": [
+      "Huaral"
+    ],
+    "variables": [
+      "caudal",
+      "nivel"
+    ],
+    "estado": "activa"
   }
 ]

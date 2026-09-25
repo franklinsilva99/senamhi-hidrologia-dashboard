@@ -10,6 +10,7 @@ export default function HidrogramaPopupCard({
   fecha,
   filename,
   onClose,
+  controles,
   chartHeightClass = "h-[210px]",
   chartFullscreenClass = "h-[70vh]",
   legend,
@@ -20,6 +21,7 @@ export default function HidrogramaPopupCard({
   fecha: string;
   filename: string;
   onClose: () => void;
+  controles?: ReactNode;
   chartHeightClass?: string;
   chartFullscreenClass?: string;
   legend?: ReactNode;
@@ -90,9 +92,12 @@ export default function HidrogramaPopupCard({
         ×
       </button>
 
-      {/* Barra: fecha + opciones */}
-      <div className="pt-3 px-4 pb-1 flex items-center justify-between text-[12px] text-gray-600">
-        <span>Fecha: {fecha}</span>
+      {/* Barra: controles + fecha + opciones */}
+      <div className="pt-3 px-4 pb-1 flex items-center justify-between gap-2 text-[12px] text-gray-600">
+        <div className="flex items-center gap-3 flex-wrap">
+          {controles}
+          <span>Fecha: {fecha}</span>
+        </div>
         <div className="relative mt-3" data-menu-root>
           <button
             type="button"

@@ -1,7 +1,7 @@
 "use client";
 import {
   ComposedChart, Line, XAxis, YAxis, Tooltip,
-  ReferenceArea, ResponsiveContainer,
+  ReferenceArea, ResponsiveContainer, Brush,
 } from "recharts";
 import ChartTooltip from "@/components/ChartTooltip";
 import type { Observation, TipoAviso } from "@/lib/types";
@@ -29,7 +29,7 @@ function formatAxisNum(v: number): string {
 
 export default function ChartHydro({
   series, preferencia = "caudal", tipo = "avenida", cota = null,
-  umbralAmarilla, umbralNaranja, umbralRoja,
+  umbralAmarilla, umbralNaranja, umbralRoja, navigator = false,
 }: {
   series: Observation[];
   preferencia?: "caudal" | "nivel";
@@ -38,6 +38,7 @@ export default function ChartHydro({
   umbralAmarilla?: number;
   umbralNaranja?: number;
   umbralRoja?: number;
+  navigator?: boolean;
 }) {
   const isNivel = preferencia === "nivel";
   const tieneCota = isNivel && cota != null;
@@ -119,6 +120,10 @@ export default function ChartHydro({
           )}
 
           <Line type="monotone" dataKey="valor" name={varName} stroke={C_LINEA} fill="none" strokeWidth={1.5} dot={false} connectNulls={false} />
+
+          {navigator && (
+            <Brush dataKey="fecha" height={26} travellerWidth={8} stroke="#94a3b8" fill="#eef2f7" />
+          )}
         </ComposedChart>
       </ResponsiveContainer>
       {/* Watermark */}

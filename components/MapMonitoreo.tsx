@@ -5,8 +5,15 @@ import "leaflet/dist/leaflet.css";
 import { ESTADO_COLOR, PERU_BOUNDS, stationDotColorIcon } from "@/lib/mapIcons";
 import HidrogramaMonitoreoPopup from "@/components/HidrogramaMonitoreoPopup";
 import { getLatestMerged, getSeriesMerged } from "@/lib/data";
-import { getThresholds } from "@/lib/queries";
+import { clasificarUmbral } from "@/lib/queries";
+import { getConfigMap, type ConfigEstacion } from "@/lib/configEstacion";
 import type { Observation, Station } from "@/lib/types";
+
+const NIVEL_TO_ESTADO: Record<string, string> = {
+  AMARILLO: "amarilla",
+  NARANJA: "naranja",
+  ROJO: "roja",
+};
 
 export default function MapMonitoreo({
   stations,
@@ -16,11 +23,13 @@ export default function MapMonitoreo({
   heightClass?: string;
 }) {
   const [latest, setLatest] = useState<Record<string, Observation>>({});
+  const [configMap, setConfigMap] = useState<Record<string, ConfigEstacion>>({});
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [serie, setSerie] = useState<Observation[]>([]);
 
   useEffect(() => {
     setLatest(getLatestMerged());
+    setConfigMap(getConfigMap());
   }, []);
 
   useEffect(() => {
@@ -28,7 +37,19 @@ export default function MapMonitoreo({
   }, [selectedId]);
 
   const selected = selectedId ? stations.find((s) => s.id === selectedId) ?? null : null;
-  const th = selected ? getThresholds().find((t) => t.stationId === selected.id) : undefined;
+  const selectedConfig = selected ? configMap[selected.id] : undefined;
+
+  // Color del punto según la preferencia (caudal/nivel) contra sus umbrales; gris si está en mantenimiento
+  const colorDe = (s: Station): string => {
+    const c = configMap[s.id];
+    if (!c) return ESTADO_COLOR.normal;
+    if (c.estado === "mantenimiento") return "#9ca3af";
+    const obs = latest[s.id];
+    if (!obs) return ESTADO_COLOR.normal;
+    const valor = c.preferencia === "caudal" ? obs.caudal : obs.nivel;
+    const umbral = clasificarUmbral(valor, c, c.preferencia);
+    return umbral ? ESTADO_COLOR[NIVEL_TO_ESTADO[umbral]] ?? ESTADO_COLOR.normal : ESTADO_COLOR.normal;
+  };
 
   return (
     <div className="relative">
@@ -43,13 +64,12 @@ export default function MapMonitoreo({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {stations.map((s) => {
-          const estado = latest[s.id]?.estado ?? "normal";
           const sel = selectedId === s.id;
           return (
             <Marker
               key={s.id}
               position={[s.lat, s.lon]}
-              icon={stationDotColorIcon(ESTADO_COLOR[estado] ?? ESTADO_COLOR.normal, sel)}
+              icon={stationDotColorIcon(colorDe(s), sel)}
               eventHandlers={{ click: () => setSelectedId(s.id) }}
             >
               <Tooltip direction="top" offset={[0, -28]}>{s.estacion}</Tooltip>
@@ -58,17 +78,12 @@ export default function MapMonitoreo({
         })}
       </MapContainer>
 
-      {selected && th && (
+      {selected && selectedConfig && (
         <div className="absolute top-2 inset-x-0 flex justify-center z-[1100] px-2">
           <HidrogramaMonitoreoPopup
             station={selected}
             series={serie}
-            preferencia={th.preferencia}
-            tipo={th.tipo}
-            cota={selected.cota}
-            umbralAmarilla={th.preferencia === "nivel" ? th.nivel.amarilla : th.caudal.amarilla}
-            umbralNaranja={th.preferencia === "nivel" ? th.nivel.naranja : th.caudal.naranja}
-            umbralRoja={th.preferencia === "nivel" ? th.nivel.roja : th.caudal.roja}
+            config={selectedConfig}
             onClose={() => setSelectedId(null)}
           />
         </div>

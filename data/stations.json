@@ -118,5 +118,80 @@
     "departamento": "Puno",
     "provincia": ["Azángaro", "Huancané"],
     "distritos": ["Arapa", "Taraco"]
+  },
+  {
+    "id": "el-tigre",
+    "n": 26,
+    "cuenca": "Tumbes",
+    "estacion": "El Tigre",
+    "rio": "Tumbes",
+    "codigoAuto": "4724A3F6",
+    "codigoConvencional": null,
+    "dz": "DZ1",
+    "escalaTemporal": "Diario",
+    "region": "Pacifico",
+    "lat": -3.7688,
+    "lon": -80.4568,
+    "isEstimated": false,
+    "fuente": "SENAMHI-PHISIS-WFS",
+    "poblados": ["San Jacinto"],
+    "pobladosGeo": [
+      { "nombre": "San Jacinto", "lat": -3.7688, "lon": -80.4568 }
+    ],
+    "polygon": null,
+    "cota": null,
+    "departamento": "Tumbes",
+    "provincia": ["Tumbes"],
+    "distritos": ["San Jacinto"]
+  },
+  {
+    "id": "cirato",
+    "n": 27,
+    "cuenca": "Chancay-Lambayeque",
+    "estacion": "Cirato",
+    "rio": "Chancay Lambayeque",
+    "codigoAuto": "4724D566",
+    "codigoConvencional": null,
+    "dz": "DZ2",
+    "escalaTemporal": "Diario",
+    "region": "Pacifico",
+    "lat": -6.65583,
+    "lon": -79.07384,
+    "isEstimated": false,
+    "fuente": "SENAMHI-PHISIS-WFS",
+    "poblados": ["Catache"],
+    "pobladosGeo": [
+      { "nombre": "Catache", "lat": -6.65583, "lon": -79.07384 }
+    ],
+    "polygon": null,
+    "cota": null,
+    "departamento": "Cajamarca",
+    "provincia": ["Santa Cruz"],
+    "distritos": ["Catache"]
+  },
+  {
+    "id": "santo-domingo",
+    "n": 28,
+    "cuenca": "Chancay-Huaral",
+    "estacion": "Santo Domingo",
+    "rio": "Chancay-Huaral",
+    "codigoAuto": "202701",
+    "codigoConvencional": null,
+    "dz": "DZ4",
+    "escalaTemporal": "Diario",
+    "region": "Pacifico",
+    "lat": -11.3836,
+    "lon": -77.0503,
+    "isEstimated": false,
+    "fuente": "SENAMHI-PHISIS-WFS",
+    "poblados": ["Huaral"],
+    "pobladosGeo": [
+      { "nombre": "Huaral", "lat": -11.3836, "lon": -77.0503 }
+    ],
+    "polygon": null,
+    "cota": null,
+    "departamento": "Lima",
+    "provincia": ["Huaral"],
+    "distritos": ["Huaral"]
   }
 ]

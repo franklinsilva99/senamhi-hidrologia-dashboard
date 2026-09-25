@@ -106,5 +106,32 @@
       "max": 75.0,
       "deltaMax": 15.0
     }
+  },
+  {
+    "stationId": "el-tigre",
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "nivel": { "amarilla": 2.2, "naranja": 2.45, "roja": 2.7, "unidad": "m" },
+    "caudal": { "amarilla": 170.0, "naranja": 190.0, "roja": 215.0, "unidad": "m3/s" },
+    "duracionHoras": { "amarilla": 200, "naranja": 150, "roja": 72 },
+    "qc1": { "min": 90.0, "max": 245.0, "deltaMax": 30.0 }
+  },
+  {
+    "stationId": "cirato",
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "nivel": { "amarilla": 2.4, "naranja": 2.6, "roja": 2.85, "unidad": "m" },
+    "caudal": { "amarilla": 165.0, "naranja": 185.0, "roja": 210.0, "unidad": "m3/s" },
+    "duracionHoras": { "amarilla": 200, "naranja": 150, "roja": 72 },
+    "qc1": { "min": 90.0, "max": 250.0, "deltaMax": 30.0 }
+  },
+  {
+    "stationId": "santo-domingo",
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "nivel": { "amarilla": 2.6, "naranja": 2.85, "roja": 3.1, "unidad": "m" },
+    "caudal": { "amarilla": 70.0, "naranja": 82.0, "roja": 95.0, "unidad": "m3/s" },
+    "duracionHoras": { "amarilla": 200, "naranja": 150, "roja": 72 },
+    "qc1": { "min": 38.0, "max": 100.0, "deltaMax": 12.0 }
   }
 ]

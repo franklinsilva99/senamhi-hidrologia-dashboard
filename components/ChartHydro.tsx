@@ -61,7 +61,10 @@ export default function ChartHydro({
     }
   }
 
-  const ticks = realData.filter((_, i) => i % 12 === 0).map((d) => d.fecha);
+  // Ticks: inicios de día (00:00 → etiqueta de fecha) y mediodía (12:00 → hora)
+  const ticks = realData
+    .map((d) => d.fecha)
+    .filter((f) => f.endsWith("T00:00") || f.endsWith("T12:00"));
 
   const a = (umbralAmarilla ?? 0) + offset;
   const n = (umbralNaranja ?? 0) + offset;

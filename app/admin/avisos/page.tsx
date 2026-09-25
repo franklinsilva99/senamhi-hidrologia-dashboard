@@ -1,7 +1,8 @@
 "use client";
 import { useState, useMemo, useEffect } from "react";
 import { getAlerts, getStations, loadAlerts, saveAlerts, loadInjectedObs, appendInjectedObs, clearInjectedObs, getLatestMerged, getSeriesMerged } from "@/lib/data";
-import { getThresholds, detectarAvisos, prepararAviso } from "@/lib/queries";
+import { detectarAvisos, prepararAviso } from "@/lib/queries";
+import { getConfigThresholdsMap } from "@/lib/configEstacion";
 import { existeAvisoPrevio, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA } from "@/lib/avisos";
 import type { Alert, DeteccionAviso, NivelAlerta, Observation, TipoAviso } from "@/lib/types";
 
@@ -56,7 +57,7 @@ export default function AdminAvisosPage() {
     for (const o of all) last[o.stationId] = o;
     setInjectedObs(last);
     setRefresh((r) => r + 1);
-    setDeteccion(detectarAvisos());
+    setDeteccion(detectarAvisos(undefined, undefined, getConfigThresholdsMap()));
   }, []);
 
   useEffect(() => {
@@ -70,9 +71,9 @@ export default function AdminAvisosPage() {
   };
 
   const stations = getStations();
-  const thresholds = getThresholds();
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]));
-  const thMap = Object.fromEntries(thresholds.map((t) => [t.stationId, t]));
+  // Umbrales/alertas con overrides de configuración (localStorage)
+  const thMap = useMemo(() => getConfigThresholdsMap(), [refresh]);
   const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
   // Última lectura válida (qc1-ok) por estación, de la serie fusionada (estática + overlay)
   const latestOverride = useMemo(() => getLatestMerged(), [refresh]);
@@ -176,7 +177,7 @@ export default function AdminAvisosPage() {
     for (const d of det) {
       if (!d.excedido || !d.umbral) continue;
       if (evaluarAccionAviso(d.stationId, d.umbral, next) === "mantener") continue;
-      const aviso = crearAviso(d.stationId, latestOverride, preferenciaOverride, { nro: siguienteNro(next), ca: siguienteCA(next) });
+      const aviso = crearAviso(d.stationId, latestOverride, preferenciaOverride, { nro: siguienteNro(next), ca: siguienteCA(next) }, thMap);
       const res = aplicarAviso(next, aviso);
       next = res.next;
       textos.push(res.texto);
@@ -186,7 +187,7 @@ export default function AdminAvisosPage() {
 
   // ── Actualizar detección ──
   const handleActualizarDeteccion = () => {
-    const det = detectarAvisos(latestOverride, preferenciaOverride);
+    const det = detectarAvisos(latestOverride, preferenciaOverride, thMap);
     setDeteccion(det);
     if (modoPublicacion === "automatico") {
       const { next, textos } = publicarAutomatico(alerts, det);
@@ -200,7 +201,7 @@ export default function AdminAvisosPage() {
   };
 
   const handleCrearAviso = (stationId: string) => {
-    const aviso = crearAviso(stationId, latestOverride, preferenciaOverride, { nro: siguienteNro(alerts), ca: siguienteCA(alerts) });
+    const aviso = crearAviso(stationId, latestOverride, preferenciaOverride, { nro: siguienteNro(alerts), ca: siguienteCA(alerts) }, thMap);
     setPreviewAviso(aviso);
   };
 
@@ -210,7 +211,7 @@ export default function AdminAvisosPage() {
     setAlerts(next);
     saveAlerts(next);
     setPreviewAviso(null);
-    setDeteccion(detectarAvisos(latestOverride, preferenciaOverride));
+    setDeteccion(detectarAvisos(latestOverride, preferenciaOverride, thMap));
     setMsg(texto);
     setTimeout(() => setMsg(""), 5000);
   };
@@ -220,7 +221,7 @@ export default function AdminAvisosPage() {
     setInjectedObs({});
     setPreferenciaOverride({});
     setRefresh((r) => r + 1);
-    setDeteccion(detectarAvisos());
+    setDeteccion(detectarAvisos(undefined, undefined, getConfigThresholdsMap()));
     setSimMsg("Ingesta limpiada. Detección restaurada a la serie base.");
     setTimeout(() => setSimMsg(""), 4000);
   };

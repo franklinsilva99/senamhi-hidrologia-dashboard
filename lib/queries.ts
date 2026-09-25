@@ -61,11 +61,11 @@ export function clasificarUmbral(valor: number, th: Thresholds, preferencia: "ca
   return null;
 }
 
-export function detectarAvisos(latestOverride?: Record<string, Observation>, preferenciaOverride?: Record<string, "caudal" | "nivel">): DeteccionAviso[] {
+export function detectarAvisos(latestOverride?: Record<string, Observation>, preferenciaOverride?: Record<string, "caudal" | "nivel">, thresholdsOverride?: Record<string, Thresholds>): DeteccionAviso[] {
   const stations = getStations();
   const baseLatest = getLatestMerged();
   const latest = latestOverride ? { ...baseLatest, ...latestOverride } : baseLatest;
-  const allThresholds = getThresholds();
+  const allThresholds = thresholdsOverride ? Object.values(thresholdsOverride) : getThresholds();
   const thMap = Object.fromEntries(allThresholds.map((t) => [t.stationId, t]));
 
   return stations.map((s) => {
@@ -92,7 +92,7 @@ export function detectarAvisos(latestOverride?: Record<string, Observation>, pre
   });
 }
 
-export function prepararAviso(stationId: string, latestOverride?: Record<string, Observation>, preferenciaOverride?: Record<string, "caudal" | "nivel">): {
+export function prepararAviso(stationId: string, latestOverride?: Record<string, Observation>, preferenciaOverride?: Record<string, "caudal" | "nivel">, thresholdsOverride?: Record<string, Thresholds>): {
   titulo: string;
   cuerpoAgua: string;
   distrito: string;
@@ -110,7 +110,7 @@ export function prepararAviso(stationId: string, latestOverride?: Record<string,
   const baseLatest = getLatestMerged();
   const latest = latestOverride ? { ...baseLatest, ...latestOverride } : baseLatest;
   const latestObs = latest[stationId];
-  const th = getThresholds().find((t) => t.stationId === stationId)!;
+  const th = thresholdsOverride?.[stationId] ?? getThresholds().find((t) => t.stationId === stationId)!;
   const preferencia = preferenciaOverride?.[stationId] ?? th.preferencia;
   const tipo = th.tipo;
   const esNivel = preferencia === "nivel";

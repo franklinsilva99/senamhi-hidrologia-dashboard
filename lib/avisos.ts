@@ -1,10 +1,10 @@
 import { detectarAvisos, prepararAviso, getThresholds } from "./queries";
 import { getAlerts, getStations, getLatestMerged, getMockNow, getSeriesMerged } from "./data";
-import type { Alert, DeteccionAviso, Observation } from "./types";
+import type { Alert, DeteccionAviso, Observation, Thresholds } from "./types";
 
 // Pool 1: Listar avisos que superan umbrales
-export function listarAvisosDetectados(latestOverride?: Record<string, Observation>, preferenciaOverride?: Record<string, "caudal" | "nivel">): DeteccionAviso[] {
-  return detectarAvisos(latestOverride, preferenciaOverride).filter((d) => d.excedido);
+export function listarAvisosDetectados(latestOverride?: Record<string, Observation>, preferenciaOverride?: Record<string, "caudal" | "nivel">, thresholdsOverride?: Record<string, Thresholds>): DeteccionAviso[] {
+  return detectarAvisos(latestOverride, preferenciaOverride, thresholdsOverride).filter((d) => d.excedido);
 }
 
 // Pool 1: ¿Existe aviso previo vigente en esa estación? (sobre la colección de trabajo)
@@ -48,13 +48,14 @@ export function crearAviso(
   latestOverride?: Record<string, Observation>,
   preferenciaOverride?: Record<string, "caudal" | "nivel">,
   secuencia?: { nro?: number; ca?: string },
+  thresholdsOverride?: Record<string, Thresholds>,
 ): Alert {
-  const preparacion = prepararAviso(stationId, latestOverride, preferenciaOverride);
+  const preparacion = prepararAviso(stationId, latestOverride, preferenciaOverride, thresholdsOverride);
   const baseAlerts = getAlerts();
   const nro = secuencia?.nro ?? siguienteNro(baseAlerts);
   const ca = secuencia?.ca ?? siguienteCA(baseAlerts);
   const station = getStations().find((s) => s.id === stationId)!;
-  const th = getThresholds().find((t) => t.stationId === stationId)!;
+  const th = thresholdsOverride?.[stationId] ?? getThresholds().find((t) => t.stationId === stationId)!;
   const preferencia = preferenciaOverride?.[stationId] ?? th.preferencia;
   const baseLatest = getLatestMerged();
   const latest = latestOverride ? { ...baseLatest, ...latestOverride } : baseLatest;

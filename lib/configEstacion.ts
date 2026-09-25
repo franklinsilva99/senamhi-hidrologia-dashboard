@@ -44,6 +44,11 @@ export function getConfigMap(): Record<string, ConfigEstacion> {
   return map;
 }
 
+// Mapa de Thresholds (con overrides) para detección/creación de avisos
+export function getConfigThresholdsMap(): Record<string, Thresholds> {
+  return getConfigMap();
+}
+
 export function setConfigEstacion(stationId: string, partial: Partial<ConfigEstacion>) {
   const o = getOverrides();
   o[stationId] = { ...o[stationId], ...partial };

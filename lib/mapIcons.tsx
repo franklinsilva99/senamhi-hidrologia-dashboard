@@ -67,7 +67,23 @@ export function stationDotIcon(selected = false) {
     className: "marker-station",
     iconSize: [28, 28],
     iconAnchor: [14, 14],
-    html: dotGlyph(selected ? 9.5 : 8.5),
+    html: dotGlyph(selected ? 8.5 : 7.5),
+  });
+}
+
+// Punto con relleno variable (para el mapa de monitoreo: color segun estado/umbral)
+function dotColorGlyph(fill: string, r: number) {
+  return `<svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="14" cy="14" r="${r}" fill="${fill}" stroke="#073763" stroke-width="1.5"/>
+    </svg>`;
+}
+
+export function stationDotColorIcon(fill: string, selected = false) {
+  return L.divIcon({
+    className: "marker-station",
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    html: dotColorGlyph(fill, selected ? 8.5 : 7.5),
   });
 }
 

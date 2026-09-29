@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SENAMHI — PoC Hidrología (Sede Contingencia Junín)
 
-## Getting Started
+Portal de contingencia DHI piloto: **monitoreo QC1**, **pronóstico diario** (promedio de modelos) y **avisos hidrológicos**, sobre 4 estaciones reales (Socsi, Chosica, Pisac, Puente Ramis).
 
-First, run the development server:
+> **Prueba de concepto.** La lógica de negocio está preparada para portarse a **Java (Spring Boot) + Angular + Postgres**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Stack
+
+- Next.js 16 (App Router) · React 19 · TypeScript
+- Tailwind CSS v4 · Leaflet / react-leaflet · Recharts
+- pnpm
+
+## Funcionalidades
+
+| Ruta | Qué hace |
+|---|---|
+| `/` | Resumen (estaciones, avisos vigentes, mapa). |
+| `/monitoreo` | Mapa de estaciones con estado por umbral QC1 e hidrogramas. |
+| `/pronostico` | Pronóstico diario D+1..D+3 como promedio de modelos. |
+| `/avisos` | Lista + mapa de avisos; detalle `/avisos/[ca-ce]`. |
+| `/admin` | Gestión: avisos (detección, publicación, habilitar/deshabilitar), configuración de estaciones, carga de pronóstico. |
+
+## Arquitectura
+
+Separación en capas dentro de `lib/` (precursora de Clean Architecture):
+
+```
+lib/
+├── domain/   # lógica pura (sin React, localStorage ni JSON): umbrales, detección, pronóstico, avisos, tipos
+├── ports/    # interfaces de repositorio (en Spring serán JPA/Postgres)
+├── infra/    # adaptadores actuales: JSON estático + overlay en localStorage
+└── ui/       # helpers de presentación (tabs, iconos de mapa)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mapeo a la pila objetivo:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| PoC (`lib/`) | Spring Boot / Angular |
+|---|---|
+| `domain/` (casos de uso puros) | Servicios de aplicación / dominio |
+| `ports/` | Interfaces de repositorio (`@Repository`, JPA) |
+| `infra/` | Implementaciones JPA + Postgres |
+| `components/` + `app/` | Angular |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Modelo de datos (`lib/domain/types.ts`)
 
-## Learn More
+- **Station** — ficha/ubicación (cuenca, río, cota, poblados, variables).
+- **Thresholds** — umbrales (caudal/nivel), tipo avenida/vigilancia, QC1, vigencia.
+- **Observation** — lectura horaria (nivel, caudal, origen `qc1-ok`|`cuarentena`, estado).
+- **ForecastInput / ForecastDiario** — modelos ingresados y pronóstico promedio.
+- **Alert** — aviso (título, nivel, vigencia, snapshot de la serie).
 
-To learn more about Next.js, take a look at the following resources:
+## Reglas de negocio clave
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Avisos (flujo reducido)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clasificar** último dato (relativo) contra umbrales → estado → alimenta *monitoreo*.
+2. **Decidir** acción: sin previo → *crear*; mismo nivel → *mantener*; distinto → *reemplazar*.
+3. **Preparar** aviso: 72 h + cota (si es nivel) + hidrograma/título/etiquetas/vigencia.
+4. **Publicación**: automática o manual (aprobación).
 
-## Deploy on Vercel
+- Preferencia por estación: **caudal** o **nivel**.
+- **Avenida** = mayor es peor; **Vigilancia** = menor es peor.
+- **Cota**: la detección compara valores *relativos*; la cota solo se suma para mostrar **m.s.n.m.** (`Nivel absoluto = Nivel relativo + Cota`).
+- **QC1**: si un dato viola mín/máx/Δmáx → `cuarentena` (se muestra pero **no dispara aviso**).
+- **Aviso publicado = snapshot congelado** (`Alert.serie`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Pronóstico
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- La DZ ingresa 1+ modelos por estación/fecha (nombres genéricos `Modelo 1..4`).
+- Regla: 0 modelos → omitir; 1 → ese valor; 2+ → **promedio aritmético**.
+- Horizonte D+1..D+3.
+
+## Persistencia (PoC)
+
+Datos base en `data/*.json` + **overlay** en `localStorage`:
+
+| Clave | Contenido |
+|---|---|
+| `senamhi_avisos` | avisos (base + creados/deshabilitados) |
+| `senamhi_observaciones` | ingesta simulada de observaciones |
+| `senamhi_forecast_inputs` | modelos de pronóstico cargados |
+| `senamhi_config_estaciones` | overrides de configuración por estación |
+| `senamhi_modo_publicacion` | publicación automática/manual |
+
+## Cómo correr
+
+```bash
+pnpm install
+pnpm dev       # http://localhost:3000
+pnpm build     # build de producción
+pnpm lint      # eslint
+```
+
+## Nota de producción
+
+En producción se reemplaza: overlay de `localStorage` → BD de observaciones (Postgres), `Alert.serie` → snapshot persistido, y la cota aproximada (`cotaFuente: "inventario-altitud"`) → cota oficial de la Dirección Zonal (`cotaFuente: "oficial"`).

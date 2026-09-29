@@ -136,7 +136,11 @@ export default function AdminAvisosPage() {
     const origen = fallaQC ? ("cuarentena" as const) : ("qc1-ok" as const);
 
     const tipoEst = th?.tipo ?? "avenida";
-    const nivelDet = clasificarNivel(nivel, th?.nivel ?? { amarilla: 1.95, naranja: 3.06, roja: 4.42 }, tipoEst);
+    // La alerta se clasifica según la preferencia de la estación (caudal/nivel), no siempre por nivel
+    const preferenciaEfectiva = simVariable === "nivel" ? "nivel" : (th?.preferencia ?? "caudal");
+    const valorEstado = preferenciaEfectiva === "caudal" ? caudal : nivel;
+    const uEstado = preferenciaEfectiva === "caudal" ? th?.caudal : th?.nivel;
+    const nivelDet = clasificarNivel(valorEstado, uEstado ?? { amarilla: 0, naranja: 0, roja: 0 }, tipoEst);
     const estado = nivelDet === "ROJO" ? "roja" as const : nivelDet === "NARANJA" ? "naranja" as const : nivelDet === "AMARILLO" ? "amarilla" as const : "normal" as const;
 
     const obs: Observation = { stationId: simStationId, fecha, nivel, caudal, origen, estado };

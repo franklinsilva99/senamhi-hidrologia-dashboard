@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { getStations } from "@/lib/infra/data";
-import { getForecastDiario } from "@/lib/infra/catalogos";
+import { getForecastDiario, appendForecastInputs } from "@/lib/infra/catalogos";
+import type { ForecastInput } from "@/lib/domain/types";
 
 const stations = getStations();
 const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
@@ -15,6 +16,7 @@ export default function AdminPronosticoPage() {
   const [formStation, setFormStation] = useState("");
   const [formFecha, setFormFecha] = useState("");
   const [saved, setSaved] = useState(false);
+  const [modelos, setModelos] = useState<Record<string, Record<number, string>>>({});
 
   const diario = getForecastDiario();
 
@@ -36,7 +38,31 @@ export default function AdminPronosticoPage() {
     return d.toISOString().split("T")[0];
   });
 
+  const setModelo = (fecha: string, idx: number, valor: string) =>
+    setModelos((p) => ({ ...p, [fecha]: { ...p[fecha], [idx]: valor } }));
+
   const handleSave = () => {
+    if (!formStation) return;
+    const nuevos: ForecastInput[] = [];
+    for (const fecha of fechas) {
+      const celdas = modelos[fecha];
+      if (!celdas) continue;
+      for (let idx = 0; idx < 4; idx++) {
+        const raw = celdas[idx];
+        if (raw == null || raw.trim() === "") continue;
+        const valor = parseFloat(raw);
+        if (isNaN(valor)) continue;
+        nuevos.push({
+          stationId: formStation,
+          fecha,
+          modelo: `Modelo ${idx + 1}`,
+          valor,
+          usuario: "operador-DZ",
+        });
+      }
+    }
+    if (nuevos.length === 0) return;
+    appendForecastInputs(nuevos);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -142,18 +168,17 @@ export default function AdminPronosticoPage() {
                     {fechas.map((f) => (
                       <tr key={f}>
                         <td className="p-2 border border-slate-300 font-semibold">{f}</td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
+                        {[0, 1, 2, 3].map((idx) => (
+                          <td key={idx} className="p-1 border border-slate-300">
+                            <input
+                              type="number"
+                              step="0.1"
+                              value={modelos[f]?.[idx] ?? ""}
+                              onChange={(e) => setModelo(f, idx, e.target.value)}
+                              className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                            />
+                          </td>
+                        ))}
                       </tr>
                     ))}
                   </tbody>

@@ -96,6 +96,7 @@ export default function AdminConfigPage() {
   const [modo, setModo] = useState<Modo>("automatico");
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setDraft(getConfigMap());
     const m = localStorage.getItem(MODO_KEY);
     if (m === "manual" || m === "automatico") setModo(m);

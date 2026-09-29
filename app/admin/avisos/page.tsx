@@ -40,6 +40,7 @@ export default function AdminAvisosPage() {
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setAlerts(loadAlerts());
     // Cargar la ingesta persistida (overlay) en el estado para reactividad
     const all = loadInjectedObs();
@@ -52,6 +53,7 @@ export default function AdminAvisosPage() {
 
   useEffect(() => {
     const m = localStorage.getItem(MODO_KEY);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     if (m === "manual" || m === "automatico") setModoPublicacion(m);
   }, []);
 
@@ -63,10 +65,18 @@ export default function AdminAvisosPage() {
   const stations = getStations();
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]));
   // Umbrales/alertas con overrides de configuración (localStorage)
-  const thMap = useMemo(() => getConfigThresholdsMap(), [refresh]);
+  const thMap = useMemo(
+    () => getConfigThresholdsMap(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- refresh fuerza recálculo tras ingesta/config
+    [refresh]
+  );
   const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
   // Última lectura válida (qc1-ok) por estación, de la serie fusionada (estática + overlay)
-  const latestOverride = useMemo(() => getLatestMerged(), [refresh]);
+  const latestOverride = useMemo(
+    () => getLatestMerged(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- refresh fuerza recálculo tras ingesta/config
+    [refresh]
+  );
 
   const filtered = alerts.filter((a) => {
     const st = stationMap[a.stationId];
@@ -210,6 +220,17 @@ export default function AdminAvisosPage() {
     setAlerts(originales);
     saveAlerts(originales);
     setMsg(`Datos restaurados a los ${originales.length} avisos base.`);
+    setTimeout(() => setMsg(""), 4000);
+  };
+
+  // ── Habilitar / Deshabilitar un aviso (toggle de vigencia) ──
+  const toggleVigente = (aviso: Alert) => {
+    const next = alerts.map((x) =>
+      x.ca === aviso.ca && x.ce === aviso.ce ? { ...x, vigente: !x.vigente } : x
+    );
+    setAlerts(next);
+    saveAlerts(next);
+    setMsg(`Aviso #${aviso.nro} ${aviso.vigente ? "deshabilitado" : "habilitado"}.`);
     setTimeout(() => setMsg(""), 4000);
   };
 
@@ -562,7 +583,7 @@ export default function AdminAvisosPage() {
                       </a>
                     </td>
                     <td className="p-2">
-                      <button className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-200 text-slate-600 hover:bg-slate-300" title={a.vigente ? "Deshabilitar" : "Habilitar"}>
+                      <button onClick={() => toggleVigente(a)} className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-200 text-slate-600 hover:bg-slate-300" title={a.vigente ? "Deshabilitar" : "Habilitar"}>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {a.vigente
                             ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />

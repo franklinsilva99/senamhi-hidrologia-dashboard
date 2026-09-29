@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
@@ -44,24 +45,30 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             const active = item.exact
               ? pathname === item.href
               : pathname === item.href || pathname.startsWith(item.href + "/");
-            return (
-              <a
-                key={item.label}
-                href={item.disabled ? "#" : item.href}
-                className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-                  item.disabled
-                    ? "text-gray-500 cursor-not-allowed"
-                    : active
-                      ? "bg-[#003366] text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                }`}
-              >
+            const className = `flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+              item.disabled
+                ? "text-gray-500 cursor-not-allowed"
+                : active
+                  ? "bg-[#003366] text-white"
+                  : "text-gray-300 hover:bg-gray-700 hover:text-white"
+            }`;
+            const content = (
+              <>
                 <span className="text-base w-5 text-center">{item.icon}</span>
                 <span className="flex-1">{item.label}</span>
                 {item.hasDropdown && !item.disabled && (
                   <span className="text-xs text-gray-400">▾</span>
                 )}
-              </a>
+              </>
+            );
+            return item.disabled ? (
+              <span key={item.label} className={className}>
+                {content}
+              </span>
+            ) : (
+              <Link key={item.label} href={item.href} className={className}>
+                {content}
+              </Link>
             );
           })}
         </nav>
@@ -101,11 +108,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
               </svg>
             </button>
-            <a href="/" className="p-2 rounded hover:bg-slate-100 text-slate-500" title="Cerrar sesión">
+            <Link href="/" className="p-2 rounded hover:bg-slate-100 text-slate-500" title="Cerrar sesión">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>
-            </a>
+            </Link>
           </div>
         </header>
 

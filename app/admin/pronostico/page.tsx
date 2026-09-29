@@ -1,38 +1,28 @@
 "use client";
 import { useState } from "react";
 import { getStations } from "@/lib/infra/data";
-import { getForecastInputs, getForecastDiario } from "@/lib/infra/catalogos";
-import type { ForecastInput, ForecastDiario } from "@/lib/domain/types";
+import { getForecastDiario, appendForecastInputs } from "@/lib/infra/catalogos";
+import type { ForecastInput } from "@/lib/domain/types";
 
 const stations = getStations();
 const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
 
 export default function AdminPronosticoPage() {
   const [activeTab, setActiveTab] = useState<"horario" | "diario" | "mensual">("diario");
-  const [filtroStation, setFiltroStation] = useState("");
-  const [filtroFecha, setFiltroFecha] = useState("");
+  const [filtroStation] = useState("");
+  const [filtroFecha] = useState("");
 
   const [formDZ, setFormDZ] = useState("");
   const [formStation, setFormStation] = useState("");
   const [formFecha, setFormFecha] = useState("");
-  const [modelo1, setModelo1] = useState("");
-  const [modelo2, setModelo2] = useState("");
-  const [modelo3, setModelo3] = useState("");
-  const [modelo4, setModelo4] = useState("");
   const [saved, setSaved] = useState(false);
+  const [modelos, setModelos] = useState<Record<string, Record<number, string>>>({});
 
-  const inputs = getForecastInputs();
   const diario = getForecastDiario();
 
   const filteredStations = formDZ
     ? stations.filter((s) => s.dz === formDZ)
     : stations;
-
-  const filteredInputs = inputs.filter((fi) => {
-    if (filtroStation && fi.stationId !== filtroStation) return false;
-    if (filtroFecha && fi.fecha !== filtroFecha) return false;
-    return true;
-  });
 
   const filteredDiario = diario.filter((fd) => {
     if (filtroStation && fd.stationId !== filtroStation) return false;
@@ -48,7 +38,31 @@ export default function AdminPronosticoPage() {
     return d.toISOString().split("T")[0];
   });
 
+  const setModelo = (fecha: string, idx: number, valor: string) =>
+    setModelos((p) => ({ ...p, [fecha]: { ...p[fecha], [idx]: valor } }));
+
   const handleSave = () => {
+    if (!formStation) return;
+    const nuevos: ForecastInput[] = [];
+    for (const fecha of fechas) {
+      const celdas = modelos[fecha];
+      if (!celdas) continue;
+      for (let idx = 0; idx < 4; idx++) {
+        const raw = celdas[idx];
+        if (raw == null || raw.trim() === "") continue;
+        const valor = parseFloat(raw);
+        if (isNaN(valor)) continue;
+        nuevos.push({
+          stationId: formStation,
+          fecha,
+          modelo: `Modelo ${idx + 1}`,
+          valor,
+          usuario: "operador-DZ",
+        });
+      }
+    }
+    if (nuevos.length === 0) return;
+    appendForecastInputs(nuevos);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -154,18 +168,17 @@ export default function AdminPronosticoPage() {
                     {fechas.map((f) => (
                       <tr key={f}>
                         <td className="p-2 border border-slate-300 font-semibold">{f}</td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
-                        <td className="p-1 border border-slate-300">
-                          <input type="number" step="0.1" className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                        </td>
+                        {[0, 1, 2, 3].map((idx) => (
+                          <td key={idx} className="p-1 border border-slate-300">
+                            <input
+                              type="number"
+                              step="0.1"
+                              value={modelos[f]?.[idx] ?? ""}
+                              onChange={(e) => setModelo(f, idx, e.target.value)}
+                              className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                            />
+                          </td>
+                        ))}
                       </tr>
                     ))}
                   </tbody>

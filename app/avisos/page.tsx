@@ -11,6 +11,7 @@ export default function AvisosPage() {
   const stations = getStations();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setAlerts(loadAlerts());
     setLatest(getLatestMerged());
   }, []);

@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import type { ForecastDiario, ForecastInput, Station } from "@/lib/types";
+import type { ForecastDiario, ForecastInput, Station } from "@/lib/domain/types";
 
 const MapPronostico = dynamic(() => import("@/components/MapPronostico"), { ssr: false });
 

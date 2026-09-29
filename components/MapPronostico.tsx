@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { PERU_BOUNDS, stationDotIcon } from "@/lib/mapIcons";
+import { PERU_BOUNDS, stationDotIcon } from "@/lib/ui/mapIcons";
 import HidrogramaPronosticoPopup from "@/components/HidrogramaPronosticoPopup";
-import type { ForecastDiario, ForecastInput, Station } from "@/lib/types";
+import type { ForecastDiario, ForecastInput, Station } from "@/lib/domain/types";
 
 export default function MapPronostico({
   stations,

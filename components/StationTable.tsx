@@ -1,4 +1,4 @@
-import type { Observation, Station } from "@/lib/types";
+import type { Observation, Station } from "@/lib/domain/types";
 
 const badge: Record<string, string> = {
   normal: "bg-green-100 text-green-800",

@@ -9,8 +9,8 @@ import {
   pinIcon,
   MapController,
   type FlyTarget,
-} from "@/lib/mapIcons";
-import type { NivelAlerta, Observation, Station, TipoAviso } from "@/lib/types";
+} from "@/lib/ui/mapIcons";
+import type { NivelAlerta, Observation, Station, TipoAviso } from "@/lib/domain/types";
 import {
   NIVELES,
   NIVEL_LABEL,
@@ -18,7 +18,7 @@ import {
   PELIGRO,
   RECOMENDACION,
   type NivelKey,
-} from "@/lib/nivelesPeligro";
+} from "@/lib/domain/nivelesPeligro";
 
 // Sección del panel SENAMHI (encabezado cian + valor en blanco)
 function Seccion({ titulo, valor }: { titulo: string; valor: string }) {

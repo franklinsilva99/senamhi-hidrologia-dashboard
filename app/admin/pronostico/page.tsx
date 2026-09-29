@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { getStations } from "@/lib/data";
-import { getForecastInputs, getForecastDiario } from "@/lib/queries";
-import type { ForecastInput, ForecastDiario } from "@/lib/types";
+import { getStations } from "@/lib/infra/data";
+import { getForecastInputs, getForecastDiario } from "@/lib/infra/catalogos";
+import type { ForecastInput, ForecastDiario } from "@/lib/domain/types";
 
 const stations = getStations();
 const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];

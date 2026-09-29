@@ -1,7 +1,7 @@
 import TopicBanner from "@/components/TopicBanner";
 import MapMonitoreoClient from "@/components/MapMonitoreoClient";
-import { getStations } from "@/lib/data";
-import { avisoTabClass } from "@/lib/tabs";
+import { getStations } from "@/lib/infra/data";
+import { avisoTabClass } from "@/lib/ui/tabs";
 
 export default function MonitoreoPage() {
   const stations = getStations();

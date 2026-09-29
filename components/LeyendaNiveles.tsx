@@ -1,5 +1,5 @@
-import type { TipoAviso } from "@/lib/types";
-import { PELIGRO } from "@/lib/nivelesPeligro";
+import type { TipoAviso } from "@/lib/domain/types";
+import { PELIGRO } from "@/lib/domain/nivelesPeligro";
 
 export default function LeyendaNiveles({ tipo = "avenida" }: { tipo?: TipoAviso }) {
   const textos = PELIGRO[tipo];

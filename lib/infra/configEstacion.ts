@@ -1,11 +1,11 @@
 import stations from "@/data/stations.json";
 import thresholds from "@/data/thresholds.json";
-import type { Station, Thresholds } from "./types";
+import type { ConfigEstacion, Station, Thresholds } from "@/lib/domain/types";
+
+// ── Adaptador de configuración de estaciones (PoC): JSON + localStorage override ──
+// Implementa el puerto ConfigRepository.
 
 const CONFIG_KEY = "senamhi_config_estaciones";
-
-// Vista combinada: ficha/ubicación (stations.json) + alertas/medición (thresholds.json)
-export type ConfigEstacion = Station & Thresholds;
 
 type Override = Record<string, Partial<ConfigEstacion>>;
 

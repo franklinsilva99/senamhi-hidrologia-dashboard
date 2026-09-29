@@ -1,8 +1,9 @@
 import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
-import { avisoTabClass } from "@/lib/tabs";
-import { getForecastDiario, getStations, getThresholds, getForecastInputs } from "@/lib/queries";
-import type { ForecastDiario, ForecastInput } from "@/lib/types";
+import { avisoTabClass } from "@/lib/ui/tabs";
+import { getStations } from "@/lib/infra/data";
+import { getForecastDiario, getThresholds, getForecastInputs } from "@/lib/infra/catalogos";
+import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
 
 export default function PronosticoPage() {
   const stations = getStations();

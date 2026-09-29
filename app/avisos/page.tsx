@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getAlerts, getLatestMerged, getStations, loadAlerts } from "@/lib/data";
+import { getAlerts, getLatestMerged, getStations, loadAlerts } from "@/lib/infra/data";
 import AvisosTabs from "@/components/AvisosTabs";
 import AvisosBanner from "@/components/AvisosBanner";
-import type { Alert, Observation } from "@/lib/types";
+import type { Alert, Observation } from "@/lib/domain/types";
 
 export default function AvisosPage() {
   const [alerts, setAlerts] = useState<Alert[]>(getAlerts);

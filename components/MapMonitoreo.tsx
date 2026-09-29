@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { ESTADO_COLOR, PERU_BOUNDS, stationDotColorIcon } from "@/lib/mapIcons";
+import { ESTADO_COLOR, PERU_BOUNDS, stationDotColorIcon } from "@/lib/ui/mapIcons";
 import HidrogramaMonitoreoPopup from "@/components/HidrogramaMonitoreoPopup";
-import { getLatestMerged, getSeriesMerged } from "@/lib/data";
-import { clasificarUmbral } from "@/lib/queries";
-import { getConfigMap, type ConfigEstacion } from "@/lib/configEstacion";
-import type { Observation, Station } from "@/lib/types";
+import { getLatestMerged, getSeriesMerged } from "@/lib/infra/data";
+import { clasificarUmbral } from "@/lib/domain/umbrales";
+import { getConfigMap } from "@/lib/infra/configEstacion";
+import type { ConfigEstacion, Observation, Station } from "@/lib/domain/types";
 
 const NIVEL_TO_ESTADO: Record<string, string> = {
   AMARILLO: "amarilla",

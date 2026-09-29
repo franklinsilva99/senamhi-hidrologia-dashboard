@@ -4,9 +4,8 @@ import {
   getConfigMap,
   setConfigEstacion,
   resetConfigEstacion,
-  type ConfigEstacion,
-} from "@/lib/configEstacion";
-import type { TipoAviso } from "@/lib/types";
+} from "@/lib/infra/configEstacion";
+import type { ConfigEstacion, TipoAviso } from "@/lib/domain/types";
 
 const MODO_KEY = "senamhi_modo_publicacion";
 type Modo = "automatico" | "manual";

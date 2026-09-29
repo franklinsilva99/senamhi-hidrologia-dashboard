@@ -3,14 +3,6 @@ import type { ModelInfo, ModelStatus } from "./types";
 export const USE_PISCO_LITE =
   process.env.NEXT_PUBLIC_USE_PISCO_LITE !== "false";
 
-export interface HydrologyPort {
-  getModelStatus(): ModelInfo[];
-  getPrecipitation(
-    stationId: string,
-    fecha: string
-  ): { mm: number; fuente: string };
-}
-
 // Estado degradado asumido para mini-DC Junín:
 // - RS MINERVE / GR2M / WRF / ETA regional: offline (no replicables)
 // - PISCO-light: degraded (recorte 26 cuencas, pre-procesado en nube/mini-DC)

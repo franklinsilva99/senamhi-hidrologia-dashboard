@@ -4,7 +4,7 @@ import {
   ReferenceArea, ResponsiveContainer,
 } from "recharts";
 import ChartTooltip from "@/components/ChartTooltip";
-import type { Observation, TipoAviso } from "@/lib/types";
+import type { Observation, TipoAviso } from "@/lib/domain/types";
 
 const C_AMARILLO = "#ffeb3b";
 const C_NARANJA = "#fca326";

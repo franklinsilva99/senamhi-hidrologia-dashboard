@@ -1,10 +1,11 @@
 "use client";
 import { useState, useMemo, useEffect } from "react";
-import { getAlerts, getStations, loadAlerts, saveAlerts, loadInjectedObs, appendInjectedObs, clearInjectedObs, getLatestMerged, getSeriesMerged } from "@/lib/data";
-import { detectarAvisos, prepararAviso } from "@/lib/queries";
-import { getConfigThresholdsMap } from "@/lib/configEstacion";
-import { existeAvisoPrevio, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA } from "@/lib/avisos";
-import type { Alert, DeteccionAviso, NivelAlerta, Observation, TipoAviso } from "@/lib/types";
+import { getAlerts, getStations, loadAlerts, saveAlerts, loadInjectedObs, appendInjectedObs, clearInjectedObs, getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
+import { detectarAvisos } from "@/lib/domain/deteccion";
+import { clasificarNivel } from "@/lib/domain/umbrales";
+import { getConfigThresholdsMap } from "@/lib/infra/configEstacion";
+import { existeAvisoPrevio, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA, aplicarAviso, procesarDeteccion } from "@/lib/domain/avisos";
+import type { Alert, DeteccionAviso, Observation } from "@/lib/domain/types";
 
 const badgeNivel: Record<string, string> = {
   AMARILLO: "bg-[#ffeb3b] text-black",
@@ -14,19 +15,6 @@ const badgeNivel: Record<string, string> = {
 
 const MODO_KEY = "senamhi_modo_publicacion";
 type ModoPublicacion = "automatico" | "manual";
-
-function clasificarValor(valor: number, u: { amarilla: number; naranja: number; roja: number }, tipo: TipoAviso): NivelAlerta | null {
-  if (tipo === "vigilancia") {
-    if (valor <= u.roja) return "ROJO";
-    if (valor <= u.naranja) return "NARANJA";
-    if (valor <= u.amarilla) return "AMARILLO";
-    return null;
-  }
-  if (valor >= u.roja) return "ROJO";
-  if (valor >= u.naranja) return "NARANJA";
-  if (valor >= u.amarilla) return "AMARILLO";
-  return null;
-}
 
 export default function AdminAvisosPage() {
   const [alerts, setAlerts] = useState<Alert[]>(getAlerts);
@@ -43,7 +31,9 @@ export default function AdminAvisosPage() {
   const [simValor, setSimValor] = useState("");
   const [simMsg, setSimMsg] = useState("");
   const [injectedObs, setInjectedObs] = useState<Record<string, Observation>>({});
-  const [deteccion, setDeteccion] = useState<DeteccionAviso[]>(() => detectarAvisos());
+  const [deteccion, setDeteccion] = useState<DeteccionAviso[]>(() =>
+    detectarAvisos(getStations(), getLatestMerged(), getConfigThresholdsMap())
+  );
   const [msg, setMsg] = useState("");
   const [preferenciaOverride, setPreferenciaOverride] = useState<Record<string, "caudal" | "nivel">>({});
   const [modoPublicacion, setModoPublicacion] = useState<ModoPublicacion>("automatico");
@@ -57,7 +47,7 @@ export default function AdminAvisosPage() {
     for (const o of all) last[o.stationId] = o;
     setInjectedObs(last);
     setRefresh((r) => r + 1);
-    setDeteccion(detectarAvisos(undefined, undefined, getConfigThresholdsMap()));
+    setDeteccion(detectarAvisos(getStations(), getLatestMerged(), getConfigThresholdsMap()));
   }, []);
 
   useEffect(() => {
@@ -116,7 +106,8 @@ export default function AdminAvisosPage() {
     const baseFecha = prev ? prev.fecha : new Date().toISOString().slice(0, 16);
     const next = new Date(baseFecha.replace(" ", "T"));
     next.setHours(next.getHours() + 1);
-    const fecha = next.toISOString().slice(0, 16);
+    // Formato de hora LOCAL (evita el desfase de toISOString/UTC)
+    const fecha = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}-${String(next.getDate()).padStart(2, "0")}T${String(next.getHours()).padStart(2, "0")}:${String(next.getMinutes()).padStart(2, "0")}`;
 
     let caudal: number;
     let nivel: number;
@@ -135,7 +126,7 @@ export default function AdminAvisosPage() {
     const origen = fallaQC ? ("cuarentena" as const) : ("qc1-ok" as const);
 
     const tipoEst = th?.tipo ?? "avenida";
-    const nivelDet = clasificarValor(nivel, th?.nivel ?? { amarilla: 1.95, naranja: 3.06, roja: 4.42 }, tipoEst);
+    const nivelDet = clasificarNivel(nivel, th?.nivel ?? { amarilla: 1.95, naranja: 3.06, roja: 4.42 }, tipoEst);
     const estado = nivelDet === "ROJO" ? "roja" as const : nivelDet === "NARANJA" ? "naranja" as const : nivelDet === "AMARILLO" ? "amarilla" as const : "normal" as const;
 
     const obs: Observation = { stationId: simStationId, fecha, nivel, caudal, origen, estado };
@@ -154,43 +145,19 @@ export default function AdminAvisosPage() {
     setTimeout(() => setSimMsg(""), 7000);
   };
 
-  // ── Aplicar aviso respetando compuertas BPMN (desactivación condicional) ──
-  const aplicarAviso = (base: Alert[], aviso: Alert): { next: Alert[]; texto: string } => {
-    const accion = evaluarAccionAviso(aviso.stationId, aviso.nivel, base);
-    if (accion === "mantener") {
-      return { next: base, texto: `Sin cambios: la estación ya tiene un aviso vigente en nivel ${aviso.nivel}.` };
-    }
-    if (accion === "reemplazar") {
-      const previo = existeAvisoPrevio(aviso.stationId, base);
-      const next = base
-        .map((a) => (a.stationId === aviso.stationId && a.vigente ? { ...a, vigente: false } : a))
-        .concat(aviso);
-      return { next, texto: `Aviso #${previo?.nro} desactivado. Nuevo aviso #${aviso.nro} publicado (${aviso.nivel}).` };
-    }
-    return { next: base.concat(aviso), texto: `Aviso #${aviso.nro} publicado correctamente (${aviso.nivel}).` };
-  };
-
-  // ── Publicación automática (rama BPMN "¿La publicación es automática? = SI") ──
-  const publicarAutomatico = (base: Alert[], det: DeteccionAviso[]): { next: Alert[]; textos: string[] } => {
-    let next = base;
-    const textos: string[] = [];
-    for (const d of det) {
-      if (!d.excedido || !d.umbral) continue;
-      if (evaluarAccionAviso(d.stationId, d.umbral, next) === "mantener") continue;
-      const aviso = crearAviso(d.stationId, latestOverride, preferenciaOverride, { nro: siguienteNro(next), ca: siguienteCA(next) }, thMap);
-      const res = aplicarAviso(next, aviso);
-      next = res.next;
-      textos.push(res.texto);
-    }
-    return { next, textos };
-  };
-
   // ── Actualizar detección ──
   const handleActualizarDeteccion = () => {
-    const det = detectarAvisos(latestOverride, preferenciaOverride, thMap);
+    const det = detectarAvisos(stations, latestOverride, thMap, preferenciaOverride);
     setDeteccion(det);
     if (modoPublicacion === "automatico") {
-      const { next, textos } = publicarAutomatico(alerts, det);
+      const { next, textos } = procesarDeteccion(alerts, det, {
+        stations,
+        latest: latestOverride,
+        umbrales: thMap,
+        preferenciaOverride,
+        serieDe: (id) => getSeriesMerged(id),
+        mockNow: getMockNow(),
+      });
       if (textos.length > 0) {
         setAlerts(next);
         saveAlerts(next);
@@ -201,7 +168,19 @@ export default function AdminAvisosPage() {
   };
 
   const handleCrearAviso = (stationId: string) => {
-    const aviso = crearAviso(stationId, latestOverride, preferenciaOverride, { nro: siguienteNro(alerts), ca: siguienteCA(alerts) }, thMap);
+    const station = stations.find((s) => s.id === stationId);
+    const th = thMap[stationId];
+    if (!station || !th) return;
+    const aviso = crearAviso({
+      station,
+      latest: latestOverride,
+      th,
+      preferencia: preferenciaOverride[stationId] ?? th.preferencia,
+      mockNow: getMockNow(),
+      serie: getSeriesMerged(stationId),
+      nro: siguienteNro(alerts),
+      ca: siguienteCA(alerts),
+    });
     setPreviewAviso(aviso);
   };
 
@@ -211,7 +190,7 @@ export default function AdminAvisosPage() {
     setAlerts(next);
     saveAlerts(next);
     setPreviewAviso(null);
-    setDeteccion(detectarAvisos(latestOverride, preferenciaOverride, thMap));
+    setDeteccion(detectarAvisos(stations, latestOverride, thMap, preferenciaOverride));
     setMsg(texto);
     setTimeout(() => setMsg(""), 5000);
   };
@@ -221,7 +200,7 @@ export default function AdminAvisosPage() {
     setInjectedObs({});
     setPreferenciaOverride({});
     setRefresh((r) => r + 1);
-    setDeteccion(detectarAvisos(undefined, undefined, getConfigThresholdsMap()));
+    setDeteccion(detectarAvisos(getStations(), getLatestMerged(), getConfigThresholdsMap()));
     setSimMsg("Ingesta limpiada. Detección restaurada a la serie base.");
     setTimeout(() => setSimMsg(""), 4000);
   };
@@ -239,7 +218,7 @@ export default function AdminAvisosPage() {
   const simUmbrales = simVariable === "caudal" ? simTh?.caudal : simTh?.nivel;
   const simUmbralRef = simUmbrales?.amarilla;
   const simNivelDetectado = simTh && simValorActual > 0 && simUmbrales
-    ? clasificarValor(simValorActual, simUmbrales, simTh.tipo)
+    ? clasificarNivel(simValorActual, simUmbrales, simTh.tipo)
     : null;
   const simExcedido = simNivelDetectado !== null;
 
@@ -318,7 +297,7 @@ export default function AdminAvisosPage() {
                 const valor = pref === "caudal" ? obs.caudal : obs.nivel;
                 const valorMsnm = pref === "nivel" && st?.cota != null ? obs.nivel + st.cota : valor;
                 const unidad = pref === "caudal" ? "m³/s" : "m.s.n.m.";
-                const nivelDet = umbrales ? clasificarValor(valor, umbrales, tipo) : null;
+                const nivelDet = umbrales ? clasificarNivel(valor, umbrales, tipo) : null;
                 return (
                   <span key={sid} className={`text-xs px-2 py-1 rounded ${nivelDet ? "bg-red-100 text-red-700 border border-red-200" : "bg-green-100 text-green-700 border border-green-200"}`}>
                     {st?.estacion}: {valorMsnm.toFixed(2)} {unidad} {nivelDet ? `⚠ ${nivelDet}` : "✓"}

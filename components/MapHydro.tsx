@@ -3,7 +3,6 @@ import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import {
-  ESTADO_COLOR as color,
   PERU_BOUNDS,
   stationIcon,
   pinIcon,
@@ -112,28 +111,35 @@ export default function MapHydro({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MapController target={flyTarget} />
-        {stations.map((s) => {
-          const o = latest[s.id];
-          const est = o?.estado ?? "normal";
-          const sel = selectedId === s.id;
-          return (
-            <Marker
-              key={s.id}
-              position={[s.lat, s.lon]}
-              icon={stationIcon(color[est] ?? color.normal, sel)}
-              eventHandlers={{ click: () => handleStationClick(s) }}
-            >
-              <Tooltip direction="top" offset={[0, -28]}> Estación: {s.estacion}</Tooltip>
-              <Popup>
-                <b> Estación: {s.estacion}</b>
-                <br />Rio: {s.rio}
-                <br />Q: {o?.caudal} m³/s
-                <br />N: {o?.nivel} m
-                <br />Nivel: {est}
-              </Popup>
-            </Marker>
-          );
-        })}
+        {stations
+          .filter((s) => vigenteIds?.has(s.id))
+          .map((s) => {
+            const o = latest[s.id];
+            const nivel = nivelPorEstacion?.[s.id];
+            const fill = nivel ? NIVEL_SENAMHI[nivel].bg : "#9ca3af";
+            const sel = selectedId === s.id;
+            return (
+              <Marker
+                key={s.id}
+                position={[s.lat, s.lon]}
+                icon={stationIcon(fill, sel)}
+                eventHandlers={{ click: () => handleStationClick(s) }}
+              >
+                <Tooltip direction="top" offset={[0, -28]}> Estación: {s.estacion}</Tooltip>
+                <Popup>
+                  <b> Estación: {s.estacion}</b>
+                  <br />Rio: {s.rio}
+                  <br />Q: {o?.caudal} m³/s
+                  <br />N: {o?.nivel} m
+                  {nivel && (
+                    <>
+                      <br />Nivel: {nivel}
+                    </>
+                  )}
+                </Popup>
+              </Marker>
+            );
+          })}
         {selected && vigenteIds?.has(selected.id)
           ? (selected.pobladosGeo ?? []).map((p) => (
               <Marker

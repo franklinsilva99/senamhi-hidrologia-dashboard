@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/ui/tabs";
@@ -7,18 +9,23 @@ import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
 
 export default function PronosticoPage() {
   const stations = getStations();
-  const diario = getForecastDiario();
-  const byStation = (id: string) => diario.filter((f) => f.stationId === id);
+  const [diario, setDiario] = useState<ForecastDiario[]>([]);
+  const [inputs, setInputs] = useState<ForecastInput[]>([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
+    setDiario(getForecastDiario());
+    setInputs(getForecastInputs());
+  }, []);
 
   // Estaciones con pronóstico + su serie
   const conPronostico = stations.filter((s) => diario.some((f) => f.stationId === s.id));
   const forecastPorEstacion: Record<string, ForecastDiario[]> = {};
-  for (const s of conPronostico) forecastPorEstacion[s.id] = byStation(s.id);
+  for (const s of conPronostico) forecastPorEstacion[s.id] = diario.filter((f) => f.stationId === s.id);
 
   const thMap = Object.fromEntries(getThresholds().map((t) => [t.stationId, t]));
 
   // Inputs (modelos) por estación → Min–Max del popup
-  const inputs = getForecastInputs();
   const inputsPorEstacion: Record<string, ForecastInput[]> = {};
   for (const s of conPronostico) inputsPorEstacion[s.id] = inputs.filter((i) => i.stationId === s.id);
 

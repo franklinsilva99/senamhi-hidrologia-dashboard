@@ -32,7 +32,7 @@ export const PELIGRO: Record<TipoAviso, Record<NivelKey, string>> = {
   },
 };
 
-// Recomendación por nivel y tipo (fuente: lib/queries.ts prepararAviso)
+// Recomendación por nivel y tipo
 export const RECOMENDACION: Record<TipoAviso, Record<NivelKey, string>> = {
   avenida: {
     AMARILLO: "Seguir reportes de la DZ. Mantenerse informado por la web institucional del SENAMHI.",

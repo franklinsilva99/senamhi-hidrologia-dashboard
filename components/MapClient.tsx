@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import type { Observation, Station } from "@/lib/types";
+import type { Observation, Station } from "@/lib/domain/types";
 
 const MapHydro = dynamic(() => import("@/components/MapHydro"), { ssr: false });
 

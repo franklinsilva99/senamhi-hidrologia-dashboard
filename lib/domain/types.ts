@@ -108,3 +108,6 @@ export interface DeteccionAviso {
   tipo: TipoAviso;
   excedido: boolean;
 }
+
+// Vista combinada: ficha/ubicación (Station) + alertas/medición (Thresholds)
+export type ConfigEstacion = Station & Thresholds;

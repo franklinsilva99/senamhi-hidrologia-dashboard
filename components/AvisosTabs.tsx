@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { avisoTabClass } from "@/lib/tabs";
-import type { Alert, NivelAlerta, Observation, Station, TipoAviso } from "@/lib/types";
+import { avisoTabClass } from "@/lib/ui/tabs";
+import type { Alert, NivelAlerta, Observation, Station, TipoAviso } from "@/lib/domain/types";
 
 const MapHydro = dynamic(() => import("@/components/MapHydro"), { ssr: false });
 

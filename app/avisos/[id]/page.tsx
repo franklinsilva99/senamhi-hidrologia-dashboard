@@ -1,14 +1,14 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getAlerts, getSeries, getSeriesMerged, getStations, loadAlerts } from "@/lib/data";
-import { getThresholds } from "@/lib/queries";
+import { getAlerts, getSeries, getSeriesMerged, getStations, loadAlerts } from "@/lib/infra/data";
+import { getThresholds } from "@/lib/infra/catalogos";
 import ChartAviso from "@/components/ChartAviso";
 import TablaDatosAviso from "@/components/TablaDatosAviso";
 import LeyendaNiveles from "@/components/LeyendaNiveles";
 import SectionHeader from "@/components/SectionHeader";
-import { avisoTabClass } from "@/lib/tabs";
-import type { Alert, Observation } from "@/lib/types";
+import { avisoTabClass } from "@/lib/ui/tabs";
+import type { Alert, Observation } from "@/lib/domain/types";
 
 const badge: Record<string, string> = {
   AMARILLO: "bg-[#FFFF00] text-black",

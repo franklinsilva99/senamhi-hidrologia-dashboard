@@ -1,7 +1,10 @@
 import stations from "@/data/stations.json";
 import observations from "@/data/observations_qc1.json";
 import alerts from "@/data/alerts.json";
-import type { Alert, Observation, Station } from "./types";
+import type { Alert, Observation, Station } from "@/lib/domain/types";
+
+// ── Adaptador de persistencia (PoC): JSON estático + localStorage overlay ──
+// Implementa los puertos StationRepository / ObservacionRepository / AvisoRepository.
 
 const STORAGE_KEY = "senamhi_avisos";
 const OBS_KEY = "senamhi_observaciones";
@@ -102,6 +105,7 @@ export function getSeries(stationId: string): Observation[] {
   return staticSeries(stationId);
 }
 
+// Última lectura estática por estación (sin overlay, sin filtrar qc1-ok).
 export function getLatestByStation(): Record<string, Observation> {
   const map: Record<string, Observation> = {};
   for (const o of observations as Observation[]) {

@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 
 // Colores por estado de la última lectura (verde=normal … rojo)
 export const ESTADO_COLOR: Record<string, string> = {
-  normal: "#16a34a",
+  normal: "#fbfdfc",
   amarilla: "#ffeb3b",
   naranja: "#fca326",
   roja: "#ee3d43",

@@ -1,5 +1,5 @@
 import MapClient from "@/components/MapClient";
-import { getAlerts, getLatestByStation, getStations } from "@/lib/data";
+import { getAlerts, getLatestByStation, getStations } from "@/lib/infra/data";
 import StationTable from "@/components/StationTable";
 import ModelStatus from "@/components/ModelStatus";
 

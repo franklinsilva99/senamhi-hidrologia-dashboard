@@ -1,5 +1,5 @@
-import { getStations, getAlerts } from "@/lib/data";
-import { getForecastDiario } from "@/lib/queries";
+import { getStations, getAlerts } from "@/lib/infra/data";
+import { getForecastDiario } from "@/lib/infra/catalogos";
 
 export default function AdminDashboard() {
   const stations = getStations();

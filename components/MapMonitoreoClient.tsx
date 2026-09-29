@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import type { Station } from "@/lib/types";
+import type { Station } from "@/lib/domain/types";
 
 const MapMonitoreo = dynamic(() => import("@/components/MapMonitoreo"), { ssr: false });
 

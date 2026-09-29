@@ -2,8 +2,7 @@
 import { useMemo, useState } from "react";
 import HidrogramaPopupCard from "@/components/HidrogramaPopupCard";
 import ChartHydro from "@/components/ChartHydro";
-import type { ConfigEstacion } from "@/lib/configEstacion";
-import type { Observation, Station } from "@/lib/types";
+import type { ConfigEstacion, Observation, Station } from "@/lib/domain/types";
 
 type Variable = "caudal" | "nivel";
 

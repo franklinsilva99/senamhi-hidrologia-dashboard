@@ -1,4 +1,4 @@
-import type { Station, Thresholds } from "@/lib/types";
+import type { Station, Thresholds } from "@/lib/domain/types";
 
 export default function TablaDatosAviso({
   station,

@@ -1,4 +1,4 @@
-import { getModelStatus, modelBadge } from "@/lib/ports";
+import { getModelStatus, modelBadge } from "@/lib/domain/modelos";
 
 export default function ModelStatus() {
   const models = getModelStatus();

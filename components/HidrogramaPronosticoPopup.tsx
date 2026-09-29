@@ -5,7 +5,7 @@ import {
   ReferenceLine, CartesianGrid, ResponsiveContainer,
 } from "recharts";
 import HidrogramaPopupCard from "@/components/HidrogramaPopupCard";
-import type { ForecastDiario, ForecastInput, Station } from "@/lib/types";
+import type { ForecastDiario, ForecastInput, Station } from "@/lib/domain/types";
 
 const C_ROJO = "#e60000";
 const C_NARANJA = "#ff9900";

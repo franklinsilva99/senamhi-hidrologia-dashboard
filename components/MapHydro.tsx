@@ -3,8 +3,9 @@ import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import {
+  ESTADO_COLOR,
   PERU_BOUNDS,
-  stationIcon,
+  stationDotColorIcon,
   pinIcon,
   MapController,
   type FlyTarget,
@@ -18,6 +19,13 @@ import {
   RECOMENDACION,
   type NivelKey,
 } from "@/lib/domain/nivelesPeligro";
+
+// Nivel de alerta → clave de color saturado (paleta visible en mapa)
+const NIVEL_TO_ESTADO: Record<string, string> = {
+  AMARILLO: "amarilla",
+  NARANJA: "naranja",
+  ROJO: "roja",
+};
 
 // Sección del panel SENAMHI (encabezado cian + valor en blanco)
 function Seccion({ titulo, valor }: { titulo: string; valor: string }) {
@@ -116,13 +124,13 @@ export default function MapHydro({
           .map((s) => {
             const o = latest[s.id];
             const nivel = nivelPorEstacion?.[s.id];
-            const fill = nivel ? NIVEL_SENAMHI[nivel].bg : "#9ca3af";
+            const fill = nivel ? ESTADO_COLOR[NIVEL_TO_ESTADO[nivel]] ?? ESTADO_COLOR.normal : "#9ca3af";
             const sel = selectedId === s.id;
             return (
               <Marker
                 key={s.id}
                 position={[s.lat, s.lon]}
-                icon={stationIcon(fill, sel)}
+                icon={stationDotColorIcon(fill, sel)}
                 eventHandlers={{ click: () => handleStationClick(s) }}
               >
                 <Tooltip direction="top" offset={[0, -28]}> Estación: {s.estacion}</Tooltip>

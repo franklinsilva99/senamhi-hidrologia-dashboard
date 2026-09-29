@@ -28,11 +28,13 @@ export default function MapMonitoreo({
   const [serie, setSerie] = useState<Observation[]>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setLatest(getLatestMerged());
     setConfigMap(getConfigMap());
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- sincroniza la serie con la estación seleccionada
     setSerie(selectedId ? getSeriesMerged(selectedId) : []);
   }, [selectedId]);
 

@@ -40,6 +40,7 @@ export default function AdminAvisosPage() {
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setAlerts(loadAlerts());
     // Cargar la ingesta persistida (overlay) en el estado para reactividad
     const all = loadInjectedObs();
@@ -52,6 +53,7 @@ export default function AdminAvisosPage() {
 
   useEffect(() => {
     const m = localStorage.getItem(MODO_KEY);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     if (m === "manual" || m === "automatico") setModoPublicacion(m);
   }, []);
 
@@ -63,10 +65,18 @@ export default function AdminAvisosPage() {
   const stations = getStations();
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]));
   // Umbrales/alertas con overrides de configuración (localStorage)
-  const thMap = useMemo(() => getConfigThresholdsMap(), [refresh]);
+  const thMap = useMemo(
+    () => getConfigThresholdsMap(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- refresh fuerza recálculo tras ingesta/config
+    [refresh]
+  );
   const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
   // Última lectura válida (qc1-ok) por estación, de la serie fusionada (estática + overlay)
-  const latestOverride = useMemo(() => getLatestMerged(), [refresh]);
+  const latestOverride = useMemo(
+    () => getLatestMerged(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- refresh fuerza recálculo tras ingesta/config
+    [refresh]
+  );
 
   const filtered = alerts.filter((a) => {
     const st = stationMap[a.stationId];

@@ -1,38 +1,26 @@
 "use client";
 import { useState } from "react";
 import { getStations } from "@/lib/infra/data";
-import { getForecastInputs, getForecastDiario } from "@/lib/infra/catalogos";
-import type { ForecastInput, ForecastDiario } from "@/lib/domain/types";
+import { getForecastDiario } from "@/lib/infra/catalogos";
 
 const stations = getStations();
 const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
 
 export default function AdminPronosticoPage() {
   const [activeTab, setActiveTab] = useState<"horario" | "diario" | "mensual">("diario");
-  const [filtroStation, setFiltroStation] = useState("");
-  const [filtroFecha, setFiltroFecha] = useState("");
+  const [filtroStation] = useState("");
+  const [filtroFecha] = useState("");
 
   const [formDZ, setFormDZ] = useState("");
   const [formStation, setFormStation] = useState("");
   const [formFecha, setFormFecha] = useState("");
-  const [modelo1, setModelo1] = useState("");
-  const [modelo2, setModelo2] = useState("");
-  const [modelo3, setModelo3] = useState("");
-  const [modelo4, setModelo4] = useState("");
   const [saved, setSaved] = useState(false);
 
-  const inputs = getForecastInputs();
   const diario = getForecastDiario();
 
   const filteredStations = formDZ
     ? stations.filter((s) => s.dz === formDZ)
     : stations;
-
-  const filteredInputs = inputs.filter((fi) => {
-    if (filtroStation && fi.stationId !== filtroStation) return false;
-    if (filtroFecha && fi.fecha !== filtroFecha) return false;
-    return true;
-  });
 
   const filteredDiario = diario.filter((fd) => {
     if (filtroStation && fd.stationId !== filtroStation) return false;

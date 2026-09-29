@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getAlerts, getSeries, getSeriesMerged, getStations, loadAlerts } from "@/lib/infra/data";
@@ -36,6 +37,7 @@ export default function AvisoDetalle() {
 
   useEffect(() => {
     const stored = loadAlerts();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setAlerts(stored);
     const a = stored.find((x) => x.ca === ca && x.ce === ce);
     // Aviso publicado: serie congelada (snapshot). Si no tiene, serie fusionada.
@@ -64,19 +66,19 @@ export default function AvisoDetalle() {
         <nav aria-label="Pestañas de navegación" className="border-b border-gray-300 mb-6">
           <ul className="flex space-x-1 text-sm">
             <li>
-              <a href="/avisos?tab=mapa" className={avisoTabClass(false)}>
+              <Link href="/avisos?tab=mapa" className={avisoTabClass(false)}>
                 Mapa
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/avisos?tab=lista" className={avisoTabClass(false)}>
+              <Link href="/avisos?tab=lista" className={avisoTabClass(false)}>
                 Lista
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/avisos" className={avisoTabClass(true)}>
+              <Link href="/avisos" className={avisoTabClass(true)}>
                 Aviso # {aviso.nro}
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

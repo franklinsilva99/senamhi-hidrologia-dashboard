@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import {
@@ -56,10 +56,13 @@ export default function MapHydro({
   const [legendOpen, setLegendOpen] = useState(true);
   const [nivelActivo, setNivelActivo] = useState<NivelKey>("AMARILLO");
   const [tipoActivo, setTipoActivo] = useState<TipoAviso>(tipoDefault);
+  const [prevTipoDefault, setPrevTipoDefault] = useState<TipoAviso>(tipoDefault);
 
-  useEffect(() => {
+  // Ajustar estado durante el render cuando cambia la prop (patrón de React docs)
+  if (prevTipoDefault !== tipoDefault) {
+    setPrevTipoDefault(tipoDefault);
     setTipoActivo(tipoDefault);
-  }, [tipoDefault]);
+  }
 
   const handleStationClick = (s: Station) => {
     if (!vigenteIds?.has(s.id)) return;

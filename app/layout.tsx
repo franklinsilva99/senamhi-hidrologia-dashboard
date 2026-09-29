@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -30,11 +31,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <p className="text-xs opacity-80">Monitoreo · Pronóstico diario (promedio modelos) · Avisos — 4 estaciones piloto</p>
             </div>
             <nav className="ml-auto flex gap-1 text-sm">
-              <a className="px-3 py-2 rounded hover:bg-white/10" href="/">Resumen</a>
-              <a className="px-3 py-2 rounded hover:bg-white/10" href="/monitoreo">Monitoreo</a>
-              <a className="px-3 py-2 rounded hover:bg-white/10" href="/pronostico">Pronóstico</a>
-              <a className="px-3 py-2 rounded hover:bg-white/10" href="/avisos">Avisos</a>
-              <a className="px-3 py-2 rounded hover:bg-white/10 border border-white/20" href="/admin">Admin</a>
+              <Link className="px-3 py-2 rounded hover:bg-white/10" href="/">Resumen</Link>
+              <Link className="px-3 py-2 rounded hover:bg-white/10" href="/monitoreo">Monitoreo</Link>
+              <Link className="px-3 py-2 rounded hover:bg-white/10" href="/pronostico">Pronóstico</Link>
+              <Link className="px-3 py-2 rounded hover:bg-white/10" href="/avisos">Avisos</Link>
+              <Link className="px-3 py-2 rounded hover:bg-white/10 border border-white/20" href="/admin">Admin</Link>
             </nav>
           </div>
         </header>

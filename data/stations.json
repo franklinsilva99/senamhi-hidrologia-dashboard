@@ -45,6 +45,9 @@
       "caudal",
       "nivel"
     ],
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "modoPublicacion": "automatico",
     "estado": "activa"
   },
   {
@@ -92,6 +95,9 @@
       "caudal",
       "nivel"
     ],
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "modoPublicacion": "automatico",
     "estado": "activa"
   },
   {
@@ -140,6 +146,9 @@
       "caudal",
       "nivel"
     ],
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "modoPublicacion": "automatico",
     "estado": "activa"
   },
   {
@@ -189,6 +198,9 @@
       "caudal",
       "nivel"
     ],
+    "preferencia": "caudal",
+    "tipo": "vigilancia",
+    "modoPublicacion": "automatico",
     "estado": "activa"
   },
   {
@@ -229,6 +241,9 @@
       "caudal",
       "nivel"
     ],
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "modoPublicacion": "automatico",
     "estado": "activa"
   },
   {
@@ -269,6 +284,9 @@
       "caudal",
       "nivel"
     ],
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "modoPublicacion": "automatico",
     "estado": "activa"
   },
   {
@@ -309,6 +327,9 @@
       "caudal",
       "nivel"
     ],
+    "preferencia": "caudal",
+    "tipo": "avenida",
+    "modoPublicacion": "automatico",
     "estado": "activa"
   }
 ]

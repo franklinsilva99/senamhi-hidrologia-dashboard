@@ -4,7 +4,8 @@ import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/ui/tabs";
 import { getStations } from "@/lib/infra/data";
-import { getForecastDiario, getThresholds, getForecastInputs } from "@/lib/infra/catalogos";
+import { getForecastDiario, getForecastInputs } from "@/lib/infra/catalogos";
+import { getConfigVigente } from "@/lib/infra/configRecords";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
 
 export default function PronosticoPage() {
@@ -23,8 +24,6 @@ export default function PronosticoPage() {
   const forecastPorEstacion: Record<string, ForecastDiario[]> = {};
   for (const s of conPronostico) forecastPorEstacion[s.id] = diario.filter((f) => f.stationId === s.id);
 
-  const thMap = Object.fromEntries(getThresholds().map((t) => [t.stationId, t]));
-
   // Inputs (modelos) por estación → Min–Max del popup
   const inputsPorEstacion: Record<string, ForecastInput[]> = {};
   for (const s of conPronostico) inputsPorEstacion[s.id] = inputs.filter((i) => i.stationId === s.id);
@@ -32,10 +31,10 @@ export default function PronosticoPage() {
   // Umbrales según preferencia de la estación (caudal o nivel)
   const umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }> = {};
   for (const s of conPronostico) {
-    const th = thMap[s.id];
-    if (!th) continue;
-    const u = th.preferencia === "nivel" ? th.nivel : th.caudal;
-    umbralesPorEstacion[s.id] = { amarilla: u.amarilla, naranja: u.naranja, roja: u.roja };
+    const record = getConfigVigente(s.id, s.preferencia ?? "caudal", new Date().toISOString().slice(0, 10));
+    const u = record?.umbrales[s.tipo ?? "avenida"];
+    if (!u) continue;
+    umbralesPorEstacion[s.id] = { ...u };
   }
 
   return (

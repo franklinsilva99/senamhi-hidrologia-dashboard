@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import { getStations } from "@/lib/infra/data";
-import { getForecastDiario, appendForecastInputs } from "@/lib/infra/catalogos";
+import { getForecastDiario, appendForecastInputs, getForecastInputs } from "@/lib/infra/catalogos";
 import type { ForecastInput } from "@/lib/domain/types";
+import { USUARIO } from "@/lib/sesion";
 
 const stations = getStations();
 const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
@@ -19,6 +20,9 @@ export default function AdminPronosticoPage() {
   const [modelos, setModelos] = useState<Record<string, Record<number, string>>>({});
 
   const diario = getForecastDiario();
+  const usuarioPorKey = new Map(
+    getForecastInputs().map((i) => [`${i.stationId}|${i.fecha}`, i.usuario])
+  );
 
   const filteredStations = formDZ
     ? stations.filter((s) => s.dz === formDZ)
@@ -250,6 +254,7 @@ export default function AdminPronosticoPage() {
                 <tbody className="text-center">
                   {filteredDiario.map((fd, i) => {
                     const st = stations.find((s) => s.id === fd.stationId);
+                    const usuario = usuarioPorKey.get(`${fd.stationId}|${fd.fecha}`) ?? USUARIO.usuario;
                     return (
                       <tr key={i} className="border-t border-slate-200 hover:bg-slate-50">
                         <td className="p-2 text-xs">{st?.dz ?? "—"}</td>
@@ -257,7 +262,7 @@ export default function AdminPronosticoPage() {
                         <td className="p-2 text-xs">{st?.rio ?? "—"}</td>
                         <td className="p-2 text-xs">SUR</td>
                         <td className="p-2 text-xs">{fd.fecha}</td>
-                        <td className="p-2 text-xs">MCASAVERDE - {st?.dz ?? "DZ"}</td>
+                        <td className="p-2 text-xs">{usuario}</td>
                         <td className="p-2">
                           <button
                             className="inline-flex items-center justify-center w-8 h-8 rounded bg-[#00539b] text-white hover:bg-[#0070ba]"

@@ -21,16 +21,24 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Pool 1 "Listar avisos": preferencia caudal/nivel → comparar último dato vs umbrales → compuerta "¿nivel del aviso vigente es diferente?" → "¿existe aviso previo?" → "¿publicación automática?".
 - Pool 2 "Preparación de Aviso": datos 72h → si nivel y hay cota, sumar cota → hidrograma, título, etiquetas → generar aviso (vigencia según configuración).
-- `lib/queries.ts`: `detectarAvisos`, `prepararAviso`, `clasificarUmbral` (avena = mayor es peor; vigilancia = menor es peor).
-- `lib/avisos.ts`: `evaluarAccionAviso` → `"mantener" | "crear" | "reemplazar"` (desactivación condicional).
-- Modo de publicación (automática/manual) persistido en `localStorage` key `senamhi_modo_publicacion`.
+- `lib/deteccion.ts`: `detectarAvisos` (usa `Station.preferencia` + `ConfigRecord` vigente).
+- `lib/avisos.ts`: `evaluarAccionAviso` → `"mantener" | "crear" | "reemplazar"`, `prepararAviso`, `crearAviso`.
+- `lib/umbrales.ts`: `clasificarNivel` (avenida = mayor es peor; vigilancia = menor es peor).
+- Modo de publicación por estación (`Station.modoPublicacion`, editable en Configuración general).
+
+# Configuración (tabla + ficha)
+
+- **Tabla de configuración** (`ConfigRecord`): umbrales + tiempo de vigencia por (estación, variable, periodo). `periodo.final === null` = vigente. Datos en `data/config_records.json` + overlay `senamhi_config_records`.
+- **Ficha por estación** (`Station`): `preferencia`, `tipo` (avenida/vigilancia), `cota` + `cotaFuente`, `variables`, `estado`, `modoPublicacion`. Overlay `senamhi_station_config`.
+- `lib/infra/configRecords.ts`: `getConfigVigente(stationId, variable, fecha)` resuelve el registro vigente según su periodo.
+- Detección y avisos leen `Station.preferencia` + `getConfigVigente` (ya no `Thresholds`).
 
 # Ingesta de observaciones y publicación (Solución híbrida)
 
-- **Fuente de verdad de las observaciones**: `data/observations_qc1.json` (histórico) + **overlay** en `localStorage` key `senamhi_observaciones` (ingesta simulada del sensor).
-- `lib/data.ts`: `getSeriesMerged(stationId)` (estática + overlay, sin duplicar fecha, **ventana móvil de 72 h**), `getLatestMerged()` (última lectura **`qc1-ok`** por estación), `getMockNow()` (reloj del mock = fecha más reciente), `appendInjectedObs` / `clearInjectedObs`.
+- **Fuente de verdad de las observaciones**: `data/observations.json` (histórico) + **overlay** en `localStorage` key `senamhi_observaciones` (ingesta simulada del sensor).
+- `lib/data.ts`: `getSeriesMerged(stationId)` (estática + overlay, sin duplicar fecha, **ventana móvil de 72 h**), `getLatestMerged()` (última lectura por estación), `getMockNow()` (reloj del mock = fecha más reciente), `appendInjectedObs` / `clearInjectedObs`.
 - **Detección e hidrograma leen la serie fusionada** → el dato ingestado aparece en el gráfico y coincide con el aviso.
-- **QC1 en la ingesta**: si el valor viola `qc1.min/max/deltaMax` respecto a la lectura previa → `origen: "cuarentena"` y **no dispara aviso** (sí se muestra en el gráfico).
+- **Sin control de calidad en el PoC**: se consumen los productos ya limpios ("Caudales horarios" + "Niveles vigilados horario"). El flujo QC (`niveles_caudales`) se implementa aparte.
 - **Aviso publicado = documento congelado**: `Alert.serie` guarda el snapshot de la serie al emitir; el detalle usa `aviso.serie ?? getSeriesMerged(...)` (los 4 avisos base de `alerts.json` ya traen `serie`).
 - **Reloj del mock**: `prepararAviso`/`crearAviso` derivan `fechaEmision`/`inicio` de `getMockNow()` (no `new Date()`), para que la línea de tiempo coincida con la data.
 - `app/monitoreo` es **client** para poder leer el overlay.

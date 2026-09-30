@@ -21,17 +21,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${openSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-senamhi-bg text-senamhi-text">
-        <div className="bg-senamhi-navy text-white text-xs sm:text-sm px-4 py-2 text-center font-semibold">
-          SEDE CONTINGENCIA JUNÍN · PCO · Piloto 4 estaciones reales · QC1 (mín/máx) + promedio de modelos · Sin interrupción
-        </div>
         <header className="water-banner text-white">
           <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center gap-4">
             <div>
               <p className="text-lg font-bold leading-tight">SENAMHI · DHI Contingencia</p>
-              <p className="text-xs opacity-80">Monitoreo · Pronóstico diario (promedio modelos) · Avisos — 4 estaciones piloto</p>
+              <p className="text-xs opacity-80">Monitoreo · Pronóstico · Avisos</p>
             </div>
             <nav className="ml-auto flex gap-1 text-sm">
-              <Link className="px-3 py-2 rounded hover:bg-white/10" href="/">Resumen</Link>
               <Link className="px-3 py-2 rounded hover:bg-white/10" href="/monitoreo">Monitoreo</Link>
               <Link className="px-3 py-2 rounded hover:bg-white/10" href="/pronostico">Pronóstico</Link>
               <Link className="px-3 py-2 rounded hover:bg-white/10" href="/avisos">Avisos</Link>

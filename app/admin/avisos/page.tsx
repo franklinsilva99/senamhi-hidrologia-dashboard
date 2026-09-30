@@ -1,20 +1,19 @@
 "use client";
 import { useState, useMemo, useEffect } from "react";
-import { getAlerts, getStations, loadAlerts, saveAlerts, loadInjectedObs, appendInjectedObs, clearInjectedObs, getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
+import { getAlerts, loadAlerts, saveAlerts, loadInjectedObs, appendInjectedObs, clearInjectedObs, getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
+import { getStationsConfig } from "@/lib/infra/stationConfig";
 import { detectarAvisos } from "@/lib/domain/deteccion";
 import { clasificarNivel } from "@/lib/domain/umbrales";
-import { getConfigThresholdsMap } from "@/lib/infra/configEstacion";
+import { getConfigVigente } from "@/lib/infra/configRecords";
 import { existeAvisoPrevio, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA, aplicarAviso, procesarDeteccion } from "@/lib/domain/avisos";
 import type { Alert, DeteccionAviso, Observation } from "@/lib/domain/types";
+import { USUARIO } from "@/lib/sesion";
 
 const badgeNivel: Record<string, string> = {
   AMARILLO: "bg-[#ffeb3b] text-black",
   NARANJA: "bg-[#fca326] text-white",
   ROJO: "bg-[#ee3d43] text-white",
 };
-
-const MODO_KEY = "senamhi_modo_publicacion";
-type ModoPublicacion = "automatico" | "manual";
 
 export default function AdminAvisosPage() {
   const [alerts, setAlerts] = useState<Alert[]>(getAlerts);
@@ -32,11 +31,9 @@ export default function AdminAvisosPage() {
   const [simMsg, setSimMsg] = useState("");
   const [injectedObs, setInjectedObs] = useState<Record<string, Observation>>({});
   const [deteccion, setDeteccion] = useState<DeteccionAviso[]>(() =>
-    detectarAvisos(getStations(), getLatestMerged(), getConfigThresholdsMap())
+    detectarAvisos(getStationsConfig(), getLatestMerged(), getConfigVigente, getMockNow())
   );
   const [msg, setMsg] = useState("");
-  const [preferenciaOverride, setPreferenciaOverride] = useState<Record<string, "caudal" | "nivel">>({});
-  const [modoPublicacion, setModoPublicacion] = useState<ModoPublicacion>("automatico");
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
@@ -48,30 +45,13 @@ export default function AdminAvisosPage() {
     for (const o of all) last[o.stationId] = o;
     setInjectedObs(last);
     setRefresh((r) => r + 1);
-    setDeteccion(detectarAvisos(getStations(), getLatestMerged(), getConfigThresholdsMap()));
+    setDeteccion(detectarAvisos(getStationsConfig(), getLatestMerged(), getConfigVigente, getMockNow()));
   }, []);
 
-  useEffect(() => {
-    const m = localStorage.getItem(MODO_KEY);
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
-    if (m === "manual" || m === "automatico") setModoPublicacion(m);
-  }, []);
-
-  const cambiarModo = (m: ModoPublicacion) => {
-    setModoPublicacion(m);
-    localStorage.setItem(MODO_KEY, m);
-  };
-
-  const stations = getStations();
+  const stations = getStationsConfig();
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]));
-  // Umbrales/alertas con overrides de configuración (localStorage)
-  const thMap = useMemo(
-    () => getConfigThresholdsMap(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- refresh fuerza recálculo tras ingesta/config
-    [refresh]
-  );
   const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
-  // Última lectura válida (qc1-ok) por estación, de la serie fusionada (estática + overlay)
+  // Última lectura por estación, de la serie fusionada (estática + overlay)
   const latestOverride = useMemo(
     () => getLatestMerged(),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- refresh fuerza recálculo tras ingesta/config
@@ -108,7 +88,8 @@ export default function AdminAvisosPage() {
       setSimMsg("Ingrese un valor válido (> 0)");
       return;
     }
-    const th = thMap[simStationId];
+    const st = stationMap[simStationId];
+    const tipo = st?.tipo ?? "avenida";
 
     // Próxima hora respecto al fin de la serie (reloj del mock)
     const serie = getSeriesMerged(simStationId);
@@ -119,77 +100,71 @@ export default function AdminAvisosPage() {
     // Formato de hora LOCAL (evita el desfase de toISOString/UTC)
     const fecha = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}-${String(next.getDate()).padStart(2, "0")}T${String(next.getHours()).padStart(2, "0")}:${String(next.getMinutes()).padStart(2, "0")}`;
 
+    // Registros de configuración vigentes para derivar la otra variable
+    const recCaudal = getConfigVigente(simStationId, "caudal", getMockNow());
+    const recNivel = getConfigVigente(simStationId, "nivel", getMockNow());
+    const amCaudal = recCaudal?.umbrales[tipo]?.amarilla ?? 42;
+    const amNivel = recNivel?.umbrales[tipo]?.amarilla ?? 1.95;
+
     let caudal: number;
     let nivel: number;
     if (simVariable === "caudal") {
       caudal = valor;
-      nivel = Math.round((valor / (th?.caudal.amarilla ?? 42)) * 1.5 * 100) / 100;
+      nivel = Math.round((valor / amCaudal) * 1.5 * 100) / 100;
     } else {
       nivel = valor;
-      caudal = Math.round((valor / (th?.nivel.amarilla ?? 1.95)) * (th?.caudal.amarilla ?? 42) * 100) / 100;
+      caudal = Math.round((valor / amNivel) * amCaudal * 100) / 100;
     }
 
-    // QC1: rango y salto máximo respecto a la lectura previa
-    const qc = th?.qc1 ?? { min: 0, max: Number.POSITIVE_INFINITY, deltaMax: Number.POSITIVE_INFINITY };
-    const delta = prev ? Math.abs(caudal - prev.caudal) : 0;
-    const fallaQC = caudal > qc.max || caudal < qc.min || delta > qc.deltaMax;
-    const origen = fallaQC ? ("cuarentena" as const) : ("qc1-ok" as const);
-
-    const tipoEst = th?.tipo ?? "avenida";
-    // La alerta se clasifica según la preferencia de la estación (caudal/nivel), no siempre por nivel
-    const preferenciaEfectiva = simVariable === "nivel" ? "nivel" : (th?.preferencia ?? "caudal");
-    const valorEstado = preferenciaEfectiva === "caudal" ? caudal : nivel;
-    const uEstado = preferenciaEfectiva === "caudal" ? th?.caudal : th?.nivel;
-    const nivelDet = clasificarNivel(valorEstado, uEstado ?? { amarilla: 0, naranja: 0, roja: 0 }, tipoEst);
+    // La alerta se clasifica según la preferencia de la estación (caudal/nivel)
+    const preferencia = st?.preferencia ?? "caudal";
+    const recordPref = getConfigVigente(simStationId, preferencia, getMockNow());
+    const uPref = recordPref?.umbrales[tipo];
+    const valorEstado = preferencia === "caudal" ? caudal : nivel;
+    const nivelDet = uPref ? clasificarNivel(valorEstado, uPref, tipo) : null;
     const estado = nivelDet === "ROJO" ? "roja" as const : nivelDet === "NARANJA" ? "naranja" as const : nivelDet === "AMARILLO" ? "amarilla" as const : "normal" as const;
 
-    const obs: Observation = { stationId: simStationId, fecha, nivel, caudal, origen, estado };
+    const obs: Observation = { stationId: simStationId, fecha, nivel, caudal, estado };
 
     appendInjectedObs(obs);
     setInjectedObs((p) => ({ ...p, [simStationId]: obs }));
-    if (simVariable === "nivel") {
-      setPreferenciaOverride((p) => ({ ...p, [simStationId]: "nivel" }));
-    }
     setRefresh((r) => r + 1);
 
-    const st = stationMap[simStationId];
     const unidad = simVariable === "caudal" ? "m³/s" : "m";
-    const qcTxt = fallaQC ? "⚠ cuarentena (no dispara aviso)" : "✓ qc1-ok";
-    setSimMsg(`Ingesta: ${st?.estacion} — ${valor} ${unidad} @ ${fecha} · ${qcTxt}. Clic en "Actualizar detección".`);
+    setSimMsg(`Ingesta: ${st?.estacion} — ${valor} ${unidad} @ ${fecha}. Clic en "Actualizar detección".`);
     setTimeout(() => setSimMsg(""), 7000);
   };
 
   // ── Actualizar detección ──
   const handleActualizarDeteccion = () => {
-    const det = detectarAvisos(stations, latestOverride, thMap, preferenciaOverride);
+    const det = detectarAvisos(stations, latestOverride, getConfigVigente, getMockNow());
     setDeteccion(det);
-    if (modoPublicacion === "automatico") {
-      const { next, textos } = procesarDeteccion(alerts, det, {
-        stations,
-        latest: latestOverride,
-        umbrales: thMap,
-        preferenciaOverride,
-        serieDe: (id) => getSeriesMerged(id),
-        mockNow: getMockNow(),
-      });
-      if (textos.length > 0) {
-        setAlerts(next);
-        saveAlerts(next);
-        setMsg(`Publicación automática: ${textos.join(" ")}`);
-        setTimeout(() => setMsg(""), 6000);
-      }
+    const { next, textos } = procesarDeteccion(alerts, det, {
+      stations,
+      latest: latestOverride,
+      configVigenteDe: getConfigVigente,
+      serieDe: (id) => getSeriesMerged(id),
+      mockNow: getMockNow(),
+    });
+    if (textos.length > 0) {
+      setAlerts(next);
+      saveAlerts(next);
+      setMsg(`Publicación automática: ${textos.join(" ")}`);
+      setTimeout(() => setMsg(""), 6000);
     }
   };
 
   const handleCrearAviso = (stationId: string) => {
     const station = stations.find((s) => s.id === stationId);
-    const th = thMap[stationId];
-    if (!station || !th) return;
+    if (!station) return;
+    const preferencia = station.preferencia ?? "caudal";
+    const record = getConfigVigente(stationId, preferencia, getMockNow());
+    if (!record) return;
     const aviso = crearAviso({
       station,
       latest: latestOverride,
-      th,
-      preferencia: preferenciaOverride[stationId] ?? th.preferencia,
+      record,
+      preferencia,
       mockNow: getMockNow(),
       serie: getSeriesMerged(stationId),
       nro: siguienteNro(alerts),
@@ -204,7 +179,7 @@ export default function AdminAvisosPage() {
     setAlerts(next);
     saveAlerts(next);
     setPreviewAviso(null);
-    setDeteccion(detectarAvisos(stations, latestOverride, thMap, preferenciaOverride));
+    setDeteccion(detectarAvisos(stations, latestOverride, getConfigVigente, getMockNow()));
     setMsg(texto);
     setTimeout(() => setMsg(""), 5000);
   };
@@ -212,9 +187,8 @@ export default function AdminAvisosPage() {
   const handleLimpiarInyeccion = () => {
     clearInjectedObs();
     setInjectedObs({});
-    setPreferenciaOverride({});
     setRefresh((r) => r + 1);
-    setDeteccion(detectarAvisos(getStations(), getLatestMerged(), getConfigThresholdsMap()));
+    setDeteccion(detectarAvisos(getStationsConfig(), getLatestMerged(), getConfigVigente, getMockNow()));
     setSimMsg("Ingesta limpiada. Detección restaurada a la serie base.");
     setTimeout(() => setSimMsg(""), 4000);
   };
@@ -238,12 +212,13 @@ export default function AdminAvisosPage() {
     setTimeout(() => setMsg(""), 4000);
   };
 
-  const simTh = thMap[simStationId];
+  const simStation = stationMap[simStationId];
+  const simRecord = getConfigVigente(simStationId, simVariable, getMockNow());
   const simValorActual = simValor ? parseFloat(simValor) : 0;
-  const simUmbrales = simVariable === "caudal" ? simTh?.caudal : simTh?.nivel;
+  const simUmbrales = simRecord?.umbrales[simStation?.tipo ?? "avenida"];
   const simUmbralRef = simUmbrales?.amarilla;
-  const simNivelDetectado = simTh && simValorActual > 0 && simUmbrales
-    ? clasificarNivel(simValorActual, simUmbrales, simTh.tipo)
+  const simNivelDetectado = simUmbrales && simValorActual > 0
+    ? clasificarNivel(simValorActual, simUmbrales, simStation?.tipo ?? "avenida")
     : null;
   const simExcedido = simNivelDetectado !== null;
 
@@ -284,7 +259,7 @@ export default function AdminAvisosPage() {
                 step="any"
                 value={simValor}
                 onChange={(e) => setSimValor(e.target.value)}
-                placeholder={simTh ? (simVariable === "caudal" ? `Ej: ${simTh.caudal.amarilla + 5}` : `Ej: ${simTh.nivel.amarilla + 0.5}`) : ""}
+                placeholder={simUmbrales ? (simVariable === "caudal" ? `Ej: ${simUmbrales.amarilla + 5}` : `Ej: ${simUmbrales.amarilla + 0.5}`) : ""}
                 className="w-full border border-slate-300 rounded px-3 py-2 text-sm"
               />
             </div>
@@ -315,14 +290,14 @@ export default function AdminAvisosPage() {
             <div className="mt-2 flex flex-wrap gap-2">
               {Object.entries(injectedObs).map(([sid, obs]) => {
                 const st = stationMap[sid];
-                const th = thMap[sid];
-                const pref = preferenciaOverride[sid] ?? th?.preferencia ?? "caudal";
-                const tipo = th?.tipo ?? "avenida";
-                const umbrales = pref === "caudal" ? th?.caudal : th?.nivel;
+                const pref = st?.preferencia ?? "caudal";
+                const tipo = st?.tipo ?? "avenida";
+                const record = getConfigVigente(sid, pref, getMockNow());
                 const valor = pref === "caudal" ? obs.caudal : obs.nivel;
                 const valorMsnm = pref === "nivel" && st?.cota != null ? obs.nivel + st.cota : valor;
                 const unidad = pref === "caudal" ? "m³/s" : "m.s.n.m.";
-                const nivelDet = umbrales ? clasificarNivel(valor, umbrales, tipo) : null;
+                const u = record?.umbrales[tipo];
+                const nivelDet = u ? clasificarNivel(valor, u, tipo) : null;
                 return (
                   <span key={sid} className={`text-xs px-2 py-1 rounded ${nivelDet ? "bg-red-100 text-red-700 border border-red-200" : "bg-green-100 text-green-700 border border-green-200"}`}>
                     {st?.estacion}: {valorMsnm.toFixed(2)} {unidad} {nivelDet ? `⚠ ${nivelDet}` : "✓"}
@@ -338,24 +313,7 @@ export default function AdminAvisosPage() {
       <div className="bg-white rounded-lg border border-slate-200">
         <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg flex items-center justify-between gap-3">
           <h2 className="text-sm font-bold uppercase">Detección Automática de Avisos</h2>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-white/80 uppercase">Publicación</span>
-            <div className="inline-flex rounded overflow-hidden border border-white/30">
-              <button
-                onClick={() => cambiarModo("automatico")}
-                className={`px-2.5 py-1 text-xs font-semibold ${modoPublicacion === "automatico" ? "bg-white text-[#00539b]" : "bg-white/10 text-white hover:bg-white/20"}`}
-              >
-                Automática
-              </button>
-              <button
-                onClick={() => cambiarModo("manual")}
-                className={`px-2.5 py-1 text-xs font-semibold ${modoPublicacion === "manual" ? "bg-white text-[#00539b]" : "bg-white/10 text-white hover:bg-white/20"}`}
-              >
-                Manual
-              </button>
-            </div>
-            <span className="text-xs bg-white/20 px-2 py-0.5 rounded">{estacionesConAlerta.length} estación(es) con alerta</span>
-          </div>
+          <span className="text-xs bg-white/20 px-2 py-0.5 rounded">{estacionesConAlerta.length} estación(es) con alerta</span>
         </div>
         <div className="p-4">
           {estacionesConAlerta.length === 0 ? (
@@ -372,6 +330,7 @@ export default function AdminAvisosPage() {
                     <th className="p-2">DZ</th>
                     <th className="p-2">Preferencia</th>
                     <th className="p-2">Tipo</th>
+                    <th className="p-2">Modo</th>
                     <th className="p-2">Valor Actual</th>
                     <th className="p-2">Umbral Detectado</th>
                     <th className="p-2">Aviso Previo</th>
@@ -393,6 +352,11 @@ export default function AdminAvisosPage() {
                         <td className="p-2 text-xs">{d.preferencia}</td>
                         <td className="p-2 text-xs">
                           <span className={`px-1.5 py-0.5 rounded ${d.tipo === "vigilancia" ? "bg-sky-100 text-sky-700" : "bg-rose-100 text-rose-700"}`}>{d.tipo}</span>
+                        </td>
+                        <td className="p-2 text-xs">
+                          <span className={st?.modoPublicacion === "manual" ? "text-slate-500" : "text-green-700"}>
+                            {st?.modoPublicacion === "manual" ? "Manual" : "Auto"}
+                          </span>
                         </td>
                         <td className="p-2 font-semibold">
                           {valorMostrar.toFixed(2)} {unidadMostrar}
@@ -575,7 +539,7 @@ export default function AdminAvisosPage() {
                     <td className="p-2">
                       <span className={`px-2 py-0.5 rounded text-xs font-bold ${badgeNivel[a.nivel]}`}>{a.nivel}</span>
                     </td>
-                    <td className="p-2 text-xs">MCASAVERDE</td>
+                    <td className="p-2 text-xs">{USUARIO.usuario}</td>
                     <td className="p-2">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${a.vigente ? "bg-green-500 text-white" : "bg-slate-200 text-slate-500"}`}>
                         {a.vigente ? "Activo" : "Inactivo"}

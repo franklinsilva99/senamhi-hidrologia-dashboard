@@ -43,9 +43,9 @@ Mapeo a la pila objetivo:
 
 ## Modelo de datos (`lib/domain/types.ts`)
 
-- **Station** — ficha/ubicación (cuenca, río, cota, poblados, variables).
-- **Thresholds** — umbrales (caudal/nivel), tipo avenida/vigilancia, QC1, vigencia.
-- **Observation** — lectura horaria (nivel, caudal, origen `qc1-ok`|`cuarentena`, estado).
+- **Station** — ficha/ubicación (cuenca, río, cota, poblados) + `variables`, `preferencia`, `tipo` (avenida/vigilancia), `modoPublicacion`.
+- **ConfigRecord** — tabla de configuración por (estación, variable, periodo): `umbrales` + `tiempoVigenciaHrs`.
+- **Observation** — lectura horaria (nivel, caudal, estado).
 - **ForecastInput / ForecastDiario** — modelos ingresados y pronóstico promedio.
 - **Alert** — aviso (título, nivel, vigencia, snapshot de la serie).
 
@@ -61,7 +61,7 @@ Mapeo a la pila objetivo:
 - Preferencia por estación: **caudal** o **nivel**.
 - **Avenida** = mayor es peor; **Vigilancia** = menor es peor.
 - **Cota**: la detección compara valores *relativos*; la cota solo se suma para mostrar **m.s.n.m.** (`Nivel absoluto = Nivel relativo + Cota`).
-- **QC1**: si un dato viola mín/máx/Δmáx → `cuarentena` (se muestra pero **no dispara aviso**).
+- **Modo de publicación por estación**: automática o manual (aprobación).
 - **Aviso publicado = snapshot congelado** (`Alert.serie`).
 
 ### Pronóstico
@@ -79,8 +79,8 @@ Datos base en `data/*.json` + **overlay** en `localStorage`:
 | `senamhi_avisos` | avisos (base + creados/deshabilitados) |
 | `senamhi_observaciones` | ingesta simulada de observaciones |
 | `senamhi_forecast_inputs` | modelos de pronóstico cargados |
-| `senamhi_config_estaciones` | overrides de configuración por estación |
-| `senamhi_modo_publicacion` | publicación automática/manual |
+| `senamhi_config_records` | tabla de configuración (umbrales + vigencia) por estación/variable |
+| `senamhi_station_config` | ficha por estación (preferencia, tipo, cota, modo publicación) |
 
 ## Cómo correr
 

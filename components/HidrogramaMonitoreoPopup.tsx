@@ -2,9 +2,9 @@
 import { useMemo, useState } from "react";
 import HidrogramaPopupCard from "@/components/HidrogramaPopupCard";
 import ChartHydro from "@/components/ChartHydro";
-import type { ConfigEstacion, Observation, Station } from "@/lib/domain/types";
-
-type Variable = "caudal" | "nivel";
+import { getConfigVigente, getVariablesConfiguradas } from "@/lib/infra/configRecords";
+import { getMockNow } from "@/lib/infra/data";
+import type { Observation, Station, Variable } from "@/lib/domain/types";
 
 // Promedio diario (para la granularidad "Diario")
 function promedioDiario(series: Observation[]): Observation[] {
@@ -24,7 +24,6 @@ function promedioDiario(series: Observation[]): Observation[] {
       fecha,
       caudal: Math.round((e.c / e.count) * 10) / 10,
       nivel: Math.round((e.l / e.count) * 100) / 100,
-      origen: "qc1-ok" as const,
       estado: "normal" as const,
     }));
 }
@@ -32,16 +31,15 @@ function promedioDiario(series: Observation[]): Observation[] {
 export default function HidrogramaMonitoreoPopup({
   station,
   series,
-  config,
   onClose,
 }: {
   station: Station;
   series: Observation[];
-  config: ConfigEstacion;
   onClose: () => void;
 }) {
-  const variables: Variable[] = config.variables ?? ["caudal", "nivel"];
-  const inicial: Variable = variables.includes(config.preferencia) ? config.preferencia : variables[0];
+  const variables: Variable[] = station.variables ?? getVariablesConfiguradas(station.id);
+  const preferencia = station.preferencia ?? "caudal";
+  const inicial: Variable = variables.includes(preferencia) ? preferencia : variables[0];
   const [variable, setVariable] = useState<Variable>(inicial);
   const [granularidad, setGranularidad] = useState<"horario" | "diario">("horario");
 
@@ -50,7 +48,8 @@ export default function HidrogramaMonitoreoPopup({
     [series, granularidad],
   );
 
-  const u = variable === "caudal" ? config.caudal : config.nivel;
+  const record = getConfigVigente(station.id, variable, getMockNow());
+  const u = record?.umbrales[station.tipo ?? "avenida"];
   const variableTitle = variable === "caudal" ? "Caudal" : "Nivel";
   const hoyISO = new Date().toISOString().slice(0, 10);
 
@@ -122,11 +121,11 @@ export default function HidrogramaMonitoreoPopup({
       <ChartHydro
         series={serieGraficada}
         preferencia={variable}
-        tipo={config.tipo}
-        cota={config.cota}
-        umbralAmarilla={u.amarilla}
-        umbralNaranja={u.naranja}
-        umbralRoja={u.roja}
+        tipo={station.tipo ?? "avenida"}
+        cota={station.cota}
+        umbralAmarilla={u?.amarilla}
+        umbralNaranja={u?.naranja}
+        umbralRoja={u?.roja}
         navigator
       />
     </HidrogramaPopupCard>

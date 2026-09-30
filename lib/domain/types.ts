@@ -1,3 +1,40 @@
+// ── Variables de medición ──
+export type Variable = "caudal" | "nivel";
+export type Unidad = "m3/s" | "m";
+
+export const UNIDAD_POR_VARIABLE: Record<Variable, Unidad> = {
+  caudal: "m3/s",
+  nivel: "m",
+};
+
+// Umbrales y vigencia por nivel de alerta (amarilla/naranja/roja)
+export interface Umbrales {
+  amarilla: number;
+  naranja: number;
+  roja: number;
+}
+
+export interface TiempoVigenciaHrs {
+  amarilla: number;
+  naranja: number;
+  roja: number;
+}
+
+// Registro de la tabla de configuración: umbrales + vigencia por
+// (estación, variable, periodo). `periodo.final === null` = vigente.
+// Umbrales por tipo: avenida (ascendente) y vigilancia (descendente);
+// una estación puede tener uno o ambos sets. La vigencia es un solo set.
+export interface ConfigRecord {
+  stationId: string;
+  variable: Variable;
+  periodo: { inicio: string; final: string | null };
+  umbrales: {
+    avenida?: Umbrales;
+    vigilancia?: Umbrales;
+  };
+  tiempoVigenciaHrs: TiempoVigenciaHrs;
+}
+
 export interface Station {
   id: string;
   n: number;
@@ -21,29 +58,22 @@ export interface Station {
   polygon: number[][][] | null;
   cota: number | null;
   cotaFuente?: "oficial" | "inventario-altitud" | "dem";
-  variables?: ("caudal" | "nivel")[];
+  variables?: Variable[];
+  preferencia?: Variable; // cuál variable dispara el aviso
+  tipo?: TipoAviso; // avenida (mayor es peor) | vigilancia (menor es peor)
+  modoPublicacion?: ModoPublicacion; // automática | manual
   estado?: "activa" | "mantenimiento";
 }
 
 export type TipoAviso = "avenida" | "vigilancia";
 export type NivelAlerta = "AMARILLO" | "NARANJA" | "ROJO";
-
-export interface Thresholds {
-  stationId: string;
-  preferencia: "caudal" | "nivel";
-  tipo: TipoAviso;
-  nivel: { amarilla: number; naranja: number; roja: number; unidad: "m" };
-  caudal: { amarilla: number; naranja: number; roja: number; unidad: "m3/s" };
-  duracionHoras: { amarilla: number; naranja: number; roja: number };
-  qc1: { min: number; max: number; deltaMax: number };
-}
+export type ModoPublicacion = "automatico" | "manual";
 
 export interface Observation {
   stationId: string;
   fecha: string;
   nivel: number;
   caudal: number;
-  origen: "qc1-ok" | "cuarentena";
   estado: "normal" | "amarilla" | "naranja" | "roja";
 }
 
@@ -91,14 +121,6 @@ export interface Alert {
   serie?: Observation[];
 }
 
-export type ModelStatus = "full" | "degraded" | "offline";
-
-export interface ModelInfo {
-  nombre: string;
-  status: ModelStatus;
-  detalle: string;
-}
-
 export interface DeteccionAviso {
   stationId: string;
   valorActual: number;
@@ -108,6 +130,3 @@ export interface DeteccionAviso {
   tipo: TipoAviso;
   excedido: boolean;
 }
-
-// Vista combinada: ficha/ubicación (Station) + alertas/medición (Thresholds)
-export type ConfigEstacion = Station & Thresholds;

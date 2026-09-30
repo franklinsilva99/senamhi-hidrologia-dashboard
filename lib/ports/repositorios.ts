@@ -1,11 +1,11 @@
 import type {
   Alert,
-  ConfigEstacion,
+  ConfigRecord,
   ForecastDiario,
   ForecastInput,
   Observation,
   Station,
-  Thresholds,
+  Variable,
 } from "@/lib/domain/types";
 
 // Contratos de persistencia. En producción (Spring Boot) se convierten en
@@ -20,7 +20,7 @@ export interface StationRepository {
 export interface ObservacionRepository {
   // Serie fusionada (estática + overlay), ordenada y recortada a la ventana.
   serieFusionada(stationId: string, horas?: number): Observation[];
-  // Última lectura válida (qc1-ok) por estación.
+  // Última lectura por estación.
   ultimaValida(): Record<string, Observation>;
   // Reloj del mock: fecha más reciente de la serie fusionada.
   ultimaFecha(): string;
@@ -42,8 +42,9 @@ export interface PronosticoRepository {
 }
 
 export interface ConfigRepository {
-  umbrales(): Thresholds[];
-  configMap(): Record<string, ConfigEstacion>;
-  guardar(stationId: string, partial: Partial<ConfigEstacion>): void;
-  reset(stationId?: string): void;
+  // Tabla de configuración: umbrales + vigencia por (estación, variable, periodo).
+  registros(stationId?: string, variable?: Variable): ConfigRecord[];
+  vigente(stationId: string, variable: Variable, fecha: string): ConfigRecord | null;
+  guardar(record: ConfigRecord): void;
+  reset(stationId: string, variable?: Variable): void;
 }

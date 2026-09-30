@@ -4,10 +4,11 @@ import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { ESTADO_COLOR, PERU_BOUNDS, stationDotColorIcon } from "@/lib/ui/mapIcons";
 import HidrogramaMonitoreoPopup from "@/components/HidrogramaMonitoreoPopup";
-import { getLatestMerged, getSeriesMerged } from "@/lib/infra/data";
-import { clasificarUmbral } from "@/lib/domain/umbrales";
-import { getConfigMap } from "@/lib/infra/configEstacion";
-import type { ConfigEstacion, Observation, Station } from "@/lib/domain/types";
+import { getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
+import { clasificarNivel } from "@/lib/domain/umbrales";
+import { getConfigVigente } from "@/lib/infra/configRecords";
+import { getStationsConfig } from "@/lib/infra/stationConfig";
+import type { Observation, Station } from "@/lib/domain/types";
 
 const NIVEL_TO_ESTADO: Record<string, string> = {
   AMARILLO: "amarilla",
@@ -16,21 +17,19 @@ const NIVEL_TO_ESTADO: Record<string, string> = {
 };
 
 export default function MapMonitoreo({
-  stations,
   heightClass = "h-[900px]",
 }: {
-  stations: Station[];
   heightClass?: string;
 }) {
+  const [stations, setStations] = useState<Station[]>([]);
   const [latest, setLatest] = useState<Record<string, Observation>>({});
-  const [configMap, setConfigMap] = useState<Record<string, ConfigEstacion>>({});
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [serie, setSerie] = useState<Observation[]>([]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
+    setStations(getStationsConfig());
     setLatest(getLatestMerged());
-    setConfigMap(getConfigMap());
   }, []);
 
   useEffect(() => {
@@ -39,17 +38,20 @@ export default function MapMonitoreo({
   }, [selectedId]);
 
   const selected = selectedId ? stations.find((s) => s.id === selectedId) ?? null : null;
-  const selectedConfig = selected ? configMap[selected.id] : undefined;
 
   // Color del punto según la preferencia (caudal/nivel) contra sus umbrales; gris si está en mantenimiento
   const colorDe = (s: Station): string => {
-    const c = configMap[s.id];
-    if (!c) return ESTADO_COLOR.normal;
-    if (c.estado === "mantenimiento") return "#9ca3af";
+    if (s.estado === "mantenimiento") return "#9ca3af";
     const obs = latest[s.id];
     if (!obs) return ESTADO_COLOR.normal;
-    const valor = c.preferencia === "caudal" ? obs.caudal : obs.nivel;
-    const umbral = clasificarUmbral(valor, c, c.preferencia);
+    const preferencia = s.preferencia ?? "caudal";
+    const tipo = s.tipo ?? "avenida";
+    const record = getConfigVigente(s.id, preferencia, getMockNow());
+    if (!record) return ESTADO_COLOR.normal;
+    const u = record.umbrales[tipo];
+    if (!u) return ESTADO_COLOR.normal;
+    const valor = preferencia === "caudal" ? obs.caudal : obs.nivel;
+    const umbral = clasificarNivel(valor, u, tipo);
     return umbral ? ESTADO_COLOR[NIVEL_TO_ESTADO[umbral]] ?? ESTADO_COLOR.normal : ESTADO_COLOR.normal;
   };
 
@@ -80,12 +82,11 @@ export default function MapMonitoreo({
         })}
       </MapContainer>
 
-      {selected && selectedConfig && (
+      {selected && (
         <div className="absolute top-2 inset-x-0 flex justify-center z-[1100] px-2">
           <HidrogramaMonitoreoPopup
             station={selected}
             series={serie}
-            config={selectedConfig}
             onClose={() => setSelectedId(null)}
           />
         </div>

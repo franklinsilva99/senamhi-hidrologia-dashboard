@@ -1,29 +1,27 @@
-import type { Station, Thresholds } from "@/lib/domain/types";
+import type { Station } from "@/lib/domain/types";
 
 export default function TablaDatosAviso({
   station,
-  thresholds,
   preferencia,
   nivelActual,
   caudalActual,
   cota,
   hora,
+  umbralRojoRel,
 }: {
   station: Station;
-  thresholds?: Thresholds;
   preferencia?: "caudal" | "nivel";
   nivelActual?: number;
   caudalActual?: number;
   cota?: number | null;
   hora?: string;
+  umbralRojoRel?: number;
 }) {
-  const esNivel = (preferencia ?? thresholds?.preferencia) === "nivel";
-  const tieneCota = esNivel && cota != null;
-  const offset = tieneCota ? (cota as number) : 0;
+  const esNivel = preferencia === "nivel";
+  const offset = esNivel && cota != null ? (cota as number) : 0;
   const unidad = esNivel ? "m.s.n.m." : "m³/s";
 
   const valorActual = esNivel ? nivelActual : caudalActual;
-  const umbralRojoRel = esNivel ? thresholds?.nivel.roja : thresholds?.caudal.roja;
   const umbralRojo = umbralRojoRel != null ? umbralRojoRel + offset : undefined;
 
   const etiquetaActual = esNivel

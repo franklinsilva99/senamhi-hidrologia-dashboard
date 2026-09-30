@@ -1,0 +1,282 @@
+[
+  {
+    "stationId": "socsi",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "caudal",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 42,
+        "naranja": 54,
+        "roja": 69
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "socsi",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "nivel",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 1.95,
+        "naranja": 3.06,
+        "roja": 4.42
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "chosica",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "caudal",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 49,
+        "naranja": 60,
+        "roja": 72
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "chosica",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "nivel",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 2.65,
+        "naranja": 3.25,
+        "roja": 3.9
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "pisac",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "caudal",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 170,
+        "naranja": 205,
+        "roja": 245
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "pisac",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "nivel",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 2.85,
+        "naranja": 3.45,
+        "roja": 4.1
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "caudal",
+    "umbrales": {
+      "vigilancia": {
+        "amarilla": 22,
+        "naranja": 18,
+        "roja": 15
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "nivel",
+    "umbrales": {
+      "vigilancia": {
+        "amarilla": 1.8,
+        "naranja": 1.5,
+        "roja": 1.2
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "caudal",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 170,
+        "naranja": 190,
+        "roja": 215
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "nivel",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 2.2,
+        "naranja": 2.45,
+        "roja": 2.7
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "cirato",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "caudal",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 165,
+        "naranja": 185,
+        "roja": 210
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "cirato",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "nivel",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 2.4,
+        "naranja": 2.6,
+        "roja": 2.85
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "caudal",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 70,
+        "naranja": 82,
+        "roja": 95
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "periodo": {
+      "inicio": "2026-01-01",
+      "final": null
+    },
+    "variable": "nivel",
+    "umbrales": {
+      "avenida": {
+        "amarilla": 2.6,
+        "naranja": 2.85,
+        "roja": 3.1
+      }
+    },
+    "tiempoVigenciaHrs": {
+      "amarilla": 200,
+      "naranja": 150,
+      "roja": 72
+    }
+  }
+]

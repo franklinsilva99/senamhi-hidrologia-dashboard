@@ -1,11 +1,8 @@
 import TopicBanner from "@/components/TopicBanner";
 import MapMonitoreoClient from "@/components/MapMonitoreoClient";
-import { getStations } from "@/lib/infra/data";
 import { avisoTabClass } from "@/lib/ui/tabs";
 
 export default function MonitoreoPage() {
-  const stations = getStations();
-
   return (
     <div className="min-h-screen bg-white">
       <TopicBanner
@@ -31,7 +28,7 @@ export default function MonitoreoPage() {
             Información disponible de niveles y/o caudales de la red de monitoreo hidrológico del
             Servicio Nacional de Meteorología e Hidrología del Perú (SENAMHI).
           </p>
-          <MapMonitoreoClient stations={stations} />
+          <MapMonitoreoClient />
         </section>
 
         <footer className="flex justify-center pt-4 pb-2">

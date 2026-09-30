@@ -1,5 +1,5 @@
 import stations from "@/data/stations.json";
-import observations from "@/data/observations_qc1.json";
+import observations from "@/data/observations.json";
 import alerts from "@/data/alerts.json";
 import type { Alert, Observation, Station } from "@/lib/domain/types";
 
@@ -54,17 +54,12 @@ export function getSeriesMerged(stationId: string): Observation[] {
   return merged.slice(-VENTANA_HORAS);
 }
 
-// Última lectura válida (qc1-ok) por estación, de la serie fusionada.
+// Última lectura por estación, de la serie fusionada.
 export function getLatestMerged(): Record<string, Observation> {
   const map: Record<string, Observation> = {};
   for (const s of getStations()) {
     const serie = getSeriesMerged(s.id);
-    for (let i = serie.length - 1; i >= 0; i--) {
-      if (serie[i].origen === "qc1-ok") {
-        map[s.id] = serie[i];
-        break;
-      }
-    }
+    if (serie.length > 0) map[s.id] = serie[serie.length - 1];
   }
   return map;
 }
@@ -103,13 +98,4 @@ export function saveAlerts(alertsToSave: Alert[]) {
 // Serie estática (sin overlay) — para SSR y snapshots base.
 export function getSeries(stationId: string): Observation[] {
   return staticSeries(stationId);
-}
-
-// Última lectura estática por estación (sin overlay, sin filtrar qc1-ok).
-export function getLatestByStation(): Record<string, Observation> {
-  const map: Record<string, Observation> = {};
-  for (const o of observations as Observation[]) {
-    if (!map[o.stationId] || map[o.stationId].fecha < o.fecha) map[o.stationId] = o;
-  }
-  return map;
 }

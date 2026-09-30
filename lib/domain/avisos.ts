@@ -1,13 +1,14 @@
 import type {
   Alert,
+  ConfigRecord,
   DeteccionAviso,
   NivelAlerta,
   Observation,
   Station,
-  Thresholds,
   TipoAviso,
+  Variable,
 } from "./types";
-import { clasificarUmbral } from "./umbrales";
+import { clasificarNivel } from "./umbrales";
 import { RECOMENDACION } from "./nivelesPeligro";
 
 export type AccionAviso = "mantener" | "crear" | "reemplazar";
@@ -74,16 +75,17 @@ function fechaLocal(d: Date): string {
 export function prepararAviso(
   station: Station,
   latest: Record<string, Observation>,
-  th: Thresholds,
-  preferencia: "caudal" | "nivel",
+  record: ConfigRecord,
+  preferencia: Variable,
   mockNow: string
 ): PreparacionAviso | null {
   const latestObs = latest[station.id];
-  const tipo = th.tipo;
+  const tipo = station.tipo ?? "avenida";
   const esNivel = preferencia === "nivel";
   // Pool 1: detección con valor RELATIVO contra umbrales relativos (sin cota)
   const valorActual = esNivel ? latestObs?.nivel ?? 0 : latestObs?.caudal ?? 0;
-  const nivel = clasificarUmbral(valorActual, th, preferencia);
+  const u = record.umbrales[tipo];
+  const nivel = u ? clasificarNivel(valorActual, u, tipo) : null;
   if (!nivel) return null;
 
   // Pool 2: visualización en m.s.n.m. (Nivel absoluto = Nivel relativo + Cota)
@@ -97,7 +99,7 @@ export function prepararAviso(
   const distrito = station.distritos.join(", ") || "—";
   const fechaEmision = `${DIAS[hoy.getDay()]}, ${hoy.getDate()} de ${MESES[hoy.getMonth()]} de ${hoy.getFullYear()} - ${hoy.getHours().toString().padStart(2, "0")}:${hoy.getMinutes().toString().padStart(2, "0")} hrs`;
 
-  const duracionHoras = th.duracionHoras[nivel.toLowerCase() as "amarilla" | "naranja" | "roja"] ?? 200;
+  const duracionHoras = record.tiempoVigenciaHrs[nivel.toLowerCase() as "amarilla" | "naranja" | "roja"] ?? 200;
   const plazo: "normal" | "extendido" = duracionHoras > 120 ? "extendido" : "normal";
   const finDate = new Date(hoy);
   finDate.setHours(finDate.getHours() + duracionHoras);
@@ -117,8 +119,8 @@ export function prepararAviso(
 export interface DatosCrearAviso {
   station: Station;
   latest: Record<string, Observation>;
-  th: Thresholds;
-  preferencia: "caudal" | "nivel";
+  record: ConfigRecord;
+  preferencia: Variable;
   mockNow: string;
   serie: Observation[];
   nro: number;
@@ -127,8 +129,8 @@ export interface DatosCrearAviso {
 
 // Pool 2: Crear aviso completo (preparación + generación). Función pura.
 export function crearAviso(d: DatosCrearAviso): Alert {
-  const { station, latest, th, preferencia, mockNow, serie, nro, ca } = d;
-  const preparacion = prepararAviso(station, latest, th, preferencia, mockNow);
+  const { station, latest, record, preferencia, mockNow, serie, nro, ca } = d;
+  const preparacion = prepararAviso(station, latest, record, preferencia, mockNow);
   if (!preparacion) {
     throw new Error(`No hay umbral excedido para la estación ${station.id}`);
   }
@@ -197,8 +199,11 @@ export function aplicarAviso(
 export interface DepsProcesarDeteccion {
   stations: Station[];
   latest: Record<string, Observation>;
-  umbrales: Record<string, Thresholds>;
-  preferenciaOverride?: Record<string, "caudal" | "nivel">;
+  configVigenteDe: (
+    stationId: string,
+    variable: Variable,
+    fecha: string
+  ) => ConfigRecord | null;
   serieDe: (stationId: string) => Observation[];
   mockNow: string;
 }
@@ -216,13 +221,15 @@ export function procesarDeteccion(
     if (evaluarAccionAviso(d.stationId, d.umbral, next) === "mantener") continue;
     const station = deps.stations.find((s) => s.id === d.stationId);
     if (!station) continue;
-    const th = deps.umbrales[d.stationId];
-    if (!th) continue;
-    const preferencia = deps.preferenciaOverride?.[d.stationId] ?? th.preferencia;
+    // Solo auto-publica si la estación está en modo automático.
+    if (station.modoPublicacion === "manual") continue;
+    const preferencia = d.preferencia;
+    const record = deps.configVigenteDe(d.stationId, preferencia, deps.mockNow);
+    if (!record) continue;
     const aviso = crearAviso({
       station,
       latest: deps.latest,
-      th,
+      record,
       preferencia,
       mockNow: deps.mockNow,
       serie: deps.serieDe(d.stationId),

@@ -1,24 +1,21 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { USUARIO } from "@/lib/sesion";
 
 const navItems = [
   { href: "/admin", label: "Página Principal", icon: "🏠", exact: true },
   { href: "/admin/config", label: "Configuración General", icon: "⚙️" },
   { href: "/admin/avisos", label: "Avisos", icon: "📋", hasDropdown: true },
   { href: "/monitoreo", label: "Monitoreo", icon: "📈" },
-  { href: "/admin/info-diaria", label: "Información Diaria", icon: "📅", hasDropdown: true, disabled: true },
-  { href: "/admin/info-mensual", label: "Información Mensual", icon: "📅", hasDropdown: true, disabled: true },
   { href: "/admin/pronostico", label: "Pronóstico", icon: "📊", hasDropdown: true },
-  { href: "/admin/manual", label: "Manual de Usuario", icon: "📖", hasDropdown: true, disabled: true },
-  { href: "/admin/anexos", label: "Anexos", icon: "📎", disabled: true },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f7f9fa]">
+    <div className="flex h-full overflow-hidden bg-[#f7f9fa]">
       {/* Sidebar */}
       <aside className="w-52 bg-[#001e40] text-white flex-shrink-0 flex flex-col overflow-y-auto">
         {/* Logo SC PHISIS */}
@@ -34,8 +31,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </svg>
           </div>
           <div>
-            <p className="text-sm font-semibold text-white">PEPE FLORES</p>
-            <p className="text-xs text-gray-400">ptlores</p>
+            <p className="text-sm font-semibold text-white">{USUARIO.nombre}</p>
+            <p className="text-xs text-gray-400">{USUARIO.usuario}</p>
           </div>
         </div>
 
@@ -46,26 +43,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               ? pathname === item.href
               : pathname === item.href || pathname.startsWith(item.href + "/");
             const className = `flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-              item.disabled
-                ? "text-gray-500 cursor-not-allowed"
-                : active
-                  ? "bg-[#003366] text-white"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white"
+              active
+                ? "bg-[#003366] text-white"
+                : "text-gray-300 hover:bg-gray-700 hover:text-white"
             }`;
             const content = (
               <>
                 <span className="text-base w-5 text-center">{item.icon}</span>
                 <span className="flex-1">{item.label}</span>
-                {item.hasDropdown && !item.disabled && (
+                {item.hasDropdown && (
                   <span className="text-xs text-gray-400">▾</span>
                 )}
               </>
             );
-            return item.disabled ? (
-              <span key={item.label} className={className}>
-                {content}
-              </span>
-            ) : (
+            return (
               <Link key={item.label} href={item.href} className={className}>
                 {content}
               </Link>
@@ -98,17 +89,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 rounded hover:bg-slate-100 text-slate-500" title="Vista grid">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-              </svg>
-            </button>
-            <button className="p-2 rounded hover:bg-slate-100 text-slate-500" title="Usuario">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-              </svg>
-            </button>
-            <Link href="/" className="p-2 rounded hover:bg-slate-100 text-slate-500" title="Cerrar sesión">
+            <Link href="/monitoreo" className="p-2 rounded hover:bg-slate-100 text-slate-500" title="Cerrar sesión">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>

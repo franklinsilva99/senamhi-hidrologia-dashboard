@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getAlerts, getSeries, getSeriesMerged, getStations, loadAlerts } from "@/lib/infra/data";
-import { getThresholds } from "@/lib/infra/catalogos";
+import { getConfigVigente } from "@/lib/infra/configRecords";
 import ChartAviso from "@/components/ChartAviso";
 import TablaDatosAviso from "@/components/TablaDatosAviso";
 import LeyendaNiveles from "@/components/LeyendaNiveles";
@@ -55,7 +55,8 @@ export default function AvisoDetalle() {
   }
 
   const st = getStations().find((s) => s.id === aviso.stationId);
-  const th = getThresholds().find((t) => t.stationId === aviso.stationId);
+  const record = getConfigVigente(aviso.stationId, aviso.preferencia, aviso.inicio);
+  const u = record?.umbrales[aviso.tipo];
   const horaUltima = serie.length > 0 ? serie[serie.length - 1].fecha.slice(11, 16) : undefined;
 
   return (
@@ -126,9 +127,9 @@ export default function AvisoDetalle() {
             preferencia={aviso.preferencia}
             tipo={aviso.tipo}
             cota={aviso.cota}
-            umbralAmarilla={aviso.preferencia === "nivel" ? th?.nivel.amarilla : th?.caudal.amarilla}
-            umbralNaranja={aviso.preferencia === "nivel" ? th?.nivel.naranja : th?.caudal.naranja}
-            umbralRoja={aviso.preferencia === "nivel" ? th?.nivel.roja : th?.caudal.roja}
+            umbralAmarilla={u?.amarilla}
+            umbralNaranja={u?.naranja}
+            umbralRoja={u?.roja}
           />
           <p className="text-center text-[11px] text-gray-500 italic mt-3">
             Nota: Información en tiempo casi real, sujeto a revisión y validación
@@ -140,12 +141,12 @@ export default function AvisoDetalle() {
           <section className="max-w-3xl mx-auto mb-8 overflow-hidden rounded-sm shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
             <TablaDatosAviso
               station={st}
-              thresholds={th}
               preferencia={aviso.preferencia}
               nivelActual={aviso.nivelActual}
               caudalActual={aviso.caudalActual}
               cota={aviso.cota}
               hora={horaUltima}
+              umbralRojoRel={u?.roja}
             />
           </section>
         )}

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { getStations, getMockNow } from "@/lib/infra/data";
 import { getForecastDiario, appendForecastInputs, getForecastInputs } from "@/lib/infra/catalogos";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
@@ -7,6 +7,24 @@ import { USUARIO } from "@/lib/sesion";
 
 const stations = getStations();
 const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
+
+// Suma/resta días a una fecha YYYY-MM-DD (devuelve el mismo formato).
+function sumarDias(base: string, dias: number): string {
+  const d = new Date(`${base}T00:00`);
+  d.setDate(d.getDate() + dias);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+// Grupo de 3 días consecutivos. El "padre" es el primer día pronosticado.
+function grupoDesde(primerDia: string): { padre: string; fechas: string[] } {
+  return {
+    padre: primerDia,
+    fechas: [0, 1, 2].map((i) => sumarDias(primerDia, i)),
+  };
+}
 
 export default function AdminPronosticoPage() {
   const [activeTab, setActiveTab] = useState<"horario" | "diario" | "mensual">("diario");
@@ -18,19 +36,12 @@ export default function AdminPronosticoPage() {
   // Inicializado vacío para evitar hydration mismatch (los overlays solo existen en el cliente).
   const [diario, setDiario] = useState<ForecastDiario[]>([]);
   const [inputs, setInputs] = useState<ForecastInput[]>([]);
-  const [fechas, setFechas] = useState<string[]>([]);
+  const [grupos, setGrupos] = useState<{ padre: string; fechas: string[] }[]>([]);
 
   useEffect(() => {
     const base = getMockNow().slice(0, 10) || new Date().toISOString().slice(0, 10);
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
-    setFechas([1, 2, 3].map((i) => {
-      const d = new Date(`${base}T00:00`);
-      d.setDate(d.getDate() + i);
-      const y = d.getFullYear();
-      const m = String(d.getMonth() + 1).padStart(2, "0");
-      const day = String(d.getDate()).padStart(2, "0");
-      return `${y}-${m}-${day}`;
-    }));
+    setGrupos([grupoDesde(sumarDias(base, 1))]);
     setDiario(getForecastDiario());
     setInputs(getForecastInputs());
   }, []);
@@ -47,24 +58,37 @@ export default function AdminPronosticoPage() {
   const setModelo = (fecha: string, idx: number, valor: string) =>
     setModelos((p) => ({ ...p, [fecha]: { ...p[fecha], [idx]: valor } }));
 
+  // Agrega un grupo consecutivo de 3 días (padre = último día del último grupo + 1).
+  const agregarGrupo = () => {
+    setGrupos((prev) => {
+      const ultimo = prev[prev.length - 1];
+      if (!ultimo) return prev;
+      const nuevoPrimero = sumarDias(ultimo.fechas[ultimo.fechas.length - 1], 1);
+      return [...prev, grupoDesde(nuevoPrimero)];
+    });
+  };
+
   const handleSave = () => {
     if (!formStation) return;
     const nuevos: ForecastInput[] = [];
-    for (const fecha of fechas) {
-      const celdas = modelos[fecha];
-      if (!celdas) continue;
-      for (let idx = 0; idx < 4; idx++) {
-        const raw = celdas[idx];
-        if (raw == null || raw.trim() === "") continue;
-        const valor = parseFloat(raw);
-        if (isNaN(valor)) continue;
-        nuevos.push({
-          stationId: formStation,
-          fecha,
-          modelo: `Modelo ${idx + 1}`,
-          valor,
-          usuario: "operador-DZ",
-        });
+    for (const g of grupos) {
+      for (const fecha of g.fechas) {
+        const celdas = modelos[fecha];
+        if (!celdas) continue;
+        for (let idx = 0; idx < 4; idx++) {
+          const raw = celdas[idx];
+          if (raw == null || raw.trim() === "") continue;
+          const valor = parseFloat(raw);
+          if (isNaN(valor)) continue;
+          nuevos.push({
+            stationId: formStation,
+            fecha,
+            modelo: `Modelo ${idx + 1}`,
+            valor,
+            usuario: "operador-DZ",
+            padre: g.padre,
+          });
+        }
       }
     }
     if (nuevos.length === 0) return;
@@ -159,24 +183,44 @@ export default function AdminPronosticoPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {fechas.map((f) => (
-                      <tr key={f}>
-                        <td className="p-2 border border-slate-300 font-semibold">{f}</td>
-                        {[0, 1, 2, 3].map((idx) => (
-                          <td key={idx} className="p-1 border border-slate-300">
-                            <input
-                              type="number"
-                              step="0.1"
-                              value={modelos[f]?.[idx] ?? ""}
-                              onChange={(e) => setModelo(f, idx, e.target.value)}
-                              className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
-                            />
+                    {grupos.map((g) => (
+                      <Fragment key={g.padre}>
+                        <tr className="bg-blue-50">
+                          <td colSpan={5} className="p-2 border border-slate-300 text-left font-semibold text-xs uppercase text-slate-600">
+                            Grupo — Padre: {g.padre}
                           </td>
+                        </tr>
+                        {g.fechas.map((f) => (
+                          <tr key={f}>
+                            <td className="p-2 border border-slate-300 font-semibold">{f}</td>
+                            {[0, 1, 2, 3].map((idx) => (
+                              <td key={idx} className="p-1 border border-slate-300">
+                                <input
+                                  type="number"
+                                  step="0.1"
+                                  value={modelos[f]?.[idx] ?? ""}
+                                  onChange={(e) => setModelo(f, idx, e.target.value)}
+                                  className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                                />
+                              </td>
+                            ))}
+                          </tr>
                         ))}
-                      </tr>
+                      </Fragment>
                     ))}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Botón para agregar otro grupo de 3 días */}
+              <div className="flex justify-center mb-4">
+                <button
+                  type="button"
+                  onClick={agregarGrupo}
+                  className="bg-white border border-[#00539b] text-[#00539b] px-6 py-2 rounded text-sm font-semibold hover:bg-blue-50"
+                >
+                  + Más (agregar 3 días)
+                </button>
               </div>
 
               <div className="flex justify-center">
@@ -240,7 +284,7 @@ export default function AdminPronosticoPage() {
             Módulo de pronóstico {activeTab} no disponible en contingencia.
           </p>
           <p className="text-xs text-slate-400 mt-2">
-            Solo el pronóstico Diario D+1..3 está habilitado en sede alterna Junín.
+            Solo el pronóstico Diario por grupos de 3 días está habilitado en sede alterna Junín.
           </p>
         </div>
       )}

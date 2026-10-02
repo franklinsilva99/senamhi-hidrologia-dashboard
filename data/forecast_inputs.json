@@ -4,251 +4,287 @@
     "fecha": "2026-10-02",
     "modelo": "Modelo 1",
     "valor": 55.4,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-02",
     "modelo": "Modelo 2",
     "valor": 56.7,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-02",
     "modelo": "Modelo 3",
     "valor": 58,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-03",
     "modelo": "Modelo 1",
     "valor": 53.2,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-03",
     "modelo": "Modelo 2",
     "valor": 54.5,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-03",
     "modelo": "Modelo 3",
     "valor": 55.8,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-04",
     "modelo": "Modelo 1",
     "valor": 50.9,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-04",
     "modelo": "Modelo 2",
     "valor": 52.3,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "socsi",
     "fecha": "2026-10-04",
     "modelo": "Modelo 3",
     "valor": 53.6,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-02",
     "modelo": "Modelo 1",
     "valor": 49.5,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-02",
     "modelo": "Modelo 2",
     "valor": 50.7,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-02",
     "modelo": "Modelo 3",
     "valor": 51.9,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-03",
     "modelo": "Modelo 1",
     "valor": 47.8,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-03",
     "modelo": "Modelo 2",
     "valor": 49,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-03",
     "modelo": "Modelo 3",
     "valor": 50.2,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-04",
     "modelo": "Modelo 1",
     "valor": 46.2,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-04",
     "modelo": "Modelo 2",
     "valor": 47.5,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "chosica",
     "fecha": "2026-10-04",
     "modelo": "Modelo 3",
     "valor": 48.8,
-    "usuario": "operador-DZ4"
+    "usuario": "operador-DZ4",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-02",
     "modelo": "Modelo 1",
     "valor": 177.6,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-02",
     "modelo": "Modelo 2",
     "valor": 179.9,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-02",
     "modelo": "Modelo 3",
     "valor": 182.2,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-03",
     "modelo": "Modelo 1",
     "valor": 174.8,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-03",
     "modelo": "Modelo 2",
     "valor": 177.1,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-03",
     "modelo": "Modelo 3",
     "valor": 179.4,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-04",
     "modelo": "Modelo 1",
     "valor": 172,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-04",
     "modelo": "Modelo 2",
     "valor": 174.3,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "pisac",
     "fecha": "2026-10-04",
     "modelo": "Modelo 3",
     "valor": 176.6,
-    "usuario": "operador-DZ12"
+    "usuario": "operador-DZ12",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-02",
     "modelo": "Modelo 1",
     "valor": 16.2,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-02",
     "modelo": "Modelo 2",
     "valor": 16,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-02",
     "modelo": "Modelo 3",
     "valor": 15.8,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-03",
     "modelo": "Modelo 1",
     "valor": 15.9,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-03",
     "modelo": "Modelo 2",
     "valor": 15.7,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-03",
     "modelo": "Modelo 3",
     "valor": 15.5,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-04",
     "modelo": "Modelo 1",
     "valor": 15.6,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-04",
     "modelo": "Modelo 2",
     "valor": 15.4,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   },
   {
     "stationId": "puente-ramis",
     "fecha": "2026-10-04",
     "modelo": "Modelo 3",
     "valor": 15.2,
-    "usuario": "operador-DZ13"
+    "usuario": "operador-DZ13",
+    "padre": "2026-10-02"
   }
 ]

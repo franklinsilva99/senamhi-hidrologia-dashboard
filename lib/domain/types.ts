@@ -91,6 +91,8 @@ export interface ForecastInput {
   modelo: string;
   valor: number;
   usuario: string;
+  // Primer día pronosticado del grupo de 3 días al que pertenece esta fecha.
+  padre?: string;
 }
 
 export interface ForecastDiario {

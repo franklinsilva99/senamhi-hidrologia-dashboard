@@ -49,7 +49,7 @@ export default function PronosticoPage() {
       <TopicBanner
         subtitle="Sistema de Pronóstico Hidrológico"
         title="Hidrología / Pronóstico Hidrológico"
-        description="Pronóstico hidrológico diario (D+1 a D+3) como promedio de los modelos ingresados por las direcciones zonales, para los principales ríos y cuencas del país."
+        description="Pronóstico hidrológico diario como promedio de los modelos ingresados por las direcciones zonales, en grupos de 3 días, para los principales ríos y cuencas del país."
       />
 
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -67,7 +67,7 @@ export default function PronosticoPage() {
           </h2>
           <p className="text-justify text-sm text-gray-700 mt-2 mb-4">
             Pronóstico diario de caudales en cuencas con modelos hidrológicos implementados,
-            considerando las previsiones de lluvia con horizonte de 3 días.
+            considerando las previsiones de lluvia.
           </p>
           
           <MapPronosticoClient

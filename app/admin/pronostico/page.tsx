@@ -1,7 +1,9 @@
 "use client";
 import { Fragment, useEffect, useMemo, useState } from "react";
-import { getStations, getMockNow } from "@/lib/infra/data";
+import { getStations, getMockNow, getCaudalPromedioDiario } from "@/lib/infra/data";
 import { getForecastDiario, appendForecastInputs, getForecastInputs } from "@/lib/infra/catalogos";
+import { getConfigVigente } from "@/lib/infra/configRecords";
+import HidrogramaPronosticoPopup from "@/components/HidrogramaPronosticoPopup";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
 import { USUARIO } from "@/lib/sesion";
 
@@ -59,6 +61,7 @@ export default function AdminPronosticoPage() {
   const [extraGrupos, setExtraGrupos] = useState(0);
   const [editing, setEditing] = useState<{ stationId: string; padre: string; fechas: string[] } | null>(null);
   const [editModelos, setEditModelos] = useState<Record<string, Record<number, string>>>({});
+  const [verStationId, setVerStationId] = useState<string | null>(null);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
@@ -429,12 +432,18 @@ export default function AdminPronosticoPage() {
                         <td className="p-2 text-xs">{st?.rio ?? "—"}</td>
                         <td className="p-2 text-xs">{g.padre}</td>
                         <td className="p-2 text-xs">{usuario}</td>
-                        <td className="p-2">
+                        <td className="p-2 whitespace-nowrap">
                           <button
                             onClick={() => abrirEditar(g.stationId, g.padre)}
                             className="text-xs font-semibold text-[#00539b] hover:underline"
                           >
                             Editar
+                          </button>
+                          <button
+                            onClick={() => setVerStationId(g.stationId)}
+                            className="ml-3 text-xs font-semibold text-[#00539b] hover:underline"
+                          >
+                            Ver hidrograma
                           </button>
                         </td>
                       </tr>
@@ -515,6 +524,26 @@ export default function AdminPronosticoPage() {
           </div>
         </div>
       )}
+
+      {/* Modal: ver hidrograma del pronóstico */}
+      {verStationId && (() => {
+        const st = stations.find((s) => s.id === verStationId);
+        if (!st) return null;
+        const record = getConfigVigente(st.id, st.preferencia ?? "caudal", getMockNow());
+        const u = record?.umbrales[st.tipo ?? "avenida"];
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 overflow-auto">
+            <HidrogramaPronosticoPopup
+              station={st}
+              umbrales={u ?? { amarilla: 0, naranja: 0, roja: 0 }}
+              forecast={diario.filter((f) => f.stationId === verStationId)}
+              inputs={inputs.filter((i) => i.stationId === verStationId)}
+              caudalPromedio={getCaudalPromedioDiario(verStationId)}
+              onClose={() => setVerStationId(null)}
+            />
+          </div>
+        );
+      })()}
     </div>
   );
 }

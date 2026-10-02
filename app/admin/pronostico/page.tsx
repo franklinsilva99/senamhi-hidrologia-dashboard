@@ -116,6 +116,9 @@ export default function AdminPronosticoPage() {
   // Agrega un grupo consecutivo de 3 días (padre = último día del último grupo + 1).
   const agregarGrupo = () => setExtraGrupos((n) => n + 1);
 
+  // Quita el último grupo agregado (nunca baja de 0, el grupo de la fecha siempre queda).
+  const quitarGrupo = () => setExtraGrupos((n) => Math.max(0, n - 1));
+
   // Abre el modal de edición con los modelos guardados de una fecha.
   const abrirEditar = (stationId: string, fecha: string) => {
     const valores: Record<number, string> = {};
@@ -270,15 +273,29 @@ export default function AdminPronosticoPage() {
                     className="w-full border border-slate-300 rounded px-3 py-2 text-sm"
                   />
                 </div>
-                <div className="flex items-end h-full">
+                <div className="flex items-end h-full gap-2">
+                  <button
+                    type="button"
+                    onClick={quitarGrupo}
+                    disabled={extraGrupos === 0}
+                    title="Quitar 3 días"
+                    aria-label="Quitar 3 días"
+                    className="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-500 shadow-sm flex items-center justify-center transition hover:bg-slate-100 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0070ba] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:scale-100"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M2.5 7h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </button>
                   <button
                     type="button"
                     onClick={agregarGrupo}
                     title="Agregar 3 días"
                     aria-label="Agregar 3 días"
-                    className="w-9 h-9 rounded-full bg-[#00539b] text-white text-xl font-bold leading-none flex items-center justify-center hover:bg-[#0070ba]"
+                    className="w-9 h-9 rounded-full bg-[#00539b] text-white shadow-sm flex items-center justify-center transition hover:bg-[#0070ba] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0070ba] focus-visible:ring-offset-2"
                   >
-                    +
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M7 2.5v9M2.5 7h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
                   </button>
                 </div>
               </div>

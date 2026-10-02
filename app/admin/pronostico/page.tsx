@@ -57,8 +57,8 @@ export default function AdminPronosticoPage() {
   const [inputs, setInputs] = useState<ForecastInput[]>([]);
   const [fecha, setFecha] = useState<string>(ANCHOR);
   const [extraGrupos, setExtraGrupos] = useState(0);
-  const [editing, setEditing] = useState<{ stationId: string; fecha: string } | null>(null);
-  const [editModelos, setEditModelos] = useState<Record<number, string>>({});
+  const [editing, setEditing] = useState<{ stationId: string; padre: string; fechas: string[] } | null>(null);
+  const [editModelos, setEditModelos] = useState<Record<string, Record<number, string>>>({});
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
@@ -80,6 +80,30 @@ export default function AdminPronosticoPage() {
     () => new Map(inputs.map((i) => [`${i.stationId}|${i.fecha}`, i.usuario])),
     [inputs]
   );
+
+  // Padre por (estación|fecha), para agrupar el listado.
+  const padrePorKey = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const i of inputs) {
+      if (i.padre) m.set(`${i.stationId}|${i.fecha}`, i.padre);
+    }
+    return m;
+  }, [inputs]);
+
+  // Listado agrupado: una fila por (estación, padre), con las fechas del grupo.
+  const listadoAgrupado = useMemo(() => {
+    const m = new Map<string, { stationId: string; padre: string; fechas: string[] }>();
+    for (const fd of diario) {
+      const padre = padrePorKey.get(`${fd.stationId}|${fd.fecha}`) ?? fd.fecha;
+      const key = `${fd.stationId}|${padre}`;
+      if (!m.has(key)) m.set(key, { stationId: fd.stationId, padre, fechas: [] });
+      m.get(key)!.fechas.push(fd.fecha);
+    }
+    const out = [...m.values()];
+    out.sort((a, b) => a.padre.localeCompare(b.padre) || a.stationId.localeCompare(b.stationId));
+    for (const g of out) g.fechas.sort();
+    return out;
+  }, [diario, padrePorKey]);
 
   // Valores guardados por (estación|fecha|modelo) para precargar las celdas.
   const guardadoPorCelda = useMemo(() => {
@@ -119,38 +143,43 @@ export default function AdminPronosticoPage() {
   // Quita el último grupo agregado (nunca baja de 0, el grupo de la fecha siempre queda).
   const quitarGrupo = () => setExtraGrupos((n) => Math.max(0, n - 1));
 
-  // Abre el modal de edición con los modelos guardados de una fecha.
-  const abrirEditar = (stationId: string, fecha: string) => {
-    const valores: Record<number, string> = {};
-    for (const i of inputs) {
-      if (i.stationId !== stationId || i.fecha !== fecha) continue;
-      const idx = MODELOS.indexOf(i.modelo);
-      if (idx >= 0) valores[idx] = String(i.valor);
+  // Abre el modal de edición con los modelos guardados de todo el grupo (3 días).
+  const abrirEditar = (stationId: string, padre: string) => {
+    const fechas = grupoDesde(padre).fechas;
+    const valores: Record<string, Record<number, string>> = {};
+    for (const f of fechas) {
+      valores[f] = {};
+      for (const i of inputs) {
+        if (i.stationId !== stationId || i.fecha !== f) continue;
+        const idx = MODELOS.indexOf(i.modelo);
+        if (idx >= 0) valores[f][idx] = String(i.valor);
+      }
     }
     setEditModelos(valores);
-    setEditing({ stationId, fecha });
+    setEditing({ stationId, padre, fechas });
   };
 
-  // Guarda la edición sobrescribiendo los modelos de esa fecha.
+  // Guarda la edición sobrescribiendo los modelos de los días del grupo.
   const guardarEdicion = () => {
     if (!editing) return;
     const nuevos: ForecastInput[] = [];
-    const padre =
-      inputs.find((i) => i.stationId === editing.stationId && i.fecha === editing.fecha)?.padre ??
-      grupoContiene(editing.fecha).padre;
-    for (let idx = 0; idx < 4; idx++) {
-      const raw = editModelos[idx];
-      if (raw == null || raw.trim() === "") continue;
-      const valor = parseFloat(raw);
-      if (isNaN(valor)) continue;
-      nuevos.push({
-        stationId: editing.stationId,
-        fecha: editing.fecha,
-        modelo: MODELOS[idx],
-        valor,
-        usuario: "operador-DZ",
-        padre,
-      });
+    for (const f of editing.fechas) {
+      const celdas = editModelos[f];
+      if (!celdas) continue;
+      for (let idx = 0; idx < 4; idx++) {
+        const raw = celdas[idx];
+        if (raw == null || raw.trim() === "") continue;
+        const valor = parseFloat(raw);
+        if (isNaN(valor)) continue;
+        nuevos.push({
+          stationId: editing.stationId,
+          fecha: f,
+          modelo: MODELOS[idx],
+          valor,
+          usuario: "operador-DZ",
+          padre: editing.padre,
+        });
+      }
     }
     if (nuevos.length > 0) appendForecastInputs(nuevos);
     setDiario(getForecastDiario());
@@ -317,7 +346,7 @@ export default function AdminPronosticoPage() {
                       <Fragment key={g.padre}>
                         <tr className="bg-blue-50">
                           <td colSpan={5} className="p-2 border border-slate-300 text-left font-semibold text-xs uppercase text-slate-600">
-                            Grupo — Padre: {g.padre}
+                            Fecha Pronóstico: {g.padre}
                           </td>
                         </tr>
                         {g.fechas.map((f) => {
@@ -390,19 +419,19 @@ export default function AdminPronosticoPage() {
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  {diario.map((fd) => {
-                    const st = stations.find((s) => s.id === fd.stationId);
-                    const usuario = usuarioPorKey.get(`${fd.stationId}|${fd.fecha}`) ?? USUARIO.usuario;
+                  {listadoAgrupado.map((g) => {
+                    const st = stations.find((s) => s.id === g.stationId);
+                    const usuario = usuarioPorKey.get(`${g.stationId}|${g.fechas[0]}`) ?? USUARIO.usuario;
                     return (
-                      <tr key={`${fd.stationId}-${fd.fecha}`} className="border-t border-slate-200 hover:bg-slate-50">
+                      <tr key={`${g.stationId}-${g.padre}`} className="border-t border-slate-200 hover:bg-slate-50">
                         <td className="p-2 text-xs">{st?.dz ?? "—"}</td>
-                        <td className="p-2 font-semibold text-xs">{st?.estacion ?? fd.stationId}</td>
+                        <td className="p-2 font-semibold text-xs">{st?.estacion ?? g.stationId}</td>
                         <td className="p-2 text-xs">{st?.rio ?? "—"}</td>
-                        <td className="p-2 text-xs">{fd.fecha}</td>
+                        <td className="p-2 text-xs">{g.padre}</td>
                         <td className="p-2 text-xs">{usuario}</td>
                         <td className="p-2">
                           <button
-                            onClick={() => abrirEditar(fd.stationId, fd.fecha)}
+                            onClick={() => abrirEditar(g.stationId, g.padre)}
                             className="text-xs font-semibold text-[#00539b] hover:underline"
                           >
                             Editar
@@ -432,24 +461,42 @@ export default function AdminPronosticoPage() {
       {/* Modal de edición de pronóstico */}
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-5">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-lg p-5">
             <h3 className="text-sm font-bold uppercase text-slate-700 mb-1">Editar pronóstico</h3>
             <p className="text-xs text-slate-500 mb-3">
-              {stations.find((s) => s.id === editing.stationId)?.estacion ?? editing.stationId} — {editing.fecha}
+              {stations.find((s) => s.id === editing.stationId)?.estacion ?? editing.stationId} — Padre: {editing.padre}
             </p>
-            <div className="space-y-2">
-              {MODELOS.map((m, idx) => (
-                <div key={m} className="flex items-center gap-3">
-                  <label className="w-20 text-xs text-slate-500">{m}</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={editModelos[idx] ?? ""}
-                    onChange={(e) => setEditModelos((p) => ({ ...p, [idx]: e.target.value }))}
-                    className="w-full border border-slate-300 rounded px-3 py-2 text-sm"
-                  />
-                </div>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border border-slate-200">
+                <thead>
+                  <tr className="bg-slate-100 text-xs text-slate-600">
+                    <th className="p-2 border border-slate-200 text-left">Fecha</th>
+                    {MODELOS.map((m) => (
+                      <th key={m} className="p-2 border border-slate-200 text-center font-normal">{m}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {editing.fechas.map((f) => (
+                    <tr key={f}>
+                      <td className="p-2 border border-slate-200 font-semibold text-xs">{f}</td>
+                      {[0, 1, 2, 3].map((idx) => (
+                        <td key={idx} className="p-1 border border-slate-200">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={editModelos[f]?.[idx] ?? ""}
+                            onChange={(e) =>
+                              setEditModelos((p) => ({ ...p, [f]: { ...p[f], [idx]: e.target.value } }))
+                            }
+                            className="w-full border border-slate-300 rounded px-2 py-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                          />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
             <div className="flex justify-end gap-2 mt-5">
               <button

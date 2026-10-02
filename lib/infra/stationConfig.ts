@@ -1,5 +1,6 @@
 import stations from "@/data/stations.json";
 import type { Station } from "@/lib/domain/types";
+import { withCotass } from "@/lib/infra/cotas";
 
 // ── Ficha de estación (configurable): preferencia, tipo, cota, variables,
 // estado, modo de publicación. Edición como overlay en localStorage.
@@ -22,10 +23,12 @@ function saveOverrides(o: Override) {
   localStorage.setItem(KEY, JSON.stringify(o));
 }
 
-// Estaciones con override de ficha, sobre stations.json.
+// Estaciones con override de ficha, sobre stations.json + cota del catálogo.
 export function getStationsConfig(): Station[] {
   const ov = getOverrides();
-  return (stations as Station[]).map((s) => (ov[s.id] ? { ...s, ...ov[s.id] } : s));
+  return withCotass(stations as Station[]).map((s) =>
+    ov[s.id] ? { ...s, ...ov[s.id] } : s
+  );
 }
 
 export function setStationConfig(stationId: string, partial: Partial<Station>) {

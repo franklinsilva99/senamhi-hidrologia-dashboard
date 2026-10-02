@@ -1,13 +1,13 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
-import { getAlerts, loadAlerts, saveAlerts, loadInjectedObs, appendInjectedObs, clearInjectedObs, getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
+import { useState, useEffect } from "react";
+import { getAlerts, loadAlerts, saveAlerts, getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
 import { getStationsConfig } from "@/lib/infra/stationConfig";
 import { detectarAvisos } from "@/lib/domain/deteccion";
-import { clasificarNivel } from "@/lib/domain/umbrales";
 import { getConfigVigente } from "@/lib/infra/configRecords";
 import { existeAvisoPrevio, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA, aplicarAviso, procesarDeteccion } from "@/lib/domain/avisos";
-import type { Alert, DeteccionAviso, Observation } from "@/lib/domain/types";
+import type { Alert, DeteccionAviso, Station } from "@/lib/domain/types";
 import { USUARIO } from "@/lib/sesion";
+import ChartAviso from "@/components/ChartAviso";
 
 const badgeNivel: Record<string, string> = {
   AMARILLO: "bg-[#ffeb3b] text-black",
@@ -24,39 +24,22 @@ export default function AdminAvisosPage() {
   const [searchText, setSearchText] = useState("");
   const [previewAviso, setPreviewAviso] = useState<Alert | null>(null);
 
-  // ── Simulación ──
-  const [simStationId, setSimStationId] = useState("socsi");
-  const [simVariable, setSimVariable] = useState<"caudal" | "nivel">("caudal");
-  const [simValor, setSimValor] = useState("");
-  const [simMsg, setSimMsg] = useState("");
-  const [injectedObs, setInjectedObs] = useState<Record<string, Observation>>({});
-  const [deteccion, setDeteccion] = useState<DeteccionAviso[]>(() =>
-    detectarAvisos(getStationsConfig(), getLatestMerged(), getConfigVigente, getMockNow())
-  );
+  // ── Estado ──
+  const [deteccion, setDeteccion] = useState<DeteccionAviso[]>([]);
+  const [stations, setStations] = useState<Station[]>([]);
   const [msg, setMsg] = useState("");
-  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setAlerts(loadAlerts());
-    // Cargar la ingesta persistida (overlay) en el estado para reactividad
-    const all = loadInjectedObs();
-    const last: Record<string, Observation> = {};
-    for (const o of all) last[o.stationId] = o;
-    setInjectedObs(last);
-    setRefresh((r) => r + 1);
+    setStations(getStationsConfig());
     setDeteccion(detectarAvisos(getStationsConfig(), getLatestMerged(), getConfigVigente, getMockNow()));
   }, []);
 
-  const stations = getStationsConfig();
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]));
   const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
-  // Última lectura por estación, de la serie fusionada (estática + overlay)
-  const latestOverride = useMemo(
-    () => getLatestMerged(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- refresh fuerza recálculo tras ingesta/config
-    [refresh]
-  );
+  // Última lectura por estación, de la serie fusionada (caudal + nivel).
+  const latestOverride = getLatestMerged();
 
   const filtered = alerts.filter((a) => {
     const st = stationMap[a.stationId];
@@ -80,60 +63,6 @@ export default function AdminAvisosPage() {
   });
 
   const estacionesConAlerta = deteccion.filter((d) => d.excedido);
-
-  // ── Ingesta de observación (simula el sensor) ──
-  const handleInyectar = () => {
-    const valor = parseFloat(simValor);
-    if (isNaN(valor) || valor <= 0) {
-      setSimMsg("Ingrese un valor válido (> 0)");
-      return;
-    }
-    const st = stationMap[simStationId];
-    const tipo = st?.tipo ?? "avenida";
-
-    // Próxima hora respecto al fin de la serie (reloj del mock)
-    const serie = getSeriesMerged(simStationId);
-    const prev = serie.length > 0 ? serie[serie.length - 1] : null;
-    const baseFecha = prev ? prev.fecha : new Date().toISOString().slice(0, 16);
-    const next = new Date(baseFecha.replace(" ", "T"));
-    next.setHours(next.getHours() + 1);
-    // Formato de hora LOCAL (evita el desfase de toISOString/UTC)
-    const fecha = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}-${String(next.getDate()).padStart(2, "0")}T${String(next.getHours()).padStart(2, "0")}:${String(next.getMinutes()).padStart(2, "0")}`;
-
-    // Registros de configuración vigentes para derivar la otra variable
-    const recCaudal = getConfigVigente(simStationId, "caudal", getMockNow());
-    const recNivel = getConfigVigente(simStationId, "nivel", getMockNow());
-    const amCaudal = recCaudal?.umbrales[tipo]?.amarilla ?? 42;
-    const amNivel = recNivel?.umbrales[tipo]?.amarilla ?? 1.95;
-
-    let caudal: number;
-    let nivel: number;
-    if (simVariable === "caudal") {
-      caudal = valor;
-      nivel = Math.round((valor / amCaudal) * 1.5 * 100) / 100;
-    } else {
-      nivel = valor;
-      caudal = Math.round((valor / amNivel) * amCaudal * 100) / 100;
-    }
-
-    // La alerta se clasifica según la preferencia de la estación (caudal/nivel)
-    const preferencia = st?.preferencia ?? "caudal";
-    const recordPref = getConfigVigente(simStationId, preferencia, getMockNow());
-    const uPref = recordPref?.umbrales[tipo];
-    const valorEstado = preferencia === "caudal" ? caudal : nivel;
-    const nivelDet = uPref ? clasificarNivel(valorEstado, uPref, tipo) : null;
-    const estado = nivelDet === "ROJO" ? "roja" as const : nivelDet === "NARANJA" ? "naranja" as const : nivelDet === "AMARILLO" ? "amarilla" as const : "normal" as const;
-
-    const obs: Observation = { stationId: simStationId, fecha, nivel, caudal, estado };
-
-    appendInjectedObs(obs);
-    setInjectedObs((p) => ({ ...p, [simStationId]: obs }));
-    setRefresh((r) => r + 1);
-
-    const unidad = simVariable === "caudal" ? "m³/s" : "m";
-    setSimMsg(`Ingesta: ${st?.estacion} — ${valor} ${unidad} @ ${fecha}. Clic en "Actualizar detección".`);
-    setTimeout(() => setSimMsg(""), 7000);
-  };
 
   // ── Actualizar detección ──
   const handleActualizarDeteccion = () => {
@@ -184,15 +113,6 @@ export default function AdminAvisosPage() {
     setTimeout(() => setMsg(""), 5000);
   };
 
-  const handleLimpiarInyeccion = () => {
-    clearInjectedObs();
-    setInjectedObs({});
-    setRefresh((r) => r + 1);
-    setDeteccion(detectarAvisos(getStationsConfig(), getLatestMerged(), getConfigVigente, getMockNow()));
-    setSimMsg("Ingesta limpiada. Detección restaurada a la serie base.");
-    setTimeout(() => setSimMsg(""), 4000);
-  };
-
   const handleLimpiarDatos = () => {
     const originales = getAlerts();
     setAlerts(originales);
@@ -212,103 +132,13 @@ export default function AdminAvisosPage() {
     setTimeout(() => setMsg(""), 4000);
   };
 
-  const simStation = stationMap[simStationId];
-  const simRecord = getConfigVigente(simStationId, simVariable, getMockNow());
-  const simValorActual = simValor ? parseFloat(simValor) : 0;
-  const simUmbrales = simRecord?.umbrales[simStation?.tipo ?? "avenida"];
-  const simUmbralRef = simUmbrales?.amarilla;
-  const simNivelDetectado = simUmbrales && simValorActual > 0
-    ? clasificarNivel(simValorActual, simUmbrales, simStation?.tipo ?? "avenida")
+  // Acción del preview (misma regla de negocio que al publicar).
+  const accionPreview = previewAviso
+    ? evaluarAccionAviso(previewAviso.stationId, previewAviso.nivel, alerts)
     : null;
-  const simExcedido = simNivelDetectado !== null;
 
   return (
     <div className="space-y-5">
-      {/* ── SECCIÓN 0: Simulación de Observación ── */}
-      <div className="bg-white rounded-lg border border-slate-200">
-        <div className="bg-amber-600 text-white px-4 py-2 rounded-t-lg flex items-center justify-between">
-          <h2 className="text-sm font-bold uppercase flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-            Simulación de Observación
-          </h2>
-          <span className="text-xs bg-white/20 px-2 py-0.5 rounded">Solo para pruebas</span>
-        </div>
-        <div className="p-4">
-          <div className="grid grid-cols-12 gap-3 items-end">
-            <div className="col-span-3">
-              <label className="block text-xs text-slate-500 mb-1 uppercase">Estación</label>
-              <select value={simStationId} onChange={(e) => setSimStationId(e.target.value)} className="w-full border border-slate-300 rounded px-3 py-2 text-sm">
-                {stations.map((s) => <option key={s.id} value={s.id}>{s.estacion} ({s.rio})</option>)}
-              </select>
-            </div>
-            <div className="col-span-2">
-              <label className="block text-xs text-slate-500 mb-1 uppercase">Variable</label>
-              <select value={simVariable} onChange={(e) => setSimVariable(e.target.value as "caudal" | "nivel")} className="w-full border border-slate-300 rounded px-3 py-2 text-sm">
-                <option value="caudal">Caudal (m³/s)</option>
-                <option value="nivel">Nivel (m)</option>
-              </select>
-            </div>
-            <div className="col-span-3">
-              <label className="block text-xs text-slate-500 mb-1 uppercase">
-                Valor {simVariable === "caudal" ? "(m³/s)" : "(m)"} {simUmbralRef !== undefined && (
-                  <span className="text-slate-400 normal-case">— Amarilla: {simUmbralRef} {simVariable === "caudal" ? "m³/s" : "m"}</span>
-                )}
-              </label>
-              <input
-                type="number"
-                step="any"
-                value={simValor}
-                onChange={(e) => setSimValor(e.target.value)}
-                placeholder={simUmbrales ? (simVariable === "caudal" ? `Ej: ${simUmbrales.amarilla + 5}` : `Ej: ${simUmbrales.amarilla + 0.5}`) : ""}
-                className="w-full border border-slate-300 rounded px-3 py-2 text-sm"
-              />
-            </div>
-            <div className="col-span-2">
-              {simValorActual > 0 && (
-                <div className={`text-xs font-bold px-2 py-1 rounded text-center ${simExcedido ? badgeNivel[simNivelDetectado!] : "bg-green-100 text-green-700"}`}>
-                  {simExcedido ? `⚠ ${simNivelDetectado}` : "✓ Normal"}
-                </div>
-              )}
-            </div>
-            <div className="col-span-1">
-              <button onClick={handleInyectar} className="w-full bg-amber-600 text-white px-3 py-2 rounded text-sm font-semibold hover:bg-amber-700">
-                Inyectar
-              </button>
-            </div>
-            <div className="col-span-1">
-              <button onClick={handleLimpiarInyeccion} className="w-full bg-slate-200 text-slate-600 px-3 py-2 rounded text-sm hover:bg-slate-300">
-                Limpiar
-              </button>
-            </div>
-          </div>
-          {simMsg && (
-            <div className="mt-2 text-xs px-3 py-2 rounded bg-amber-50 text-amber-800 border border-amber-200">
-              {simMsg}
-            </div>
-          )}
-          {Object.keys(injectedObs).length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-2">
-              {Object.entries(injectedObs).map(([sid, obs]) => {
-                const st = stationMap[sid];
-                const pref = st?.preferencia ?? "caudal";
-                const tipo = st?.tipo ?? "avenida";
-                const record = getConfigVigente(sid, pref, getMockNow());
-                const valor = pref === "caudal" ? obs.caudal : obs.nivel;
-                const valorMsnm = pref === "nivel" && st?.cota != null ? obs.nivel + st.cota : valor;
-                const unidad = pref === "caudal" ? "m³/s" : "m.s.n.m.";
-                const u = record?.umbrales[tipo];
-                const nivelDet = u ? clasificarNivel(valor, u, tipo) : null;
-                return (
-                  <span key={sid} className={`text-xs px-2 py-1 rounded ${nivelDet ? "bg-red-100 text-red-700 border border-red-200" : "bg-green-100 text-green-700 border border-green-200"}`}>
-                    {st?.estacion}: {valorMsnm.toFixed(2)} {unidad} {nivelDet ? `⚠ ${nivelDet}` : "✓"}
-                  </span>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </div>
-
       {/* ── SECCIÓN 1: Detección Automática ── */}
       <div className="bg-white rounded-lg border border-slate-200">
         <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg flex items-center justify-between gap-3">
@@ -318,7 +148,7 @@ export default function AdminAvisosPage() {
         <div className="p-4">
           {estacionesConAlerta.length === 0 ? (
             <p className="text-sm text-slate-500 text-center py-4">
-              Ninguna estación supera umbrales en este momento. Use la sección de simulación para inyectar un caudal.
+              Ninguna estación supera umbrales en este momento. Ajuste los umbrales en Configuración General y actualice la detección.
             </p>
           ) : (
             <div className="overflow-x-auto">
@@ -376,14 +206,23 @@ export default function AdminAvisosPage() {
                           )}
                         </td>
                         <td className="p-2">
-                          <button
-                            onClick={() => handleCrearAviso(d.stationId)}
-                            disabled={accion === "mantener"}
-                            className={`px-3 py-1 rounded text-xs font-semibold ${accion === "mantener" ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-[#00539b] text-white hover:bg-[#0070ba]"}`}
-                            title={accion === "mantener" ? "El aviso vigente ya tiene el mismo nivel" : "Crear aviso"}
-                          >
-                            {accion === "mantener" ? "Sin cambios" : accion === "reemplazar" ? "Reemplazar" : "Crear aviso"}
-                          </button>
+                          <div className="flex items-center justify-center gap-1">
+                            <button
+                              onClick={() => handleCrearAviso(d.stationId)}
+                              className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-100 text-slate-600 hover:bg-slate-200"
+                              title="Visualizar aviso detectado"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                            </button>
+                            <button
+                              onClick={() => handleCrearAviso(d.stationId)}
+                              disabled={accion === "mantener"}
+                              className={`px-3 py-1 rounded text-xs font-semibold ${accion === "mantener" ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-[#00539b] text-white hover:bg-[#0070ba]"}`}
+                              title={accion === "mantener" ? "El aviso vigente ya tiene el mismo nivel" : "Crear aviso"}
+                            >
+                              {accion === "mantener" ? "Sin cambios" : accion === "reemplazar" ? "Reemplazar" : "Crear aviso"}
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -415,7 +254,7 @@ export default function AdminAvisosPage() {
       {/* ── MODAL: Preview del aviso ── */}
       {previewAviso && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-4">
+          <div className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold">Preview del Aviso</h3>
               <button onClick={() => setPreviewAviso(null)} className="text-slate-400 hover:text-slate-600 text-xl">✕</button>
@@ -437,9 +276,31 @@ export default function AdminAvisosPage() {
               <p className="text-xs text-slate-500"><strong>Recomendaciones:</strong> {previewAviso.recomendaciones}</p>
               <p className="text-xs text-slate-400">ca: {previewAviso.ca} · ce: {previewAviso.ce}</p>
             </div>
+            <div className="border border-gray-200 rounded-lg p-3">
+              <ChartAviso
+                series={previewAviso.serie ?? []}
+                titulo={`HIDROGRAMA DE ${previewAviso.cuerpoAgua}`}
+                estacion={stationMap[previewAviso.stationId]?.estacion?.toUpperCase() ?? ""}
+                preferencia={previewAviso.preferencia}
+                tipo={previewAviso.tipo}
+                cota={previewAviso.cota}
+                umbralAmarilla={previewAviso.umbrales?.amarilla}
+                umbralNaranja={previewAviso.umbrales?.naranja}
+                umbralRoja={previewAviso.umbrales?.roja}
+              />
+            </div>
+            {accionPreview === "mantener" && (
+              <p className="text-sm text-slate-500 text-center">
+                Sin cambios: la estación ya tiene un aviso vigente de este nivel.
+              </p>
+            )}
             <div className="flex gap-3 justify-end">
-              <button onClick={() => setPreviewAviso(null)} className="px-4 py-2 rounded border text-sm hover:bg-slate-50">Cancelar</button>
-              <button onClick={handlePublicar} className="bg-green-600 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-green-700">Publicar</button>
+              <button onClick={() => setPreviewAviso(null)} className="px-4 py-2 rounded border text-sm hover:bg-slate-50">
+                {accionPreview === "mantener" ? "Cerrar" : "Cancelar"}
+              </button>
+              {accionPreview !== "mantener" && (
+                <button onClick={handlePublicar} className="bg-green-600 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-green-700">Publicar</button>
+              )}
             </div>
           </div>
         </div>
@@ -513,15 +374,12 @@ export default function AdminAvisosPage() {
                 <th className="p-2.5 font-semibold">Nivel</th>
                 <th className="p-2.5 font-semibold">Usuario</th>
                 <th className="p-2.5 font-semibold">Estado</th>
-                <th className="p-2.5 font-semibold" colSpan={5}>Acciones</th>
+                <th className="p-2.5 font-semibold" colSpan={2}>Acciones</th>
               </tr>
               <tr className="bg-[#0070ba]">
                 <th colSpan={10}></th>
                 <th className="p-1.5 font-normal text-xs">Mas Información</th>
                 <th className="p-1.5 font-normal text-xs">Habilitar / Deshabilitar</th>
-                <th className="p-1.5 font-normal text-xs">Visualizar / Ocultar</th>
-                <th className="p-1.5 font-normal text-xs">Actualizar Información</th>
-                <th className="p-1.5 font-normal text-xs">Actualizar Datos</th>
               </tr>
             </thead>
             <tbody className="text-center">
@@ -557,21 +415,6 @@ export default function AdminAvisosPage() {
                             ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />}
                         </svg>
-                      </button>
-                    </td>
-                    <td className="p-2">
-                      <button className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-200 text-slate-600 hover:bg-slate-300" title="Visualizar / Ocultar">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                      </button>
-                    </td>
-                    <td className="p-2">
-                      <button className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-200 text-slate-600 hover:bg-slate-300" title="Actualizar Información">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                      </button>
-                    </td>
-                    <td className="p-2">
-                      <button className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-200 text-slate-600 hover:bg-slate-300" title="Actualizar Datos">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                       </button>
                     </td>
                   </tr>

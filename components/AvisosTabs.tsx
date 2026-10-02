@@ -71,6 +71,13 @@ export default function AvisosTabs({
     return m;
   }, [alerts]);
 
+  // Centros poblados congelados del aviso vigente por estación.
+  const pobladosPorEstacion = useMemo(() => {
+    const m: Record<string, string[]> = {};
+    for (const a of alerts) if (a.vigente) m[a.stationId] = a.poblados;
+    return m;
+  }, [alerts]);
+
   const tipoDefault = useMemo<TipoAviso>(() => {
     const tipos = Object.values(tipoPorEstacion);
     const vigilancia = tipos.filter((t) => t === "vigilancia").length;
@@ -169,6 +176,7 @@ export default function AvisosTabs({
             tipoPorEstacion={tipoPorEstacion}
             nivelPorEstacion={nivelPorEstacion}
             avisoIdPorEstacion={avisoIdPorEstacion}
+            pobladosPorEstacion={pobladosPorEstacion}
             tipoDefault={tipoDefault}
             mostrarNiveles
           />

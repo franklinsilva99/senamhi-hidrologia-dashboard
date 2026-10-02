@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/ui/tabs";
-import { getStations } from "@/lib/infra/data";
+import { getStations, getMockNow } from "@/lib/infra/data";
 import { getForecastDiario, getForecastInputs } from "@/lib/infra/catalogos";
 import { getConfigVigente } from "@/lib/infra/configRecords";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
@@ -31,7 +31,7 @@ export default function PronosticoPage() {
   // Umbrales según preferencia de la estación (caudal o nivel)
   const umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }> = {};
   for (const s of conPronostico) {
-    const record = getConfigVigente(s.id, s.preferencia ?? "caudal", new Date().toISOString().slice(0, 10));
+    const record = getConfigVigente(s.id, s.preferencia ?? "caudal", getMockNow());
     const u = record?.umbrales[s.tipo ?? "avenida"];
     if (!u) continue;
     umbralesPorEstacion[s.id] = { ...u };

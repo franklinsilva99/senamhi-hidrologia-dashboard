@@ -74,7 +74,15 @@ export interface Observation {
   fecha: string;
   nivel: number;
   caudal: number;
-  estado: "normal" | "amarilla" | "naranja" | "roja";
+}
+
+// Lectura de una variable (producto separado: caudal o nivel).
+// nivel.json y caudal.json almacenan la serie como Lectura[] (sin estado,
+// que se deriva al leer según umbrales y tipo).
+export interface Lectura {
+  stationId: string;
+  fecha: string;
+  valor: number;
 }
 
 export interface ForecastInput {
@@ -118,6 +126,8 @@ export interface Alert {
   preferencia: "caudal" | "nivel";
   tipo: TipoAviso;
   cota?: number | null;
+  // Snapshot de umbrales con los que se emitió el aviso (documento congelado).
+  umbrales?: Umbrales;
   serie?: Observation[];
 }
 

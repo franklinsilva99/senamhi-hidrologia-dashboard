@@ -1,7 +1,7 @@
 "use client";
 import {
   ComposedChart, Line, XAxis, YAxis, Tooltip,
-  ReferenceArea, ResponsiveContainer,
+  ReferenceArea, ReferenceLine, ResponsiveContainer,
 } from "recharts";
 import ChartTooltip from "@/components/ChartTooltip";
 import type { Observation, TipoAviso } from "@/lib/domain/types";
@@ -11,7 +11,7 @@ const C_NARANJA = "#fca326";
 const C_ROJO = "#ee3d43";
 const C_LINEA = "#0000ff";
 
-const MESES = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+const MESES = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
 // Formato real SENAMHI: en 00:00 → "9. Sep"; en 12:00 → "12:00"
 function formatTick(fecha: string): string {
@@ -25,6 +25,16 @@ function formatTick(fecha: string): string {
 // Eje Y: hasta 2 decimales (recorta ceros: 60.00 → 60, 3201.50 → 3201.5)
 function formatAxisNum(v: number): string {
   return String(Number(Number(v).toFixed(2)));
+}
+
+// Formato local "YYYY-MM-DDTHH:MM" (evita el desfase UTC de toISOString)
+function fmtLocal(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  return `${y}-${m}-${day}T${hh}:${mm}`;
 }
 
 export default function ChartAviso({
@@ -68,12 +78,14 @@ export default function ChartAviso({
     const last = new Date(realData[realData.length - 1].fecha.replace(" ", "T"));
     for (let i = 1; i <= PHANTOM_HORAS; i++) {
       const d = new Date(last.getTime() + i * 3600 * 1000);
-      data.push({ fecha: d.toISOString().slice(0, 16), valor: null });
+      data.push({ fecha: fmtLocal(d), valor: null });
     }
   }
 
-  // Ticks cada 12 h (paridad con el gráfico real)
-  const ticks = realData.filter((_, i) => i % 12 === 0).map((d) => d.fecha);
+  // Ticks: inicios de día (00:00 → etiqueta de fecha) y mediodía (12:00 → hora)
+  const ticks = data
+    .map((d) => d.fecha)
+    .filter((f) => f.endsWith("T00:00") || f.endsWith("T12:00"));
 
   const a = (umbralAmarilla ?? 0) + offset;
   const n = (umbralNaranja ?? 0) + offset;
@@ -83,9 +95,10 @@ export default function ChartAviso({
   const dMin = valores.length ? Math.min(...valores) : a;
   const dMax = valores.length ? Math.max(...valores) : r;
   const pad = 0.05 * Math.abs(r - a) || Math.abs(r) * 0.02 || 1;
-  // El rojo no tiene tope (solo inicio de peligro) → siempre más ancho (1.4× el naranja)
-  const bottom = tipo === "vigilancia" ? r - 1.4 * (n - r) : Math.min(dMin, a) - pad;
-  const top = tipo === "vigilancia" ? Math.max(dMax, a) + pad : r + 1.4 * (r - n);
+  // El rojo no tiene tope (solo inicio de peligro) → siempre más ancho (1.4× el naranja).
+  // Se reserva una franja blanca ("normal") del alto de la banda amarilla junto al umbral amarillo.
+  const bottom = tipo === "vigilancia" ? r - 1.4 * (n - r) : Math.min(dMin, a - (n - a)) - pad;
+  const top = tipo === "vigilancia" ? Math.max(dMax, a + (a - n)) + pad : r + 1.4 * (r - n);
 
   const chartTitle = titulo ?? `HIDROGRAMA DE ${varTitle} DEL RÍO`;
   const subtitle = estacion ? `ESTACIÓN ${estacion}` : undefined;
@@ -152,6 +165,11 @@ export default function ChartAviso({
                 <ReferenceArea y1={r} y2={top} fill={C_ROJO} fillOpacity={0.85} stroke="none" />
               </>
             )}
+
+            {/* Líneas de umbral (marcan los límites de cada banda) */}
+            <ReferenceLine y={a} stroke={C_AMARILLO} strokeWidth={2} />
+            <ReferenceLine y={n} stroke={C_NARANJA} strokeWidth={2} />
+            <ReferenceLine y={r} stroke={C_ROJO} strokeWidth={2} />
 
             {/* Línea de datos real — spline */}
             <Line

@@ -1,7 +1,7 @@
 "use client";
 import {
   ComposedChart, Line, XAxis, YAxis, Tooltip,
-  ReferenceArea, ResponsiveContainer, Brush,
+  ReferenceLine, ResponsiveContainer, Brush,
 } from "recharts";
 import ChartTooltip from "@/components/ChartTooltip";
 import type { Observation, TipoAviso } from "@/lib/domain/types";
@@ -25,6 +25,16 @@ function formatTick(fecha: string): string {
 // Eje Y: hasta 2 decimales (recorta ceros: 60.00 → 60, 3201.50 → 3201.5)
 function formatAxisNum(v: number): string {
   return String(Number(Number(v).toFixed(2)));
+}
+
+// Formato local "YYYY-MM-DDTHH:MM" (evita el desfase UTC de toISOString)
+function fmtLocal(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  return `${y}-${m}-${day}T${hh}:${mm}`;
 }
 
 export default function ChartHydro({
@@ -58,12 +68,12 @@ export default function ChartHydro({
     const last = new Date(realData[realData.length - 1].fecha.replace(" ", "T"));
     for (let i = 1; i <= PHANTOM_HORAS; i++) {
       const d = new Date(last.getTime() + i * 3600 * 1000);
-      data.push({ fecha: d.toISOString().slice(0, 16), valor: null });
+      data.push({ fecha: fmtLocal(d), valor: null });
     }
   }
 
   // Ticks: inicios de día (00:00 → etiqueta de fecha) y mediodía (12:00 → hora)
-  const ticks = realData
+  const ticks = data
     .map((d) => d.fecha)
     .filter((f) => f.endsWith("T00:00") || f.endsWith("T12:00"));
 
@@ -75,9 +85,9 @@ export default function ChartHydro({
   const dMin = valores.length ? Math.min(...valores) : a;
   const dMax = valores.length ? Math.max(...valores) : r;
   const pad = 0.05 * Math.abs(r - a) || Math.abs(r) * 0.02 || 1;
-  // El rojo no tiene tope (solo inicio de peligro) → siempre más ancho (1.4× el naranja)
-  const bottom = tipo === "vigilancia" ? r - 1.4 * (n - r) : Math.min(dMin, a) - pad;
-  const top = tipo === "vigilancia" ? Math.max(dMax, a) + pad : r + 1.4 * (r - n);
+  // Dominio del eje Y: cubre datos + umbrales (mín/máx) con margen.
+  const bottom = Math.min(dMin, tipo === "vigilancia" ? r : a) - pad;
+  const top = Math.max(dMax, tipo === "vigilancia" ? a : r) + pad;
 
   return (
     <div className="h-64 w-full relative">
@@ -104,20 +114,10 @@ export default function ChartHydro({
           />
           <Tooltip content={<ChartTooltip varName={varName} unidad={unidad} a={a} n={n} r={r} />} />
 
-          {/* Bandas de umbral — avenida vs vigilancia */}
-          {tipo === "vigilancia" ? (
-            <>
-              <ReferenceArea y1={bottom} y2={r} fill={C_ROJO} fillOpacity={0.85} stroke="none" />
-              <ReferenceArea y1={r} y2={n} fill={C_NARANJA} fillOpacity={0.85} stroke="none" />
-              <ReferenceArea y1={n} y2={a} fill={C_AMARILLO} fillOpacity={0.85} stroke="none" />
-            </>
-          ) : (
-            <>
-              <ReferenceArea y1={a} y2={n} fill={C_AMARILLO} fillOpacity={0.85} stroke="none" />
-              <ReferenceArea y1={n} y2={r} fill={C_NARANJA} fillOpacity={0.85} stroke="none" />
-              <ReferenceArea y1={r} y2={top} fill={C_ROJO} fillOpacity={0.85} stroke="none" />
-            </>
-          )}
+          {/* Líneas de umbral */}
+          <ReferenceLine y={a} stroke={C_AMARILLO} strokeWidth={2} />
+          <ReferenceLine y={n} stroke={C_NARANJA} strokeWidth={2} />
+          <ReferenceLine y={r} stroke={C_ROJO} strokeWidth={2} />
 
           <Line type="monotone" dataKey="valor" name={varName} stroke={C_LINEA} fill="none" strokeWidth={1.5} dot={false} connectNulls={false} />
 

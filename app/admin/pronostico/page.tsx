@@ -8,6 +8,12 @@ import { USUARIO } from "@/lib/sesion";
 const stations = getStations();
 const dzList = [...new Set(stations.map((s) => s.dz).filter(Boolean))];
 
+// Reloj del mock (dato estático) y "día uno" (primer día pronosticado).
+const BASE = getMockNow().slice(0, 10) || new Date().toISOString().slice(0, 10);
+const ANCHOR = sumarDias(BASE, 1);
+
+const MODELOS = ["Modelo 1", "Modelo 2", "Modelo 3", "Modelo 4"];
+
 // Suma/resta días a una fecha YYYY-MM-DD (devuelve el mismo formato).
 function sumarDias(base: string, dias: number): string {
   const d = new Date(`${base}T00:00`);
@@ -18,12 +24,25 @@ function sumarDias(base: string, dias: number): string {
   return `${y}-${m}-${day}`;
 }
 
+// Diferencia en días entre dos fechas YYYY-MM-DD (b - a).
+function diasEntre(a: string, b: string): number {
+  return Math.round(
+    (new Date(`${b}T00:00`).getTime() - new Date(`${a}T00:00`).getTime()) / 86400000,
+  );
+}
+
 // Grupo de 3 días consecutivos. El "padre" es el primer día pronosticado.
 function grupoDesde(primerDia: string): { padre: string; fechas: string[] } {
   return {
     padre: primerDia,
     fechas: [0, 1, 2].map((i) => sumarDias(primerDia, i)),
   };
+}
+
+// Grupo de 3 días que contiene la fecha dada (ajusta al bloque anclado a ANCHOR).
+function grupoContiene(fecha: string): { padre: string; fechas: string[] } {
+  const k = Math.floor(diasEntre(ANCHOR, fecha) / 3);
+  return grupoDesde(sumarDias(ANCHOR, k * 3));
 }
 
 export default function AdminPronosticoPage() {
@@ -36,20 +55,38 @@ export default function AdminPronosticoPage() {
   // Inicializado vacío para evitar hydration mismatch (los overlays solo existen en el cliente).
   const [diario, setDiario] = useState<ForecastDiario[]>([]);
   const [inputs, setInputs] = useState<ForecastInput[]>([]);
-  const [grupos, setGrupos] = useState<{ padre: string; fechas: string[] }[]>([]);
+  const [fecha, setFecha] = useState<string>(ANCHOR);
+  const [extraGrupos, setExtraGrupos] = useState(0);
 
   useEffect(() => {
-    const base = getMockNow().slice(0, 10) || new Date().toISOString().slice(0, 10);
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
-    setGrupos([grupoDesde(sumarDias(base, 1))]);
     setDiario(getForecastDiario());
     setInputs(getForecastInputs());
   }, []);
+
+  // Grupos mostrados: el bloque que contiene `fecha` + los grupos extra agregados con "+".
+  const grupos = useMemo(() => {
+    const list = [grupoContiene(fecha)];
+    for (let i = 0; i < extraGrupos; i++) {
+      const ultimo = list[list.length - 1];
+      list.push(grupoDesde(sumarDias(ultimo.fechas[ultimo.fechas.length - 1], 1)));
+    }
+    return list;
+  }, [fecha, extraGrupos]);
 
   const usuarioPorKey = useMemo(
     () => new Map(inputs.map((i) => [`${i.stationId}|${i.fecha}`, i.usuario])),
     [inputs]
   );
+
+  // Valores guardados por (estación|fecha|modelo) para precargar las celdas.
+  const guardadoPorCelda = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const i of inputs) {
+      m.set(`${i.stationId}|${i.fecha}|${i.modelo}`, String(i.valor));
+    }
+    return m;
+  }, [inputs]);
 
   const filteredStations = formDZ
     ? stations.filter((s) => s.dz === formDZ)
@@ -58,15 +95,15 @@ export default function AdminPronosticoPage() {
   const setModelo = (fecha: string, idx: number, valor: string) =>
     setModelos((p) => ({ ...p, [fecha]: { ...p[fecha], [idx]: valor } }));
 
-  // Agrega un grupo consecutivo de 3 días (padre = último día del último grupo + 1).
-  const agregarGrupo = () => {
-    setGrupos((prev) => {
-      const ultimo = prev[prev.length - 1];
-      if (!ultimo) return prev;
-      const nuevoPrimero = sumarDias(ultimo.fechas[ultimo.fechas.length - 1], 1);
-      return [...prev, grupoDesde(nuevoPrimero)];
-    });
+  // Valor de una celda: lo escrito por el operador tiene prioridad; si no, lo guardado.
+  const valorCelda = (f: string, idx: number): string => {
+    const escrito = modelos[f]?.[idx];
+    if (escrito != null) return escrito;
+    return guardadoPorCelda.get(`${formStation}|${f}|${MODELOS[idx]}`) ?? "";
   };
+
+  // Agrega un grupo consecutivo de 3 días (padre = último día del último grupo + 1).
+  const agregarGrupo = () => setExtraGrupos((n) => n + 1);
 
   const handleSave = () => {
     if (!formStation) return;
@@ -137,8 +174,8 @@ export default function AdminPronosticoPage() {
               <h2 className="text-sm font-bold uppercase">Registro de Datos de Pronóstico</h2>
             </div>
             <div className="p-4">
-              {/* Fila: DZ + Estación */}
-              <div className="grid grid-cols-2 gap-4 mb-4 items-end">
+              {/* Fila: DZ + Estación + Fecha + agregar grupo */}
+              <div className="grid grid-cols-2 sm:grid-cols-[1fr_1fr_1fr_auto] gap-4 mb-4 items-end">
                 <div>
                   <label className="block text-xs text-slate-500 mb-1 uppercase">Dirección Zonal</label>
                   <select
@@ -159,7 +196,10 @@ export default function AdminPronosticoPage() {
                   <label className="block text-xs text-slate-500 mb-1 uppercase">Estación</label>
                   <select
                     value={formStation}
-                    onChange={(e) => setFormStation(e.target.value)}
+                    onChange={(e) => {
+                      setFormStation(e.target.value);
+                      setModelos({});
+                    }}
                     className="w-full border border-slate-300 rounded px-3 py-2 text-sm"
                   >
                     <option value="">Seleccione</option>
@@ -167,6 +207,29 @@ export default function AdminPronosticoPage() {
                       <option key={s.id} value={s.id}>{s.estacion}</option>
                     ))}
                   </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-slate-500 mb-1 uppercase">Fecha</label>
+                  <input
+                    type="date"
+                    value={fecha}
+                    onChange={(e) => {
+                      setFecha(e.target.value || ANCHOR);
+                      setExtraGrupos(0);
+                    }}
+                    className="w-full border border-slate-300 rounded px-3 py-2 text-sm"
+                  />
+                </div>
+                <div className="flex items-end h-full">
+                  <button
+                    type="button"
+                    onClick={agregarGrupo}
+                    title="Agregar 3 días"
+                    aria-label="Agregar 3 días"
+                    className="w-9 h-9 rounded-full bg-[#00539b] text-white text-xl font-bold leading-none flex items-center justify-center hover:bg-[#0070ba]"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
 
@@ -198,7 +261,7 @@ export default function AdminPronosticoPage() {
                                 <input
                                   type="number"
                                   step="0.1"
-                                  value={modelos[f]?.[idx] ?? ""}
+                                  value={valorCelda(f, idx)}
                                   onChange={(e) => setModelo(f, idx, e.target.value)}
                                   className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
                                 />
@@ -210,17 +273,6 @@ export default function AdminPronosticoPage() {
                     ))}
                   </tbody>
                 </table>
-              </div>
-
-              {/* Botón para agregar otro grupo de 3 días */}
-              <div className="flex justify-center mb-4">
-                <button
-                  type="button"
-                  onClick={agregarGrupo}
-                  className="bg-white border border-[#00539b] text-[#00539b] px-6 py-2 rounded text-sm font-semibold hover:bg-blue-50"
-                >
-                  + Más (agregar 3 días)
-                </button>
               </div>
 
               <div className="flex justify-center">

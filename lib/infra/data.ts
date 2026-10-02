@@ -51,6 +51,24 @@ export function getSeries(stationId: string): Observation[] {
   return joinSeries(stationId);
 }
 
+// Caudal promedio diario (fecha → promedio), desde la serie observada completa.
+// Los productos horarios se agrupan por día (YYYY-MM-DD) y se promedian.
+export function getCaudalPromedioDiario(stationId: string): Record<string, number> {
+  const porDia = new Map<string, { sum: number; count: number }>();
+  for (const o of getSeries(stationId)) {
+    const dia = o.fecha.slice(0, 10);
+    const e = porDia.get(dia) ?? { sum: 0, count: 0 };
+    e.sum += o.caudal;
+    e.count++;
+    porDia.set(dia, e);
+  }
+  const out: Record<string, number> = {};
+  for (const [dia, e] of porDia) {
+    out[dia] = Math.round((e.sum / e.count) * 10) / 10;
+  }
+  return out;
+}
+
 // Última lectura por estación, de la serie fusionada.
 export function getLatestMerged(): Record<string, Observation> {
   const map: Record<string, Observation> = {};

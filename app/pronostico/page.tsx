@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/ui/tabs";
-import { getStations, getMockNow } from "@/lib/infra/data";
+import { getStations, getMockNow, getCaudalPromedioDiario } from "@/lib/infra/data";
 import { getForecastDiario, getForecastInputs } from "@/lib/infra/catalogos";
 import { getConfigVigente } from "@/lib/infra/configRecords";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
@@ -37,6 +37,13 @@ export default function PronosticoPage() {
     umbralesPorEstacion[s.id] = { ...u };
   }
 
+  // Caudal promedio diario observado por estación (fecha → caudal), para los
+  // días sin pronóstico en la ventana del hidrograma.
+  const caudalPromedioPorEstacion: Record<string, Record<string, number>> = {};
+  for (const s of conPronostico) {
+    caudalPromedioPorEstacion[s.id] = getCaudalPromedioDiario(s.id);
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <TopicBanner
@@ -68,6 +75,7 @@ export default function PronosticoPage() {
             forecastPorEstacion={forecastPorEstacion}
             inputsPorEstacion={inputsPorEstacion}
             umbralesPorEstacion={umbralesPorEstacion}
+            caudalPromedioPorEstacion={caudalPromedioPorEstacion}
           />
         </section>
 

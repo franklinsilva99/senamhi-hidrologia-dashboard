@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TopicBanner from "@/components/TopicBanner";
 import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/ui/tabs";
-import { getStations } from "@/lib/infra/data";
+import { getStations, getMockNow, getCaudalPromedioDiario } from "@/lib/infra/data";
 import { getForecastDiario, getForecastInputs } from "@/lib/infra/catalogos";
 import { getConfigVigente } from "@/lib/infra/configRecords";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
@@ -31,10 +31,17 @@ export default function PronosticoPage() {
   // Umbrales según preferencia de la estación (caudal o nivel)
   const umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }> = {};
   for (const s of conPronostico) {
-    const record = getConfigVigente(s.id, s.preferencia ?? "caudal", new Date().toISOString().slice(0, 10));
+    const record = getConfigVigente(s.id, s.preferencia ?? "caudal", getMockNow());
     const u = record?.umbrales[s.tipo ?? "avenida"];
     if (!u) continue;
     umbralesPorEstacion[s.id] = { ...u };
+  }
+
+  // Caudal promedio diario observado por estación (fecha → caudal), para los
+  // días sin pronóstico en la ventana del hidrograma.
+  const caudalPromedioPorEstacion: Record<string, Record<string, number>> = {};
+  for (const s of conPronostico) {
+    caudalPromedioPorEstacion[s.id] = getCaudalPromedioDiario(s.id);
   }
 
   return (
@@ -42,7 +49,7 @@ export default function PronosticoPage() {
       <TopicBanner
         subtitle="Sistema de Pronóstico Hidrológico"
         title="Hidrología / Pronóstico Hidrológico"
-        description="Pronóstico hidrológico diario (D+1 a D+3) como promedio de los modelos ingresados por las direcciones zonales, para los principales ríos y cuencas del país."
+        description="Pronóstico hidrológico diario como promedio de los modelos ingresados por las direcciones zonales, en grupos de 3 días, para los principales ríos y cuencas del país."
       />
 
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -60,7 +67,7 @@ export default function PronosticoPage() {
           </h2>
           <p className="text-justify text-sm text-gray-700 mt-2 mb-4">
             Pronóstico diario de caudales en cuencas con modelos hidrológicos implementados,
-            considerando las previsiones de lluvia con horizonte de 3 días.
+            considerando las previsiones de lluvia.
           </p>
           
           <MapPronosticoClient
@@ -68,6 +75,7 @@ export default function PronosticoPage() {
             forecastPorEstacion={forecastPorEstacion}
             inputsPorEstacion={inputsPorEstacion}
             umbralesPorEstacion={umbralesPorEstacion}
+            caudalPromedioPorEstacion={caudalPromedioPorEstacion}
           />
         </section>
 

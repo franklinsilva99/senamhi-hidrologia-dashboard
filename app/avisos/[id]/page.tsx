@@ -55,15 +55,15 @@ export default function AvisoDetalle() {
   }
 
   const st = getStations().find((s) => s.id === aviso.stationId);
-  const record = getConfigVigente(aviso.stationId, aviso.preferencia, aviso.inicio);
-  const u = record?.umbrales[aviso.tipo];
+  // Aviso congelado: umbrales snapshot; si no existe (aviso viejo del overlay), cae a la config vigente.
+  const u = aviso.umbrales ?? getConfigVigente(aviso.stationId, aviso.preferencia, aviso.inicio)?.umbrales[aviso.tipo];
   const horaUltima = serie.length > 0 ? serie[serie.length - 1].fecha.slice(11, 16) : undefined;
 
   return (
     <div className="min-h-screen bg-senamhi-bg">
       <SectionHeader title="Hidrologia / Avisos Hidrológicos" />
 
-      <main className="w-full max-w-5xl bg-white min-h-[900px] shadow-sm my-4 md:my-6 p-4 sm:p-8 md:p-10 border border-gray-200 mx-auto">
+      <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6">
         <nav aria-label="Pestañas de navegación" className="border-b border-gray-300 mb-6">
           <ul className="flex space-x-1 text-sm">
             <li>

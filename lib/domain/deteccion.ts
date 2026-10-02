@@ -43,7 +43,7 @@ export function detectarAvisos(
     const umbral = u ? clasificarNivel(valorActual, u, tipo) : null;
     // m.s.n.m. solo para visualización (Nivel absoluto = Nivel relativo + Cota).
     const valorAbsoluto =
-      preferencia === "nivel" && s.cota !== null
+      preferencia === "nivel" && s.cota != null
         ? obs.nivel + s.cota
         : valorActual;
     return {

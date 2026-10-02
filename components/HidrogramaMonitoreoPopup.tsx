@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import HidrogramaPopupCard from "@/components/HidrogramaPopupCard";
 import ChartHydro from "@/components/ChartHydro";
-import { getConfigVigente, getVariablesConfiguradas } from "@/lib/infra/configRecords";
+import { getConfigVigente } from "@/lib/infra/configRecords";
 import { getMockNow } from "@/lib/infra/data";
 import type { Observation, Station, Variable } from "@/lib/domain/types";
 
@@ -24,7 +24,6 @@ function promedioDiario(series: Observation[]): Observation[] {
       fecha,
       caudal: Math.round((e.c / e.count) * 10) / 10,
       nivel: Math.round((e.l / e.count) * 100) / 100,
-      estado: "normal" as const,
     }));
 }
 
@@ -37,10 +36,17 @@ export default function HidrogramaMonitoreoPopup({
   series: Observation[];
   onClose: () => void;
 }) {
-  const variables: Variable[] = station.variables ?? getVariablesConfiguradas(station.id);
+  // Variables disponibles según los datos de la serie (caudal y/o nivel).
+  const tieneCaudal = series.some((o) => typeof o.caudal === "number" && !Number.isNaN(o.caudal));
+  const tieneNivel = series.some((o) => typeof o.nivel === "number" && !Number.isNaN(o.nivel));
+  const variables: Variable[] = [
+    ...(tieneNivel ? (["nivel"] as Variable[]) : []),
+    ...(tieneCaudal ? (["caudal"] as Variable[]) : []),
+  ];
   const preferencia = station.preferencia ?? "caudal";
-  const inicial: Variable = variables.includes(preferencia) ? preferencia : variables[0];
-  const [variable, setVariable] = useState<Variable>(inicial);
+  // La serie llega de forma asíncrona, por lo que `variables` está vacío en el
+  // primer render. Se inicializa con la preferencia (disponible síncronamente).
+  const [variable, setVariable] = useState<Variable>(preferencia);
   const [granularidad, setGranularidad] = useState<"horario" | "diario">("horario");
 
   const serieGraficada = useMemo(
@@ -51,7 +57,7 @@ export default function HidrogramaMonitoreoPopup({
   const record = getConfigVigente(station.id, variable, getMockNow());
   const u = record?.umbrales[station.tipo ?? "avenida"];
   const variableTitle = variable === "caudal" ? "Caudal" : "Nivel";
-  const hoyISO = new Date().toISOString().slice(0, 10);
+  const hoyISO = getMockNow().slice(0, 10) || new Date().toISOString().slice(0, 10);
 
   const controles = (
     <>
@@ -114,7 +120,6 @@ export default function HidrogramaMonitoreoPopup({
       filename={`hidrograma-${station.rio.toLowerCase()}-${station.id}`}
       onClose={onClose}
       controles={controles}
-      legend={legend}
       chartHeightClass=""
       chartFullscreenClass=""
     >
@@ -127,6 +132,7 @@ export default function HidrogramaMonitoreoPopup({
         umbralNaranja={u?.naranja}
         umbralRoja={u?.roja}
         navigator
+        legend={legend}
       />
     </HidrogramaPopupCard>
   );

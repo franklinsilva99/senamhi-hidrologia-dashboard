@@ -1,6 +1,6 @@
 # SENAMHI — PoC Hidrología (Sede Contingencia Junín)
 
-Portal de contingencia DHI piloto: **monitoreo QC1**, **pronóstico diario** (promedio de modelos) y **avisos hidrológicos**, sobre 4 estaciones reales (Socsi, Chosica, Pisac, Puente Ramis).
+Portal de contingencia DHI piloto: **monitoreo QC1**, **pronóstico diario** (promedio de modelos) y **avisos hidrológicos**, sobre 7 estaciones reales (Socsi, Chosica, Pisac, Puente Ramis, El Tigre, Cirato, Santo Domingo).
 
 > **Prueba de concepto.** La lógica de negocio está preparada para portarse a **Java (Spring Boot) + Angular + Postgres**.
 
@@ -43,9 +43,10 @@ Mapeo a la pila objetivo:
 
 ## Modelo de datos (`lib/domain/types.ts`)
 
-- **Station** — ficha/ubicación (cuenca, río, cota, poblados) + `variables`, `preferencia`, `tipo` (avenida/vigilancia), `modoPublicacion`.
+- **Station** — ficha/ubicación (cuenca, río, cota, departamento/provincia/distritos) + centros poblados afectados (`poblados`/`pobladosGeo`) + `variables`, `preferencia`, `tipo` (avenida/vigilancia), `modoPublicacion`.
 - **ConfigRecord** — tabla de configuración por (estación, variable, periodo): `umbrales` + `tiempoVigenciaHrs`.
-- **Observation** — lectura horaria (nivel, caudal, estado).
+- **Lectura** — un punto de una serie por variable (`stationId`, `fecha`, `valor`), tal como se guarda en `nivel.json` y `caudal.json`.
+- **Observation** — lectura horaria unida (nivel + caudal por fecha). El estado se deriva al leer, no se almacena.
 - **ForecastInput / ForecastDiario** — modelos ingresados y pronóstico promedio.
 - **Alert** — aviso (título, nivel, vigencia, snapshot de la serie).
 
@@ -72,12 +73,20 @@ Mapeo a la pila objetivo:
 
 ## Persistencia (PoC)
 
-Datos base en `data/*.json` + **overlay** en `localStorage`:
+Datos base en `data/*.json` + **overlay** en `localStorage` (solo para edición de configuración, avisos y pronóstico):
+
+| Fuente | Contenido |
+|---|---|
+| `data/nivel.json` | serie horaria de nivel (relativo) por estación |
+| `data/caudal.json` | serie horaria de caudal por estación |
+| `data/config_records.json` | tabla de configuración (umbrales + vigencia) por estación/variable |
+| `data/cotas.json` | cota del cero de la regla por estación (se resuelve en la ficha) |
+
+Overlays de `localStorage`:
 
 | Clave | Contenido |
 |---|---|
 | `senamhi_avisos` | avisos (base + creados/deshabilitados) |
-| `senamhi_observaciones` | ingesta simulada de observaciones |
 | `senamhi_forecast_inputs` | modelos de pronóstico cargados |
 | `senamhi_config_records` | tabla de configuración (umbrales + vigencia) por estación/variable |
 | `senamhi_station_config` | ficha por estación (preferencia, tipo, cota, modo publicación) |
@@ -93,4 +102,6 @@ pnpm lint      # eslint
 
 ## Nota de producción
 
-En producción se reemplaza: overlay de `localStorage` → BD de observaciones (Postgres), `Alert.serie` → snapshot persistido, y la cota aproximada (`cotaFuente: "inventario-altitud"`) → cota oficial de la Dirección Zonal (`cotaFuente: "oficial"`).
+En producción se reemplaza: JSON estáticos (`nivel.json`/`caudal.json`/`cotas.json`) → BD de observaciones (Postgres), `Alert.serie` → snapshot persistido, y la cota aproximada (`cotaFuente: "inventario-altitud"`) → cota oficial de la Dirección Zonal (`cotaFuente: "oficial"`).
+
+Los **centros poblados afectados** hoy están desnormalizados en la estación (`poblados`/`pobladosGeo`). En producción conviene extraerlos a un **catálogo propio** (`CentroPoblado`: id, nombre, lat/lon, distrito/provincia/departamento), referenciado por la estación (relación N:M), y que el aviso congele el snapshot de la lista al emitir.

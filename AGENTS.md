@@ -13,7 +13,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `Station.cota` es la elevación del **cero de la regla** (datum) en m.s.n.m.
 - **Nivel absoluto = Nivel relativo + Cota** (Pool 2 del flujo Bizagi).
 - La **detección de avisos (Pool 1) compara nivel relativo contra umbrales relativos — NO usa cota**. La cota solo se usa para visualización (hidrograma, tabla, descripción en m.s.n.m.).
-- Valores actuales del PoC: tomados de `Estaciones.xlsx` (columna `ALTITUD (m)`), con `cotaFuente: "inventario-altitud"`. Son una **aproximación** (altitud del terreno ≈ cota, error de pocos metros) y **no afectan el nivel de alerta**, solo el desplazamiento del eje.
+- Valores actuales del PoC: tomados de `Estaciones.xlsx` (columna `ALTITUD (m)`), con `cotaFuente: "inventario-altitud"`. Son una **aproximación** (altitud del terreno ≈ cota, error de pocos metros) y **no afectan el nivel de alerta**, solo el desplazamiento del eje. Las cotas viven en `data/cotas.json` y se resuelven en la ficha al leer (`lib/infra/cotas.ts`).
 - **En producción**: reemplazar por la cota oficial de la Dirección Zonal (cero de la regla, nivelación GNSS) y marcar `cotaFuente: "oficial"`.
 - Validación: `cota = nivel_msnm_publicado − lectura_relativa` si se cuenta con un aviso real.
 
@@ -33,14 +33,20 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `lib/infra/configRecords.ts`: `getConfigVigente(stationId, variable, fecha)` resuelve el registro vigente según su periodo.
 - Detección y avisos leen `Station.preferencia` + `getConfigVigente` (ya no `Thresholds`).
 
-# Ingesta de observaciones y publicación (Solución híbrida)
+# Centros poblados afectados
 
-- **Fuente de verdad de las observaciones**: `data/observations.json` (histórico) + **overlay** en `localStorage` key `senamhi_observaciones` (ingesta simulada del sensor).
-- `lib/data.ts`: `getSeriesMerged(stationId)` (estática + overlay, sin duplicar fecha, **ventana móvil de 72 h**), `getLatestMerged()` (última lectura por estación), `getMockNow()` (reloj del mock = fecha más reciente), `appendInjectedObs` / `clearInjectedObs`.
-- **Detección e hidrograma leen la serie fusionada** → el dato ingestado aparece en el gráfico y coincide con el aviso.
+- Hoy desnormalizados en la estación (`Station.poblados` nombres + `Station.pobladosGeo` coordenadas). Mantenedor en `/admin/centros-poblados` (overlay `senamhi_station_config`).
+- El aviso congela la **lista de nombres** (`Alert.poblados`) al emitir; el mapa público resuelve las coordenadas desde el catálogo de la estación (las coords no cambian).
+- En producción: extraer a un **catálogo propio** (`CentroPoblado`: id, nombre, lat/lon, distrito/provincia/departamento) referenciado por la estación (N:M), y congelar el snapshot en el aviso.
+
+# Ingesta de observaciones y publicación (productos separados)
+
+- **Fuente de verdad de las observaciones**: `data/nivel.json` y `data/caudal.json` (series horarias por producto, una variable por archivo). No hay ingesta manual ni overlay de observaciones.
+- `lib/infra/data.ts`: `getSeriesMerged(stationId)` une caudal + nivel por fecha (sin duplicar, **ventana móvil de 72 h**), `getLatestMerged()` (última lectura por estación), `getMockNow()` (reloj del mock = fecha más reciente), `getSeries()` (serie completa, sin ventana).
+- **El estado (normal/amarilla/naranja/roja) se deriva al leer** contra umbrales y tipo; no se almacena ni en los JSON ni en `Observation`.
 - **Sin control de calidad en el PoC**: se consumen los productos ya limpios ("Caudales horarios" + "Niveles vigilados horario"). El flujo QC (`niveles_caudales`) se implementa aparte.
-- **Aviso publicado = documento congelado**: `Alert.serie` guarda el snapshot de la serie al emitir; el detalle usa `aviso.serie ?? getSeriesMerged(...)` (los 4 avisos base de `alerts.json` ya traen `serie`).
+- **Aviso publicado = documento congelado**: `Alert.serie` guarda el snapshot de la serie al emitir; el detalle usa `aviso.serie ?? getSeriesMerged(...)` (los avisos base de `alerts.json` ya traen `serie`).
 - **Reloj del mock**: `prepararAviso`/`crearAviso` derivan `fechaEmision`/`inicio` de `getMockNow()` (no `new Date()`), para que la línea de tiempo coincida con la data.
-- `app/monitoreo` es **client** para poder leer el overlay.
-- Producción: reemplazar el overlay por la BD de observaciones y `Alert.serie` por la referencia/snapshot persistido.
+- `app/monitoreo` es **client** para poder leer el overlay de configuración.
+- Producción: reemplazar los JSON por la BD de observaciones (Postgres) y `Alert.serie` por la referencia/snapshot persistido.
 

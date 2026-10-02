@@ -1,57 +1,72 @@
 import stations from "@/data/stations.json";
-import observations from "@/data/observations.json";
+import nivelSerie from "@/data/nivel.json";
+import caudalSerie from "@/data/caudal.json";
 import alerts from "@/data/alerts.json";
-import type { Alert, Observation, Station } from "@/lib/domain/types";
+import type { Alert, Lectura, Observation, Station } from "@/lib/domain/types";
+import { withCotass } from "@/lib/infra/cotas";
 
-// ── Adaptador de persistencia (PoC): JSON estático + localStorage overlay ──
+// ── Adaptador de persistencia (PoC): JSON estático separado por producto ──
 // Implementa los puertos StationRepository / ObservacionRepository / AvisoRepository.
+// Fuente de verdad: nivel.json + caudal.json (series por variable), unidas al leer.
 
 const STORAGE_KEY = "senamhi_avisos";
-const OBS_KEY = "senamhi_observaciones";
 const VENTANA_HORAS = 72;
 
 export function getStations(): Station[] {
-  return stations as Station[];
+  return withCotass(stations as Station[]);
 }
 
-function staticSeries(stationId: string): Observation[] {
-  return (observations as Observation[])
-    .filter((o) => o.stationId === stationId)
-    .sort((a, b) => a.fecha.localeCompare(b.fecha));
-}
-
-// ── Overlay de observaciones (ingesta simulada del sensor) ──
-export function loadInjectedObs(): Observation[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem(OBS_KEY);
-    if (raw) return JSON.parse(raw) as Observation[];
-  } catch { /* ignore */ }
-  return [];
-}
-
-export function appendInjectedObs(obs: Observation) {
-  if (typeof window === "undefined") return;
-  const all = loadInjectedObs();
-  all.push(obs);
-  localStorage.setItem(OBS_KEY, JSON.stringify(all));
-}
-
-export function clearInjectedObs() {
-  if (typeof window === "undefined") return;
-  localStorage.removeItem(OBS_KEY);
-}
-
-// Serie fusionada: estática + inyectadas (la inyectada gana si coincide la fecha),
-// ordenada y recortada a la ventana móvil de 72 h.
-export function getSeriesMerged(stationId: string): Observation[] {
-  const map = new Map<string, Observation>();
-  for (const o of staticSeries(stationId)) map.set(o.fecha, o);
-  for (const o of loadInjectedObs()) {
-    if (o.stationId === stationId) map.set(o.fecha, o);
+// Serie por variable: fecha → valor de una estación.
+function serieDe(lecturas: Lectura[], stationId: string): Map<string, number> {
+  const m = new Map<string, number>();
+  for (const l of lecturas) {
+    if (l.stationId === stationId) m.set(l.fecha, l.valor);
   }
-  const merged = [...map.values()].sort((a, b) => a.fecha.localeCompare(b.fecha));
-  return merged.slice(-VENTANA_HORAS);
+  return m;
+}
+
+// Serie fusionada: caudal + nivel unidos por fecha, ordenada y sin duplicar.
+function joinSeries(stationId: string): Observation[] {
+  const n = serieDe(nivelSerie as Lectura[], stationId);
+  const c = serieDe(caudalSerie as Lectura[], stationId);
+  const fechas = new Set([...n.keys(), ...c.keys()]);
+  const out: Observation[] = [];
+  for (const fecha of fechas) {
+    const nivel = n.get(fecha);
+    const caudal = c.get(fecha);
+    // Solo puntos con ambas variables (los productos horarios vienen alineados).
+    if (nivel == null || caudal == null) continue;
+    out.push({ stationId, fecha, nivel, caudal });
+  }
+  return out.sort((a, b) => a.fecha.localeCompare(b.fecha));
+}
+
+// Serie fusionada recortada a la ventana móvil de 72 h.
+export function getSeriesMerged(stationId: string): Observation[] {
+  return joinSeries(stationId).slice(-VENTANA_HORAS);
+}
+
+// Serie completa (sin ventana) — para snapshots base y SSR.
+export function getSeries(stationId: string): Observation[] {
+  return joinSeries(stationId);
+}
+
+// Caudal promedio diario (fecha → promedio), desde la serie observada completa.
+// Los productos horarios se agrupan por día (YYYY-MM-DD) y se promedian.
+export function getCaudalPromedioDiario(stationId: string): Record<string, number> {
+  const porDia = new Map<string, { sum: number; count: number }>();
+  for (const o of getSeries(stationId)) {
+    const dia = o.fecha.slice(0, 10);
+    const e = porDia.get(dia) ?? { sum: 0, count: 0 };
+    e.sum += o.caudal;
+    e.count++;
+    porDia.set(dia, e);
+  }
+  const out: Record<string, number> = {};
+  for (const [dia, e] of porDia) {
+    out[dia] = Math.round((e.sum / e.count) * 10) / 10;
+  }
+  return out;
 }
 
 // Última lectura por estación, de la serie fusionada.
@@ -93,9 +108,4 @@ export function loadAlerts(): Alert[] {
 export function saveAlerts(alertsToSave: Alert[]) {
   if (typeof window === "undefined") return;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(alertsToSave));
-}
-
-// Serie estática (sin overlay) — para SSR y snapshots base.
-export function getSeries(stationId: string): Observation[] {
-  return staticSeries(stationId);
 }

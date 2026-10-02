@@ -28,6 +28,17 @@ function fmtLargo(fecha: string): string {
   return `${DIAS[d.getDay()]}, ${MESES[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
+// Suma/resta días a una fecha YYYY-MM-DD (devuelve el mismo formato).
+function addDias(fecha: string, dias: number): string {
+  const d = new Date(fecha + "T00:00:00");
+  if (isNaN(d.getTime())) return fecha;
+  d.setDate(d.getDate() + dias);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 const num = (v?: number | null) => (v == null ? "—" : String(Number(Number(v).toFixed(2))));
 
 type Umbrales = { amarilla: number; naranja: number; roja: number };
@@ -92,12 +103,14 @@ export default function HidrogramaPronosticoPopup({
   umbrales,
   forecast,
   inputs,
+  caudalPromedio,
   onClose,
 }: {
   station: Station;
   umbrales: Umbrales;
   forecast: ForecastDiario[];
   inputs: ForecastInput[];
+  caudalPromedio: Record<string, number>;
   onClose: () => void;
 }) {
   const hoyISO = new Date().toISOString().slice(0, 10);
@@ -111,41 +124,59 @@ export default function HidrogramaPronosticoPopup({
     return m;
   }, [inputs]);
 
+  // Ventana fija de 6 días (o más si hay más días pronosticados), terminando
+  // en el último día con pronóstico. Los días sin pronóstico se rellenan con
+  // el caudal promedio observado; los días con pronóstico usan el previsto.
   const data: Punto[] = useMemo(() => {
-    const arr: Punto[] = forecast
-      .map((f) => {
-        const vals = minMaxPorDia.get(f.fecha) ?? [];
+    const porFecha = new Map(forecast.map((f) => [f.fecha, f]));
+    const fechasForecast = [...porFecha.keys()].sort();
+    const ultima = fechasForecast[fechasForecast.length - 1];
+    if (!ultima) return [];
+
+    const ventana = Math.max(6, fechasForecast.length);
+    const arr: Punto[] = [];
+    for (let i = ventana - 1; i >= 0; i--) {
+      const fecha = addDias(ultima, -i);
+      const f = porFecha.get(fecha);
+      if (f) {
+        const vals = minMaxPorDia.get(fecha) ?? [];
         const min = vals.length ? Math.min(...vals) : f.caudalPrevisto;
         const max = vals.length ? Math.max(...vals) : f.caudalPrevisto;
-        const esPasado = f.fecha <= hoyISO;
-        return {
-          fecha: f.fecha,
-          label: fmtCorto(f.fecha),
-          fechaLarga: fmtLargo(f.fecha),
-          real: esPasado ? f.caudalPrevisto : null,
-          pron: esPasado ? null : f.caudalPrevisto,
+        arr.push({
+          fecha,
+          label: fmtCorto(fecha),
+          fechaLarga: fmtLargo(fecha),
+          real: null,
+          pron: f.caudalPrevisto,
           min,
           max,
-          rango: esPasado ? null : ([min, max] as [number, number]),
-        };
-      })
-      .sort((a, b) => a.fecha.localeCompare(b.fecha));
+          rango: [min, max] as [number, number],
+        });
+      } else {
+        const real = caudalPromedio[fecha] ?? null;
+        arr.push({
+          fecha,
+          label: fmtCorto(fecha),
+          fechaLarga: fmtLargo(fecha),
+          real,
+          pron: null,
+          rango: null,
+        });
+      }
+    }
 
-    // Encadena la línea punteada y la banda desde el último día pasado
-    const lastPast = [...arr].reverse().find((d) => d.real != null);
-    if (lastPast && arr.some((d) => d.pron != null)) {
-      lastPast.pron = lastPast.real;
-      if (lastPast.min != null && lastPast.max != null) {
-        lastPast.rango = [lastPast.min, lastPast.max];
+    // Encadena la línea punteada y la banda min-max desde el último día observado
+    const lastReal = [...arr].reverse().find((d) => d.real != null);
+    if (lastReal && arr.some((d) => d.pron != null)) {
+      lastReal.pron = lastReal.real;
+      if (lastReal.real != null) {
+        lastReal.rango = [lastReal.real, lastReal.real];
       }
     }
     return arr;
-  }, [forecast, minMaxPorDia, hoyISO]);
+  }, [forecast, minMaxPorDia, caudalPromedio]);
 
-  // Ventana: todos los días pronosticados (futuros); si son <6, se completan con pasados
-  const nFuturos = forecast.filter((f) => f.fecha > hoyISO).length;
-  const ventana = Math.max(6, nFuturos);
-  const visibles = data.slice(-ventana);
+  const visibles = data;
 
   const valores = visibles.flatMap((d) => [d.real, d.pron, d.min, d.max]).filter((v): v is number => v != null);
   const yMax = Math.max(umbrales.roja, umbrales.naranja, umbrales.amarilla, ...valores) * 1.12;
@@ -166,7 +197,6 @@ export default function HidrogramaPronosticoPopup({
           <span className="flex items-center gap-1.5"><span className="w-4 h-[2px] inline-block" style={{ backgroundColor: C_AMARILLO }} /> Amarillo</span>
           <span className="flex items-center gap-1.5"><span className="w-4 h-[2px] inline-block" style={{ backgroundColor: C_OBS }} /> Caudal Promedio</span>
           <span className="flex items-center gap-1.5"><span className="w-4 h-0 border-t-2 border-dashed inline-block" style={{ borderColor: C_PRON }} /> Caudal Pronosticado</span>
-          <span className="flex items-center gap-1.5"><span className="w-4 h-2.5 inline-block rounded-sm" style={{ backgroundColor: C_PRON, opacity: 0.25 }} /> Min - Max</span>
         </>
       }
     >

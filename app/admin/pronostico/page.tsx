@@ -57,6 +57,8 @@ export default function AdminPronosticoPage() {
   const [inputs, setInputs] = useState<ForecastInput[]>([]);
   const [fecha, setFecha] = useState<string>(ANCHOR);
   const [extraGrupos, setExtraGrupos] = useState(0);
+  const [editing, setEditing] = useState<{ stationId: string; fecha: string } | null>(null);
+  const [editModelos, setEditModelos] = useState<Record<number, string>>({});
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
@@ -88,6 +90,15 @@ export default function AdminPronosticoPage() {
     return m;
   }, [inputs]);
 
+  // Fechas que ya tienen al menos un valor guardado para la estación seleccionada.
+  const fechasPronosticadas = useMemo(() => {
+    const s = new Set<string>();
+    for (const i of inputs) {
+      if (i.stationId === formStation) s.add(i.fecha);
+    }
+    return s;
+  }, [inputs, formStation]);
+
   const filteredStations = formDZ
     ? stations.filter((s) => s.dz === formDZ)
     : stations;
@@ -104,6 +115,45 @@ export default function AdminPronosticoPage() {
 
   // Agrega un grupo consecutivo de 3 días (padre = último día del último grupo + 1).
   const agregarGrupo = () => setExtraGrupos((n) => n + 1);
+
+  // Abre el modal de edición con los modelos guardados de una fecha.
+  const abrirEditar = (stationId: string, fecha: string) => {
+    const valores: Record<number, string> = {};
+    for (const i of inputs) {
+      if (i.stationId !== stationId || i.fecha !== fecha) continue;
+      const idx = MODELOS.indexOf(i.modelo);
+      if (idx >= 0) valores[idx] = String(i.valor);
+    }
+    setEditModelos(valores);
+    setEditing({ stationId, fecha });
+  };
+
+  // Guarda la edición sobrescribiendo los modelos de esa fecha.
+  const guardarEdicion = () => {
+    if (!editing) return;
+    const nuevos: ForecastInput[] = [];
+    const padre =
+      inputs.find((i) => i.stationId === editing.stationId && i.fecha === editing.fecha)?.padre ??
+      grupoContiene(editing.fecha).padre;
+    for (let idx = 0; idx < 4; idx++) {
+      const raw = editModelos[idx];
+      if (raw == null || raw.trim() === "") continue;
+      const valor = parseFloat(raw);
+      if (isNaN(valor)) continue;
+      nuevos.push({
+        stationId: editing.stationId,
+        fecha: editing.fecha,
+        modelo: MODELOS[idx],
+        valor,
+        usuario: "operador-DZ",
+        padre,
+      });
+    }
+    if (nuevos.length > 0) appendForecastInputs(nuevos);
+    setDiario(getForecastDiario());
+    setInputs(getForecastInputs());
+    setEditing(null);
+  };
 
   const handleSave = () => {
     if (!formStation) return;
@@ -253,22 +303,34 @@ export default function AdminPronosticoPage() {
                             Grupo — Padre: {g.padre}
                           </td>
                         </tr>
-                        {g.fechas.map((f) => (
-                          <tr key={f}>
-                            <td className="p-2 border border-slate-300 font-semibold">{f}</td>
-                            {[0, 1, 2, 3].map((idx) => (
-                              <td key={idx} className="p-1 border border-slate-300">
-                                <input
-                                  type="number"
-                                  step="0.1"
-                                  value={valorCelda(f, idx)}
-                                  onChange={(e) => setModelo(f, idx, e.target.value)}
-                                  className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
-                                />
+                        {g.fechas.map((f) => {
+                          const pronosticada = fechasPronosticadas.has(f);
+                          return (
+                            <tr key={f} className={pronosticada ? "bg-slate-50" : undefined}>
+                              <td className="p-2 border border-slate-300 font-semibold">
+                                {f}
+                                {pronosticada && (
+                                  <span className="ml-1 text-[10px] font-normal text-slate-400">(pronosticado)</span>
+                                )}
                               </td>
-                            ))}
-                          </tr>
-                        ))}
+                              {[0, 1, 2, 3].map((idx) => {
+                                const guardado = guardadoPorCelda.get(`${formStation}|${f}|${MODELOS[idx]}`) ?? "";
+                                return (
+                                  <td key={idx} className="p-1 border border-slate-300">
+                                    <input
+                                      type="number"
+                                      step="0.1"
+                                      value={pronosticada ? guardado : valorCelda(f, idx)}
+                                      onChange={(e) => setModelo(f, idx, e.target.value)}
+                                      disabled={pronosticada}
+                                      className="w-full border-0 p-1.5 text-center text-sm focus:outline-none focus:ring-1 focus:ring-blue-400 disabled:bg-slate-100 disabled:text-slate-400"
+                                    />
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          );
+                        })}
                       </Fragment>
                     ))}
                   </tbody>
@@ -307,6 +369,7 @@ export default function AdminPronosticoPage() {
                     <th className="p-2.5 font-semibold">Cuerpo Agua</th>
                     <th className="p-2.5 font-semibold">Fecha Pronóstico</th>
                     <th className="p-2.5 font-semibold">Usuario</th>
+                    <th className="p-2.5 font-semibold">Acciones</th>
                   </tr>
                 </thead>
                 <tbody className="text-center">
@@ -320,6 +383,14 @@ export default function AdminPronosticoPage() {
                         <td className="p-2 text-xs">{st?.rio ?? "—"}</td>
                         <td className="p-2 text-xs">{fd.fecha}</td>
                         <td className="p-2 text-xs">{usuario}</td>
+                        <td className="p-2">
+                          <button
+                            onClick={() => abrirEditar(fd.stationId, fd.fecha)}
+                            className="text-xs font-semibold text-[#00539b] hover:underline"
+                          >
+                            Editar
+                          </button>
+                        </td>
                       </tr>
                     );
                   })}
@@ -338,6 +409,46 @@ export default function AdminPronosticoPage() {
           <p className="text-xs text-slate-400 mt-2">
             Solo el pronóstico Diario por grupos de 3 días está habilitado en sede alterna Junín.
           </p>
+        </div>
+      )}
+
+      {/* Modal de edición de pronóstico */}
+      {editing && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-5">
+            <h3 className="text-sm font-bold uppercase text-slate-700 mb-1">Editar pronóstico</h3>
+            <p className="text-xs text-slate-500 mb-3">
+              {stations.find((s) => s.id === editing.stationId)?.estacion ?? editing.stationId} — {editing.fecha}
+            </p>
+            <div className="space-y-2">
+              {MODELOS.map((m, idx) => (
+                <div key={m} className="flex items-center gap-3">
+                  <label className="w-20 text-xs text-slate-500">{m}</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={editModelos[idx] ?? ""}
+                    onChange={(e) => setEditModelos((p) => ({ ...p, [idx]: e.target.value }))}
+                    className="w-full border border-slate-300 rounded px-3 py-2 text-sm"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-end gap-2 mt-5">
+              <button
+                onClick={() => setEditing(null)}
+                className="px-4 py-2 rounded text-sm font-semibold text-slate-600 hover:bg-slate-100"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={guardarEdicion}
+                className="px-4 py-2 rounded text-sm font-semibold bg-[#00539b] text-white hover:bg-[#0070ba]"
+              >
+                Guardar
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

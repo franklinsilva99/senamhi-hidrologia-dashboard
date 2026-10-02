@@ -62,6 +62,7 @@ export default function AdminPronosticoPage() {
   const [editing, setEditing] = useState<{ stationId: string; padre: string; fechas: string[] } | null>(null);
   const [editModelos, setEditModelos] = useState<Record<string, Record<number, string>>>({});
   const [verStationId, setVerStationId] = useState<string | null>(null);
+  const [busqueda, setBusqueda] = useState("");
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
@@ -107,6 +108,17 @@ export default function AdminPronosticoPage() {
     for (const g of out) g.fechas.sort();
     return out;
   }, [diario, padrePorKey]);
+
+  // Listado filtrado por el texto del buscador (sin distinguir mayúsculas).
+  const listadoFiltrado = useMemo(() => {
+    const q = busqueda.trim().toLowerCase();
+    if (!q) return listadoAgrupado;
+    return listadoAgrupado.filter((g) => {
+      const st = stations.find((s) => s.id === g.stationId);
+      const campos = [st?.estacion, st?.rio, st?.dz, g.padre].filter(Boolean).join(" ");
+      return campos.toLowerCase().includes(q);
+    });
+  }, [listadoAgrupado, busqueda]);
 
   // Valores guardados por (estación|fecha|modelo) para precargar las celdas.
   const guardadoPorCelda = useMemo(() => {
@@ -404,8 +416,15 @@ export default function AdminPronosticoPage() {
 
           {/* Listado de pronósticos */}
           <div className="bg-white rounded-lg border border-slate-200">
-            <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg">
+            <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg flex items-center justify-between gap-4">
               <h2 className="text-sm font-bold uppercase">Listado de Datos de Pronóstico</h2>
+              <input
+                type="search"
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+                placeholder="Buscar…"
+                className="w-44 sm:w-56 rounded px-2.5 py-1 text-xs text-slate-700 bg-white border border-slate-200 focus:outline-none focus:ring-1 focus:ring-white"
+              />
             </div>
 
             {/* Tabla */}
@@ -422,7 +441,7 @@ export default function AdminPronosticoPage() {
                   </tr>
                 </thead>
                 <tbody className="text-center">
-                  {listadoAgrupado.map((g) => {
+                  {listadoFiltrado.map((g) => {
                     const st = stations.find((s) => s.id === g.stationId);
                     const usuario = usuarioPorKey.get(`${g.stationId}|${g.fechas[0]}`) ?? USUARIO.usuario;
                     return (

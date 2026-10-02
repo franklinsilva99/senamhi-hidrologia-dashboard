@@ -5,6 +5,7 @@ import {
 } from "recharts";
 import ChartTooltip from "@/components/ChartTooltip";
 import type { Observation, TipoAviso } from "@/lib/domain/types";
+import type { ReactNode } from "react";
 
 const C_AMARILLO = "#ffeb3b";
 const C_NARANJA = "#fca326";
@@ -39,7 +40,7 @@ function fmtLocal(d: Date): string {
 
 export default function ChartHydro({
   series, preferencia = "caudal", tipo = "avenida", cota = null,
-  umbralAmarilla, umbralNaranja, umbralRoja, navigator = false,
+  umbralAmarilla, umbralNaranja, umbralRoja, navigator = false, legend,
 }: {
   series: Observation[];
   preferencia?: "caudal" | "nivel";
@@ -49,6 +50,7 @@ export default function ChartHydro({
   umbralNaranja?: number;
   umbralRoja?: number;
   navigator?: boolean;
+  legend?: ReactNode;
 }) {
   const isNivel = preferencia === "nivel";
   const tieneCota = isNivel && cota != null;
@@ -132,6 +134,12 @@ export default function ChartHydro({
           SENAMHI
         </span>
       </div>
+      {/* Leyenda entre el gráfico y el deslizador (encima del Brush) */}
+      {legend && (
+        <div className="absolute left-0 right-0 flex flex-wrap items-center justify-center gap-x-5 gap-y-1 px-4 text-[11px] text-gray-700 pointer-events-none z-10" style={{ bottom: 31 }}>
+          {legend}
+        </div>
+      )}
     </div>
   );
 }

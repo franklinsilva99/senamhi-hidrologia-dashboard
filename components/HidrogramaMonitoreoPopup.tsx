@@ -44,8 +44,9 @@ export default function HidrogramaMonitoreoPopup({
     ...(tieneCaudal ? (["caudal"] as Variable[]) : []),
   ];
   const preferencia = station.preferencia ?? "caudal";
-  const inicial: Variable = variables.includes(preferencia) ? preferencia : variables[0];
-  const [variable, setVariable] = useState<Variable>(inicial);
+  // La serie llega de forma asíncrona, por lo que `variables` está vacío en el
+  // primer render. Se inicializa con la preferencia (disponible síncronamente).
+  const [variable, setVariable] = useState<Variable>(preferencia);
   const [granularidad, setGranularidad] = useState<"horario" | "diario">("horario");
 
   const serieGraficada = useMemo(
@@ -119,7 +120,6 @@ export default function HidrogramaMonitoreoPopup({
       filename={`hidrograma-${station.rio.toLowerCase()}-${station.id}`}
       onClose={onClose}
       controles={controles}
-      legend={legend}
       chartHeightClass=""
       chartFullscreenClass=""
     >
@@ -132,6 +132,7 @@ export default function HidrogramaMonitoreoPopup({
         umbralNaranja={u?.naranja}
         umbralRoja={u?.roja}
         navigator
+        legend={legend}
       />
     </HidrogramaPopupCard>
   );

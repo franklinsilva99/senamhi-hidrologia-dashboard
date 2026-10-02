@@ -85,6 +85,7 @@ export default function MapMonitoreo({
       {selected && (
         <div className="absolute top-2 inset-x-0 flex justify-center z-[1100] px-2">
           <HidrogramaMonitoreoPopup
+            key={selected.id}
             station={selected}
             series={serie}
             onClose={() => setSelectedId(null)}

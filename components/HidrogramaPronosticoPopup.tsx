@@ -166,7 +166,6 @@ export default function HidrogramaPronosticoPopup({
           <span className="flex items-center gap-1.5"><span className="w-4 h-[2px] inline-block" style={{ backgroundColor: C_AMARILLO }} /> Amarillo</span>
           <span className="flex items-center gap-1.5"><span className="w-4 h-[2px] inline-block" style={{ backgroundColor: C_OBS }} /> Caudal Promedio</span>
           <span className="flex items-center gap-1.5"><span className="w-4 h-0 border-t-2 border-dashed inline-block" style={{ borderColor: C_PRON }} /> Caudal Pronosticado</span>
-          <span className="flex items-center gap-1.5"><span className="w-4 h-2.5 inline-block rounded-sm" style={{ backgroundColor: C_PRON, opacity: 0.25 }} /> Min - Max</span>
         </>
       }
     >

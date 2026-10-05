@@ -45,6 +45,7 @@ export default function MapHydro({
   tipoPorEstacion,
   nivelPorEstacion,
   avisoIdPorEstacion,
+  pobladosPorEstacion,
   tipoDefault = "avenida",
   mostrarNiveles = false,
 }: {
@@ -55,6 +56,7 @@ export default function MapHydro({
   tipoPorEstacion?: Record<string, TipoAviso>;
   nivelPorEstacion?: Record<string, NivelAlerta>;
   avisoIdPorEstacion?: Record<string, string>;
+  pobladosPorEstacion?: Record<string, string[]>;
   tipoDefault?: TipoAviso;
   mostrarNiveles?: boolean;
 }) {
@@ -71,11 +73,20 @@ export default function MapHydro({
     setTipoActivo(tipoDefault);
   }
 
+  // Centros poblados del aviso vigente (nombres congelados) → coords del catálogo.
+  const coordsPoblados = (s: Station): { nombre: string; lat: number; lon: number }[] => {
+    const nombres = pobladosPorEstacion?.[s.id] ?? s.poblados;
+    const geo = s.pobladosGeo ?? [];
+    return nombres
+      .map((nombre) => geo.find((p) => p.nombre === nombre))
+      .filter((p): p is { nombre: string; lat: number; lon: number } => p != null);
+  };
+
   const handleStationClick = (s: Station) => {
     if (!vigenteIds?.has(s.id)) return;
     const pts: [number, number][] = [
       [s.lat, s.lon],
-      ...(s.pobladosGeo ?? []).map((p) => [p.lat, p.lon] as [number, number]),
+      ...coordsPoblados(s).map((p) => [p.lat, p.lon] as [number, number]),
     ];
     setSelectedId(s.id);
     // Sincroniza el tipo (avenida/vigilancia) con la estación seleccionada
@@ -149,7 +160,7 @@ export default function MapHydro({
             );
           })}
         {selected && vigenteIds?.has(selected.id)
-          ? (selected.pobladosGeo ?? []).map((p) => (
+          ? coordsPoblados(selected).map((p) => (
               <Marker
                 key={`${selected.id}-${p.nombre}`}
                 position={[p.lat, p.lon]}
@@ -201,7 +212,7 @@ export default function MapHydro({
                   </div>
                 )}
                 <hr className="my-2 border-t border-white/30" />
-                <Seccion titulo="Centros poblados" valor={selected.poblados.join(", ")} />
+                <Seccion titulo="Centros poblados" valor={(pobladosPorEstacion?.[selected.id] ?? selected.poblados).join(", ")} />
                 <Seccion titulo="Departamento" valor={selected.departamento} />
                 <Seccion titulo="Provincia" valor={selected.provincia.join(", ")} />
                 <Seccion titulo="Distritos" valor={selected.distritos.join(", ")} />

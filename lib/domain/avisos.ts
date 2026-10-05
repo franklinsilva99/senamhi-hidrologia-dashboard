@@ -89,7 +89,7 @@ export function prepararAviso(
   if (!nivel) return null;
 
   // Pool 2: visualización en m.s.n.m. (Nivel absoluto = Nivel relativo + Cota)
-  const valorMostrado = esNivel && station.cota !== null ? valorActual + station.cota : valorActual;
+  const valorMostrado = esNivel && station.cota != null ? valorActual + station.cota : valorActual;
   const variable = esNivel ? "NIVEL" : "CAUDAL";
   const unidad = esNivel ? "m.s.n.m." : "m³/s";
   const hoy = mockNow ? new Date(mockNow.replace(" ", "T")) : new Date();
@@ -167,6 +167,7 @@ export function crearAviso(d: DatosCrearAviso): Alert {
     preferencia,
     tipo: preparacion.tipo,
     cota,
+    umbrales: record.umbrales[preparacion.tipo],
     serie,
   };
 }

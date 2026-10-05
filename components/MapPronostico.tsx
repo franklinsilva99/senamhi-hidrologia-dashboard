@@ -11,12 +11,14 @@ export default function MapPronostico({
   forecastPorEstacion,
   inputsPorEstacion,
   umbralesPorEstacion,
+  caudalPromedioPorEstacion,
   heightClass = "h-[960px]",
 }: {
   stations: Station[];
   forecastPorEstacion: Record<string, ForecastDiario[]>;
   inputsPorEstacion: Record<string, ForecastInput[]>;
   umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }>;
+  caudalPromedioPorEstacion: Record<string, Record<string, number>>;
   heightClass?: string;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -56,6 +58,7 @@ export default function MapPronostico({
             umbrales={umbralesPorEstacion[selected.id] ?? { amarilla: 0, naranja: 0, roja: 0 }}
             forecast={forecastPorEstacion[selected.id] ?? []}
             inputs={inputsPorEstacion[selected.id] ?? []}
+            caudalPromedio={caudalPromedioPorEstacion[selected.id] ?? {}}
             onClose={() => setSelectedId(null)}
           />
         </div>

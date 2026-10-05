@@ -188,9 +188,9 @@
     "variable": "nivel",
     "umbrales": {
       "avenida": {
-        "amarilla": 2.2,
-        "naranja": 2.45,
-        "roja": 2.7
+        "amarilla": 2.22,
+        "naranja": 2.48,
+        "roja": 2.81
       }
     },
     "tiempoVigenciaHrs": {
@@ -228,9 +228,9 @@
     "variable": "nivel",
     "umbrales": {
       "avenida": {
-        "amarilla": 2.4,
-        "naranja": 2.6,
-        "roja": 2.85
+        "amarilla": 2.33,
+        "naranja": 2.62,
+        "roja": 2.97
       }
     },
     "tiempoVigenciaHrs": {
@@ -268,9 +268,9 @@
     "variable": "nivel",
     "umbrales": {
       "avenida": {
-        "amarilla": 2.6,
-        "naranja": 2.85,
-        "roja": 3.1
+        "amarilla": 2.49,
+        "naranja": 2.91,
+        "roja": 3.37
       }
     },
     "tiempoVigenciaHrs": {

@@ -1,0 +1,34 @@
+[
+  {
+    "stationId": "socsi",
+    "cota": 302,
+    "cotaFuente": "inventario-altitud"
+  },
+  {
+    "stationId": "chosica",
+    "cota": 867,
+    "cotaFuente": "inventario-altitud"
+  },
+  {
+    "stationId": "pisac",
+    "cota": 3002,
+    "cotaFuente": "inventario-altitud"
+  },
+  {
+    "stationId": "puente-ramis",
+    "cota": 3825,
+    "cotaFuente": "inventario-altitud"
+  },
+  {
+    "stationId": "el-tigre",
+    "cota": null
+  },
+  {
+    "stationId": "cirato",
+    "cota": null
+  },
+  {
+    "stationId": "santo-domingo",
+    "cota": null
+  }
+]

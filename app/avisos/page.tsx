@@ -7,7 +7,8 @@ import type { Alert, Observation } from "@/lib/domain/types";
 
 export default function AvisosPage() {
   const [alerts, setAlerts] = useState<Alert[]>(getAlerts);
-  const [latest, setLatest] = useState<Record<string, Observation>>(() => getLatestMerged());
+  // Inicializado vacío para evitar hydration mismatch (el overlay solo existe en el cliente).
+  const [latest, setLatest] = useState<Record<string, Observation>>({});
   const stations = getStations();
 
   useEffect(() => {

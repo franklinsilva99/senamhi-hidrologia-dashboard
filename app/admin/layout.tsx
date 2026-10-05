@@ -6,6 +6,7 @@ import { USUARIO } from "@/lib/sesion";
 const navItems = [
   { href: "/admin", label: "Página Principal", icon: "🏠", exact: true },
   { href: "/admin/config", label: "Configuración General", icon: "⚙️" },
+  { href: "/admin/centros-poblados", label: "Centros Poblados", icon: "📍" },
   { href: "/admin/avisos", label: "Avisos", icon: "📋", hasDropdown: true },
   { href: "/monitoreo", label: "Monitoreo", icon: "📈" },
   { href: "/admin/pronostico", label: "Pronóstico", icon: "📊", hasDropdown: true },

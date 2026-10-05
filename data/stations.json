@@ -31,8 +31,6 @@
       }
     ],
     "polygon": null,
-    "cota": 302,
-    "cotaFuente": "inventario-altitud",
     "departamento": "Lima",
     "provincia": [
       "Cañete"
@@ -82,8 +80,6 @@
       }
     ],
     "polygon": null,
-    "cota": 867,
-    "cotaFuente": "inventario-altitud",
     "departamento": "Lima",
     "provincia": [
       "Lima"
@@ -132,8 +128,6 @@
       }
     ],
     "polygon": null,
-    "cota": 3002,
-    "cotaFuente": "inventario-altitud",
     "departamento": "Cusco",
     "provincia": [
       "Calca"
@@ -183,8 +177,6 @@
       }
     ],
     "polygon": null,
-    "cota": 3825,
-    "cotaFuente": "inventario-altitud",
     "departamento": "Puno",
     "provincia": [
       "Azángaro",
@@ -229,7 +221,6 @@
       }
     ],
     "polygon": null,
-    "cota": null,
     "departamento": "Tumbes",
     "provincia": [
       "Tumbes"
@@ -272,7 +263,6 @@
       }
     ],
     "polygon": null,
-    "cota": null,
     "departamento": "Cajamarca",
     "provincia": [
       "Santa Cruz"
@@ -315,7 +305,6 @@
       }
     ],
     "polygon": null,
-    "cota": null,
     "departamento": "Lima",
     "provincia": [
       "Huaral"

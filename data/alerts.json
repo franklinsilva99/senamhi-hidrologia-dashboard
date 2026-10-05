@@ -6,14 +6,14 @@
     "stationId": "socsi",
     "titulo": "SITUACIÓN ACTUAL DEL CAUDAL DEL RÍO CAÑETE - ESTACIÓN SOCSI",
     "cuerpoAgua": "RÍO CAÑETE",
-    "distrito": "CAÑETE",
-    "inicio": "2026-09-10",
-    "fin": "2026-09-16",
+    "distrito": "Nuevo Imperial, Cañete",
+    "inicio": "2026-10-01",
+    "fin": "2026-10-07",
     "duracionHoras": 150,
     "nivel": "NARANJA",
     "plazo": "extendido",
     "vigente": true,
-    "fechaEmision": "Jueves, 10 de Septiembre de 2026 - 08:00 hrs",
+    "fechaEmision": "Jueves, 1 de Octubre de 2026 - 09:00 hrs",
     "descripcion": "El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del RÍO CAÑETE. La estación hidrológica SOCSI, registró un CAUDAL de 58.40 m³/s, con tendencia ascendente, ubicándose en el umbral NARANJA. Las potenciales áreas de afectación serían los centros poblados de CAÑETE, NUEVO IMPERIAL. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.",
     "recomendaciones": "Evitar cruce de cauce, alejar bienes de riberas. Mantenerse informado por la web institucional del SENAMHI.",
     "validadoDZ": true,
@@ -25,510 +25,443 @@
     "preferencia": "caudal",
     "tipo": "avenida",
     "cota": 302,
+    "umbrales": {
+      "amarilla": 42,
+      "naranja": 54,
+      "roja": 69
+    },
     "serie": [
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T00:00",
-        "nivel": 1.98,
-        "caudal": 30.2,
-        "estado": "normal"
+        "fecha": "2026-09-28T10:00",
+        "nivel": 4.32,
+        "caudal": 66.6
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T01:00",
-        "nivel": 1.99,
-        "caudal": 30.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T11:00",
+        "nivel": 4.3,
+        "caudal": 66.7
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T02:00",
-        "nivel": 1.99,
-        "caudal": 30.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T12:00",
+        "nivel": 4.31,
+        "caudal": 67.4
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T03:00",
-        "nivel": 1.99,
-        "caudal": 30.4,
-        "estado": "normal"
+        "fecha": "2026-09-28T13:00",
+        "nivel": 4.31,
+        "caudal": 67.2
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T04:00",
-        "nivel": 2,
-        "caudal": 30.5,
-        "estado": "normal"
+        "fecha": "2026-09-28T14:00",
+        "nivel": 4.3,
+        "caudal": 67
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T05:00",
-        "nivel": 2.01,
-        "caudal": 30.6,
-        "estado": "normal"
+        "fecha": "2026-09-28T15:00",
+        "nivel": 4.32,
+        "caudal": 67.6
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T06:00",
-        "nivel": 2.02,
-        "caudal": 30.8,
-        "estado": "normal"
+        "fecha": "2026-09-28T16:00",
+        "nivel": 4.31,
+        "caudal": 67.2
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T07:00",
-        "nivel": 2.02,
-        "caudal": 30.9,
-        "estado": "normal"
+        "fecha": "2026-09-28T17:00",
+        "nivel": 4.3,
+        "caudal": 67.1
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T08:00",
-        "nivel": 2.04,
-        "caudal": 31.1,
-        "estado": "normal"
+        "fecha": "2026-09-28T18:00",
+        "nivel": 4.29,
+        "caudal": 66.9
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T09:00",
-        "nivel": 2.05,
-        "caudal": 31.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T19:00",
+        "nivel": 4.27,
+        "caudal": 66.3
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T10:00",
-        "nivel": 2.06,
-        "caudal": 31.5,
-        "estado": "normal"
+        "fecha": "2026-09-28T20:00",
+        "nivel": 4.27,
+        "caudal": 66.1
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T11:00",
-        "nivel": 2.08,
-        "caudal": 31.8,
-        "estado": "normal"
+        "fecha": "2026-09-28T21:00",
+        "nivel": 4.27,
+        "caudal": 64.8
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T12:00",
-        "nivel": 2.1,
-        "caudal": 32,
-        "estado": "normal"
+        "fecha": "2026-09-28T22:00",
+        "nivel": 4.26,
+        "caudal": 65.2
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T13:00",
-        "nivel": 2.11,
-        "caudal": 32.2,
-        "estado": "normal"
+        "fecha": "2026-09-28T23:00",
+        "nivel": 4.25,
+        "caudal": 64.9
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T14:00",
-        "nivel": 2.12,
-        "caudal": 32.4,
-        "estado": "normal"
+        "fecha": "2026-09-29T00:00",
+        "nivel": 4.25,
+        "caudal": 64.3
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T15:00",
-        "nivel": 2.14,
-        "caudal": 32.6,
-        "estado": "normal"
+        "fecha": "2026-09-29T01:00",
+        "nivel": 4.23,
+        "caudal": 64
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T16:00",
-        "nivel": 2.15,
-        "caudal": 32.8,
-        "estado": "normal"
+        "fecha": "2026-09-29T02:00",
+        "nivel": 4.23,
+        "caudal": 63.9
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T17:00",
-        "nivel": 2.16,
-        "caudal": 32.9,
-        "estado": "normal"
+        "fecha": "2026-09-29T03:00",
+        "nivel": 4.21,
+        "caudal": 63.9
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T18:00",
-        "nivel": 2.16,
-        "caudal": 33,
-        "estado": "normal"
+        "fecha": "2026-09-29T04:00",
+        "nivel": 4.22,
+        "caudal": 63.3
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T19:00",
-        "nivel": 2.17,
-        "caudal": 33.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T05:00",
+        "nivel": 4.2,
+        "caudal": 63.6
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T20:00",
-        "nivel": 2.18,
-        "caudal": 33.3,
-        "estado": "normal"
+        "fecha": "2026-09-29T06:00",
+        "nivel": 4.21,
+        "caudal": 64.4
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T21:00",
-        "nivel": 2.21,
-        "caudal": 33.7,
-        "estado": "normal"
+        "fecha": "2026-09-29T07:00",
+        "nivel": 4.21,
+        "caudal": 64.2
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T22:00",
-        "nivel": 2.23,
-        "caudal": 34.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T08:00",
+        "nivel": 4.2,
+        "caudal": 64.5
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-08T23:00",
-        "nivel": 2.26,
-        "caudal": 34.5,
-        "estado": "normal"
+        "fecha": "2026-09-29T09:00",
+        "nivel": 4.2,
+        "caudal": 64.8
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-09T00:00",
-        "nivel": 2.29,
-        "caudal": 35,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T01:00",
-        "nivel": 2.33,
-        "caudal": 35.6,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T02:00",
-        "nivel": 2.37,
-        "caudal": 36.1,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T03:00",
-        "nivel": 2.4,
-        "caudal": 36.7,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T04:00",
-        "nivel": 2.44,
-        "caudal": 37.3,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T05:00",
-        "nivel": 2.48,
-        "caudal": 37.8,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T06:00",
-        "nivel": 2.71,
-        "caudal": 41.3,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T07:00",
-        "nivel": 2.54,
-        "caudal": 38.7,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T08:00",
-        "nivel": 2.56,
-        "caudal": 39,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T09:00",
-        "nivel": 2.58,
-        "caudal": 39.3,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T10:00",
-        "nivel": 2.59,
-        "caudal": 39.5,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T11:00",
-        "nivel": 2.6,
-        "caudal": 39.6,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T12:00",
-        "nivel": 2.6,
-        "caudal": 39.7,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T13:00",
-        "nivel": 2.61,
-        "caudal": 39.8,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T14:00",
-        "nivel": 2.63,
-        "caudal": 40.1,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T15:00",
-        "nivel": 2.66,
-        "caudal": 40.6,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T16:00",
-        "nivel": 2.7,
-        "caudal": 41.2,
-        "estado": "normal"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T17:00",
-        "nivel": 2.76,
-        "caudal": 42.1,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T18:00",
-        "nivel": 2.82,
-        "caudal": 43,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T19:00",
-        "nivel": 2.88,
-        "caudal": 44,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T20:00",
-        "nivel": 2.96,
-        "caudal": 45.1,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T21:00",
-        "nivel": 3.03,
-        "caudal": 46.3,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T22:00",
-        "nivel": 3.11,
-        "caudal": 47.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-09T23:00",
-        "nivel": 3.17,
-        "caudal": 48.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T00:00",
-        "nivel": 3.24,
-        "caudal": 49.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T01:00",
-        "nivel": 3.29,
-        "caudal": 50.2,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T02:00",
-        "nivel": 3.34,
-        "caudal": 50.9,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T03:00",
-        "nivel": 3.37,
-        "caudal": 51.5,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T04:00",
-        "nivel": 3.39,
-        "caudal": 51.8,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T05:00",
-        "nivel": 3.41,
-        "caudal": 52,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T06:00",
-        "nivel": 3.41,
-        "caudal": 52,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T07:00",
-        "nivel": 3.41,
-        "caudal": 52.1,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T08:00",
-        "nivel": 3.45,
-        "caudal": 52.6,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T09:00",
-        "nivel": 3.51,
-        "caudal": 53.5,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T10:00",
-        "nivel": 3.58,
-        "caudal": 54.6,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T11:00",
-        "nivel": 3.67,
-        "caudal": 56,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T12:00",
-        "nivel": 3.77,
-        "caudal": 57.5,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T13:00",
-        "nivel": 3.87,
-        "caudal": 59.1,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T14:00",
-        "nivel": 3.97,
-        "caudal": 60.6,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T15:00",
-        "nivel": 4.06,
-        "caudal": 61.9,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T16:00",
-        "nivel": 4.12,
-        "caudal": 62.9,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T17:00",
-        "nivel": 4.17,
-        "caudal": 63.7,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "socsi",
-        "fecha": "2026-09-10T18:00",
+        "fecha": "2026-09-29T10:00",
         "nivel": 4.19,
-        "caudal": 64,
-        "estado": "naranja"
+        "caudal": 65
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-10T19:00",
+        "fecha": "2026-09-29T11:00",
+        "nivel": 4.2,
+        "caudal": 65
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T12:00",
+        "nivel": 4.2,
+        "caudal": 64.8
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T13:00",
+        "nivel": 4.18,
+        "caudal": 65.5
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T14:00",
         "nivel": 4.17,
-        "caudal": 63.6,
-        "estado": "naranja"
+        "caudal": 64.6
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-10T20:00",
+        "fecha": "2026-09-29T15:00",
+        "nivel": 4.16,
+        "caudal": 64.5
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T16:00",
+        "nivel": 4.17,
+        "caudal": 64.2
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T17:00",
+        "nivel": 4.14,
+        "caudal": 63.6
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T18:00",
+        "nivel": 4.13,
+        "caudal": 63.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T19:00",
+        "nivel": 4.12,
+        "caudal": 62.8
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T20:00",
+        "nivel": 4.11,
+        "caudal": 62.3
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T21:00",
         "nivel": 4.08,
-        "caudal": 62.2,
-        "estado": "naranja"
+        "caudal": 62.3
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-10T21:00",
+        "fecha": "2026-09-29T22:00",
+        "nivel": 4.08,
+        "caudal": 61.6
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-29T23:00",
+        "nivel": 4.06,
+        "caudal": 60.9
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T00:00",
+        "nivel": 4.05,
+        "caudal": 60.5
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T01:00",
+        "nivel": 4.05,
+        "caudal": 60.5
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T02:00",
+        "nivel": 4.03,
+        "caudal": 60.3
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T03:00",
+        "nivel": 4.02,
+        "caudal": 59.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T04:00",
+        "nivel": 4.01,
+        "caudal": 59.8
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T05:00",
+        "nivel": 4.02,
+        "caudal": 59.8
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T06:00",
+        "nivel": 4.02,
+        "caudal": 60.3
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T07:00",
+        "nivel": 4.01,
+        "caudal": 59.9
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T08:00",
+        "nivel": 4.01,
+        "caudal": 60.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T09:00",
+        "nivel": 3.99,
+        "caudal": 60.4
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T10:00",
+        "nivel": 4,
+        "caudal": 60.2
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T11:00",
+        "nivel": 4,
+        "caudal": 60.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T12:00",
+        "nivel": 4,
+        "caudal": 60.8
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T13:00",
+        "nivel": 3.99,
+        "caudal": 60.6
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T14:00",
+        "nivel": 3.99,
+        "caudal": 60.9
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T15:00",
+        "nivel": 3.97,
+        "caudal": 60.9
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T16:00",
         "nivel": 3.96,
-        "caudal": 60.4,
-        "estado": "naranja"
+        "caudal": 60.1
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-10T22:00",
-        "nivel": 3.87,
-        "caudal": 59,
-        "estado": "naranja"
+        "fecha": "2026-09-30T17:00",
+        "nivel": 3.97,
+        "caudal": 60.1
       },
       {
         "stationId": "socsi",
-        "fecha": "2026-09-10T23:00",
-        "nivel": 3.83,
-        "caudal": 58.4,
-        "estado": "naranja"
+        "fecha": "2026-09-30T18:00",
+        "nivel": 3.95,
+        "caudal": 59.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T19:00",
+        "nivel": 3.94,
+        "caudal": 59
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T20:00",
+        "nivel": 3.93,
+        "caudal": 58.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T21:00",
+        "nivel": 3.91,
+        "caudal": 57.9
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T22:00",
+        "nivel": 3.92,
+        "caudal": 57.5
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-09-30T23:00",
+        "nivel": 3.9,
+        "caudal": 57.6
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T00:00",
+        "nivel": 3.9,
+        "caudal": 57.6
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T01:00",
+        "nivel": 3.9,
+        "caudal": 57.4
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T02:00",
+        "nivel": 3.89,
+        "caudal": 56.8
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T03:00",
+        "nivel": 3.88,
+        "caudal": 56.9
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T04:00",
+        "nivel": 3.89,
+        "caudal": 56.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T05:00",
+        "nivel": 3.89,
+        "caudal": 57.6
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T06:00",
+        "nivel": 3.88,
+        "caudal": 57.2
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T07:00",
+        "nivel": 3.89,
+        "caudal": 57.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T08:00",
+        "nivel": 3.9,
+        "caudal": 57.7
+      },
+      {
+        "stationId": "socsi",
+        "fecha": "2026-10-01T09:00",
+        "nivel": 3.9,
+        "caudal": 58.4
       }
     ]
   },
@@ -539,529 +472,462 @@
     "stationId": "chosica",
     "titulo": "SITUACIÓN ACTUAL DEL CAUDAL DEL RÍO RÍMAC - ESTACIÓN CHOSICA",
     "cuerpoAgua": "RÍO RÍMAC",
-    "distrito": "CHOSICA",
-    "inicio": "2026-09-10",
-    "fin": "2026-09-18",
+    "distrito": "Lurigancho-Chosica",
+    "inicio": "2026-10-01",
+    "fin": "2026-10-09",
     "duracionHoras": 200,
     "nivel": "AMARILLO",
     "plazo": "extendido",
     "vigente": true,
-    "fechaEmision": "Jueves, 10 de Septiembre de 2026 - 08:00 hrs",
-    "descripcion": "El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del RÍO RÍMAC. La estación hidrológica CHOSICA, registró un CAUDAL de 51.40 m³/s, con tendencia ascendente, ubicándose en el umbral AMARILLO. Las potenciales áreas de afectación serían los centros poblados de CHOSICA, LURIGANCHO-CHOSICA. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.",
+    "fechaEmision": "Jueves, 1 de Octubre de 2026 - 09:00 hrs",
+    "descripcion": "El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del RÍO RÍMAC. La estación hidrológica CHOSICA, registró un CAUDAL de 52.00 m³/s, con tendencia ascendente, ubicándose en el umbral AMARILLO. Las potenciales áreas de afectación serían los centros poblados de CHOSICA, LURIGANCHO-CHOSICA. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.",
     "recomendaciones": "Seguir reportes de la DZ. Mantenerse informado por la web institucional del SENAMHI.",
     "validadoDZ": true,
     "poblados": [
       "Chosica",
       "Lurigancho-Chosica"
     ],
-    "caudalActual": 51.4,
+    "caudalActual": 52,
     "preferencia": "caudal",
     "tipo": "avenida",
     "cota": 867,
+    "umbrales": {
+      "amarilla": 49,
+      "naranja": 60,
+      "roja": 72
+    },
     "serie": [
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T00:00",
-        "nivel": 1.96,
-        "caudal": 36.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T10:00",
+        "nivel": 2.91,
+        "caudal": 57.4
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T01:00",
-        "nivel": 1.96,
-        "caudal": 36.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T11:00",
+        "nivel": 2.91,
+        "caudal": 57.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T02:00",
-        "nivel": 1.96,
-        "caudal": 36.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T12:00",
+        "nivel": 2.92,
+        "caudal": 58.5
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T03:00",
-        "nivel": 1.97,
-        "caudal": 36.4,
-        "estado": "normal"
+        "fecha": "2026-09-28T13:00",
+        "nivel": 2.91,
+        "caudal": 58.4
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T04:00",
-        "nivel": 1.97,
-        "caudal": 36.5,
-        "estado": "normal"
+        "fecha": "2026-09-28T14:00",
+        "nivel": 2.92,
+        "caudal": 58.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T05:00",
-        "nivel": 1.98,
-        "caudal": 36.7,
-        "estado": "normal"
+        "fecha": "2026-09-28T15:00",
+        "nivel": 2.92,
+        "caudal": 57.9
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T06:00",
-        "nivel": 1.99,
-        "caudal": 36.8,
-        "estado": "normal"
+        "fecha": "2026-09-28T16:00",
+        "nivel": 2.92,
+        "caudal": 58.2
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T07:00",
-        "nivel": 2,
-        "caudal": 37,
-        "estado": "normal"
+        "fecha": "2026-09-28T17:00",
+        "nivel": 2.9,
+        "caudal": 57.8
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T08:00",
-        "nivel": 2.01,
-        "caudal": 37.2,
-        "estado": "normal"
+        "fecha": "2026-09-28T18:00",
+        "nivel": 2.89,
+        "caudal": 57.4
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T09:00",
-        "nivel": 2.03,
-        "caudal": 37.5,
-        "estado": "normal"
+        "fecha": "2026-09-28T19:00",
+        "nivel": 2.88,
+        "caudal": 57.1
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T10:00",
-        "nivel": 2.04,
-        "caudal": 37.7,
-        "estado": "normal"
+        "fecha": "2026-09-28T20:00",
+        "nivel": 2.89,
+        "caudal": 56.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T11:00",
-        "nivel": 2.05,
-        "caudal": 38,
-        "estado": "normal"
+        "fecha": "2026-09-28T21:00",
+        "nivel": 2.87,
+        "caudal": 56.1
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T12:00",
-        "nivel": 2.07,
-        "caudal": 38.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T22:00",
+        "nivel": 2.87,
+        "caudal": 55.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T13:00",
-        "nivel": 2.09,
-        "caudal": 38.6,
-        "estado": "normal"
+        "fecha": "2026-09-28T23:00",
+        "nivel": 2.86,
+        "caudal": 55.4
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T14:00",
-        "nivel": 2.1,
-        "caudal": 38.9,
-        "estado": "normal"
+        "fecha": "2026-09-29T00:00",
+        "nivel": 2.85,
+        "caudal": 55.8
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T15:00",
-        "nivel": 2.12,
-        "caudal": 39.2,
-        "estado": "normal"
+        "fecha": "2026-09-29T01:00",
+        "nivel": 2.85,
+        "caudal": 55.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T16:00",
-        "nivel": 2.14,
-        "caudal": 39.5,
-        "estado": "normal"
+        "fecha": "2026-09-29T02:00",
+        "nivel": 2.83,
+        "caudal": 54.9
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T17:00",
-        "nivel": 2.15,
-        "caudal": 39.7,
-        "estado": "normal"
+        "fecha": "2026-09-29T03:00",
+        "nivel": 2.85,
+        "caudal": 55.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T18:00",
-        "nivel": 2.16,
-        "caudal": 39.9,
-        "estado": "normal"
+        "fecha": "2026-09-29T04:00",
+        "nivel": 2.85,
+        "caudal": 55.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T19:00",
-        "nivel": 2.17,
-        "caudal": 40.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T05:00",
+        "nivel": 2.83,
+        "caudal": 55.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T20:00",
-        "nivel": 2.17,
-        "caudal": 40.2,
-        "estado": "normal"
+        "fecha": "2026-09-29T06:00",
+        "nivel": 2.85,
+        "caudal": 55.9
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T21:00",
-        "nivel": 2.18,
-        "caudal": 40.3,
-        "estado": "normal"
+        "fecha": "2026-09-29T07:00",
+        "nivel": 2.83,
+        "caudal": 56.1
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T22:00",
-        "nivel": 2.18,
-        "caudal": 40.4,
-        "estado": "normal"
+        "fecha": "2026-09-29T08:00",
+        "nivel": 2.85,
+        "caudal": 55.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-08T23:00",
-        "nivel": 2.19,
-        "caudal": 40.6,
-        "estado": "normal"
+        "fecha": "2026-09-29T09:00",
+        "nivel": 2.84,
+        "caudal": 56
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T00:00",
-        "nivel": 2.21,
-        "caudal": 40.8,
-        "estado": "normal"
+        "fecha": "2026-09-29T10:00",
+        "nivel": 2.84,
+        "caudal": 56.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T01:00",
-        "nivel": 2.22,
-        "caudal": 41,
-        "estado": "normal"
+        "fecha": "2026-09-29T11:00",
+        "nivel": 2.85,
+        "caudal": 56.5
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T02:00",
-        "nivel": 2.23,
-        "caudal": 41.3,
-        "estado": "normal"
+        "fecha": "2026-09-29T12:00",
+        "nivel": 2.84,
+        "caudal": 56.6
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T03:00",
-        "nivel": 2.25,
-        "caudal": 41.6,
-        "estado": "normal"
+        "fecha": "2026-09-29T13:00",
+        "nivel": 2.84,
+        "caudal": 56.4
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T04:00",
-        "nivel": 2.26,
-        "caudal": 41.9,
-        "estado": "normal"
+        "fecha": "2026-09-29T14:00",
+        "nivel": 2.83,
+        "caudal": 56.1
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T05:00",
-        "nivel": 2.28,
-        "caudal": 42.2,
-        "estado": "normal"
+        "fecha": "2026-09-29T15:00",
+        "nivel": 2.82,
+        "caudal": 56.5
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T06:00",
-        "nivel": 2.3,
-        "caudal": 42.5,
-        "estado": "normal"
+        "fecha": "2026-09-29T16:00",
+        "nivel": 2.82,
+        "caudal": 55.8
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T07:00",
-        "nivel": 2.31,
-        "caudal": 42.8,
-        "estado": "normal"
+        "fecha": "2026-09-29T17:00",
+        "nivel": 2.81,
+        "caudal": 56
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T08:00",
-        "nivel": 2.33,
-        "caudal": 43.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T18:00",
+        "nivel": 2.79,
+        "caudal": 55.8
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T09:00",
-        "nivel": 2.35,
-        "caudal": 43.4,
-        "estado": "normal"
+        "fecha": "2026-09-29T19:00",
+        "nivel": 2.78,
+        "caudal": 54.9
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T10:00",
-        "nivel": 2.36,
-        "caudal": 43.7,
-        "estado": "normal"
+        "fecha": "2026-09-29T20:00",
+        "nivel": 2.78,
+        "caudal": 54.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T11:00",
-        "nivel": 2.37,
-        "caudal": 43.9,
-        "estado": "normal"
+        "fecha": "2026-09-29T21:00",
+        "nivel": 2.78,
+        "caudal": 53.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-09T12:00",
-        "nivel": 2.39,
-        "caudal": 44.2,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T13:00",
-        "nivel": 2.4,
-        "caudal": 44.4,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T14:00",
-        "nivel": 2.41,
-        "caudal": 44.6,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T15:00",
-        "nivel": 2.42,
-        "caudal": 44.7,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T16:00",
-        "nivel": 2.42,
-        "caudal": 44.8,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T17:00",
-        "nivel": 2.43,
-        "caudal": 45,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T18:00",
-        "nivel": 2.44,
-        "caudal": 45.2,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T19:00",
-        "nivel": 2.46,
-        "caudal": 45.6,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T20:00",
-        "nivel": 2.62,
-        "caudal": 48.5,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T21:00",
-        "nivel": 2.51,
-        "caudal": 46.5,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T22:00",
-        "nivel": 2.55,
-        "caudal": 47.1,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-09T23:00",
-        "nivel": 2.58,
-        "caudal": 47.7,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-10T00:00",
-        "nivel": 2.61,
-        "caudal": 48.3,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-10T01:00",
-        "nivel": 2.64,
-        "caudal": 48.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-10T02:00",
-        "nivel": 2.67,
-        "caudal": 49.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-10T03:00",
-        "nivel": 2.7,
-        "caudal": 50,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-10T04:00",
-        "nivel": 2.73,
-        "caudal": 50.5,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "chosica",
-        "fecha": "2026-09-10T05:00",
+        "fecha": "2026-09-29T22:00",
         "nivel": 2.75,
-        "caudal": 50.9,
-        "estado": "amarilla"
+        "caudal": 53.9
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T06:00",
-        "nivel": 2.77,
-        "caudal": 51.2,
-        "estado": "amarilla"
+        "fecha": "2026-09-29T23:00",
+        "nivel": 2.75,
+        "caudal": 53.5
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T07:00",
-        "nivel": 2.78,
-        "caudal": 51.4,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T00:00",
+        "nivel": 2.75,
+        "caudal": 53.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T08:00",
-        "nivel": 2.79,
-        "caudal": 51.6,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T01:00",
+        "nivel": 2.74,
+        "caudal": 52.9
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T09:00",
-        "nivel": 2.79,
-        "caudal": 51.7,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T02:00",
+        "nivel": 2.72,
+        "caudal": 52.8
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T10:00",
-        "nivel": 2.79,
-        "caudal": 51.6,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T03:00",
+        "nivel": 2.72,
+        "caudal": 52.5
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T11:00",
-        "nivel": 2.79,
-        "caudal": 51.6,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T04:00",
+        "nivel": 2.72,
+        "caudal": 52.8
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T12:00",
-        "nivel": 2.78,
-        "caudal": 51.5,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T05:00",
+        "nivel": 2.71,
+        "caudal": 52.4
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T13:00",
-        "nivel": 2.78,
-        "caudal": 51.5,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T06:00",
+        "nivel": 2.72,
+        "caudal": 52.7
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T14:00",
-        "nivel": 2.78,
-        "caudal": 51.4,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T07:00",
+        "nivel": 2.72,
+        "caudal": 53
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T15:00",
-        "nivel": 2.78,
-        "caudal": 51.4,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T08:00",
+        "nivel": 2.72,
+        "caudal": 53.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T16:00",
-        "nivel": 2.78,
-        "caudal": 51.4,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T09:00",
+        "nivel": 2.71,
+        "caudal": 52.9
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T17:00",
-        "nivel": 2.77,
-        "caudal": 51.3,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T10:00",
+        "nivel": 2.72,
+        "caudal": 53.5
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T18:00",
-        "nivel": 2.77,
-        "caudal": 51.3,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T11:00",
+        "nivel": 2.72,
+        "caudal": 53.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T19:00",
-        "nivel": 2.77,
-        "caudal": 51.3,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T12:00",
+        "nivel": 2.71,
+        "caudal": 53.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T20:00",
-        "nivel": 2.77,
-        "caudal": 51.3,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T13:00",
+        "nivel": 2.72,
+        "caudal": 53.5
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T21:00",
-        "nivel": 2.77,
-        "caudal": 51.3,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T14:00",
+        "nivel": 2.71,
+        "caudal": 53.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T22:00",
-        "nivel": 2.78,
-        "caudal": 51.4,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T15:00",
+        "nivel": 2.71,
+        "caudal": 53.3
       },
       {
         "stationId": "chosica",
-        "fecha": "2026-09-10T23:00",
-        "nivel": 2.78,
-        "caudal": 51.4,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T16:00",
+        "nivel": 2.7,
+        "caudal": 53.6
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-09-30T17:00",
+        "nivel": 2.69,
+        "caudal": 53.2
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-09-30T18:00",
+        "nivel": 2.69,
+        "caudal": 52.3
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-09-30T19:00",
+        "nivel": 2.67,
+        "caudal": 52
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-09-30T20:00",
+        "nivel": 2.67,
+        "caudal": 52.4
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-09-30T21:00",
+        "nivel": 2.66,
+        "caudal": 52
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-09-30T22:00",
+        "nivel": 2.65,
+        "caudal": 51.3
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-09-30T23:00",
+        "nivel": 2.64,
+        "caudal": 50.9
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T00:00",
+        "nivel": 2.63,
+        "caudal": 50.7
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T01:00",
+        "nivel": 2.64,
+        "caudal": 50.6
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T02:00",
+        "nivel": 2.65,
+        "caudal": 50.6
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T03:00",
+        "nivel": 2.64,
+        "caudal": 50.6
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T04:00",
+        "nivel": 2.63,
+        "caudal": 50.6
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T05:00",
+        "nivel": 2.63,
+        "caudal": 50.7
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T06:00",
+        "nivel": 2.63,
+        "caudal": 50.7
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T07:00",
+        "nivel": 2.65,
+        "caudal": 51.5
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T08:00",
+        "nivel": 2.64,
+        "caudal": 51.2
+      },
+      {
+        "stationId": "chosica",
+        "fecha": "2026-10-01T09:00",
+        "nivel": 2.66,
+        "caudal": 52
       }
     ]
   },
@@ -1072,529 +938,462 @@
     "stationId": "pisac",
     "titulo": "SITUACIÓN ACTUAL DEL CAUDAL DEL RÍO VILCANOTA - ESTACIÓN PISAC",
     "cuerpoAgua": "RÍO VILCANOTA",
-    "distrito": "PISAC",
-    "inicio": "2026-09-10",
-    "fin": "2026-09-18",
+    "distrito": "Pisac, Lamay",
+    "inicio": "2026-10-01",
+    "fin": "2026-10-09",
     "duracionHoras": 200,
     "nivel": "AMARILLO",
     "plazo": "extendido",
     "vigente": true,
-    "fechaEmision": "Jueves, 10 de Septiembre de 2026 - 08:00 hrs",
-    "descripcion": "El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del RÍO VILCANOTA. La estación hidrológica PISAC, registró un CAUDAL de 177.40 m³/s, con tendencia ascendente, ubicándose en el umbral AMARILLO. Las potenciales áreas de afectación serían los centros poblados de PISAC, COYA. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.",
+    "fechaEmision": "Jueves, 1 de Octubre de 2026 - 09:00 hrs",
+    "descripcion": "El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del RÍO VILCANOTA. La estación hidrológica PISAC, registró un CAUDAL de 182.50 m³/s, con tendencia ascendente, ubicándose en el umbral AMARILLO. Las potenciales áreas de afectación serían los centros poblados de PISAC, COYA. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.",
     "recomendaciones": "Seguir reportes de la DZ. Mantenerse informado por la web institucional del SENAMHI.",
     "validadoDZ": true,
     "poblados": [
       "Pisac",
       "Coya"
     ],
-    "caudalActual": 177.4,
+    "caudalActual": 182.5,
     "preferencia": "caudal",
     "tipo": "avenida",
     "cota": 3002,
+    "umbrales": {
+      "amarilla": 170,
+      "naranja": 205,
+      "roja": 245
+    },
     "serie": [
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T00:00",
-        "nivel": 1.99,
-        "caudal": 118.9,
-        "estado": "normal"
+        "fecha": "2026-09-28T10:00",
+        "nivel": 3.36,
+        "caudal": 200.7
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T01:00",
-        "nivel": 1.99,
-        "caudal": 119,
-        "estado": "normal"
+        "fecha": "2026-09-28T11:00",
+        "nivel": 3.37,
+        "caudal": 201
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T02:00",
-        "nivel": 2,
-        "caudal": 119.2,
-        "estado": "normal"
+        "fecha": "2026-09-28T12:00",
+        "nivel": 3.35,
+        "caudal": 200.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T03:00",
-        "nivel": 2,
-        "caudal": 119.5,
-        "estado": "normal"
+        "fecha": "2026-09-28T13:00",
+        "nivel": 3.36,
+        "caudal": 200.8
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T04:00",
-        "nivel": 2.01,
-        "caudal": 119.9,
-        "estado": "normal"
+        "fecha": "2026-09-28T14:00",
+        "nivel": 3.38,
+        "caudal": 201.7
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T05:00",
-        "nivel": 2.02,
-        "caudal": 120.4,
-        "estado": "normal"
+        "fecha": "2026-09-28T15:00",
+        "nivel": 3.38,
+        "caudal": 202.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T06:00",
-        "nivel": 2.03,
-        "caudal": 121,
-        "estado": "normal"
+        "fecha": "2026-09-28T16:00",
+        "nivel": 3.38,
+        "caudal": 202.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T07:00",
-        "nivel": 2.04,
-        "caudal": 121.7,
-        "estado": "normal"
+        "fecha": "2026-09-28T17:00",
+        "nivel": 3.33,
+        "caudal": 198.9
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T08:00",
-        "nivel": 2.05,
-        "caudal": 122.5,
-        "estado": "normal"
+        "fecha": "2026-09-28T18:00",
+        "nivel": 3.33,
+        "caudal": 199.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T09:00",
-        "nivel": 2.07,
-        "caudal": 123.3,
-        "estado": "normal"
+        "fecha": "2026-09-28T19:00",
+        "nivel": 3.33,
+        "caudal": 199.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T10:00",
-        "nivel": 2.08,
-        "caudal": 124.2,
-        "estado": "normal"
+        "fecha": "2026-09-28T20:00",
+        "nivel": 3.27,
+        "caudal": 195.6
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T11:00",
-        "nivel": 2.1,
-        "caudal": 125.1,
-        "estado": "normal"
+        "fecha": "2026-09-28T21:00",
+        "nivel": 3.28,
+        "caudal": 196
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T12:00",
-        "nivel": 2.11,
-        "caudal": 126,
-        "estado": "normal"
+        "fecha": "2026-09-28T22:00",
+        "nivel": 3.27,
+        "caudal": 195.4
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T13:00",
-        "nivel": 2.13,
-        "caudal": 126.9,
-        "estado": "normal"
+        "fecha": "2026-09-28T23:00",
+        "nivel": 3.23,
+        "caudal": 193.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T14:00",
-        "nivel": 2.14,
-        "caudal": 127.7,
-        "estado": "normal"
+        "fecha": "2026-09-29T00:00",
+        "nivel": 3.2,
+        "caudal": 191.4
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T15:00",
-        "nivel": 2.15,
-        "caudal": 128.5,
-        "estado": "normal"
+        "fecha": "2026-09-29T01:00",
+        "nivel": 3.21,
+        "caudal": 192.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T16:00",
-        "nivel": 2.16,
-        "caudal": 129.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T02:00",
+        "nivel": 3.19,
+        "caudal": 190.2
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T17:00",
-        "nivel": 2.17,
-        "caudal": 129.6,
-        "estado": "normal"
+        "fecha": "2026-09-29T03:00",
+        "nivel": 3.2,
+        "caudal": 191
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T18:00",
-        "nivel": 2.18,
-        "caudal": 130,
-        "estado": "normal"
+        "fecha": "2026-09-29T04:00",
+        "nivel": 3.23,
+        "caudal": 192.9
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T19:00",
-        "nivel": 2.18,
-        "caudal": 130.4,
-        "estado": "normal"
+        "fecha": "2026-09-29T05:00",
+        "nivel": 3.23,
+        "caudal": 193.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T20:00",
-        "nivel": 2.2,
-        "caudal": 131.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T06:00",
+        "nivel": 3.2,
+        "caudal": 191.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T21:00",
-        "nivel": 2.21,
-        "caudal": 132.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T07:00",
+        "nivel": 3.23,
+        "caudal": 192.9
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T22:00",
-        "nivel": 2.23,
-        "caudal": 133.3,
-        "estado": "normal"
+        "fecha": "2026-09-29T08:00",
+        "nivel": 3.23,
+        "caudal": 193.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-08T23:00",
-        "nivel": 2.25,
-        "caudal": 134.6,
-        "estado": "normal"
+        "fecha": "2026-09-29T09:00",
+        "nivel": 3.26,
+        "caudal": 194.7
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T00:00",
-        "nivel": 2.28,
-        "caudal": 136.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T10:00",
+        "nivel": 3.25,
+        "caudal": 194.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T01:00",
-        "nivel": 2.3,
-        "caudal": 137.6,
-        "estado": "normal"
+        "fecha": "2026-09-29T11:00",
+        "nivel": 3.3,
+        "caudal": 197.6
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T02:00",
-        "nivel": 2.43,
-        "caudal": 145.2,
-        "estado": "normal"
+        "fecha": "2026-09-29T12:00",
+        "nivel": 3.31,
+        "caudal": 197.9
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T03:00",
-        "nivel": 2.36,
-        "caudal": 140.8,
-        "estado": "normal"
+        "fecha": "2026-09-29T13:00",
+        "nivel": 3.27,
+        "caudal": 195.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T04:00",
-        "nivel": 2.38,
-        "caudal": 142.3,
-        "estado": "normal"
+        "fecha": "2026-09-29T14:00",
+        "nivel": 3.27,
+        "caudal": 195.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T05:00",
-        "nivel": 2.41,
-        "caudal": 143.7,
-        "estado": "normal"
+        "fecha": "2026-09-29T15:00",
+        "nivel": 3.3,
+        "caudal": 197.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T06:00",
-        "nivel": 2.43,
-        "caudal": 145,
-        "estado": "normal"
+        "fecha": "2026-09-29T16:00",
+        "nivel": 3.25,
+        "caudal": 194.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T07:00",
-        "nivel": 2.45,
-        "caudal": 146.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T17:00",
+        "nivel": 3.24,
+        "caudal": 193.7
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T08:00",
-        "nivel": 2.46,
-        "caudal": 147.1,
-        "estado": "normal"
+        "fecha": "2026-09-29T18:00",
+        "nivel": 3.23,
+        "caudal": 193.2
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T09:00",
-        "nivel": 2.48,
-        "caudal": 147.8,
-        "estado": "normal"
+        "fecha": "2026-09-29T19:00",
+        "nivel": 3.22,
+        "caudal": 192.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T10:00",
-        "nivel": 2.49,
-        "caudal": 148.4,
-        "estado": "normal"
+        "fecha": "2026-09-29T20:00",
+        "nivel": 3.19,
+        "caudal": 190.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T11:00",
-        "nivel": 2.49,
-        "caudal": 148.7,
-        "estado": "normal"
+        "fecha": "2026-09-29T21:00",
+        "nivel": 3.15,
+        "caudal": 188.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T12:00",
-        "nivel": 2.49,
-        "caudal": 148.8,
-        "estado": "normal"
+        "fecha": "2026-09-29T22:00",
+        "nivel": 3.11,
+        "caudal": 186.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T13:00",
-        "nivel": 2.5,
-        "caudal": 149,
-        "estado": "normal"
+        "fecha": "2026-09-29T23:00",
+        "nivel": 3.12,
+        "caudal": 186.4
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T14:00",
-        "nivel": 2.5,
-        "caudal": 149.5,
-        "estado": "normal"
+        "fecha": "2026-09-30T00:00",
+        "nivel": 3.08,
+        "caudal": 184.2
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T15:00",
-        "nivel": 2.52,
-        "caudal": 150.3,
-        "estado": "normal"
+        "fecha": "2026-09-30T01:00",
+        "nivel": 3.11,
+        "caudal": 186.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T16:00",
-        "nivel": 2.54,
-        "caudal": 151.4,
-        "estado": "normal"
+        "fecha": "2026-09-30T02:00",
+        "nivel": 3.07,
+        "caudal": 183.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T17:00",
-        "nivel": 2.56,
-        "caudal": 152.8,
-        "estado": "normal"
+        "fecha": "2026-09-30T03:00",
+        "nivel": 3.05,
+        "caudal": 182.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T18:00",
-        "nivel": 2.59,
-        "caudal": 154.4,
-        "estado": "normal"
+        "fecha": "2026-09-30T04:00",
+        "nivel": 3.08,
+        "caudal": 184.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T19:00",
-        "nivel": 2.62,
-        "caudal": 156.2,
-        "estado": "normal"
+        "fecha": "2026-09-30T05:00",
+        "nivel": 3.07,
+        "caudal": 183.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T20:00",
-        "nivel": 2.65,
-        "caudal": 158.1,
-        "estado": "normal"
+        "fecha": "2026-09-30T06:00",
+        "nivel": 3.1,
+        "caudal": 185.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T21:00",
-        "nivel": 2.68,
-        "caudal": 160.2,
-        "estado": "normal"
+        "fecha": "2026-09-30T07:00",
+        "nivel": 3.1,
+        "caudal": 185.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T22:00",
-        "nivel": 2.72,
-        "caudal": 162.2,
-        "estado": "normal"
+        "fecha": "2026-09-30T08:00",
+        "nivel": 3.14,
+        "caudal": 187.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-09T23:00",
-        "nivel": 2.75,
-        "caudal": 164.3,
-        "estado": "normal"
+        "fecha": "2026-09-30T09:00",
+        "nivel": 3.13,
+        "caudal": 187.2
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T00:00",
-        "nivel": 2.79,
-        "caudal": 166.3,
-        "estado": "normal"
+        "fecha": "2026-09-30T10:00",
+        "nivel": 3.15,
+        "caudal": 188
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T01:00",
-        "nivel": 2.82,
-        "caudal": 168.2,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T11:00",
+        "nivel": 3.17,
+        "caudal": 189.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T02:00",
-        "nivel": 2.85,
-        "caudal": 170.1,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T12:00",
+        "nivel": 3.14,
+        "caudal": 187.7
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T03:00",
-        "nivel": 2.88,
-        "caudal": 171.7,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T13:00",
+        "nivel": 3.17,
+        "caudal": 189.3
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T04:00",
-        "nivel": 2.9,
-        "caudal": 173.2,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T14:00",
+        "nivel": 3.16,
+        "caudal": 189.1
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T05:00",
-        "nivel": 2.92,
-        "caudal": 174.5,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T15:00",
+        "nivel": 3.13,
+        "caudal": 187.2
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T06:00",
-        "nivel": 2.94,
-        "caudal": 175.6,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T16:00",
+        "nivel": 3.16,
+        "caudal": 188.9
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T07:00",
-        "nivel": 2.96,
-        "caudal": 176.5,
-        "estado": "amarilla"
+        "fecha": "2026-09-30T17:00",
+        "nivel": 3.15,
+        "caudal": 187.9
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T08:00",
+        "fecha": "2026-09-30T18:00",
+        "nivel": 3.1,
+        "caudal": 185.6
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-09-30T19:00",
+        "nivel": 3.07,
+        "caudal": 183.8
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-09-30T20:00",
+        "nivel": 3.07,
+        "caudal": 183.5
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-09-30T21:00",
+        "nivel": 3.03,
+        "caudal": 181.1
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-09-30T22:00",
+        "nivel": 3.02,
+        "caudal": 180.9
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-09-30T23:00",
+        "nivel": 3.02,
+        "caudal": 180.4
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-10-01T00:00",
+        "nivel": 3.02,
+        "caudal": 180.5
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-10-01T01:00",
+        "nivel": 3,
+        "caudal": 179.4
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-10-01T02:00",
         "nivel": 2.97,
-        "caudal": 177.3,
-        "estado": "amarilla"
+        "caudal": 177.4
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T09:00",
+        "fecha": "2026-10-01T03:00",
+        "nivel": 2.97,
+        "caudal": 177.6
+      },
+      {
+        "stationId": "pisac",
+        "fecha": "2026-10-01T04:00",
         "nivel": 2.98,
-        "caudal": 177.8,
-        "estado": "amarilla"
+        "caudal": 178.4
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T10:00",
-        "nivel": 2.98,
-        "caudal": 178.2,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T11:00",
+        "fecha": "2026-10-01T05:00",
         "nivel": 2.99,
-        "caudal": 178.5,
-        "estado": "amarilla"
+        "caudal": 178.8
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T12:00",
-        "nivel": 2.99,
-        "caudal": 178.6,
-        "estado": "amarilla"
+        "fecha": "2026-10-01T06:00",
+        "nivel": 3,
+        "caudal": 179.2
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T13:00",
-        "nivel": 2.99,
-        "caudal": 178.5,
-        "estado": "amarilla"
+        "fecha": "2026-10-01T07:00",
+        "nivel": 3.03,
+        "caudal": 180.8
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T14:00",
-        "nivel": 2.99,
-        "caudal": 178.4,
-        "estado": "amarilla"
+        "fecha": "2026-10-01T08:00",
+        "nivel": 3.04,
+        "caudal": 181.5
       },
       {
         "stationId": "pisac",
-        "fecha": "2026-09-10T15:00",
-        "nivel": 2.99,
-        "caudal": 178.3,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T16:00",
-        "nivel": 2.98,
-        "caudal": 178.1,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T17:00",
-        "nivel": 2.98,
-        "caudal": 177.9,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T18:00",
-        "nivel": 2.98,
-        "caudal": 177.7,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T19:00",
-        "nivel": 2.97,
-        "caudal": 177.5,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T20:00",
-        "nivel": 2.97,
-        "caudal": 177.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T21:00",
-        "nivel": 2.97,
-        "caudal": 177.3,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T22:00",
-        "nivel": 2.97,
-        "caudal": 177.3,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "pisac",
-        "fecha": "2026-09-10T23:00",
-        "nivel": 2.97,
-        "caudal": 177.4,
-        "estado": "amarilla"
+        "fecha": "2026-10-01T09:00",
+        "nivel": 3.05,
+        "caudal": 182.5
       }
     ]
   },
@@ -1605,529 +1404,462 @@
     "stationId": "puente-ramis",
     "titulo": "SITUACIÓN ACTUAL DEL CAUDAL DEL RÍO RAMIS - ESTACIÓN PUENTE RAMIS",
     "cuerpoAgua": "RÍO RAMIS",
-    "distrito": "ARAPA",
-    "inicio": "2026-09-10",
-    "fin": "2026-09-16",
+    "distrito": "Arapa, Taraco",
+    "inicio": "2026-10-01",
+    "fin": "2026-10-07",
     "duracionHoras": 150,
     "nivel": "NARANJA",
     "plazo": "extendido",
     "vigente": true,
-    "fechaEmision": "Jueves, 10 de Septiembre de 2026 - 08:00 hrs",
-    "descripcion": "El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del RÍO RAMIS. La estación hidrológica PUENTE RAMIS, registró un CAUDAL de 16.10 m³/s, con tendencia descendente, ubicándose en el umbral NARANJA. Las potenciales áreas de afectación serían los centros poblados de ARAPA, TARACO. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.",
+    "fechaEmision": "Jueves, 1 de Octubre de 2026 - 09:00 hrs",
+    "descripcion": "El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del RÍO RAMIS. La estación hidrológica PUENTE RAMIS, registró un CAUDAL de 16.30 m³/s, con tendencia descendente, ubicándose en el umbral NARANJA. Las potenciales áreas de afectación serían los centros poblados de ARAPA, TARACO. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.",
     "recomendaciones": "Precaución por la tendencia descendente del nivel. Mantenerse informado por la web institucional del SENAMHI.",
     "validadoDZ": true,
     "poblados": [
       "Arapa",
       "Taraco"
     ],
-    "caudalActual": 16.1,
+    "caudalActual": 16.3,
     "preferencia": "caudal",
     "tipo": "vigilancia",
     "cota": 3825,
+    "umbrales": {
+      "amarilla": 22,
+      "naranja": 18,
+      "roja": 15
+    },
     "serie": [
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-08T00:00",
-        "nivel": 2,
-        "caudal": 25.2,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T01:00",
-        "nivel": 2,
-        "caudal": 25.2,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T02:00",
-        "nivel": 1.99,
-        "caudal": 25.1,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T03:00",
-        "nivel": 1.98,
-        "caudal": 25,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T04:00",
-        "nivel": 1.97,
-        "caudal": 24.8,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T05:00",
-        "nivel": 1.95,
-        "caudal": 24.6,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T06:00",
-        "nivel": 1.94,
-        "caudal": 24.4,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T07:00",
-        "nivel": 1.91,
-        "caudal": 24.1,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T08:00",
-        "nivel": 1.9,
-        "caudal": 23.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T09:00",
-        "nivel": 1.88,
-        "caudal": 23.7,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T10:00",
-        "nivel": 1.87,
-        "caudal": 23.5,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T11:00",
-        "nivel": 1.85,
-        "caudal": 23.3,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T12:00",
-        "nivel": 1.83,
-        "caudal": 23.1,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T13:00",
-        "nivel": 1.83,
-        "caudal": 23,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T14:00",
-        "nivel": 1.82,
-        "caudal": 22.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T15:00",
-        "nivel": 1.82,
-        "caudal": 22.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T16:00",
-        "nivel": 1.82,
-        "caudal": 22.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T17:00",
-        "nivel": 1.82,
-        "caudal": 22.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T18:00",
-        "nivel": 1.82,
-        "caudal": 22.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T19:00",
-        "nivel": 1.82,
-        "caudal": 22.9,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T20:00",
-        "nivel": 1.81,
-        "caudal": 22.8,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T21:00",
-        "nivel": 1.8,
-        "caudal": 22.7,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T22:00",
-        "nivel": 1.79,
-        "caudal": 22.5,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-08T23:00",
-        "nivel": 1.78,
-        "caudal": 22.4,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T00:00",
-        "nivel": 1.75,
-        "caudal": 22.1,
-        "estado": "normal"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T01:00",
-        "nivel": 1.74,
-        "caudal": 21.9,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T02:00",
-        "nivel": 1.71,
-        "caudal": 21.6,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T03:00",
-        "nivel": 1.7,
-        "caudal": 21.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T04:00",
-        "nivel": 1.67,
-        "caudal": 21.1,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T05:00",
-        "nivel": 1.66,
-        "caudal": 20.9,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T06:00",
-        "nivel": 1.63,
-        "caudal": 20.6,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T07:00",
-        "nivel": 1.62,
-        "caudal": 20.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T08:00",
-        "nivel": 1.6,
-        "caudal": 20.2,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T09:00",
-        "nivel": 1.59,
-        "caudal": 20,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T10:00",
-        "nivel": 1.58,
-        "caudal": 19.9,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T11:00",
-        "nivel": 1.58,
-        "caudal": 19.9,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T12:00",
-        "nivel": 1.57,
-        "caudal": 19.8,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T13:00",
-        "nivel": 1.57,
-        "caudal": 19.8,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T14:00",
-        "nivel": 1.57,
-        "caudal": 19.8,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T15:00",
-        "nivel": 1.57,
-        "caudal": 19.8,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T16:00",
-        "nivel": 1.56,
-        "caudal": 19.7,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T17:00",
-        "nivel": 1.56,
-        "caudal": 19.6,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T18:00",
-        "nivel": 1.55,
-        "caudal": 19.5,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T19:00",
-        "nivel": 1.54,
-        "caudal": 19.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T20:00",
-        "nivel": 1.52,
-        "caudal": 19.2,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T21:00",
-        "nivel": 1.51,
-        "caudal": 19,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T22:00",
-        "nivel": 1.49,
-        "caudal": 18.8,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-09T23:00",
-        "nivel": 1.48,
-        "caudal": 18.6,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-10T00:00",
-        "nivel": 1.46,
-        "caudal": 18.4,
-        "estado": "amarilla"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-10T01:00",
+        "fecha": "2026-09-28T10:00",
         "nivel": 1.44,
-        "caudal": 18.2,
-        "estado": "amarilla"
+        "caudal": 18.1
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T02:00",
-        "nivel": 1.59,
-        "caudal": 20,
-        "estado": "amarilla"
+        "fecha": "2026-09-28T11:00",
+        "nivel": 1.44,
+        "caudal": 18.1
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T03:00",
+        "fecha": "2026-09-28T12:00",
+        "nivel": 1.43,
+        "caudal": 18
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-28T13:00",
+        "nivel": 1.44,
+        "caudal": 18.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-28T14:00",
+        "nivel": 1.45,
+        "caudal": 18.2
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-28T15:00",
+        "nivel": 1.44,
+        "caudal": 18.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-28T16:00",
+        "nivel": 1.44,
+        "caudal": 18.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-28T17:00",
+        "nivel": 1.42,
+        "caudal": 17.8
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-28T18:00",
         "nivel": 1.41,
-        "caudal": 17.8,
-        "estado": "naranja"
+        "caudal": 17.7
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T04:00",
+        "fecha": "2026-09-28T19:00",
+        "nivel": 1.41,
+        "caudal": 17.7
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-28T20:00",
         "nivel": 1.4,
-        "caudal": 17.6,
-        "estado": "naranja"
+        "caudal": 17.5
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T05:00",
-        "nivel": 1.38,
-        "caudal": 17.4,
-        "estado": "naranja"
+        "fecha": "2026-09-28T21:00",
+        "nivel": 1.39,
+        "caudal": 17.4
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T06:00",
+        "fecha": "2026-09-28T22:00",
         "nivel": 1.37,
-        "caudal": 17.2,
-        "estado": "naranja"
+        "caudal": 17.2
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T07:00",
+        "fecha": "2026-09-28T23:00",
         "nivel": 1.36,
-        "caudal": 17.1,
-        "estado": "naranja"
+        "caudal": 17.1
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T08:00",
+        "fecha": "2026-09-29T00:00",
+        "nivel": 1.36,
+        "caudal": 17.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T01:00",
         "nivel": 1.35,
-        "caudal": 17,
-        "estado": "naranja"
+        "caudal": 16.9
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T09:00",
+        "fecha": "2026-09-29T02:00",
+        "nivel": 1.35,
+        "caudal": 16.9
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T03:00",
+        "nivel": 1.35,
+        "caudal": 16.9
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T04:00",
         "nivel": 1.34,
-        "caudal": 16.9,
-        "estado": "naranja"
+        "caudal": 16.8
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T10:00",
+        "fecha": "2026-09-29T05:00",
+        "nivel": 1.36,
+        "caudal": 17
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T06:00",
+        "nivel": 1.36,
+        "caudal": 17.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T07:00",
+        "nivel": 1.37,
+        "caudal": 17.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T08:00",
+        "nivel": 1.36,
+        "caudal": 17.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T09:00",
+        "nivel": 1.37,
+        "caudal": 17.2
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T10:00",
+        "nivel": 1.38,
+        "caudal": 17.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T11:00",
+        "nivel": 1.37,
+        "caudal": 17.2
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T12:00",
+        "nivel": 1.38,
+        "caudal": 17.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T13:00",
+        "nivel": 1.39,
+        "caudal": 17.4
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T14:00",
+        "nivel": 1.39,
+        "caudal": 17.4
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T15:00",
+        "nivel": 1.37,
+        "caudal": 17.2
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T16:00",
+        "nivel": 1.38,
+        "caudal": 17.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T17:00",
+        "nivel": 1.36,
+        "caudal": 17.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T18:00",
+        "nivel": 1.35,
+        "caudal": 16.9
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-29T19:00",
         "nivel": 1.34,
-        "caudal": 16.9,
-        "estado": "naranja"
+        "caudal": 16.8
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T11:00",
-        "nivel": 1.34,
-        "caudal": 16.9,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-10T12:00",
+        "fecha": "2026-09-29T20:00",
         "nivel": 1.33,
-        "caudal": 16.8,
-        "estado": "naranja"
+        "caudal": 16.7
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T13:00",
+        "fecha": "2026-09-29T21:00",
         "nivel": 1.33,
-        "caudal": 16.7,
-        "estado": "naranja"
+        "caudal": 16.6
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T14:00",
-        "nivel": 1.33,
-        "caudal": 16.7,
-        "estado": "naranja"
-      },
-      {
-        "stationId": "puente-ramis",
-        "fecha": "2026-09-10T15:00",
+        "fecha": "2026-09-29T22:00",
         "nivel": 1.32,
-        "caudal": 16.6,
-        "estado": "naranja"
+        "caudal": 16.6
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T16:00",
+        "fecha": "2026-09-29T23:00",
         "nivel": 1.31,
-        "caudal": 16.5,
-        "estado": "naranja"
+        "caudal": 16.4
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T17:00",
+        "fecha": "2026-09-30T00:00",
         "nivel": 1.3,
-        "caudal": 16.4,
-        "estado": "naranja"
+        "caudal": 16.3
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T18:00",
+        "fecha": "2026-09-30T01:00",
+        "nivel": 1.31,
+        "caudal": 16.4
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T02:00",
+        "nivel": 1.3,
+        "caudal": 16.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T03:00",
         "nivel": 1.29,
-        "caudal": 16.3,
-        "estado": "naranja"
+        "caudal": 16.2
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T19:00",
+        "fecha": "2026-09-30T04:00",
+        "nivel": 1.3,
+        "caudal": 16.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T05:00",
+        "nivel": 1.31,
+        "caudal": 16.4
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T06:00",
+        "nivel": 1.3,
+        "caudal": 16.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T07:00",
+        "nivel": 1.31,
+        "caudal": 16.5
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T08:00",
+        "nivel": 1.31,
+        "caudal": 16.4
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T09:00",
+        "nivel": 1.33,
+        "caudal": 16.6
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T10:00",
+        "nivel": 1.32,
+        "caudal": 16.6
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T11:00",
+        "nivel": 1.34,
+        "caudal": 16.8
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T12:00",
+        "nivel": 1.34,
+        "caudal": 16.8
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T13:00",
+        "nivel": 1.34,
+        "caudal": 16.8
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T14:00",
+        "nivel": 1.34,
+        "caudal": 16.8
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T15:00",
+        "nivel": 1.33,
+        "caudal": 16.7
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T16:00",
+        "nivel": 1.34,
+        "caudal": 16.8
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T17:00",
+        "nivel": 1.32,
+        "caudal": 16.6
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T18:00",
+        "nivel": 1.32,
+        "caudal": 16.6
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T19:00",
+        "nivel": 1.32,
+        "caudal": 16.5
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T20:00",
+        "nivel": 1.3,
+        "caudal": 16.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T21:00",
+        "nivel": 1.28,
+        "caudal": 16.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T22:00",
+        "nivel": 1.28,
+        "caudal": 16.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-09-30T23:00",
         "nivel": 1.29,
-        "caudal": 16.2,
-        "estado": "naranja"
+        "caudal": 16.1
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T20:00",
+        "fecha": "2026-10-01T00:00",
         "nivel": 1.29,
-        "caudal": 16.2,
-        "estado": "naranja"
+        "caudal": 16.1
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T21:00",
-        "nivel": 1.28,
-        "caudal": 16.1,
-        "estado": "naranja"
+        "fecha": "2026-10-01T01:00",
+        "nivel": 1.27,
+        "caudal": 15.9
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T22:00",
-        "nivel": 1.28,
-        "caudal": 16.1,
-        "estado": "naranja"
+        "fecha": "2026-10-01T02:00",
+        "nivel": 1.27,
+        "caudal": 15.9
       },
       {
         "stationId": "puente-ramis",
-        "fecha": "2026-09-10T23:00",
+        "fecha": "2026-10-01T03:00",
+        "nivel": 1.27,
+        "caudal": 15.9
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-10-01T04:00",
         "nivel": 1.28,
-        "caudal": 16.1,
-        "estado": "naranja"
+        "caudal": 16
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-10-01T05:00",
+        "nivel": 1.29,
+        "caudal": 16.2
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-10-01T06:00",
+        "nivel": 1.29,
+        "caudal": 16.1
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-10-01T07:00",
+        "nivel": 1.29,
+        "caudal": 16.2
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-10-01T08:00",
+        "nivel": 1.3,
+        "caudal": 16.3
+      },
+      {
+        "stationId": "puente-ramis",
+        "fecha": "2026-10-01T09:00",
+        "nivel": 1.3,
+        "caudal": 16.3
       }
     ]
   }

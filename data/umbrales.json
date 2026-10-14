@@ -1,0 +1,506 @@
+[
+  {
+    "stationId": "socsi",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 42,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "socsi",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 54,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "socsi",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 69,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "socsi",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 1.95,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "socsi",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 3.06,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "socsi",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 4.42,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "chosica",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 49,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "chosica",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 60,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "chosica",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 72,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "chosica",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 2.65,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "chosica",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 3.25,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "chosica",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 3.9,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "pisac",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 170,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "pisac",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 205,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "pisac",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 245,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "pisac",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 2.85,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "pisac",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 3.45,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "pisac",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 4.1,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "variable": "caudal",
+    "tipo": "vaciante",
+    "nivel": "amarilla",
+    "valor": 22,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "variable": "caudal",
+    "tipo": "vaciante",
+    "nivel": "naranja",
+    "valor": 18,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "variable": "caudal",
+    "tipo": "vaciante",
+    "nivel": "roja",
+    "valor": 15,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "variable": "nivel",
+    "tipo": "vaciante",
+    "nivel": "amarilla",
+    "valor": 1.8,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "variable": "nivel",
+    "tipo": "vaciante",
+    "nivel": "naranja",
+    "valor": 1.5,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "puente-ramis",
+    "variable": "nivel",
+    "tipo": "vaciante",
+    "nivel": "roja",
+    "valor": 1.2,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 170,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 190,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 215,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 2.22,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 2.48,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "el-tigre",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 2.81,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "cirato",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 165,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "cirato",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 185,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "cirato",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 210,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "cirato",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 2.33,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "cirato",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 2.62,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "cirato",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 2.97,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 70,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 82,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "variable": "caudal",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 95,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "amarilla",
+    "valor": 2.49,
+    "vigenciaHrs": 200,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "naranja",
+    "valor": 2.91,
+    "vigenciaHrs": 150,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  },
+  {
+    "stationId": "santo-domingo",
+    "variable": "nivel",
+    "tipo": "avenida",
+    "nivel": "roja",
+    "valor": 3.37,
+    "vigenciaHrs": 72,
+    "periodo": {
+      "inicio": "2026-01-01",
+      "fin": null
+    }
+  }
+]

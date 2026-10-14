@@ -61,12 +61,12 @@ sequenceDiagram
 ## 3. Reglas de negocio
 
 1. **Pool 1 (detección)** compara el valor **relativo** contra umbrales **relativos** (sin cota). Usa `Station.preferencia` y `getConfigVigente`.
-2. **`clasificarNivel`**: avenida = mayor es peor; vigilancia = menor es peor.
+2. **`clasificarNivel`**: avenida = mayor es peor; vaciante = menor es peor.
 3. **Compuertas** (`evaluarAccionAviso`):
    - sin aviso previo → `crear`.
    - con previo y mismo nivel → `mantener` (no hace nada).
    - con previo y distinto nivel → `reemplazar` (desactiva el anterior + crea).
-4. **Pool 2 (preparación)**: si es nivel y hay cota, `nivel absoluto = nivel relativo + cota` (solo visualización). La vigencia sale de `ConfigRecord.tiempoVigenciaHrs`.
+4. **Pool 2 (preparación)**: si es nivel y hay cota, `nivel absoluto = nivel relativo + cota` (solo visualización). La vigencia sale de `Umbral.vigenciaHrs` del umbral excedido (avenida y vaciante se evalúan a la vez; solo cuentan los umbrales cuyo periodo cubre la fecha).
 5. **Publicación**: `procesarDeteccion` solo auto-publica estaciones en `modoPublicacion === "automatico"`. El admin permite publicar manualmente.
 6. **Aviso congelado**: `Alert.serie` guarda el snapshot de la serie al emitir; el detalle usa `aviso.serie ?? getSeriesMerged(...)`.
 

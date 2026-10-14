@@ -2,7 +2,7 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { getStations, getMockNow, getCaudalPromedioDiario } from "@/lib/infra/data";
 import { getForecastDiario, appendForecastInputs, getForecastInputs } from "@/lib/infra/catalogos";
-import { getConfigVigente } from "@/lib/infra/configRecords";
+import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import HidrogramaPronosticoPopup from "@/components/HidrogramaPronosticoPopup";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
 import { USUARIO } from "@/lib/sesion";
@@ -548,13 +548,12 @@ export default function AdminPronosticoPage() {
       {verStationId && (() => {
         const st = stations.find((s) => s.id === verStationId);
         if (!st) return null;
-        const record = getConfigVigente(st.id, st.preferencia ?? "caudal", getMockNow());
-        const u = record?.umbrales[st.tipo ?? "avenida"];
+        const u = getUmbralesActivos(st.id, st.preferencia ?? "caudal", getMockNow()).avenida;
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 overflow-auto">
             <HidrogramaPronosticoPopup
               station={st}
-              umbrales={u ?? { amarilla: 0, naranja: 0, roja: 0 }}
+              umbrales={{ amarilla: u.amarilla?.valor ?? 0, naranja: u.naranja?.valor ?? 0, roja: u.roja?.valor ?? 0 }}
               forecast={diario.filter((f) => f.stationId === verStationId)}
               inputs={inputs.filter((i) => i.stationId === verStationId)}
               caudalPromedio={getCaudalPromedioDiario(verStationId)}

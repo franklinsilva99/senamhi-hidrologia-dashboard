@@ -80,8 +80,8 @@ export default function AvisosTabs({
 
   const tipoDefault = useMemo<TipoAviso>(() => {
     const tipos = Object.values(tipoPorEstacion);
-    const vigilancia = tipos.filter((t) => t === "vigilancia").length;
-    return vigilancia > tipos.length / 2 ? "vigilancia" : "avenida";
+    const vaciante = tipos.filter((t) => t === "vaciante").length;
+    return vaciante > tipos.length / 2 ? "vaciante" : "avenida";
   }, [tipoPorEstacion]);
 
   const filtrados = useMemo(() => {

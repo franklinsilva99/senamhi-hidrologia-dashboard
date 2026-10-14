@@ -1,6 +1,8 @@
 import stations from "@/data/stations.json";
 import type { Station } from "@/lib/domain/types";
 import { withCotass } from "@/lib/infra/cotas";
+import { parseOverlay } from "@/lib/infra/legado";
+import { conCobertura } from "@/lib/domain/cobertura";
 
 // ── Ficha de estación (configurable): preferencia, tipo, cota, variables,
 // estado, modo de publicación. Edición como overlay en localStorage.
@@ -13,7 +15,7 @@ function getOverrides(): Override {
   if (typeof window === "undefined") return {};
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw) as Override;
+    if (raw) return parseOverlay<Override>(raw);
   } catch { /* ignore */ }
   return {};
 }
@@ -24,10 +26,11 @@ function saveOverrides(o: Override) {
 }
 
 // Estaciones con override de ficha, sobre stations.json + cota del catálogo.
+// La cobertura (departamento/provincia/distritos) se calcula de los centros poblados.
 export function getStationsConfig(): Station[] {
   const ov = getOverrides();
   return withCotass(stations as Station[]).map((s) =>
-    ov[s.id] ? { ...s, ...ov[s.id] } : s
+    conCobertura(ov[s.id] ? { ...s, ...ov[s.id] } : s)
   );
 }
 

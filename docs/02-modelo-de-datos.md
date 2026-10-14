@@ -73,7 +73,7 @@ erDiagram
 
 | Tipo | Descripción |
 | --- | --- |
-| `Station` | Ficha de estación: preferencia (caudal/nivel), tipo (avenida/vigilancia), cota, variables, estado, modo de publicación, poblados. |
+| `Station` | Ficha de estación: preferencia (caudal/nivel), tipo (avenida/vaciante), cota, variables, estado, modo de publicación, poblados. |
 | `Observation` | Lectura fusionada (nivel + caudal) por fecha. |
 | `Lectura` | Serie por variable (`nivel.json` / `caudal.json`). |
 | `ConfigRecord` | Tabla de configuración: umbrales + vigencia por (estación, variable, periodo). `periodo.final === null` = vigente. |

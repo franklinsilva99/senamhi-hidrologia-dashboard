@@ -4,6 +4,8 @@ import caudalSerie from "@/data/caudal.json";
 import alerts from "@/data/alerts.json";
 import type { Alert, Lectura, Observation, Station } from "@/lib/domain/types";
 import { withCotass } from "@/lib/infra/cotas";
+import { parseOverlay } from "@/lib/infra/legado";
+import { conCobertura } from "@/lib/domain/cobertura";
 
 // ── Adaptador de persistencia (PoC): JSON estático separado por producto ──
 // Implementa los puertos StationRepository / ObservacionRepository / AvisoRepository.
@@ -13,7 +15,7 @@ const STORAGE_KEY = "senamhi_avisos";
 const VENTANA_HORAS = 72;
 
 export function getStations(): Station[] {
-  return withCotass(stations as Station[]);
+  return withCotass(stations as Station[]).map(conCobertura);
 }
 
 // Serie por variable: fecha → valor de una estación.
@@ -100,7 +102,7 @@ export function loadAlerts(): Alert[] {
   if (typeof window === "undefined") return getAlerts();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw) as Alert[];
+    if (raw) return parseOverlay<Alert[]>(raw);
   } catch { /* ignore */ }
   return getAlerts();
 }

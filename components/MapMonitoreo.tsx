@@ -5,8 +5,8 @@ import "leaflet/dist/leaflet.css";
 import { ESTADO_COLOR, PERU_BOUNDS, stationDotColorIcon } from "@/lib/ui/mapIcons";
 import HidrogramaMonitoreoPopup from "@/components/HidrogramaMonitoreoPopup";
 import { getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
-import { clasificarNivel } from "@/lib/domain/umbrales";
-import { getConfigVigente } from "@/lib/infra/configRecords";
+import { clasificarActivos } from "@/lib/domain/umbrales";
+import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import { getStationsConfig } from "@/lib/infra/stationConfig";
 import type { Observation, Station } from "@/lib/domain/types";
 
@@ -45,13 +45,8 @@ export default function MapMonitoreo({
     const obs = latest[s.id];
     if (!obs) return ESTADO_COLOR.normal;
     const preferencia = s.preferencia ?? "caudal";
-    const tipo = s.tipo ?? "avenida";
-    const record = getConfigVigente(s.id, preferencia, getMockNow());
-    if (!record) return ESTADO_COLOR.normal;
-    const u = record.umbrales[tipo];
-    if (!u) return ESTADO_COLOR.normal;
     const valor = preferencia === "caudal" ? obs.caudal : obs.nivel;
-    const umbral = clasificarNivel(valor, u, tipo);
+    const umbral = clasificarActivos(valor, getUmbralesActivos(s.id, preferencia, getMockNow()))?.nivel;
     return umbral ? ESTADO_COLOR[NIVEL_TO_ESTADO[umbral]] ?? ESTADO_COLOR.normal : ESTADO_COLOR.normal;
   };
 

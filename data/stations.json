@@ -21,17 +21,25 @@
     "pobladosGeo": [
       {
         "nombre": "Cañete",
+        "distrito": "Cañete",
+        "provincia": "Cañete",
+        "departamento": "Lima",
         "lat": -13.0778,
         "lon": -76.3874
       },
       {
         "nombre": "Nuevo Imperial",
+        "distrito": "Nuevo Imperial",
+        "provincia": "Cañete",
+        "departamento": "Lima",
         "lat": -12.9453,
         "lon": -76.2527
       }
     ],
     "polygon": null,
-    "departamento": "Lima",
+    "departamento": [
+      "Lima"
+    ],
     "provincia": [
       "Cañete"
     ],
@@ -44,7 +52,6 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "tipo": "avenida",
     "modoPublicacion": "automatico",
     "estado": "activa"
   },
@@ -70,17 +77,25 @@
     "pobladosGeo": [
       {
         "nombre": "Chosica",
+        "distrito": "Lurigancho-Chosica",
+        "provincia": "Lima",
+        "departamento": "Lima",
         "lat": -11.9368,
         "lon": -76.6969
       },
       {
         "nombre": "Lurigancho-Chosica",
+        "distrito": "Lurigancho-Chosica",
+        "provincia": "Lima",
+        "departamento": "Lima",
         "lat": -11.9488,
         "lon": -76.7627
       }
     ],
     "polygon": null,
-    "departamento": "Lima",
+    "departamento": [
+      "Lima"
+    ],
     "provincia": [
       "Lima"
     ],
@@ -92,7 +107,6 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "tipo": "avenida",
     "modoPublicacion": "automatico",
     "estado": "activa"
   },
@@ -118,17 +132,25 @@
     "pobladosGeo": [
       {
         "nombre": "Pisac",
+        "distrito": "Pisac",
+        "provincia": "Calca",
+        "departamento": "Cusco",
         "lat": -13.421,
         "lon": -71.8505
       },
       {
         "nombre": "Coya",
+        "distrito": "Lamay",
+        "provincia": "Calca",
+        "departamento": "Cusco",
         "lat": -13.3983,
         "lon": -71.9191
       }
     ],
     "polygon": null,
-    "departamento": "Cusco",
+    "departamento": [
+      "Cusco"
+    ],
     "provincia": [
       "Calca"
     ],
@@ -141,7 +163,6 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "tipo": "avenida",
     "modoPublicacion": "automatico",
     "estado": "activa"
   },
@@ -167,17 +188,25 @@
     "pobladosGeo": [
       {
         "nombre": "Arapa",
+        "distrito": "Arapa",
+        "provincia": "Azángaro",
+        "departamento": "Puno",
         "lat": -15.1391,
         "lon": -70.1096
       },
       {
         "nombre": "Taraco",
+        "distrito": "Taraco",
+        "provincia": "Huancané",
+        "departamento": "Puno",
         "lat": -15.2978,
         "lon": -69.9783
       }
     ],
     "polygon": null,
-    "departamento": "Puno",
+    "departamento": [
+      "Puno"
+    ],
     "provincia": [
       "Azángaro",
       "Huancané"
@@ -191,7 +220,6 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "tipo": "vigilancia",
     "modoPublicacion": "automatico",
     "estado": "activa"
   },
@@ -216,12 +244,17 @@
     "pobladosGeo": [
       {
         "nombre": "San Jacinto",
+        "distrito": "San Jacinto",
+        "provincia": "Tumbes",
+        "departamento": "Tumbes",
         "lat": -3.7688,
         "lon": -80.4568
       }
     ],
     "polygon": null,
-    "departamento": "Tumbes",
+    "departamento": [
+      "Tumbes"
+    ],
     "provincia": [
       "Tumbes"
     ],
@@ -233,7 +266,6 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "tipo": "avenida",
     "modoPublicacion": "automatico",
     "estado": "activa"
   },
@@ -258,12 +290,17 @@
     "pobladosGeo": [
       {
         "nombre": "Catache",
+        "distrito": "Catache",
+        "provincia": "Santa Cruz",
+        "departamento": "Cajamarca",
         "lat": -6.65583,
         "lon": -79.07384
       }
     ],
     "polygon": null,
-    "departamento": "Cajamarca",
+    "departamento": [
+      "Cajamarca"
+    ],
     "provincia": [
       "Santa Cruz"
     ],
@@ -275,7 +312,6 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "tipo": "avenida",
     "modoPublicacion": "automatico",
     "estado": "activa"
   },
@@ -300,12 +336,17 @@
     "pobladosGeo": [
       {
         "nombre": "Huaral",
+        "distrito": "Huaral",
+        "provincia": "Huaral",
+        "departamento": "Lima",
         "lat": -11.3836,
         "lon": -77.0503
       }
     ],
     "polygon": null,
-    "departamento": "Lima",
+    "departamento": [
+      "Lima"
+    ],
     "provincia": [
       "Huaral"
     ],
@@ -317,7 +358,6 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "tipo": "avenida",
     "modoPublicacion": "automatico",
     "estado": "activa"
   }

@@ -97,8 +97,8 @@ export default function ChartAviso({
   const pad = 0.05 * Math.abs(r - a) || Math.abs(r) * 0.02 || 1;
   // El rojo no tiene tope (solo inicio de peligro) → siempre más ancho (1.4× el naranja).
   // Se reserva una franja blanca ("normal") del alto de la banda amarilla junto al umbral amarillo.
-  const bottom = tipo === "vigilancia" ? r - 1.4 * (n - r) : Math.min(dMin, a - (n - a)) - pad;
-  const top = tipo === "vigilancia" ? Math.max(dMax, a + (a - n)) + pad : r + 1.4 * (r - n);
+  const bottom = tipo === "vaciante" ? r - 1.4 * (n - r) : Math.min(dMin, a - (n - a)) - pad;
+  const top = tipo === "vaciante" ? Math.max(dMax, a + (a - n)) + pad : r + 1.4 * (r - n);
 
   const chartTitle = titulo ?? `HIDROGRAMA DE ${varTitle} DEL RÍO`;
   const subtitle = estacion ? `ESTACIÓN ${estacion}` : undefined;
@@ -151,8 +151,8 @@ export default function ChartAviso({
 
             <Tooltip content={<ChartTooltip varName={varName} unidad={unidad} a={a} n={n} r={r} />} />
 
-            {/* Bandas de umbral — avenida (ascendente) vs vigilancia (invertida) */}
-            {tipo === "vigilancia" ? (
+            {/* Bandas de umbral — avenida (ascendente) vs vaciante (invertida) */}
+            {tipo === "vaciante" ? (
               <>
                 <ReferenceArea y1={bottom} y2={r} fill={C_ROJO} fillOpacity={0.85} stroke="none" />
                 <ReferenceArea y1={r} y2={n} fill={C_NARANJA} fillOpacity={0.85} stroke="none" />

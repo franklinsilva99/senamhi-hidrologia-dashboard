@@ -5,7 +5,7 @@ import MapPronosticoClient from "@/components/MapPronosticoClient";
 import { avisoTabClass } from "@/lib/ui/tabs";
 import { getStations, getMockNow, getCaudalPromedioDiario } from "@/lib/infra/data";
 import { getForecastDiario, getForecastInputs } from "@/lib/infra/catalogos";
-import { getConfigVigente } from "@/lib/infra/configRecords";
+import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import type { ForecastDiario, ForecastInput } from "@/lib/domain/types";
 
 export default function PronosticoPage() {
@@ -31,10 +31,10 @@ export default function PronosticoPage() {
   // Umbrales según preferencia de la estación (caudal o nivel)
   const umbralesPorEstacion: Record<string, { amarilla: number; naranja: number; roja: number }> = {};
   for (const s of conPronostico) {
-    const record = getConfigVigente(s.id, s.preferencia ?? "caudal", getMockNow());
-    const u = record?.umbrales[s.tipo ?? "avenida"];
-    if (!u) continue;
-    umbralesPorEstacion[s.id] = { ...u };
+    // El pronóstico se contrasta con los umbrales de avenida activos.
+    const u = getUmbralesActivos(s.id, s.preferencia ?? "caudal", getMockNow()).avenida;
+    if (!u.amarilla || !u.naranja || !u.roja) continue;
+    umbralesPorEstacion[s.id] = { amarilla: u.amarilla.valor, naranja: u.naranja.valor, roja: u.roja.valor };
   }
 
   // Caudal promedio diario observado por estación (fecha → caudal), para los

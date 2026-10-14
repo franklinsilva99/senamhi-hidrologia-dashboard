@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getAlerts, getSeries, getSeriesMerged, getStations, loadAlerts } from "@/lib/infra/data";
-import { getConfigVigente } from "@/lib/infra/configRecords";
+import { getUmbralesActivos } from "@/lib/infra/umbrales";
+import { valoresDe } from "@/lib/domain/umbrales";
 import ChartAviso from "@/components/ChartAviso";
 import TablaDatosAviso from "@/components/TablaDatosAviso";
 import LeyendaNiveles from "@/components/LeyendaNiveles";
@@ -56,7 +57,7 @@ export default function AvisoDetalle() {
 
   const st = getStations().find((s) => s.id === aviso.stationId);
   // Aviso congelado: umbrales snapshot; si no existe (aviso viejo del overlay), cae a la config vigente.
-  const u = aviso.umbrales ?? getConfigVigente(aviso.stationId, aviso.preferencia, aviso.inicio)?.umbrales[aviso.tipo];
+  const u = aviso.umbrales ?? valoresDe(getUmbralesActivos(aviso.stationId, aviso.preferencia, aviso.inicio)[aviso.tipo]);
   const horaUltima = serie.length > 0 ? serie[serie.length - 1].fecha.slice(11, 16) : undefined;
 
   return (
@@ -141,6 +142,7 @@ export default function AvisoDetalle() {
           <section className="max-w-3xl mx-auto mb-8 overflow-hidden rounded-sm shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
             <TablaDatosAviso
               station={st}
+              distrito={aviso.distrito}
               preferencia={aviso.preferencia}
               nivelActual={aviso.nivelActual}
               caudalActual={aviso.caudalActual}

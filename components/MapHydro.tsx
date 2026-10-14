@@ -89,7 +89,7 @@ export default function MapHydro({
       ...coordsPoblados(s).map((p) => [p.lat, p.lon] as [number, number]),
     ];
     setSelectedId(s.id);
-    // Sincroniza el tipo (avenida/vigilancia) con la estación seleccionada
+    // Sincroniza el tipo (avenida/vaciante) con la estación seleccionada
     if (tipoPorEstacion?.[s.id]) setTipoActivo(tipoPorEstacion[s.id]);
     // Sincroniza el chip de nivel con el nivel del aviso vigente
     if (nivelPorEstacion?.[s.id]) setNivelActivo(nivelPorEstacion[s.id]);
@@ -213,7 +213,7 @@ export default function MapHydro({
                 )}
                 <hr className="my-2 border-t border-white/30" />
                 <Seccion titulo="Centros poblados" valor={(pobladosPorEstacion?.[selected.id] ?? selected.poblados).join(", ")} />
-                <Seccion titulo="Departamento" valor={selected.departamento} />
+                <Seccion titulo="Departamento" valor={selected.departamento.join(", ")} />
                 <Seccion titulo="Provincia" valor={selected.provincia.join(", ")} />
                 <Seccion titulo="Distritos" valor={selected.distritos.join(", ")} />
                 <hr className="my-2 border-t border-white/30" />
@@ -225,7 +225,7 @@ export default function MapHydro({
             )}
             <div className="mt-1.5 flex items-center justify-center gap-1 text-[10px]">
               <span className="text-white/60">Tipo:</span>
-              {(["avenida", "vigilancia"] as TipoAviso[]).map((t) => (
+              {(["avenida", "vaciante"] as TipoAviso[]).map((t) => (
                 <button
                   key={t}
                   type="button"
@@ -236,7 +236,7 @@ export default function MapHydro({
                       : "text-[#c9c9c9]"
                   }`}
                 >
-                  {t === "avenida" ? "Avenida" : "Vigilancia"}
+                  {t === "avenida" ? "Avenida" : "Vaciante"}
                 </button>
               ))}
             </div>

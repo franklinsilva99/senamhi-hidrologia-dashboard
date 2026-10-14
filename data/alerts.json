@@ -1421,7 +1421,7 @@
     ],
     "caudalActual": 16.3,
     "preferencia": "caudal",
-    "tipo": "vigilancia",
+    "tipo": "vaciante",
     "cota": 3825,
     "umbrales": {
       "amarilla": 22,

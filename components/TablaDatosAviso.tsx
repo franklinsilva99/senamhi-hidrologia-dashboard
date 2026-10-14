@@ -2,6 +2,7 @@ import type { Station } from "@/lib/domain/types";
 
 export default function TablaDatosAviso({
   station,
+  distrito,
   preferencia,
   nivelActual,
   caudalActual,
@@ -10,6 +11,8 @@ export default function TablaDatosAviso({
   umbralRojoRel,
 }: {
   station: Station;
+  // Distrito(s) congelados en el aviso; si falta, se usa la cobertura actual.
+  distrito?: string;
   preferencia?: "caudal" | "nivel";
   nivelActual?: number;
   caudalActual?: number;
@@ -44,7 +47,7 @@ export default function TablaDatosAviso({
           <tr className="divide-x divide-gray-200 text-xs sm:text-[13px]">
             <td className="py-2 px-3 font-medium">{station.rio.toUpperCase()}</td>
             <td className="py-2 px-3">{station.estacion.toUpperCase()}</td>
-            <td className="py-2 px-3">{station.distritos.join(", ").toUpperCase() || "—"}</td>
+            <td className="py-2 px-3">{(distrito ?? station.distritos.join(", ")).toUpperCase() || "—"}</td>
             <td className="py-2 px-3 font-semibold">{valorActual?.toFixed(2)}</td>
             <td className="py-2 px-3 font-semibold">{umbralRojo?.toFixed(2)}</td>
           </tr>

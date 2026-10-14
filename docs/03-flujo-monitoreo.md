@@ -54,7 +54,7 @@ sequenceDiagram
 
 1. **Estado derivado**: el color del punto y el nivel se calculan **al leer**, comparando la última lectura contra `clasificarNivel`.
 2. **Preferencia**: `Station.preferencia` (`caudal` | `nivel`) decide qué variable se compara.
-3. **Tipo**: `avenida` (mayor es peor) vs `vigilancia` (menor es peor).
+3. **Tipo**: `avenida` (mayor es peor) vs `vaciante` (menor es peor).
 4. **Cota**: solo se usa para el eje en m.s.n.m.; la clasificación usa el valor relativo.
 5. **Mantenimiento**: estaciones en `estado === "mantenimiento"` se pintan gris.
 

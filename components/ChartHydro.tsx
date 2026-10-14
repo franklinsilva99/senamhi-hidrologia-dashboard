@@ -88,8 +88,8 @@ export default function ChartHydro({
   const dMax = valores.length ? Math.max(...valores) : r;
   const pad = 0.05 * Math.abs(r - a) || Math.abs(r) * 0.02 || 1;
   // Dominio del eje Y: cubre datos + umbrales (mín/máx) con margen.
-  const bottom = Math.min(dMin, tipo === "vigilancia" ? r : a) - pad;
-  const top = Math.max(dMax, tipo === "vigilancia" ? a : r) + pad;
+  const bottom = Math.min(dMin, tipo === "vaciante" ? r : a) - pad;
+  const top = Math.max(dMax, tipo === "vaciante" ? a : r) + pad;
 
   return (
     <div className="h-64 w-full relative">

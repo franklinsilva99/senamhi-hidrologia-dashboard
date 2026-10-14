@@ -3,13 +3,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { USUARIO } from "@/lib/sesion";
 
-const navItems = [
-  { href: "/admin", label: "Página Principal", icon: "🏠", exact: true },
-  { href: "/admin/config", label: "Configuración General", icon: "⚙️" },
-  { href: "/admin/centros-poblados", label: "Centros Poblados", icon: "📍" },
-  { href: "/admin/avisos", label: "Avisos", icon: "📋", hasDropdown: true },
-  { href: "/monitoreo", label: "Monitoreo", icon: "📈" },
-  { href: "/admin/pronostico", label: "Pronóstico", icon: "📊", hasDropdown: true },
+interface NavItem {
+  href: string;
+  label: string;
+  icon: string;
+  exact?: boolean;
+}
+
+// Menú agrupado: operación diaria (avisos, monitoreo, pronóstico) separada de
+// la configuración (estaciones: umbrales, centros poblados, publicación).
+const navGroups: { titulo?: string; items: NavItem[] }[] = [
+  { items: [{ href: "/admin", label: "Página Principal", icon: "🏠", exact: true }] },
+  {
+    titulo: "Operación",
+    items: [
+      { href: "/admin/avisos", label: "Avisos", icon: "📋" },
+      { href: "/monitoreo", label: "Monitoreo", icon: "📈" },
+      { href: "/admin/pronostico", label: "Pronóstico", icon: "📊" },
+    ],
+  },
+  {
+    titulo: "Configuración",
+    items: [{ href: "/admin/config", label: "Estaciones", icon: "⚙️" }],
+  },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -39,30 +55,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Nav items */}
         <nav className="flex-1 py-2">
-          {navItems.map((item) => {
-            const active = item.exact
-              ? pathname === item.href
-              : pathname === item.href || pathname.startsWith(item.href + "/");
-            const className = `flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-              active
-                ? "bg-[#003366] text-white"
-                : "text-gray-300 hover:bg-gray-700 hover:text-white"
-            }`;
-            const content = (
-              <>
-                <span className="text-base w-5 text-center">{item.icon}</span>
-                <span className="flex-1">{item.label}</span>
-                {item.hasDropdown && (
-                  <span className="text-xs text-gray-400">▾</span>
-                )}
-              </>
-            );
-            return (
-              <Link key={item.label} href={item.href} className={className}>
-                {content}
-              </Link>
-            );
-          })}
+          {navGroups.map((grupo, gi) => (
+            <div key={grupo.titulo ?? gi} className={gi > 0 ? "mt-3" : ""}>
+              {grupo.titulo && (
+                <p className="px-4 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                  {grupo.titulo}
+                </p>
+              )}
+              {grupo.items.map((item) => {
+                const active = item.exact
+                  ? pathname === item.href
+                  : pathname === item.href || pathname.startsWith(item.href + "/");
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                      active
+                        ? "bg-[#003366] text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                    }`}
+                  >
+                    <span className="text-base w-5 text-center">{item.icon}</span>
+                    <span className="flex-1">{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </nav>
       </aside>
 

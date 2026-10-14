@@ -43,8 +43,8 @@ Mapeo a la pila objetivo:
 
 ## Modelo de datos (`lib/domain/types.ts`)
 
-- **Station** — ficha/ubicación (cuenca, río, cota, departamento/provincia/distritos) + centros poblados afectados (`poblados`/`pobladosGeo`) + `variables`, `preferencia`, `tipo` (avenida/vigilancia), `modoPublicacion`.
-- **ConfigRecord** — tabla de configuración por (estación, variable, periodo): `umbrales` + `tiempoVigenciaHrs`.
+- **Station** — ficha/ubicación (cuenca, río, cota, departamento/provincia/distritos) + centros poblados afectados (`poblados`/`pobladosGeo`) + `variables`, `preferencia` (variable que genera avisos; avenida y vaciante se evalúan a la vez), `modoPublicacion`.
+- **Umbral** — tabla de umbrales: una fila por (estación, variable, tipo, nivel) con `valor`, `vigenciaHrs` y `periodo` (inicio/fin, fechas fijas).
 - **Lectura** — un punto de una serie por variable (`stationId`, `fecha`, `valor`), tal como se guarda en `nivel.json` y `caudal.json`.
 - **Observation** — lectura horaria unida (nivel + caudal por fecha). El estado se deriva al leer, no se almacena.
 - **ForecastInput / ForecastDiario** — modelos ingresados y pronóstico promedio.
@@ -60,7 +60,7 @@ Mapeo a la pila objetivo:
 4. **Publicación**: automática o manual (aprobación).
 
 - Preferencia por estación: **caudal** o **nivel**.
-- **Avenida** = mayor es peor; **Vigilancia** = menor es peor.
+- **Avenida** = mayor es peor; **Vaciante** = menor es peor.
 - **Cota**: la detección compara valores *relativos*; la cota solo se suma para mostrar **m.s.n.m.** (`Nivel absoluto = Nivel relativo + Cota`).
 - **Modo de publicación por estación**: automática o manual (aprobación).
 - **Aviso publicado = snapshot congelado** (`Alert.serie`).
@@ -79,7 +79,7 @@ Datos base en `data/*.json` + **overlay** en `localStorage` (solo para edición 
 |---|---|
 | `data/nivel.json` | serie horaria de nivel (relativo) por estación |
 | `data/caudal.json` | serie horaria de caudal por estación |
-| `data/config_records.json` | tabla de configuración (umbrales + vigencia) por estación/variable |
+| `data/umbrales.json` | tabla de umbrales (valor + vigencia + periodo), una fila por umbral |
 | `data/cotas.json` | cota del cero de la regla por estación (se resuelve en la ficha) |
 
 Overlays de `localStorage`:
@@ -88,8 +88,8 @@ Overlays de `localStorage`:
 |---|---|
 | `senamhi_avisos` | avisos (base + creados/deshabilitados) |
 | `senamhi_forecast_inputs` | modelos de pronóstico cargados |
-| `senamhi_config_records` | tabla de configuración (umbrales + vigencia) por estación/variable |
-| `senamhi_station_config` | ficha por estación (preferencia, tipo, cota, modo publicación) |
+| `senamhi_umbrales` | umbrales editados, lista completa por estación |
+| `senamhi_station_config` | ficha por estación (preferencia, cota, estado, modo publicación) |
 
 ## Cómo correr
 

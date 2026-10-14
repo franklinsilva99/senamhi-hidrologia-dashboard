@@ -7,33 +7,33 @@ export const UNIDAD_POR_VARIABLE: Record<Variable, Unidad> = {
   nivel: "m",
 };
 
-// Umbrales y vigencia por nivel de alerta (amarilla/naranja/roja)
+// Valores de umbral por nivel de alerta (amarilla/naranja/roja). Parcial
+// cuando algún nivel no está activo en la fecha consultada.
 export interface Umbrales {
   amarilla: number;
   naranja: number;
   roja: number;
 }
 
-export interface TiempoVigenciaHrs {
-  amarilla: number;
-  naranja: number;
-  roja: number;
-}
+export type NivelUmbral = keyof Umbrales;
 
-// Registro de la tabla de configuración: umbrales + vigencia por
-// (estación, variable, periodo). `periodo.final === null` = vigente.
-// Umbrales por tipo: avenida (ascendente) y vigilancia (descendente);
-// una estación puede tener uno o ambos sets. La vigencia es un solo set.
-export interface ConfigRecord {
+// Tabla de umbrales: una fila por umbral (estación, variable, tipo, nivel).
+// Hasta 12 por estación (2 variables × 2 tipos × 3 niveles). Cada umbral
+// tiene su valor, la vigencia en horas del aviso que genera y el periodo
+// (fechas fijas) en que está activo; fuera de su periodo no genera avisos.
+// Un mismo umbral puede repetirse con periodos distintos (sin solaparse).
+export interface Umbral {
   stationId: string;
   variable: Variable;
-  periodo: { inicio: string; final: string | null };
-  umbrales: {
-    avenida?: Umbrales;
-    vigilancia?: Umbrales;
-  };
-  tiempoVigenciaHrs: TiempoVigenciaHrs;
+  tipo: TipoAviso;
+  nivel: NivelUmbral;
+  valor: number;
+  vigenciaHrs: number;
+  periodo: { inicio: string; fin: string | null }; // fin null = abierto
 }
+
+// Umbrales activos de una (estación, variable) en una fecha, por tipo y nivel.
+export type UmbralesActivos = Record<TipoAviso, Partial<Record<NivelUmbral, Umbral>>>;
 
 export interface Station {
   id: string;
@@ -51,21 +51,36 @@ export interface Station {
   isEstimated: boolean;
   fuente: string;
   poblados: string[];
-  pobladosGeo?: { nombre: string; lat: number; lon: number }[];
-  departamento: string;
+  pobladosGeo?: PobladoGeo[];
+  // Cobertura administrativa: se calcula a partir de los centros poblados
+  // (ver `conCobertura`); listas porque una estación puede estar en frontera.
+  departamento: string[];
   provincia: string[];
   distritos: string[];
   polygon: number[][][] | null;
   cota: number | null;
   cotaFuente?: "oficial" | "inventario-altitud" | "dem";
   variables?: Variable[];
-  preferencia?: Variable; // cuál variable dispara el aviso
-  tipo?: TipoAviso; // avenida (mayor es peor) | vigilancia (menor es peor)
+  preferencia?: Variable; // cuál variable dispara el aviso (avenida y vaciante se evalúan a la vez)
   modoPublicacion?: ModoPublicacion; // automática | manual
   estado?: "activa" | "mantenimiento";
 }
 
-export type TipoAviso = "avenida" | "vigilancia";
+// Ubicación administrativa de un centro poblado (texto libre en el PoC).
+export interface UbicacionPoblado {
+  nombre: string;
+  distrito?: string;
+  provincia?: string;
+  departamento?: string;
+}
+
+// Centro poblado afectado por una estación: ubicación + coordenadas.
+export interface PobladoGeo extends UbicacionPoblado {
+  lat: number;
+  lon: number;
+}
+
+export type TipoAviso = "avenida" | "vaciante";
 export type NivelAlerta = "AMARILLO" | "NARANJA" | "ROJO";
 export type ModoPublicacion = "automatico" | "manual";
 
@@ -123,13 +138,15 @@ export interface Alert {
   recomendaciones: string;
   validadoDZ: boolean;
   poblados: string[];
+  // Snapshot de la ubicación de los centros poblados afectados al emitir.
+  pobladosUbicacion?: UbicacionPoblado[];
   caudalActual?: number;
   nivelActual?: number;
   preferencia: "caudal" | "nivel";
   tipo: TipoAviso;
   cota?: number | null;
   // Snapshot de umbrales con los que se emitió el aviso (documento congelado).
-  umbrales?: Umbrales;
+  umbrales?: Partial<Umbrales>;
   serie?: Observation[];
 }
 
@@ -139,6 +156,6 @@ export interface DeteccionAviso {
   valorAbsoluto?: number;
   umbral: NivelAlerta | null;
   preferencia: "caudal" | "nivel";
-  tipo: TipoAviso;
+  tipo: TipoAviso | null; // tipo del umbral excedido (null si no hay)
   excedido: boolean;
 }

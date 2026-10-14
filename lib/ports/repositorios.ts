@@ -1,10 +1,11 @@
 import type {
   Alert,
-  ConfigRecord,
   ForecastDiario,
   ForecastInput,
   Observation,
   Station,
+  Umbral,
+  UmbralesActivos,
   Variable,
 } from "@/lib/domain/types";
 
@@ -41,10 +42,12 @@ export interface PronosticoRepository {
   diario(stationId?: string): ForecastDiario[];
 }
 
-export interface ConfigRepository {
-  // Tabla de configuración: umbrales + vigencia por (estación, variable, periodo).
-  registros(stationId?: string, variable?: Variable): ConfigRecord[];
-  vigente(stationId: string, variable: Variable, fecha: string): ConfigRecord | null;
-  guardar(record: ConfigRecord): void;
-  reset(stationId: string, variable?: Variable): void;
+export interface UmbralRepository {
+  // Tabla de umbrales: una fila por (estación, variable, tipo, nivel, periodo),
+  // con su valor y la vigencia (h) del aviso que genera.
+  listar(stationId?: string, variable?: Variable): Umbral[];
+  // Activos en la fecha (por tipo y nivel), según el periodo de cada umbral.
+  activos(stationId: string, variable: Variable, fecha: string): UmbralesActivos;
+  guardarEstacion(stationId: string, umbrales: Umbral[]): void;
+  reset(stationId: string): void;
 }

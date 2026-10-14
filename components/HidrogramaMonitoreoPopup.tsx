@@ -2,7 +2,8 @@
 import { useMemo, useState } from "react";
 import HidrogramaPopupCard from "@/components/HidrogramaPopupCard";
 import ChartHydro from "@/components/ChartHydro";
-import { getConfigVigente } from "@/lib/infra/configRecords";
+import { getUmbralesActivos } from "@/lib/infra/umbrales";
+import { tipoReferencia, valoresDe } from "@/lib/domain/umbrales";
 import { getMockNow } from "@/lib/infra/data";
 import type { Observation, Station, Variable } from "@/lib/domain/types";
 
@@ -54,8 +55,12 @@ export default function HidrogramaMonitoreoPopup({
     [series, granularidad],
   );
 
-  const record = getConfigVigente(station.id, variable, getMockNow());
-  const u = record?.umbrales[station.tipo ?? "avenida"];
+  // Umbrales activos de la variable graficada; se dibuja el tipo que excede el
+  // último dato (o avenida si ninguno está excedido).
+  const activos = getUmbralesActivos(station.id, variable, getMockNow());
+  const ultimo = series[series.length - 1];
+  const tipo = tipoReferencia(ultimo ? (variable === "caudal" ? ultimo.caudal : ultimo.nivel) : undefined, activos);
+  const u = valoresDe(activos[tipo]);
   const variableTitle = variable === "caudal" ? "Caudal" : "Nivel";
   const hoyISO = getMockNow().slice(0, 10) || new Date().toISOString().slice(0, 10);
 
@@ -126,7 +131,7 @@ export default function HidrogramaMonitoreoPopup({
       <ChartHydro
         series={serieGraficada}
         preferencia={variable}
-        tipo={station.tipo ?? "avenida"}
+        tipo={tipo}
         cota={station.cota}
         umbralAmarilla={u?.amarilla}
         umbralNaranja={u?.naranja}

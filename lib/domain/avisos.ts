@@ -1,14 +1,14 @@
 import type {
   Alert,
-  ConfigRecord,
   DeteccionAviso,
   NivelAlerta,
   Observation,
   Station,
   TipoAviso,
+  UmbralesActivos,
   Variable,
 } from "./types";
-import { clasificarNivel } from "./umbrales";
+import { clasificarActivos, valoresDe } from "./umbrales";
 import { RECOMENDACION } from "./nivelesPeligro";
 
 export type AccionAviso = "mantener" | "crear" | "reemplazar";
@@ -30,16 +30,17 @@ export function siguienteCA(alerts: Alert[]): string {
 
 // Pool 1 (compuertas BPMN consolidadas en una decisión de 3 salidas):
 //   - sin aviso previo              → "crear"
-//   - con previo y mismo nivel      → "mantener"   (no se hace nada)
-//   - con previo y distinto nivel   → "reemplazar" (desactivar anterior + crear)
+//   - con previo, mismo nivel y tipo         → "mantener"   (no se hace nada)
+//   - con previo y distinto nivel o tipo     → "reemplazar" (desactivar anterior + crear)
 export function evaluarAccionAviso(
   stationId: string,
   nuevoNivel: string,
+  nuevoTipo: TipoAviso | null,
   alerts: Alert[]
 ): AccionAviso {
   const previo = existeAvisoPrevio(stationId, alerts);
   if (!previo) return "crear";
-  return previo.nivel === nuevoNivel ? "mantener" : "reemplazar";
+  return previo.nivel === nuevoNivel && previo.tipo === nuevoTipo ? "mantener" : "reemplazar";
 }
 
 export interface PreparacionAviso {
@@ -75,18 +76,18 @@ function fechaLocal(d: Date): string {
 export function prepararAviso(
   station: Station,
   latest: Record<string, Observation>,
-  record: ConfigRecord,
+  activos: UmbralesActivos,
   preferencia: Variable,
   mockNow: string
 ): PreparacionAviso | null {
   const latestObs = latest[station.id];
-  const tipo = station.tipo ?? "avenida";
   const esNivel = preferencia === "nivel";
-  // Pool 1: detección con valor RELATIVO contra umbrales relativos (sin cota)
+  // Pool 1: detección con valor RELATIVO contra umbrales relativos (sin cota),
+  // avenida y vaciante a la vez; el umbral excedido define tipo, nivel y vigencia.
   const valorActual = esNivel ? latestObs?.nivel ?? 0 : latestObs?.caudal ?? 0;
-  const u = record.umbrales[tipo];
-  const nivel = u ? clasificarNivel(valorActual, u, tipo) : null;
-  if (!nivel) return null;
+  const c = clasificarActivos(valorActual, activos);
+  if (!c) return null;
+  const { tipo, nivel } = c;
 
   // Pool 2: visualización en m.s.n.m. (Nivel absoluto = Nivel relativo + Cota)
   const valorMostrado = esNivel && station.cota != null ? valorActual + station.cota : valorActual;
@@ -99,13 +100,13 @@ export function prepararAviso(
   const distrito = station.distritos.join(", ") || "—";
   const fechaEmision = `${DIAS[hoy.getDay()]}, ${hoy.getDate()} de ${MESES[hoy.getMonth()]} de ${hoy.getFullYear()} - ${hoy.getHours().toString().padStart(2, "0")}:${hoy.getMinutes().toString().padStart(2, "0")} hrs`;
 
-  const duracionHoras = record.tiempoVigenciaHrs[nivel.toLowerCase() as "amarilla" | "naranja" | "roja"] ?? 200;
+  const duracionHoras = c.umbral.vigenciaHrs;
   const plazo: "normal" | "extendido" = duracionHoras > 120 ? "extendido" : "normal";
   const finDate = new Date(hoy);
   finDate.setHours(finDate.getHours() + duracionHoras);
   const fin = fechaLocal(finDate);
 
-  const tendencia = tipo === "vigilancia" ? "con tendencia descendente" : "con tendencia ascendente";
+  const tendencia = tipo === "vaciante" ? "con tendencia descendente" : "con tendencia ascendente";
   const descripcion = `El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del ${cuerpoAgua}. La estación hidrológica ${station.estacion.toUpperCase()}, registró un ${variable} de ${valorMostrado.toFixed(2)} ${unidad}, ${tendencia}, ubicándose en el umbral ${nivel}. Las potenciales áreas de afectación serían los centros poblados de ${station.poblados.map((p) => p.toUpperCase()).join(", ")}. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.`;
 
   const recomendaciones = RECOMENDACION[tipo][nivel];
@@ -119,7 +120,7 @@ export function prepararAviso(
 export interface DatosCrearAviso {
   station: Station;
   latest: Record<string, Observation>;
-  record: ConfigRecord;
+  activos: UmbralesActivos;
   preferencia: Variable;
   mockNow: string;
   serie: Observation[];
@@ -129,8 +130,8 @@ export interface DatosCrearAviso {
 
 // Pool 2: Crear aviso completo (preparación + generación). Función pura.
 export function crearAviso(d: DatosCrearAviso): Alert {
-  const { station, latest, record, preferencia, mockNow, serie, nro, ca } = d;
-  const preparacion = prepararAviso(station, latest, record, preferencia, mockNow);
+  const { station, latest, activos, preferencia, mockNow, serie, nro, ca } = d;
+  const preparacion = prepararAviso(station, latest, activos, preferencia, mockNow);
   if (!preparacion) {
     throw new Error(`No hay umbral excedido para la estación ${station.id}`);
   }
@@ -162,12 +163,17 @@ export function crearAviso(d: DatosCrearAviso): Alert {
     recomendaciones: preparacion.recomendaciones,
     validadoDZ: false,
     poblados: preparacion.poblados,
+    // Se congela la ubicación de cada centro poblado afectado.
+    pobladosUbicacion: preparacion.poblados.map((nombre) => {
+      const p = station.pobladosGeo?.find((g) => g.nombre === nombre);
+      return { nombre, distrito: p?.distrito, provincia: p?.provincia, departamento: p?.departamento };
+    }),
     caudalActual: esNivel ? undefined : latestObs?.caudal,
     nivelActual,
     preferencia,
     tipo: preparacion.tipo,
     cota,
-    umbrales: record.umbrales[preparacion.tipo],
+    umbrales: valoresDe(activos[preparacion.tipo]),
     serie,
   };
 }
@@ -177,11 +183,11 @@ export function aplicarAviso(
   base: Alert[],
   aviso: Alert
 ): { next: Alert[]; texto: string } {
-  const accion = evaluarAccionAviso(aviso.stationId, aviso.nivel, base);
+  const accion = evaluarAccionAviso(aviso.stationId, aviso.nivel, aviso.tipo, base);
   if (accion === "mantener") {
     return {
       next: base,
-      texto: `Sin cambios: la estación ya tiene un aviso vigente en nivel ${aviso.nivel}.`,
+      texto: `Sin cambios: la estación ya tiene un aviso vigente de ${aviso.tipo} en nivel ${aviso.nivel}.`,
     };
   }
   if (accion === "reemplazar") {
@@ -200,11 +206,7 @@ export function aplicarAviso(
 export interface DepsProcesarDeteccion {
   stations: Station[];
   latest: Record<string, Observation>;
-  configVigenteDe: (
-    stationId: string,
-    variable: Variable,
-    fecha: string
-  ) => ConfigRecord | null;
+  umbralesDe: (stationId: string, variable: Variable, fecha: string) => UmbralesActivos;
   serieDe: (stationId: string) => Observation[];
   mockNow: string;
 }
@@ -219,18 +221,16 @@ export function procesarDeteccion(
   const textos: string[] = [];
   for (const d of det) {
     if (!d.excedido || !d.umbral) continue;
-    if (evaluarAccionAviso(d.stationId, d.umbral, next) === "mantener") continue;
+    if (evaluarAccionAviso(d.stationId, d.umbral, d.tipo, next) === "mantener") continue;
     const station = deps.stations.find((s) => s.id === d.stationId);
     if (!station) continue;
     // Solo auto-publica si la estación está en modo automático.
     if (station.modoPublicacion === "manual") continue;
     const preferencia = d.preferencia;
-    const record = deps.configVigenteDe(d.stationId, preferencia, deps.mockNow);
-    if (!record) continue;
     const aviso = crearAviso({
       station,
       latest: deps.latest,
-      record,
+      activos: deps.umbralesDe(d.stationId, preferencia, deps.mockNow),
       preferencia,
       mockNow: deps.mockNow,
       serie: deps.serieDe(d.stationId),

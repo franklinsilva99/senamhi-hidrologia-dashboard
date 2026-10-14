@@ -21,22 +21,25 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Pool 1 "Listar avisos": preferencia caudal/nivel → comparar último dato vs umbrales → compuerta "¿nivel del aviso vigente es diferente?" → "¿existe aviso previo?" → "¿publicación automática?".
 - Pool 2 "Preparación de Aviso": datos 72h → si nivel y hay cota, sumar cota → hidrograma, título, etiquetas → generar aviso (vigencia según configuración).
-- `lib/deteccion.ts`: `detectarAvisos` (usa `Station.preferencia` + `ConfigRecord` vigente).
+- `lib/deteccion.ts`: `detectarAvisos` (usa `Station.preferencia` + umbrales activos de avenida y vaciante).
 - `lib/avisos.ts`: `evaluarAccionAviso` → `"mantener" | "crear" | "reemplazar"`, `prepararAviso`, `crearAviso`.
-- `lib/umbrales.ts`: `clasificarNivel` (avenida = mayor es peor; vigilancia = menor es peor).
+- `lib/umbrales.ts`: `clasificarNivel` (avenida = mayor es peor; vaciante = menor es peor).
 - Modo de publicación por estación (`Station.modoPublicacion`, editable en Configuración general).
 
 # Configuración (tabla + ficha)
 
-- **Tabla de configuración** (`ConfigRecord`): umbrales + tiempo de vigencia por (estación, variable, periodo). `periodo.final === null` = vigente. Datos en `data/config_records.json` + overlay `senamhi_config_records`.
-- **Ficha por estación** (`Station`): `preferencia`, `tipo` (avenida/vigilancia), `cota` + `cotaFuente`, `variables`, `estado`, `modoPublicacion`. Overlay `senamhi_station_config`.
-- `lib/infra/configRecords.ts`: `getConfigVigente(stationId, variable, fecha)` resuelve el registro vigente según su periodo.
-- Detección y avisos leen `Station.preferencia` + `getConfigVigente` (ya no `Thresholds`).
+- **Tabla de umbrales** (`Umbral`): **una fila por umbral** (estación, variable, tipo, nivel) con `valor`, `vigenciaHrs` (duración del aviso que genera) y `periodo` `{inicio, fin}` en **fechas fijas** (`fin: null` = abierto). Hasta 12 por estación (2 variables × 2 tipos × 3 niveles); un umbral puede repetirse con periodos que no se solapen. Fuera de su periodo, el umbral no genera avisos. Datos en `data/umbrales.json` + overlay `senamhi_umbrales` (lista completa por estación; migra el overlay legado `senamhi_config_records`).
+- **Ficha por estación** (`Station`): `preferencia` (única variable que genera avisos), `cota` + `cotaFuente`, `estado`, `modoPublicacion`. Ya **no hay `Station.tipo`**: avenida y vaciante se evalúan a la vez. Overlay `senamhi_station_config`.
+- `lib/infra/umbrales.ts`: `getUmbralesActivos(stationId, variable, fecha)` → `UmbralesActivos` (por tipo y nivel, los que cubren la fecha).
+- `lib/domain/umbrales.ts`: `clasificarActivos` (gana el umbral excedido más severo; da tipo, nivel y vigencia), `activosEn`, `tipoReferencia` (tipo a dibujar en gráficos).
+- Compuerta "mantener": mismo nivel **y** mismo tipo que el aviso vigente; si cambia cualquiera → reemplazar.
+- UI `/admin/config`: lista de estaciones + panel (Detección → Umbrales y vigencia [matriz 3×4 de activos + tabla de periodos] → Publicación → Estación).
 
 # Centros poblados afectados
 
-- Hoy desnormalizados en la estación (`Station.poblados` nombres + `Station.pobladosGeo` coordenadas). Mantenedor en `/admin/centros-poblados` (overlay `senamhi_station_config`).
-- El aviso congela la **lista de nombres** (`Alert.poblados`) al emitir; el mapa público resuelve las coordenadas desde el catálogo de la estación (las coords no cambian).
+- Hoy desnormalizados en la estación (`Station.poblados` nombres + `Station.pobladosGeo`: coordenadas + `distrito`/`provincia`/`departamento` en **texto libre**, con sugerencias `<datalist>`). Mantenedor: acción 📍 por fila en la tabla de `/admin/config` → `components/ModalCentrosPoblados.tsx` (overlay `senamhi_station_config`); `/admin/centros-poblados` solo redirige ahí. Sistema de contingencia: sin catálogo UBIGEO ni cascadas.
+- **Cobertura de la estación calculada**: `Station.departamento` (lista, por estaciones de frontera), `provincia` y `distritos` = unión de la ubicación de sus centros poblados (`lib/domain/cobertura.ts` → `conCobertura`, aplicado en `getStations`/`getStationsConfig`). Si ningún poblado tiene el dato, se usa el valor base.
+- El aviso congela la **lista de nombres** (`Alert.poblados`), su ubicación (`Alert.pobladosUbicacion`) y el distrito (`Alert.distrito`, que muestra `TablaDatosAviso`) al emitir; el mapa público resuelve las coordenadas desde el catálogo de la estación (las coords no cambian).
 - En producción: extraer a un **catálogo propio** (`CentroPoblado`: id, nombre, lat/lon, distrito/provincia/departamento) referenciado por la estación (N:M), y congelar el snapshot en el aviso.
 
 # Ingesta de observaciones y publicación (productos separados)

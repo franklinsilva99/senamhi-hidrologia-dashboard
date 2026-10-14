@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getAlerts, loadAlerts, saveAlerts, getLatestMerged, getSeriesMerged, getMockNow } from "@/lib/infra/data";
 import { getStationsConfig } from "@/lib/infra/stationConfig";
 import { detectarAvisos } from "@/lib/domain/deteccion";
-import { getConfigVigente } from "@/lib/infra/configRecords";
+import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import { existeAvisoPrevio, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA, aplicarAviso, procesarDeteccion } from "@/lib/domain/avisos";
 import type { Alert, DeteccionAviso, Station } from "@/lib/domain/types";
 import { USUARIO } from "@/lib/sesion";
@@ -33,7 +33,7 @@ export default function AdminAvisosPage() {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setAlerts(loadAlerts());
     setStations(getStationsConfig());
-    setDeteccion(detectarAvisos(getStationsConfig(), getLatestMerged(), getConfigVigente, getMockNow()));
+    setDeteccion(detectarAvisos(getStationsConfig(), getLatestMerged(), getUmbralesActivos, getMockNow()));
   }, []);
 
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]));
@@ -66,12 +66,12 @@ export default function AdminAvisosPage() {
 
   // ── Actualizar detección ──
   const handleActualizarDeteccion = () => {
-    const det = detectarAvisos(stations, latestOverride, getConfigVigente, getMockNow());
+    const det = detectarAvisos(stations, latestOverride, getUmbralesActivos, getMockNow());
     setDeteccion(det);
     const { next, textos } = procesarDeteccion(alerts, det, {
       stations,
       latest: latestOverride,
-      configVigenteDe: getConfigVigente,
+      umbralesDe: getUmbralesActivos,
       serieDe: (id) => getSeriesMerged(id),
       mockNow: getMockNow(),
     });
@@ -87,12 +87,10 @@ export default function AdminAvisosPage() {
     const station = stations.find((s) => s.id === stationId);
     if (!station) return;
     const preferencia = station.preferencia ?? "caudal";
-    const record = getConfigVigente(stationId, preferencia, getMockNow());
-    if (!record) return;
     const aviso = crearAviso({
       station,
       latest: latestOverride,
-      record,
+      activos: getUmbralesActivos(stationId, preferencia, getMockNow()),
       preferencia,
       mockNow: getMockNow(),
       serie: getSeriesMerged(stationId),
@@ -108,7 +106,7 @@ export default function AdminAvisosPage() {
     setAlerts(next);
     saveAlerts(next);
     setPreviewAviso(null);
-    setDeteccion(detectarAvisos(stations, latestOverride, getConfigVigente, getMockNow()));
+    setDeteccion(detectarAvisos(stations, latestOverride, getUmbralesActivos, getMockNow()));
     setMsg(texto);
     setTimeout(() => setMsg(""), 5000);
   };
@@ -134,7 +132,7 @@ export default function AdminAvisosPage() {
 
   // Acción del preview (misma regla de negocio que al publicar).
   const accionPreview = previewAviso
-    ? evaluarAccionAviso(previewAviso.stationId, previewAviso.nivel, alerts)
+    ? evaluarAccionAviso(previewAviso.stationId, previewAviso.nivel, previewAviso.tipo, alerts)
     : null;
 
   return (
@@ -171,7 +169,7 @@ export default function AdminAvisosPage() {
                   {estacionesConAlerta.map((d) => {
                     const st = stationMap[d.stationId];
                     const previo = existeAvisoPrevio(d.stationId, alerts);
-                    const accion = evaluarAccionAviso(d.stationId, d.umbral ?? "", alerts);
+                    const accion = evaluarAccionAviso(d.stationId, d.umbral ?? "", d.tipo, alerts);
                     const valorMostrar = d.preferencia === "caudal" ? d.valorActual : d.valorAbsoluto ?? d.valorActual;
                     const unidadMostrar = d.preferencia === "caudal" ? "m³/s" : "m.s.n.m.";
                     return (
@@ -181,7 +179,7 @@ export default function AdminAvisosPage() {
                         <td className="p-2 text-xs">{st?.dz ?? "—"}</td>
                         <td className="p-2 text-xs">{d.preferencia}</td>
                         <td className="p-2 text-xs">
-                          <span className={`px-1.5 py-0.5 rounded ${d.tipo === "vigilancia" ? "bg-sky-100 text-sky-700" : "bg-rose-100 text-rose-700"}`}>{d.tipo}</span>
+                          <span className={`px-1.5 py-0.5 rounded ${d.tipo === "vaciante" ? "bg-sky-100 text-sky-700" : "bg-rose-100 text-rose-700"}`}>{d.tipo}</span>
                         </td>
                         <td className="p-2 text-xs">
                           <span className={st?.modoPublicacion === "manual" ? "text-slate-500" : "text-green-700"}>
@@ -199,7 +197,7 @@ export default function AdminAvisosPage() {
                         <td className="p-2 text-xs">
                           {previo ? (
                             <span className={accion === "reemplazar" ? "text-[#fca326] font-semibold" : "text-slate-400"}>
-                              #{previo.nro} ({previo.nivel}) {accion === "reemplazar" ? "→ reemplazar" : "= sin cambios"}
+                              #{previo.nro} ({previo.tipo} · {previo.nivel}) {accion === "reemplazar" ? "→ reemplazar" : "= sin cambios"}
                             </span>
                           ) : (
                             <span className="text-green-600">Sin previo</span>
@@ -218,7 +216,7 @@ export default function AdminAvisosPage() {
                               onClick={() => handleCrearAviso(d.stationId)}
                               disabled={accion === "mantener"}
                               className={`px-3 py-1 rounded text-xs font-semibold ${accion === "mantener" ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-[#00539b] text-white hover:bg-[#0070ba]"}`}
-                              title={accion === "mantener" ? "El aviso vigente ya tiene el mismo nivel" : "Crear aviso"}
+                              title={accion === "mantener" ? "El aviso vigente ya tiene el mismo tipo y nivel" : "Crear aviso"}
                             >
                               {accion === "mantener" ? "Sin cambios" : accion === "reemplazar" ? "Reemplazar" : "Crear aviso"}
                             </button>
@@ -263,7 +261,7 @@ export default function AdminAvisosPage() {
               <div className="flex items-center gap-3">
                 <span className="text-xl font-bold">Aviso N°{previewAviso.nro}</span>
                 <span className={`px-3 py-1 rounded text-xs font-bold ${badgeNivel[previewAviso.nivel]}`}>{previewAviso.nivel}</span>
-                <span className={`px-2 py-1 rounded text-xs font-semibold ${previewAviso.tipo === "vigilancia" ? "bg-sky-100 text-sky-700" : "bg-rose-100 text-rose-700"}`}>{previewAviso.tipo}</span>
+                <span className={`px-2 py-1 rounded text-xs font-semibold ${previewAviso.tipo === "vaciante" ? "bg-sky-100 text-sky-700" : "bg-rose-100 text-rose-700"}`}>{previewAviso.tipo}</span>
               </div>
               <p className="text-right text-xs text-slate-500">Fecha de emisión: {previewAviso.fechaEmision}</p>
               <h4 className="text-lg font-bold text-[#dc2626] text-center">{previewAviso.titulo}</h4>
@@ -291,7 +289,7 @@ export default function AdminAvisosPage() {
             </div>
             {accionPreview === "mantener" && (
               <p className="text-sm text-slate-500 text-center">
-                Sin cambios: la estación ya tiene un aviso vigente de este nivel.
+                Sin cambios: la estación ya tiene un aviso vigente de este tipo y nivel.
               </p>
             )}
             <div className="flex gap-3 justify-end">

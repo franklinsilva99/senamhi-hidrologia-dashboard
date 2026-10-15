@@ -239,7 +239,7 @@ export default function AdminPronosticoPage() {
       <div className="flex gap-2">
         <button
           onClick={() => setActiveTab("horario")}
-          className="px-5 py-2 rounded text-sm font-bold uppercase bg-[#00539b] text-white hover:bg-[#0070ba] opacity-60 cursor-not-allowed"
+          className="px-5 py-2 rounded text-sm font-bold uppercase bg-primary-500 text-white hover:bg-primary-600 opacity-60 cursor-not-allowed"
           disabled
         >
           Pronóstico - Horario
@@ -248,15 +248,15 @@ export default function AdminPronosticoPage() {
           onClick={() => setActiveTab("diario")}
           className={`px-5 py-2 rounded text-sm font-bold uppercase ${
             activeTab === "diario"
-              ? "bg-[#00539b] text-white"
-              : "bg-[#00539b] text-white opacity-70 hover:bg-[#0070ba]"
+              ? "bg-primary-500 text-white"
+              : "bg-primary-500 text-white opacity-70 hover:bg-primary-600"
           }`}
         >
           Pronóstico - Diario
         </button>
         <button
           onClick={() => setActiveTab("mensual")}
-          className="px-5 py-2 rounded text-sm font-bold uppercase bg-[#00539b] text-white hover:bg-[#0070ba] opacity-60 cursor-not-allowed"
+          className="px-5 py-2 rounded text-sm font-bold uppercase bg-primary-500 text-white hover:bg-primary-600 opacity-60 cursor-not-allowed"
           disabled
         >
           Pronóstico - Mensual
@@ -266,8 +266,8 @@ export default function AdminPronosticoPage() {
       {activeTab === "diario" && (
         <div className="space-y-5">
           {/* Formulario de carga */}
-          <div className="bg-white rounded-lg border border-slate-200">
-            <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-card">
+            <div className="bg-primary-500 text-white px-4 py-2 rounded-t-lg">
               <h2 className="text-sm font-bold uppercase">Registro de Datos de Pronóstico</h2>
             </div>
             <div className="p-4">
@@ -324,7 +324,7 @@ export default function AdminPronosticoPage() {
                     disabled={extraGrupos === 0}
                     title="Quitar 3 días"
                     aria-label="Quitar 3 días"
-                    className="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-500 shadow-sm flex items-center justify-center transition hover:bg-slate-100 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0070ba] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:scale-100"
+                    className="w-9 h-9 rounded-full border border-slate-300 bg-white text-slate-500 shadow-sm flex items-center justify-center transition hover:bg-slate-100 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:scale-100"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <path d="M2.5 7h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -335,7 +335,7 @@ export default function AdminPronosticoPage() {
                     onClick={agregarGrupo}
                     title="Agregar 3 días"
                     aria-label="Agregar 3 días"
-                    className="w-9 h-9 rounded-full bg-[#00539b] text-white shadow-sm flex items-center justify-center transition hover:bg-[#0070ba] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0070ba] focus-visible:ring-offset-2"
+                    className="w-9 h-9 rounded-full bg-primary-500 text-white shadow-sm flex items-center justify-center transition hover:bg-primary-600 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <path d="M7 2.5v9M2.5 7h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -401,7 +401,7 @@ export default function AdminPronosticoPage() {
               <div className="flex justify-center">
                 <button
                   onClick={handleSave}
-                  className="bg-[#00539b] text-white px-8 py-2 rounded text-sm font-semibold hover:bg-[#0070ba]"
+                  className="bg-primary-500 text-white px-8 py-2 rounded text-sm font-semibold hover:bg-primary-600"
                 >
                   Guardar
                 </button>
@@ -415,8 +415,8 @@ export default function AdminPronosticoPage() {
           </div>
 
           {/* Listado de pronósticos */}
-          <div className="bg-white rounded-lg border border-slate-200">
-            <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg flex items-center justify-between gap-4">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-card">
+            <div className="bg-primary-500 text-white px-4 py-2 rounded-t-lg flex items-center justify-between gap-4">
               <h2 className="text-sm font-bold uppercase">Listado de Datos de Pronóstico</h2>
               <input
                 type="search"
@@ -430,7 +430,7 @@ export default function AdminPronosticoPage() {
             {/* Tabla */}
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-[#00539b] text-white text-center">
+                <thead className="bg-primary-500 text-white text-center">
                   <tr>
                     <th className="p-2.5 font-semibold">Dirección Zonal</th>
                     <th className="p-2.5 font-semibold">Estación</th>
@@ -454,13 +454,13 @@ export default function AdminPronosticoPage() {
                         <td className="p-2 whitespace-nowrap">
                           <button
                             onClick={() => abrirEditar(g.stationId, g.padre)}
-                            className="text-xs font-semibold text-[#00539b] hover:underline"
+                            className="text-xs font-semibold text-primary-500 hover:underline"
                           >
                             Editar
                           </button>
                           <button
                             onClick={() => setVerStationId(g.stationId)}
-                            className="ml-3 text-xs font-semibold text-[#00539b] hover:underline"
+                            className="ml-3 text-xs font-semibold text-primary-500 hover:underline"
                           >
                             Ver hidrograma
                           </button>
@@ -535,7 +535,7 @@ export default function AdminPronosticoPage() {
               </button>
               <button
                 onClick={guardarEdicion}
-                className="px-4 py-2 rounded text-sm font-semibold bg-[#00539b] text-white hover:bg-[#0070ba]"
+                className="px-4 py-2 rounded text-sm font-semibold bg-primary-500 text-white hover:bg-primary-600"
               >
                 Guardar
               </button>

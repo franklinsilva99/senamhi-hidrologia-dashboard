@@ -140,7 +140,7 @@ export default function ModalCentrosPoblados({
         className="flex h-full w-full max-w-5xl animate-modal-in flex-col overflow-hidden bg-white shadow-2xl sm:h-auto sm:max-h-[85vh] sm:rounded-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="flex flex-none items-center gap-3 bg-[#00539b] px-5 py-3">
+        <header className="flex flex-none items-center gap-3 bg-primary-500 px-5 py-3">
           <div className="min-w-0">
             <h2 id="modal-cp-titulo" className="truncate text-sm font-bold uppercase text-white">
               Centros poblados · {station.estacion}
@@ -223,7 +223,7 @@ export default function ModalCentrosPoblados({
             </table>
           </div>
 
-          <button onClick={agregar} className="rounded bg-slate-100 px-3 py-1.5 text-xs font-semibold text-[#00539b] hover:bg-slate-200">
+          <button onClick={agregar} className="rounded bg-slate-100 px-3 py-1.5 text-xs font-semibold text-primary-500 hover:bg-slate-200">
             + Agregar centro poblado
           </button>
 
@@ -251,7 +251,7 @@ export default function ModalCentrosPoblados({
             <button
               onClick={guardar}
               disabled={sinNombre || !cambiado}
-              className={`rounded px-4 py-1.5 text-xs font-semibold ${sinNombre || !cambiado ? "cursor-not-allowed bg-slate-200 text-slate-400" : "bg-[#00539b] text-white hover:bg-[#0070ba]"}`}
+              className={`rounded px-4 py-1.5 text-xs font-semibold ${sinNombre || !cambiado ? "cursor-not-allowed bg-slate-200 text-slate-400" : "bg-primary-500 text-white hover:bg-primary-600"}`}
             >
               Guardar
             </button>

@@ -48,10 +48,11 @@ function estadoPeriodo(u: Umbral, fecha: string): EstadoPeriodo {
   if (periodoCubre(u.periodo, fecha)) return "activo";
   return u.periodo.inicio > fecha.slice(0, 10) ? "programado" : "vencido";
 }
+// Banderas de la plantilla SENAMHI: Conforme (verde), callout (azul), No Dato (gris).
 const ESTADO_CLS: Record<EstadoPeriodo, string> = {
-  activo: "bg-green-100 text-green-700",
-  programado: "bg-blue-50 text-blue-700",
-  vencido: "bg-slate-100 text-slate-400",
+  activo: "border border-[#86efac] bg-[#f0fdf4] text-[#166534]",
+  programado: "border border-[#bfdbfe] bg-[#eff6ff] text-[#1e40af]",
+  vencido: "border border-[#cbd5e1] bg-[#f8fafc] text-[#475569]",
 };
 
 // Errores de la tabla de umbrales de una estación (bloquean el guardado).
@@ -107,7 +108,7 @@ function Opciones<T extends string>({
           key={o.value}
           type="button"
           onClick={() => onChange(o.value)}
-          className={`px-3 py-1 text-xs ${value === o.value ? "bg-[#00539b] font-semibold text-white" : "bg-white text-slate-600 hover:bg-slate-50"}`}
+          className={`px-3 py-1 text-xs ${value === o.value ? "bg-primary-500 font-semibold text-white" : "bg-white text-slate-600 hover:bg-slate-50"}`}
         >
           {o.label}
         </button>
@@ -267,8 +268,8 @@ export default function AdminConfigPage() {
       {msg && <div className="rounded border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800">{msg}</div>}
 
       {/* Lista de estaciones */}
-      <section className="rounded-lg border border-slate-200 bg-white">
-        <div className="flex flex-wrap items-center gap-3 rounded-t-lg bg-[#00539b] px-4 py-2">
+      <section className="rounded-lg border border-slate-200 bg-white shadow-card">
+        <div className="flex flex-wrap items-center gap-3 rounded-t-lg bg-primary-500 px-4 py-2">
           <h2 className="text-sm font-bold uppercase text-white">Estaciones</h2>
           <div className="ml-auto flex flex-wrap items-center gap-2">
             <select
@@ -358,7 +359,7 @@ export default function AdminConfigPage() {
                     <td className="whitespace-nowrap p-2 text-center">
                       <button
                         onClick={() => abrir(s)}
-                        className="rounded bg-[#00539b] px-2.5 py-1 text-xs font-semibold text-white hover:bg-[#0070ba]"
+                        className="rounded bg-primary-500 px-2.5 py-1 text-xs font-semibold text-white hover:bg-primary-600"
                         title="Configurar umbrales, detección, publicación y estación"
                       >
                         ⚙️ Configurar
@@ -414,7 +415,7 @@ export default function AdminConfigPage() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Cabecera fija */}
-            <header className="flex flex-none items-center gap-3 bg-[#00539b] px-5 py-3">
+            <header className="flex flex-none items-center gap-3 bg-primary-500 px-5 py-3">
               <div className="min-w-0">
                 <h2 id="modal-estacion-titulo" className="truncate text-sm font-bold uppercase text-white">{st.estacion}</h2>
                 <p className="text-xs text-white/70">Río {st.rio} · {st.dz ?? "—"} · {st.codigoAuto ?? "—"}</p>
@@ -533,7 +534,7 @@ export default function AdminConfigPage() {
                     <button
                       onClick={guardar}
                       disabled={errores.size > 0}
-                      className={`rounded px-4 py-1.5 text-xs font-semibold ${errores.size > 0 ? "cursor-not-allowed bg-slate-200 text-slate-400" : "bg-[#00539b] text-white hover:bg-[#0070ba]"}`}
+                      className={`rounded px-4 py-1.5 text-xs font-semibold ${errores.size > 0 ? "cursor-not-allowed bg-slate-200 text-slate-400" : "bg-primary-500 text-white hover:bg-primary-600"}`}
                     >
                       Guardar
                     </button>
@@ -545,7 +546,7 @@ export default function AdminConfigPage() {
                     </button>
                     <button
                       onClick={() => selected && setDraft({ station: { ...selected }, umbrales: umbralesDe(selected.id).map((u) => ({ ...u, periodo: { ...u.periodo } })) })}
-                      className="rounded bg-[#00539b] px-4 py-1.5 text-xs font-semibold text-white hover:bg-[#0070ba]"
+                      className="rounded bg-primary-500 px-4 py-1.5 text-xs font-semibold text-white hover:bg-primary-600"
                     >
                       ✏️ Editar
                     </button>
@@ -620,7 +621,7 @@ function TablaUmbrales({
               <tr>
                 <td
                   colSpan={8}
-                  className={`px-2 py-1.5 font-bold ${generaAvisos ? "bg-[#00539b] text-white" : "bg-slate-100 text-slate-500"}`}
+                  className={`px-2 py-1.5 font-bold ${generaAvisos ? "bg-primary-500 text-white" : "bg-slate-100 text-slate-500"}`}
                 >
                   {VAR_LABEL[v].toUpperCase()} ({unidad(v)})
                   <span className={`ml-2 rounded px-1.5 py-0.5 text-[10px] font-normal ${generaAvisos ? "bg-white/20" : "bg-white text-slate-400"}`}>
@@ -653,7 +654,7 @@ function TablaUmbrales({
                         <td colSpan={5} className="p-2 text-slate-300">— Sin umbral</td>
                         <td className="p-2 text-right">
                           {editing && (
-                            <button onClick={() => onAgregar(v, t, n)} className="rounded bg-slate-100 px-2 py-0.5 font-semibold text-[#00539b] hover:bg-slate-200">
+                            <button onClick={() => onAgregar(v, t, n)} className="rounded bg-slate-100 px-2 py-0.5 font-semibold text-primary-500 hover:bg-slate-200">
                               Configurar
                             </button>
                           )}
@@ -719,7 +720,7 @@ function TablaUmbrales({
                           {editing && (
                             <>
                               {pi === 0 && (
-                                <button onClick={() => onAgregar(v, t, n)} className="mr-2 font-bold text-[#00539b] hover:text-[#0070ba]" title="Agregar otro periodo">
+                                <button onClick={() => onAgregar(v, t, n)} className="mr-2 font-bold text-primary-500 hover:text-primary-600" title="Agregar otro periodo">
                                   +
                                 </button>
                               )}

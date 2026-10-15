@@ -138,8 +138,8 @@ export default function AdminAvisosPage() {
   return (
     <div className="space-y-5">
       {/* ── SECCIÓN 1: Detección Automática ── */}
-      <div className="bg-white rounded-lg border border-slate-200">
-        <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg flex items-center justify-between gap-3">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-card">
+        <div className="bg-primary-500 text-white px-4 py-2 rounded-t-lg flex items-center justify-between gap-3">
           <h2 className="text-sm font-bold uppercase">Detección Automática de Avisos</h2>
           <span className="text-xs bg-white/20 px-2 py-0.5 rounded">{estacionesConAlerta.length} estación(es) con alerta</span>
         </div>
@@ -215,7 +215,7 @@ export default function AdminAvisosPage() {
                             <button
                               onClick={() => handleCrearAviso(d.stationId)}
                               disabled={accion === "mantener"}
-                              className={`px-3 py-1 rounded text-xs font-semibold ${accion === "mantener" ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-[#00539b] text-white hover:bg-[#0070ba]"}`}
+                              className={`px-3 py-1 rounded text-xs font-semibold ${accion === "mantener" ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-primary-500 text-white hover:bg-primary-600"}`}
                               title={accion === "mantener" ? "El aviso vigente ya tiene el mismo tipo y nivel" : "Crear aviso"}
                             >
                               {accion === "mantener" ? "Sin cambios" : accion === "reemplazar" ? "Reemplazar" : "Crear aviso"}
@@ -232,7 +232,7 @@ export default function AdminAvisosPage() {
           <div className="mt-3 flex items-center gap-4">
             <button
               onClick={handleActualizarDeteccion}
-              className="text-xs text-[#00539b] hover:underline font-semibold"
+              className="text-xs text-primary-500 hover:underline font-semibold"
             >
               ↻ Actualizar detección
             </button>
@@ -312,8 +312,8 @@ export default function AdminAvisosPage() {
       )}
 
       {/* ── SECCIÓN 2: Parámetros de búsqueda ── */}
-      <div className="bg-white rounded-lg border border-slate-200">
-        <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-card">
+        <div className="bg-primary-500 text-white px-4 py-2 rounded-t-lg">
           <h2 className="text-sm font-bold uppercase">Parámetros de búsqueda</h2>
         </div>
         <div className="p-4">
@@ -347,8 +347,8 @@ export default function AdminAvisosPage() {
       </div>
 
       {/* ── SECCIÓN 3: Lista de avisos ── */}
-      <div className="bg-white rounded-lg border border-slate-200">
-        <div className="bg-[#00539b] text-white px-4 py-2 rounded-t-lg">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-card">
+        <div className="bg-primary-500 text-white px-4 py-2 rounded-t-lg">
           <h2 className="text-sm font-bold uppercase">Lista de Avisos Hidrológicos</h2>
         </div>
         <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200">
@@ -360,7 +360,7 @@ export default function AdminAvisosPage() {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-[#00539b] text-white text-center">
+            <thead className="bg-primary-500 text-white text-center">
               <tr>
                 <th className="p-2.5 font-semibold">Dirección Zonal</th>
                 <th className="p-2.5 font-semibold">Estación</th>
@@ -374,7 +374,7 @@ export default function AdminAvisosPage() {
                 <th className="p-2.5 font-semibold">Estado</th>
                 <th className="p-2.5 font-semibold" colSpan={2}>Acciones</th>
               </tr>
-              <tr className="bg-[#0070ba]">
+              <tr className="bg-primary-600">
                 <th colSpan={10}></th>
                 <th className="p-1.5 font-normal text-xs">Mas Información</th>
                 <th className="p-1.5 font-normal text-xs">Habilitar / Deshabilitar</th>
@@ -402,7 +402,7 @@ export default function AdminAvisosPage() {
                       </span>
                     </td>
                     <td className="p-2">
-                      <a href={`/avisos/${a.ca}-${a.ce}`} className="inline-flex items-center justify-center w-8 h-8 rounded bg-[#00539b] text-white hover:bg-[#0070ba]" title="Mas Información">
+                      <a href={`/avisos/${a.ca}-${a.ce}`} className="inline-flex items-center justify-center w-8 h-8 rounded bg-primary-500 text-white hover:bg-primary-600" title="Mas Información">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
                       </a>
                     </td>

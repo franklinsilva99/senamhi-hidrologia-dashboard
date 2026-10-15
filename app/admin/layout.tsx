@@ -32,24 +32,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   return (
-    <div className="flex h-full overflow-hidden bg-[#f7f9fa]">
-      {/* Sidebar */}
-      <aside className="w-52 bg-[#001e40] text-white flex-shrink-0 flex flex-col overflow-y-auto">
+    <div className="tema-admin flex h-full overflow-hidden bg-[#f7f9fa]">
+      {/* Sidebar (plantilla SENAMHI) */}
+      <aside className="w-56 bg-sidebar text-white flex-shrink-0 flex flex-col overflow-y-auto">
         {/* Logo SC PHISIS */}
-        <div className="px-4 py-3 border-b border-gray-600">
-          <p className="text-sm font-bold text-white tracking-wide">SC PHISIS</p>
+        <div className="px-4 py-3 border-b border-white/10">
+          <p className="font-titulo text-sm font-bold text-white tracking-wide">SC PHISIS</p>
         </div>
 
         {/* Usuario */}
-        <div className="px-4 py-4 border-b border-gray-600 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center flex-shrink-0">
+        <div className="px-4 py-4 border-b border-white/10 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
             <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
           </div>
           <div>
             <p className="text-sm font-semibold text-white">{USUARIO.nombre}</p>
-            <p className="text-xs text-gray-400">{USUARIO.usuario}</p>
+            <p className="text-xs text-white/50">{USUARIO.usuario}</p>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {navGroups.map((grupo, gi) => (
             <div key={grupo.titulo ?? gi} className={gi > 0 ? "mt-3" : ""}>
               {grupo.titulo && (
-                <p className="px-4 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                <p className="px-4 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-white/50">
                   {grupo.titulo}
                 </p>
               )}
@@ -70,10 +70,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                    className={`mx-2 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
                       active
-                        ? "bg-[#003366] text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                        ? "bg-white/12 font-semibold text-secondary-500"
+                        : "text-white/80 hover:bg-white/8 hover:text-white"
                     }`}
                   >
                     <span className="text-base w-5 text-center">{item.icon}</span>
@@ -89,7 +89,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Contenido principal */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top header bar */}
-        <header className="bg-white border-b border-slate-200 px-4 py-2 flex items-center justify-between flex-shrink-0">
+        <header className="relative z-10 bg-white border-b border-slate-200 px-4 py-2 flex items-center justify-between flex-shrink-0 shadow-header">
           <div className="flex items-center gap-4">
             {/* Logos institucionales */}
             <div className="flex items-center gap-3">
@@ -103,13 +103,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </div>
               </div>
               <div className="h-6 w-px bg-slate-300" />
-              <div className="flex items-center gap-1">
-                <span className="text-lg">🌊</span>
-                <span className="text-sm font-bold text-[#003366]">Senamhi</span>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element -- logo SVG estático (plantilla SENAMHI) */}
+              <img src="/brand/logo-senamhi.svg" alt="SENAMHI" className="h-9 w-auto" />
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              href="/monitoreo"
+              className="flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold text-primary-500 hover:bg-primary-50"
+              title="Abrir el portal público (Monitoreo)"
+            >
+              🌐 Ver público
+            </Link>
             <Link href="/monitoreo" className="p-2 rounded hover:bg-slate-100 text-slate-500" title="Cerrar sesión">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

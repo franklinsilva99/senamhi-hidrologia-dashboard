@@ -17,19 +17,19 @@ export default function AdminDashboard() {
 
       {/* Tarjetas resumen */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="bg-white rounded-xl border p-4">
+        <div className="bg-white rounded-xl border p-4 shadow-card">
           <p className="text-xs text-slate-500">Estaciones</p>
           <p className="text-2xl font-bold">{stations.length}</p>
         </div>
-        <div className="bg-white rounded-xl border p-4">
+        <div className="bg-white rounded-xl border p-4 shadow-card">
           <p className="text-xs text-slate-500">Avisos vigentes</p>
           <p className="text-2xl font-bold text-[#fca326]">{vigentes.length}</p>
         </div>
-        <div className="bg-white rounded-xl border p-4">
+        <div className="bg-white rounded-xl border p-4 shadow-card">
           <p className="text-xs text-slate-500">Estaciones con pronóstico</p>
-          <p className="text-2xl font-bold text-[#00539b]">{modelosActivos}</p>
+          <p className="text-2xl font-bold text-primary-500">{modelosActivos}</p>
         </div>
-        <div className="bg-white rounded-xl border p-4">
+        <div className="bg-white rounded-xl border p-4 shadow-card">
           <p className="text-xs text-slate-500">Total modelos ingresados</p>
           <p className="text-2xl font-bold">{forecast.length}</p>
         </div>
@@ -39,18 +39,18 @@ export default function AdminDashboard() {
       <div className="grid sm:grid-cols-2 gap-4">
         <a
           href="/admin/avisos"
-          className="block bg-white rounded-xl border p-4 hover:border-[#00539b] transition-colors"
+          className="block bg-white rounded-xl border p-4 shadow-card hover:border-primary-500 transition-colors"
         >
-          <h2 className="font-semibold text-[#003366]">Gestionar Avisos</h2>
+          <h2 className="font-semibold text-primary-500">Gestionar Avisos</h2>
           <p className="text-sm text-slate-500 mt-1">
             Crear, editar, habilitar/deshabilitar avisos hidrológicos. Tabla estilo PHISIS.
           </p>
         </a>
         <a
           href="/admin/pronostico"
-          className="block bg-white rounded-xl border p-4 hover:border-[#00539b] transition-colors"
+          className="block bg-white rounded-xl border p-4 shadow-card hover:border-primary-500 transition-colors"
         >
-          <h2 className="font-semibold text-[#003366]">Cargar Pronóstico</h2>
+          <h2 className="font-semibold text-primary-500">Cargar Pronóstico</h2>
           <p className="text-sm text-slate-500 mt-1">
             Ingresar Modelo 1..4 por estación y fecha. Solo Diario disponible en contingencia.
           </p>
@@ -58,7 +58,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Tabla resumen avisos */}
-      <div className="bg-white rounded-xl border overflow-x-auto">
+      <div className="bg-white rounded-xl border overflow-x-auto shadow-card">
         <p className="p-3 font-semibold text-sm border-b">Avisos recientes</p>
         <table className="w-full text-sm">
           <thead className="bg-slate-50">
@@ -96,7 +96,7 @@ export default function AdminDashboard() {
                   </span>
                 </td>
                 <td className="p-2 text-center">
-                  <a href={`/avisos/${a.ca}-${a.ce}`} className="text-[#00539b] underline text-xs">
+                  <a href={`/avisos/${a.ca}-${a.ce}`} className="text-primary-500 underline text-xs">
                     +Info
                   </a>
                 </td>

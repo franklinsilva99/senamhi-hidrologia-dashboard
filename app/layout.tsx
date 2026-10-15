@@ -10,7 +10,7 @@ const openSans = Open_Sans({
   weight: ["400", "600", "700", "800"],
 });
 
-// Tipografías de la plantilla SENAMHI: solo las usa el admin (.tema-admin).
+// Tipografías de la plantilla SENAMHI: las usan el admin y el observatorio (.tema-senamhi).
 // Sin preload, para que las páginas públicas no las descarguen.
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], preload: false });
 const jakarta = Plus_Jakarta_Sans({ variable: "--font-jakarta", subsets: ["latin"], preload: false });

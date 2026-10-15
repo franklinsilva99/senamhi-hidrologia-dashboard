@@ -32,7 +32,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   return (
-    <div className="tema-admin flex h-full overflow-hidden bg-[#f7f9fa]">
+    <div className="tema-senamhi flex h-full overflow-hidden bg-[#f7f9fa]">
       {/* Sidebar (plantilla SENAMHI) */}
       <aside className="w-56 bg-sidebar text-white flex-shrink-0 flex flex-col overflow-y-auto">
         {/* Logo SC PHISIS */}

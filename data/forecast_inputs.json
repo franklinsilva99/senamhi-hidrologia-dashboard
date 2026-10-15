@@ -286,5 +286,21 @@
     "valor": 15.2,
     "usuario": "operador-DZ13",
     "padre": "2026-10-02"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-10-02",
+    "modelo": "Modelo 1",
+    "valor": 158.2,
+    "usuario": "operador-DZ1",
+    "padre": "2026-10-02"
+  },
+  {
+    "stationId": "el-tigre",
+    "fecha": "2026-10-02",
+    "modelo": "Modelo 2",
+    "valor": 161.7,
+    "usuario": "operador-DZ1",
+    "padre": "2026-10-02"
   }
 ]

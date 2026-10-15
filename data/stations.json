@@ -312,7 +312,7 @@
       "nivel"
     ],
     "preferencia": "caudal",
-    "modoPublicacion": "automatico",
+    "modoPublicacion": "manual",
     "estado": "activa"
   },
   {

@@ -18,10 +18,10 @@ const badgeNivel: Record<string, string> = {
 
 export default function AdminAvisosPage() {
   const [alerts, setAlerts] = useState<Alert[]>(getAlerts);
+  // Filtros de la lista (una sola barra): texto libre, DZ y periodo.
   const [filtroDZ, setFiltroDZ] = useState("");
-  const [filtroStation, setFiltroStation] = useState("");
-  const [filtroFechaIni, setFiltroFechaIni] = useState("");
-  const [filtroFechaFin, setFiltroFechaFin] = useState("");
+  const [periodoDesde, setPeriodoDesde] = useState("");
+  const [periodoHasta, setPeriodoHasta] = useState("");
   const [searchText, setSearchText] = useState("");
   const [previewAviso, setPreviewAviso] = useState<Alert | null>(null);
 
@@ -50,16 +50,16 @@ export default function AdminAvisosPage() {
   const filtered = alerts.filter((a) => {
     const st = stationMap[a.stationId];
     if (filtroDZ && st?.dz !== filtroDZ) return false;
-    if (filtroStation && a.stationId !== filtroStation) return false;
-    if (filtroFechaIni && a.inicio < filtroFechaIni) return false;
-    if (filtroFechaFin && a.fin > filtroFechaFin) return false;
+    // Periodo: avisos vigentes en algún momento del rango (se solapan con él).
+    if (periodoHasta && a.inicio > periodoHasta) return false;
+    if (periodoDesde && a.fin < periodoDesde) return false;
     if (searchText) {
       const q = searchText.toLowerCase();
       if (
         !a.titulo.toLowerCase().includes(q) &&
         !a.nro.toString().includes(q) &&
         !(st?.estacion ?? "").toLowerCase().includes(q) &&
-        !(st?.dz ?? "").toLowerCase().includes(q)
+        !(st?.rio ?? "").toLowerCase().includes(q)
       ) return false;
     }
     return true;
@@ -373,52 +373,46 @@ export default function AdminAvisosPage() {
         </div>
       )}
 
-      {/* ── SECCIÓN 2: Parámetros de búsqueda ── */}
-      <div className="bg-white rounded-lg border border-slate-200 shadow-card">
-        <div className="bg-primary-500 text-white px-4 py-2 rounded-t-lg">
-          <h2 className="text-sm font-bold uppercase">Parámetros de búsqueda</h2>
-        </div>
-        <div className="p-4">
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-xs text-slate-500 mb-1 uppercase">Dirección Zonal</label>
-              <select value={filtroDZ} onChange={(e) => setFiltroDZ(e.target.value)} className="w-full border border-slate-300 rounded px-3 py-2 text-sm">
-                <option value="">Seleccione</option>
-                {dzList.map((dz) => <option key={dz} value={dz!}>{dz}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs text-slate-500 mb-1 uppercase">Estación</label>
-              <select value={filtroStation} onChange={(e) => setFiltroStation(e.target.value)} className="w-full border border-slate-300 rounded px-3 py-2 text-sm">
-                <option value="">Seleccione</option>
-                {stations.map((s) => <option key={s.id} value={s.id}>{s.estacion} ({s.rio})</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-xs text-slate-500 mb-1 uppercase">Fecha Inicio</label>
-              <input type="date" value={filtroFechaIni} onChange={(e) => setFiltroFechaIni(e.target.value)} className="w-full border border-slate-300 rounded px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-500 mb-1 uppercase">Fecha Final</label>
-              <input type="date" value={filtroFechaFin} onChange={(e) => setFiltroFechaFin(e.target.value)} className="w-full border border-slate-300 rounded px-3 py-2 text-sm" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── SECCIÓN 3: Lista de avisos ── */}
+      {/* ── SECCIÓN 2: Lista de avisos (con su barra de filtros) ── */}
       <div className="bg-white rounded-lg border border-slate-200 shadow-card">
         <div className="bg-primary-500 text-white px-4 py-2 rounded-t-lg">
           <h2 className="text-sm font-bold uppercase">Lista de Avisos Hidrológicos</h2>
         </div>
-        <div className="flex items-center justify-between px-4 py-2 border-b border-slate-200">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-slate-500">Buscar:</span>
-            <input type="text" value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="Zonal, estación, título..." className="border border-slate-300 rounded px-3 py-1 text-sm w-64" />
+        <div className="flex flex-wrap items-center gap-3 px-4 py-2.5 border-b border-slate-200">
+          <input
+            type="search"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Estación, río, título o Nro…"
+            aria-label="Buscar avisos"
+            className="border border-slate-300 rounded px-3 py-1.5 text-sm w-64"
+          />
+          <select
+            value={filtroDZ}
+            onChange={(e) => setFiltroDZ(e.target.value)}
+            aria-label="Dirección Zonal"
+            className="border border-slate-300 rounded px-2 py-1.5 text-sm"
+          >
+            <option value="">Todas las DZ</option>
+            {dzList.map((dz) => <option key={dz} value={dz!}>{dz}</option>)}
+          </select>
+          <div className="flex items-center gap-1.5 text-sm text-slate-500" title="Avisos vigentes en algún momento del periodo">
+            <span>Periodo</span>
+            <input type="date" value={periodoDesde} max={periodoHasta || undefined} onChange={(e) => setPeriodoDesde(e.target.value)} aria-label="Periodo desde" className="border border-slate-300 rounded px-2 py-1 text-sm" />
+            <span>–</span>
+            <input type="date" value={periodoHasta} min={periodoDesde || undefined} onChange={(e) => setPeriodoHasta(e.target.value)} aria-label="Periodo hasta" className="border border-slate-300 rounded px-2 py-1 text-sm" />
           </div>
-          <span className="text-sm text-slate-500">{filtered.length} registros</span>
+          <div className="ml-auto flex items-center gap-3 text-sm">
+            {(searchText || filtroDZ || periodoDesde || periodoHasta) && (
+              <button
+                onClick={() => { setSearchText(""); setFiltroDZ(""); setPeriodoDesde(""); setPeriodoHasta(""); }}
+                className="text-primary-500 font-semibold hover:underline"
+              >
+                Limpiar filtros
+              </button>
+            )}
+            <span className="text-slate-500">{filtered.length} registros</span>
+          </div>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

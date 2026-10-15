@@ -83,6 +83,9 @@ export interface PobladoGeo extends UbicacionPoblado {
 export type TipoAviso = "avenida" | "vaciante";
 export type NivelAlerta = "AMARILLO" | "NARANJA" | "ROJO";
 export type ModoPublicacion = "automatico" | "manual";
+// Ciclo de publicación de un aviso. "pendiente": modo manual, espera aprobación
+// (no es público ni cuenta como aviso previo). Ausente = "publicado".
+export type EstadoAviso = "pendiente" | "publicado" | "descartado";
 
 export interface Observation {
   stationId: string;
@@ -129,10 +132,13 @@ export interface Alert {
   distrito: string;
   inicio: string;
   fin: string;
+  // Fin exacto de la vigencia ("YYYY-MM-DDTHH:mm", reloj del mock) = emisión + duracionHoras.
+  vence?: string;
   duracionHoras: number;
   nivel: NivelAlerta;
   plazo: "normal" | "extendido";
   vigente: boolean;
+  estado?: EstadoAviso;
   fechaEmision: string;
   descripcion: string;
   recomendaciones: string;

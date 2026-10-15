@@ -2,7 +2,8 @@
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { getLatestMerged, getMockNow, getSeriesMerged, loadAlerts } from "@/lib/infra/data";
+import { getLatestMerged, getMockNow, getSeriesMerged } from "@/lib/infra/data";
+import { avisosPublicadosActualizados } from "@/lib/infra/deteccionHoraria";
 import { getStationsConfig } from "@/lib/infra/stationConfig";
 import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import { getForecastDiario } from "@/lib/infra/catalogos";
@@ -76,7 +77,7 @@ export default function ObservatorioPage() {
     const ahora = getMockNow();
     const deteccion = detectarAvisos(stations, latest, getUmbralesActivos, ahora);
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
-    setDatos({ stations, latest, ahora, deteccion, avisos: loadAlerts(), forecast: getForecastDiario() });
+    setDatos({ stations, latest, ahora, deteccion, avisos: avisosPublicadosActualizados(), forecast: getForecastDiario() });
     // Selección inicial: la estación con el estado más severo.
     const peor = [...deteccion].sort((a, b) => (b.umbral ? SEVERIDAD[b.umbral] : 0) - (a.umbral ? SEVERIDAD[a.umbral] : 0))[0];
     setSeleccionId(peor?.stationId ?? stations[0]?.id ?? null);

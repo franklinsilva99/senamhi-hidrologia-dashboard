@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getLatestMerged, getMockNow, loadAlerts } from "@/lib/infra/data";
+import { getLatestMerged, getMockNow } from "@/lib/infra/data";
+import { avisosActualizados } from "@/lib/infra/deteccionHoraria";
 import { getStationsConfig } from "@/lib/infra/stationConfig";
 import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import { getForecastInputs } from "@/lib/infra/catalogos";
@@ -31,6 +32,16 @@ function diaMes(f: string): string {
   return `${f.slice(8, 10)} ${MESES[Number(f.slice(5, 7)) - 1]}`;
 }
 
+// "2026-10-07T15:00" → "07 oct 15:00"
+function diaMesHora(f: string): string {
+  return `${diaMes(f)} ${f.slice(11, 16)}`;
+}
+
+// Tiempo restante legible: "6 d" o "18 h".
+function restante(horas: number): string {
+  return horas >= 24 ? `${Math.floor(horas / 24)} d` : `${Math.max(0, Math.round(horas))} h`;
+}
+
 function listaNombres(filas: FilaPanel[]): string {
   const n = filas.map((f) => f.station.estacion);
   return n.length <= 1 ? n.join("") : `${n.slice(0, -1).join(", ")} y ${n[n.length - 1]}`;
@@ -51,7 +62,7 @@ export default function AdminDashboard() {
     const ahora = getMockNow();
     const filas = filasPanel({
       stations,
-      alerts: loadAlerts(),
+      alerts: avisosActualizados(),
       latest,
       deteccion: detectarAvisos(stations, latest, getUmbralesActivos, ahora),
       inputs: getForecastInputs(),
@@ -73,10 +84,11 @@ export default function AdminDashboard() {
   const vigentes = filas.filter((f) => f.aviso);
   const porNivel = (n: NivelAlerta) => vigentes.filter((f) => f.aviso!.nivel === n).length;
   const proximo = vigentes
-    .filter((f) => f.diasParaVencer !== null)
-    .sort((a, b) => a.diasParaVencer! - b.diasParaVencer!);
-  const proximoFin = proximo[0]?.aviso!.fin;
-  const vencenPrimero = proximo.filter((f) => f.aviso!.fin === proximoFin);
+    .filter((f) => f.vence !== null)
+    .sort((a, b) => a.horasParaVencer! - b.horasParaVencer!);
+  const proximoFin = proximo[0]?.vence;
+  const vencenPrimero = proximo.filter((f) => f.vence === proximoFin);
+  const normalizados = vigentes.filter((f) => f.rioNormal);
   const operativas = filas.filter((f) => !f.enMantenimiento);
   const sinDato = filas.filter((f) => f.sinDato);
   const sinPronostico = filas.filter((f) => f.pronosticoPendiente);
@@ -113,7 +125,9 @@ export default function AdminDashboard() {
                 <span key={f.station.id} className="block">
                   <b className="font-semibold text-slate-800">{f.station.estacion}</b>: {f.pendiente!.accion}{" "}
                   aviso {f.pendiente!.nivel.toLowerCase()} de {f.pendiente!.tipo}
-                  {f.modo === "automatico" && " (automática, al actualizar detección)"}
+                  {f.avisoPendiente
+                    ? ` (#${f.avisoPendiente.nro} espera aprobación)`
+                    : f.modo === "automatico" && " (automática, en la próxima detección)"}
                 </span>
               ))}
               {porPublicar.length > 2 && <span className="block">y {porPublicar.length - 2} más</span>}
@@ -140,8 +154,13 @@ export default function AdminDashboard() {
           </span>
           {proximoFin && (
             <span className="block">
-              El próximo vence el <b className="font-semibold text-slate-800">{diaMes(proximoFin)}</b> (
+              El próximo vence el <b className="font-semibold text-slate-800">{diaMesHora(proximoFin)}</b> (
               {listaNombres(vencenPrimero)}).
+            </span>
+          )}
+          {normalizados.length > 0 && (
+            <span className="block text-sky-700">
+              Río normalizado en {listaNombres(normalizados)}: puede deshabilitarse o dejar que venza.
             </span>
           )}
         </Tarjeta>
@@ -214,6 +233,7 @@ export default function AdminDashboard() {
                   {f.pendiente ? (
                     <Chip color="bg-[#ee3d43]" className="font-semibold text-red-700">
                       Por {f.pendiente.accion} · {f.pendiente.nivel.toLowerCase()}
+                      {f.avisoPendiente && <span className="font-normal text-slate-500">#{f.avisoPendiente.nro} pendiente</span>}
                     </Chip>
                   ) : f.aviso ? (
                     <>
@@ -221,15 +241,20 @@ export default function AdminDashboard() {
                         {f.aviso.nivel}
                       </span>{" "}
                       <span className="text-xs text-slate-500">#{f.aviso.nro}</span>
+                      {f.rioNormal && (
+                        <span className="ml-1.5 text-xs font-semibold text-sky-700" title="El último dato ya no supera umbral">
+                          río normal
+                        </span>
+                      )}
                     </>
                   ) : (
                     <Chip color="bg-slate-300" className="text-slate-500">Normal</Chip>
                   )}
                 </td>
                 <td className="p-2">
-                  {f.aviso ? (
+                  {f.vence ? (
                     <>
-                      {diaMes(f.aviso.fin)} <span className="text-xs text-slate-500">({f.diasParaVencer} d)</span>
+                      {diaMesHora(f.vence)} <span className="text-xs text-slate-500">({restante(f.horasParaVencer!)})</span>
                     </>
                   ) : (
                     <span className="text-slate-400">—</span>

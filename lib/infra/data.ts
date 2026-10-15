@@ -6,6 +6,7 @@ import type { Alert, Lectura, Observation, Station } from "@/lib/domain/types";
 import { withCotass } from "@/lib/infra/cotas";
 import { parseOverlay } from "@/lib/infra/legado";
 import { conCobertura } from "@/lib/domain/cobertura";
+import { aplicarVencimiento } from "@/lib/domain/avisos";
 
 // ── Adaptador de persistencia (PoC): JSON estático separado por producto ──
 // Implementa los puertos StationRepository / ObservacionRepository / AvisoRepository.
@@ -94,15 +95,17 @@ export function getMockNow(): string {
   return max;
 }
 
+// La vigencia se deriva al leer contra el reloj del mock (aplicarVencimiento),
+// así todos los consumidores ven los avisos vencidos como no vigentes.
 export function getAlerts(): Alert[] {
-  return alerts as Alert[];
+  return aplicarVencimiento(alerts as Alert[], getMockNow());
 }
 
 export function loadAlerts(): Alert[] {
   if (typeof window === "undefined") return getAlerts();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return parseOverlay<Alert[]>(raw);
+    if (raw) return aplicarVencimiento(parseOverlay<Alert[]>(raw), getMockNow());
   } catch { /* ignore */ }
   return getAlerts();
 }

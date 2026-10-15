@@ -4,7 +4,8 @@ import { getAlerts, loadAlerts, saveAlerts, getLatestMerged, getSeriesMerged, ge
 import { getStationsConfig } from "@/lib/infra/stationConfig";
 import { detectarAvisos } from "@/lib/domain/deteccion";
 import { getUmbralesActivos } from "@/lib/infra/umbrales";
-import { existeAvisoPrevio, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA, aplicarAviso, procesarDeteccion } from "@/lib/domain/avisos";
+import { detectarSiCorresponde, ejecutarDeteccion, reiniciarDeteccion, ultimaHoraProcesada } from "@/lib/infra/deteccionHoraria";
+import { esPublicado, estaVencido, venceEn, existeAvisoPrevio, avisoPendiente, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA, aplicarAviso, aprobarAviso, descartarAviso } from "@/lib/domain/avisos";
 import type { Alert, DeteccionAviso, Station } from "@/lib/domain/types";
 import { USUARIO } from "@/lib/sesion";
 import ChartAviso from "@/components/ChartAviso";
@@ -28,12 +29,17 @@ export default function AdminAvisosPage() {
   const [deteccion, setDeteccion] = useState<DeteccionAviso[]>([]);
   const [stations, setStations] = useState<Station[]>([]);
   const [msg, setMsg] = useState("");
+  const [horaProcesada, setHoraProcesada] = useState<string | null>(null);
 
   useEffect(() => {
+    // Job horario simulado: si la hora de datos actual no se procesó, se ejecuta ahora.
+    const job = detectarSiCorresponde();
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
-    setAlerts(loadAlerts());
+    setAlerts(job?.alerts ?? loadAlerts());
     setStations(getStationsConfig());
     setDeteccion(detectarAvisos(getStationsConfig(), getLatestMerged(), getUmbralesActivos, getMockNow()));
+    setHoraProcesada(ultimaHoraProcesada());
+    if (job && job.textos.length > 0) setMsg(`Detección horaria (${job.hora.replace("T", " ")}): ${job.textos.join(" ")}`);
   }, []);
 
   const stationMap = Object.fromEntries(stations.map((s) => [s.id, s]));
@@ -58,29 +64,25 @@ export default function AdminAvisosPage() {
     }
     return true;
   }).sort((a, b) => {
+    const pa = a.estado === "pendiente", pb = b.estado === "pendiente";
+    if (pa !== pb) return pa ? -1 : 1;
     if (a.vigente !== b.vigente) return a.vigente ? -1 : 1;
     return b.inicio.localeCompare(a.inicio) || b.nro - a.nro;
   });
 
   const estacionesConAlerta = deteccion.filter((d) => d.excedido);
+  const ahora = getMockNow();
+  // Estaciones cuyo último dato ya no supera umbral (para marcar "río normalizado").
+  const rioNormal = new Set(deteccion.filter((d) => !d.excedido).map((d) => d.stationId));
 
-  // ── Actualizar detección ──
+  // ── Forzar detección (p. ej. tras cambiar umbrales o modo de publicación) ──
   const handleActualizarDeteccion = () => {
-    const det = detectarAvisos(stations, latestOverride, getUmbralesActivos, getMockNow());
-    setDeteccion(det);
-    const { next, textos } = procesarDeteccion(alerts, det, {
-      stations,
-      latest: latestOverride,
-      umbralesDe: getUmbralesActivos,
-      serieDe: (id) => getSeriesMerged(id),
-      mockNow: getMockNow(),
-    });
-    if (textos.length > 0) {
-      setAlerts(next);
-      saveAlerts(next);
-      setMsg(`Publicación automática: ${textos.join(" ")}`);
-      setTimeout(() => setMsg(""), 6000);
-    }
+    const { alerts: next, textos, hora } = ejecutarDeteccion();
+    setAlerts(next);
+    setDeteccion(detectarAvisos(getStationsConfig(), latestOverride, getUmbralesActivos, getMockNow()));
+    setHoraProcesada(hora);
+    setMsg(textos.length > 0 ? `Detección procesada: ${textos.join(" ")}` : "Detección procesada: sin cambios.");
+    setTimeout(() => setMsg(""), 6000);
   };
 
   const handleCrearAviso = (stationId: string) => {
@@ -100,9 +102,11 @@ export default function AdminAvisosPage() {
     setPreviewAviso(aviso);
   };
 
+  // Publicar el aviso del preview: si es un pendiente (modo manual) se aprueba.
   const handlePublicar = () => {
     if (!previewAviso) return;
-    const { next, texto } = aplicarAviso(alerts, previewAviso);
+    const { next, texto } =
+      previewAviso.estado === "pendiente" ? aprobarAviso(alerts, previewAviso) : aplicarAviso(alerts, previewAviso);
     setAlerts(next);
     saveAlerts(next);
     setPreviewAviso(null);
@@ -111,11 +115,24 @@ export default function AdminAvisosPage() {
     setTimeout(() => setMsg(""), 5000);
   };
 
+  const handleDescartar = () => {
+    if (!previewAviso) return;
+    const { next, texto } = descartarAviso(alerts, previewAviso);
+    setAlerts(next);
+    saveAlerts(next);
+    setPreviewAviso(null);
+    setMsg(texto);
+    setTimeout(() => setMsg(""), 5000);
+  };
+
   const handleLimpiarDatos = () => {
     const originales = getAlerts();
     setAlerts(originales);
     saveAlerts(originales);
-    setMsg(`Datos restaurados a los ${originales.length} avisos base.`);
+    // La próxima carga vuelve a correr la detección horaria sobre los avisos base.
+    reiniciarDeteccion();
+    setHoraProcesada(null);
+    setMsg(`Datos restaurados a los ${originales.length} avisos base. La detección horaria se ejecutará en la próxima carga.`);
     setTimeout(() => setMsg(""), 4000);
   };
 
@@ -134,6 +151,12 @@ export default function AdminAvisosPage() {
   const accionPreview = previewAviso
     ? evaluarAccionAviso(previewAviso.stationId, previewAviso.nivel, previewAviso.tipo, alerts)
     : null;
+  const previewEstado = previewAviso?.estado ?? "publicado";
+  // Un aviso ya publicado o descartado se abre solo para consulta.
+  const previewGuardado = previewAviso
+    ? alerts.some((a) => a.ca === previewAviso.ca && a.ce === previewAviso.ce)
+    : false;
+  const previoDePreview = previewAviso ? existeAvisoPrevio(previewAviso.stationId, alerts) : null;
 
   return (
     <div className="space-y-5">
@@ -169,6 +192,7 @@ export default function AdminAvisosPage() {
                   {estacionesConAlerta.map((d) => {
                     const st = stationMap[d.stationId];
                     const previo = existeAvisoPrevio(d.stationId, alerts);
+                    const pendiente = avisoPendiente(d.stationId, alerts);
                     const accion = evaluarAccionAviso(d.stationId, d.umbral ?? "", d.tipo, alerts);
                     const valorMostrar = d.preferencia === "caudal" ? d.valorActual : d.valorAbsoluto ?? d.valorActual;
                     const unidadMostrar = d.preferencia === "caudal" ? "m³/s" : "m.s.n.m.";
@@ -202,6 +226,11 @@ export default function AdminAvisosPage() {
                           ) : (
                             <span className="text-green-600">Sin previo</span>
                           )}
+                          {pendiente && (
+                            <span className="block text-amber-700 font-semibold">
+                              #{pendiente.nro} pendiente de aprobación ({pendiente.nivel})
+                            </span>
+                          )}
                         </td>
                         <td className="p-2">
                           <div className="flex items-center justify-center gap-1">
@@ -212,14 +241,24 @@ export default function AdminAvisosPage() {
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                             </button>
-                            <button
-                              onClick={() => handleCrearAviso(d.stationId)}
-                              disabled={accion === "mantener"}
-                              className={`px-3 py-1 rounded text-xs font-semibold ${accion === "mantener" ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-primary-500 text-white hover:bg-primary-600"}`}
-                              title={accion === "mantener" ? "El aviso vigente ya tiene el mismo tipo y nivel" : "Crear aviso"}
-                            >
-                              {accion === "mantener" ? "Sin cambios" : accion === "reemplazar" ? "Reemplazar" : "Crear aviso"}
-                            </button>
+                            {pendiente && accion !== "mantener" ? (
+                              <button
+                                onClick={() => setPreviewAviso(pendiente)}
+                                className="px-3 py-1 rounded text-xs font-semibold bg-amber-500 text-white hover:bg-amber-600"
+                                title="Revisar el aviso pendiente y aprobarlo o descartarlo"
+                              >
+                                Revisar pendiente
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleCrearAviso(d.stationId)}
+                                disabled={accion === "mantener"}
+                                className={`px-3 py-1 rounded text-xs font-semibold ${accion === "mantener" ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-primary-500 text-white hover:bg-primary-600"}`}
+                                title={accion === "mantener" ? "El aviso vigente ya tiene el mismo tipo y nivel" : "Crear aviso"}
+                              >
+                                {accion === "mantener" ? "Sin cambios" : accion === "reemplazar" ? "Reemplazar" : "Crear aviso"}
+                              </button>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -234,8 +273,11 @@ export default function AdminAvisosPage() {
               onClick={handleActualizarDeteccion}
               className="text-xs text-primary-500 hover:underline font-semibold"
             >
-              ↻ Actualizar detección
+              ↻ Forzar detección ahora
             </button>
+            <span className="text-xs text-slate-400" title="La detección corre sola una vez por cada hora de datos nueva">
+              Detección horaria: {horaProcesada ? `procesada ${horaProcesada.replace("T", " ")}` : "pendiente"}
+            </span>
             <button
               onClick={handleLimpiarDatos}
               className="text-xs text-red-500 hover:underline"
@@ -287,19 +329,39 @@ export default function AdminAvisosPage() {
                 umbralRoja={previewAviso.umbrales?.roja}
               />
             </div>
-            {accionPreview === "mantener" && (
+            {previewEstado === "pendiente" && (
+              <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded px-3 py-2">
+                Pendiente de aprobación (publicación manual). No es público todavía.
+                {previoDePreview && ` Al aprobarlo se desactiva el aviso vigente #${previoDePreview.nro} (${previoDePreview.nivel}).`}
+              </p>
+            )}
+            {previewEstado === "publicado" && !previewGuardado && accionPreview === "mantener" && (
               <p className="text-sm text-slate-500 text-center">
                 Sin cambios: la estación ya tiene un aviso vigente de este tipo y nivel.
               </p>
             )}
-            <div className="flex gap-3 justify-end">
-              <button onClick={() => setPreviewAviso(null)} className="px-4 py-2 rounded border text-sm hover:bg-slate-50">
-                {accionPreview === "mantener" ? "Cerrar" : "Cancelar"}
-              </button>
-              {accionPreview !== "mantener" && (
-                <button onClick={handlePublicar} className="bg-green-600 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-green-700">Publicar</button>
-              )}
-            </div>
+            {(() => {
+              // Solo se puede actuar sobre un pendiente o un aviso nuevo que cambia algo.
+              const puedeActuar =
+                previewEstado === "pendiente" || (!previewGuardado && accionPreview !== "mantener");
+              return (
+                <div className="flex gap-3 justify-end">
+                  <button onClick={() => setPreviewAviso(null)} className="px-4 py-2 rounded border text-sm hover:bg-slate-50">
+                    {puedeActuar ? "Cancelar" : "Cerrar"}
+                  </button>
+                  {previewEstado === "pendiente" && (
+                    <button onClick={handleDescartar} className="px-4 py-2 rounded border border-red-300 text-red-700 text-sm font-semibold hover:bg-red-50">
+                      Descartar
+                    </button>
+                  )}
+                  {puedeActuar && (
+                    <button onClick={handlePublicar} className="bg-green-600 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-green-700">
+                      {previewEstado === "pendiente" ? "Aprobar y publicar" : "Publicar"}
+                    </button>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         </div>
       )}
@@ -397,17 +459,41 @@ export default function AdminAvisosPage() {
                     </td>
                     <td className="p-2 text-xs">{USUARIO.usuario}</td>
                     <td className="p-2">
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${a.vigente ? "bg-green-500 text-white" : "bg-slate-200 text-slate-500"}`}>
-                        {a.vigente ? "Activo" : "Inactivo"}
-                      </span>
+                      {a.estado === "pendiente" ? (
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-500 text-white">Pendiente</span>
+                      ) : a.estado === "descartado" ? (
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-400 line-through">Descartado</span>
+                      ) : !a.vigente && estaVencido(a, ahora) ? (
+                        <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-200 text-slate-500" title={`Venció el ${venceEn(a).replace("T", " ")}`}>
+                          Vencido
+                        </span>
+                      ) : (
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${a.vigente ? "bg-green-500 text-white" : "bg-slate-200 text-slate-500"}`}>
+                          {a.vigente ? "Activo" : "Inactivo"}
+                        </span>
+                      )}
+                      {a.vigente && rioNormal.has(a.stationId) && (
+                        <span
+                          className="mt-1 block text-[10px] font-semibold text-sky-700"
+                          title={`El último dato ya no supera umbral. Puede deshabilitarlo o dejar que venza el ${venceEn(a).replace("T", " ")}.`}
+                        >
+                          Río normalizado
+                        </span>
+                      )}
                     </td>
                     <td className="p-2">
-                      <a href={`/avisos/${a.ca}-${a.ce}`} className="inline-flex items-center justify-center w-8 h-8 rounded bg-primary-500 text-white hover:bg-primary-600" title="Mas Información">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-                      </a>
+                      {esPublicado(a) ? (
+                        <a href={`/avisos/${a.ca}-${a.ce}`} className="inline-flex items-center justify-center w-8 h-8 rounded bg-primary-500 text-white hover:bg-primary-600" title="Mas Información">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                        </a>
+                      ) : (
+                        <button onClick={() => setPreviewAviso(a)} className={`inline-flex items-center justify-center w-8 h-8 rounded text-white ${a.estado === "pendiente" ? "bg-amber-500 hover:bg-amber-600" : "bg-slate-400 hover:bg-slate-500"}`} title={a.estado === "pendiente" ? "Revisar y aprobar" : "Ver aviso descartado"}>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                        </button>
+                      )}
                     </td>
                     <td className="p-2">
-                      <button onClick={() => toggleVigente(a)} className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-200 text-slate-600 hover:bg-slate-300" title={a.vigente ? "Deshabilitar" : "Habilitar"}>
+                      <button onClick={() => toggleVigente(a)} disabled={!esPublicado(a) || (!a.vigente && estaVencido(a, ahora))} className="inline-flex items-center justify-center w-8 h-8 rounded bg-slate-200 text-slate-600 hover:bg-slate-300 disabled:opacity-40 disabled:cursor-not-allowed" title={!esPublicado(a) ? "Solo para avisos publicados" : !a.vigente && estaVencido(a, ahora) ? "Aviso vencido" : a.vigente ? "Deshabilitar" : "Habilitar"}>
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {a.vigente
                             ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />

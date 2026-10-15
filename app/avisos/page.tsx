@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { getAlerts, getLatestMerged, getStations, loadAlerts } from "@/lib/infra/data";
+import { getAlerts, getLatestMerged, getStations } from "@/lib/infra/data";
+import { avisosPublicadosActualizados } from "@/lib/infra/deteccionHoraria";
 import AvisosTabs from "@/components/AvisosTabs";
 import AvisosBanner from "@/components/AvisosBanner";
 import type { Alert, Observation } from "@/lib/domain/types";
@@ -13,7 +14,7 @@ export default function AvisosPage() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
-    setAlerts(loadAlerts());
+    setAlerts(avisosPublicadosActualizados());
     setLatest(getLatestMerged());
   }, []);
 

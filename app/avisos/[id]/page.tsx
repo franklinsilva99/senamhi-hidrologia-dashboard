@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getAlerts, getSeries, getSeriesMerged, getStations, loadAlerts } from "@/lib/infra/data";
+import { getAlerts, getSeries, getSeriesMerged, getStations } from "@/lib/infra/data";
+import { avisosPublicadosActualizados } from "@/lib/infra/deteccionHoraria";
 import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import { valoresDe } from "@/lib/domain/umbrales";
 import ChartAviso from "@/components/ChartAviso";
@@ -37,7 +38,7 @@ export default function AvisoDetalle() {
   });
 
   useEffect(() => {
-    const stored = loadAlerts();
+    const stored = avisosPublicadosActualizados();
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hidratación desde localStorage (sistema externo)
     setAlerts(stored);
     const a = stored.find((x) => x.ca === ca && x.ce === ce);

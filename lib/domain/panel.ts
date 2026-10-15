@@ -8,7 +8,7 @@ import type {
   Station,
   TipoAviso,
 } from "./types";
-import { evaluarAccionAviso, existeAvisoPrevio } from "./avisos";
+import { avisoPendiente, evaluarAccionAviso, existeAvisoPrevio, venceEn } from "./avisos";
 
 // Panel administrativo: estado operativo por estación (qué hay que hacer ahora).
 // Dominio puro: recibe estaciones, avisos, última lectura, detección y pronóstico.
@@ -27,8 +27,11 @@ export interface FilaPanel {
   modo: ModoPublicacion;
   enMantenimiento: boolean;
   aviso: Alert | null; // aviso vigente
-  diasParaVencer: number | null;
+  vence: string | null; // fin exacto del aviso vigente
+  horasParaVencer: number | null;
+  rioNormal: boolean; // tiene aviso vigente pero el último dato ya no supera umbral
   pendiente: PendientePublicacion | null; // detección que pide crear/reemplazar
+  avisoPendiente: Alert | null; // aviso ya generado que espera aprobación (modo manual)
   ultimoDato: string | null;
   sinDato: boolean;
   modelos: number; // modelos distintos cargados en el grupo de pronóstico
@@ -50,10 +53,6 @@ function horasEntre(a: string, b: string): number {
   return (new Date(b).getTime() - new Date(a).getTime()) / 3600000;
 }
 
-function diasEntre(a: string, b: string): number {
-  return Math.round((new Date(`${b}T00:00`).getTime() - new Date(`${a}T00:00`).getTime()) / 86400000);
-}
-
 // Grupo de pronóstico vigente: los 3 días siguientes al reloj del mock
 // (el mismo bloque que abre por defecto /admin/pronostico).
 export function grupoPronostico(ahora: string): string[] {
@@ -72,7 +71,6 @@ export interface DatosPanel {
 
 export function filasPanel(d: DatosPanel): FilaPanel[] {
   const grupo = grupoPronostico(d.ahora);
-  const hoy = d.ahora.slice(0, 10);
 
   return d.stations.map((s) => {
     const enMantenimiento = s.estado === "mantenimiento";
@@ -98,8 +96,11 @@ export function filasPanel(d: DatosPanel): FilaPanel[] {
       modo: s.modoPublicacion ?? "automatico",
       enMantenimiento,
       aviso,
-      diasParaVencer: aviso ? diasEntre(hoy, aviso.fin) : null,
+      vence: aviso ? venceEn(aviso) : null,
+      horasParaVencer: aviso ? horasEntre(d.ahora, venceEn(aviso)) : null,
+      rioNormal: aviso !== null && det !== undefined && !det.excedido,
       pendiente,
+      avisoPendiente: avisoPendiente(s.id, d.alerts),
       ultimoDato,
       sinDato,
       modelos,
@@ -116,7 +117,7 @@ const SEVERIDAD: Record<NivelAlerta, number> = { ROJO: 0, NARANJA: 1, AMARILLO: 
 function prioridad(f: FilaPanel): number[] {
   if (f.pendiente) return [0, SEVERIDAD[f.pendiente.nivel]];
   if (f.sinDato) return [1, 0];
-  if (f.aviso) return [2, SEVERIDAD[f.aviso.nivel], f.diasParaVencer ?? 0];
+  if (f.aviso) return [2, SEVERIDAD[f.aviso.nivel], f.horasParaVencer ?? 0];
   if (f.pronosticoPendiente) return [3, 0];
   return [4, 0];
 }

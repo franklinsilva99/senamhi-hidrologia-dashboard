@@ -13,9 +13,38 @@ import { RECOMENDACION } from "./nivelesPeligro";
 
 export type AccionAviso = "mantener" | "crear" | "reemplazar";
 
-// Pool 1: ¿Existe aviso previo vigente en esa estación?
+// Un aviso sin `estado` (avisos base) se considera publicado.
+export function esPublicado(a: Alert): boolean {
+  return (a.estado ?? "publicado") === "publicado";
+}
+
+// Pool 1: ¿Existe aviso previo vigente (publicado) en esa estación?
 export function existeAvisoPrevio(stationId: string, alerts: Alert[]): Alert | null {
-  return alerts.find((a) => a.stationId === stationId && a.vigente) ?? null;
+  return alerts.find((a) => a.stationId === stationId && a.vigente && esPublicado(a)) ?? null;
+}
+
+// Aviso de la estación que espera aprobación (modo manual).
+export function avisoPendiente(stationId: string, alerts: Alert[]): Alert | null {
+  return alerts.find((a) => a.stationId === stationId && a.estado === "pendiente") ?? null;
+}
+
+const mismoAviso = (a: Alert, b: Alert) => a.ca === b.ca && a.ce === b.ce;
+
+// Fin exacto de la vigencia. Avisos sin `vence` (overlay antiguo): fin del día `fin`.
+export function venceEn(a: Alert): string {
+  return a.vence ?? `${a.fin}T23:59`;
+}
+
+export function estaVencido(a: Alert, ahora: string): boolean {
+  return ahora >= venceEn(a);
+}
+
+// La vigencia se deriva al leer: un aviso publicado deja de estar vigente al
+// cumplirse su duración. Al volver el río a la normalidad no se cierra solo;
+// vence por su vigencia o el operador lo deshabilita. Función pura.
+export function aplicarVencimiento(alerts: Alert[], ahora: string): Alert[] {
+  if (!ahora) return alerts;
+  return alerts.map((a) => (a.vigente && esPublicado(a) && estaVencido(a, ahora) ? { ...a, vigente: false } : a));
 }
 
 // Secuencia global de avisos: máximo + 1 (nro) y máximo + 1 (ca)
@@ -52,6 +81,7 @@ export interface PreparacionAviso {
   recomendaciones: string;
   fechaEmision: string;
   fin: string;
+  vence: string;
   duracionHoras: number;
   plazo: "normal" | "extendido";
   poblados: string[];
@@ -105,6 +135,7 @@ export function prepararAviso(
   const finDate = new Date(hoy);
   finDate.setHours(finDate.getHours() + duracionHoras);
   const fin = fechaLocal(finDate);
+  const vence = `${fin}T${String(finDate.getHours()).padStart(2, "0")}:${String(finDate.getMinutes()).padStart(2, "0")}`;
 
   const tendencia = tipo === "vaciante" ? "con tendencia descendente" : "con tendencia ascendente";
   const descripcion = `El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del ${cuerpoAgua}. La estación hidrológica ${station.estacion.toUpperCase()}, registró un ${variable} de ${valorMostrado.toFixed(2)} ${unidad}, ${tendencia}, ubicándose en el umbral ${nivel}. Las potenciales áreas de afectación serían los centros poblados de ${station.poblados.map((p) => p.toUpperCase()).join(", ")}. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.`;
@@ -113,7 +144,7 @@ export function prepararAviso(
 
   return {
     titulo, cuerpoAgua, distrito, nivel, descripcion, recomendaciones,
-    fechaEmision, fin, duracionHoras, plazo, poblados: station.poblados, tipo,
+    fechaEmision, fin, vence, duracionHoras, plazo, poblados: station.poblados, tipo,
   };
 }
 
@@ -154,6 +185,7 @@ export function crearAviso(d: DatosCrearAviso): Alert {
     distrito: preparacion.distrito,
     inicio,
     fin: preparacion.fin,
+    vence: preparacion.vence,
     duracionHoras: preparacion.duracionHoras,
     nivel: preparacion.nivel,
     plazo: preparacion.plazo,
@@ -203,6 +235,49 @@ export function aplicarAviso(
   return { next: base.concat(aviso), texto: `Aviso #${aviso.nro} publicado correctamente (${aviso.nivel}).` };
 }
 
+// Modo manual ("Preparar aviso cuya publicación debe ser aprobada"): el aviso queda
+// pendiente, sin publicarse ni desactivar el anterior. Si la estación ya tenía un
+// pendiente de otro nivel o tipo, se reemplaza conservando su número. Función pura.
+export function dejarPendiente(
+  base: Alert[],
+  aviso: Alert
+): { next: Alert[]; texto: string | null } {
+  const pendiente: Alert = { ...aviso, estado: "pendiente", vigente: false };
+  const previo = avisoPendiente(aviso.stationId, base);
+  if (!previo) {
+    return { next: base.concat(pendiente), texto: `Aviso #${aviso.nro} pendiente de aprobación (${aviso.nivel}).` };
+  }
+  if (previo.nivel === aviso.nivel && previo.tipo === aviso.tipo) return { next: base, texto: null };
+  return {
+    next: base.map((a) => (mismoAviso(a, previo) ? { ...pendiente, nro: previo.nro, ca: previo.ca } : a)),
+    texto: `Aviso #${previo.nro} pendiente actualizado (${previo.nivel} → ${aviso.nivel}).`,
+  };
+}
+
+// Aprobar un pendiente: se publica y recién ahí se desactiva el aviso vigente anterior,
+// para que la estación no quede sin aviso público mientras espera. Función pura.
+export function aprobarAviso(base: Alert[], aviso: Alert): { next: Alert[]; texto: string } {
+  const previo = existeAvisoPrevio(aviso.stationId, base);
+  const next = base.map((a) => {
+    if (mismoAviso(a, aviso)) return { ...a, estado: "publicado" as const, vigente: true, validadoDZ: true };
+    if (previo && mismoAviso(a, previo)) return { ...a, vigente: false };
+    return a;
+  });
+  return {
+    next,
+    texto: previo
+      ? `Aviso #${aviso.nro} aprobado y publicado (${aviso.nivel}). Aviso #${previo.nro} desactivado.`
+      : `Aviso #${aviso.nro} aprobado y publicado (${aviso.nivel}).`,
+  };
+}
+
+export function descartarAviso(base: Alert[], aviso: Alert): { next: Alert[]; texto: string } {
+  return {
+    next: base.map((a) => (mismoAviso(a, aviso) ? { ...a, estado: "descartado" as const, vigente: false } : a)),
+    texto: `Aviso #${aviso.nro} descartado.`,
+  };
+}
+
 export interface DepsProcesarDeteccion {
   stations: Station[];
   latest: Record<string, Observation>;
@@ -212,6 +287,8 @@ export interface DepsProcesarDeteccion {
 }
 
 // Orquestador: recorre la detección y aplica crear/reemplazar/mantener sobre una colección.
+// Modo automático → publica (aplicarAviso). Modo manual → deja el aviso pendiente.
+// Un pendiente que ya no corresponde (no supera umbral o el vigente ya lo cubre) se descarta.
 export function procesarDeteccion(
   base: Alert[],
   det: DeteccionAviso[],
@@ -219,13 +296,27 @@ export function procesarDeteccion(
 ): { next: Alert[]; textos: string[] } {
   let next = base;
   const textos: string[] = [];
+  const descartarPendiente = (stationId: string, motivo: string) => {
+    const p = avisoPendiente(stationId, next);
+    if (!p) return;
+    next = descartarAviso(next, p).next;
+    textos.push(`Aviso #${p.nro} pendiente descartado: ${motivo}.`);
+  };
+
   for (const d of det) {
-    if (!d.excedido || !d.umbral) continue;
-    if (evaluarAccionAviso(d.stationId, d.umbral, d.tipo, next) === "mantener") continue;
+    if (!d.excedido || !d.umbral) {
+      descartarPendiente(d.stationId, "ya no supera umbral");
+      continue;
+    }
+    if (evaluarAccionAviso(d.stationId, d.umbral, d.tipo, next) === "mantener") {
+      descartarPendiente(d.stationId, "el aviso vigente ya cubre ese nivel");
+      continue;
+    }
     const station = deps.stations.find((s) => s.id === d.stationId);
     if (!station) continue;
-    // Solo auto-publica si la estación está en modo automático.
-    if (station.modoPublicacion === "manual") continue;
+    const manual = station.modoPublicacion === "manual";
+    if (!manual) descartarPendiente(d.stationId, "la estación pasó a publicación automática");
+    const pendiente = avisoPendiente(d.stationId, next);
     const preferencia = d.preferencia;
     const aviso = crearAviso({
       station,
@@ -234,12 +325,12 @@ export function procesarDeteccion(
       preferencia,
       mockNow: deps.mockNow,
       serie: deps.serieDe(d.stationId),
-      nro: siguienteNro(next),
-      ca: siguienteCA(next),
+      nro: pendiente?.nro ?? siguienteNro(next),
+      ca: pendiente?.ca ?? siguienteCA(next),
     });
-    const res = aplicarAviso(next, aviso);
+    const res = manual ? dejarPendiente(next, aviso) : aplicarAviso(next, aviso);
     next = res.next;
-    textos.push(res.texto);
+    if (res.texto) textos.push(res.texto);
   }
   return { next, textos };
 }

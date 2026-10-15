@@ -1,4 +1,5 @@
 import type { Station } from "@/lib/domain/types";
+import { unidadMostrada, valorMostrado } from "@/lib/domain/unidades";
 
 export default function TablaDatosAviso({
   station,
@@ -21,11 +22,11 @@ export default function TablaDatosAviso({
   umbralRojoRel?: number;
 }) {
   const esNivel = preferencia === "nivel";
-  const offset = esNivel && cota != null ? (cota as number) : 0;
-  const unidad = esNivel ? "m.s.n.m." : "m³/s";
+  const unidad = unidadMostrada(preferencia, cota);
 
+  // nivelActual ya viene como se muestra (absoluto con cota, relativo sin cota).
   const valorActual = esNivel ? nivelActual : caudalActual;
-  const umbralRojo = umbralRojoRel != null ? umbralRojoRel + offset : undefined;
+  const umbralRojo = umbralRojoRel != null ? valorMostrado(umbralRojoRel, preferencia, cota) : undefined;
 
   const etiquetaActual = esNivel
     ? `Nivel${hora ? ` a las ${hora}` : " actual"} (${unidad})`

@@ -66,7 +66,7 @@ sequenceDiagram
    - sin aviso previo → `crear`.
    - con previo y mismo nivel → `mantener` (no hace nada).
    - con previo y distinto nivel → `reemplazar` (desactiva el anterior + crea).
-4. **Pool 2 (preparación)**: si es nivel y hay cota, `nivel absoluto = nivel relativo + cota` (solo visualización). La vigencia sale de `Umbral.vigenciaHrs` del umbral excedido (avenida y vaciante se evalúan a la vez; solo cuentan los umbrales cuyo periodo cubre la fecha).
+4. **Pool 2 (preparación)**: si es nivel y hay cota, `nivel absoluto = nivel relativo + cota` (solo visualización); si no hay cota, el nivel se muestra y guarda (`Alert.nivelActual`) como relativo en **m**. Regla única en `lib/domain/unidades.ts`. La vigencia sale de `Umbral.vigenciaHrs` del umbral excedido (avenida y vaciante se evalúan a la vez; solo cuentan los umbrales cuyo periodo cubre la fecha).
 5. **Publicación** (`procesarDeteccion`, compuerta "¿publicación automática?"):
    - `modoPublicacion === "automatico"` → publica (`aplicarAviso`).
    - `"manual"` → `dejarPendiente`: el aviso se lista con `estado: "pendiente"` y `vigente: false`. No es público (`loadAlertsPublicados`) ni cuenta como aviso previo. Si sube o cambia de nivel antes de aprobarse, el pendiente se actualiza conservando su número.

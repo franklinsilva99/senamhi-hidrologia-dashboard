@@ -10,6 +10,7 @@ import type {
 } from "./types";
 import { clasificarActivos, valoresDe } from "./umbrales";
 import { RECOMENDACION } from "./nivelesPeligro";
+import { unidadMostrada, valorMostrado } from "./unidades";
 
 export type AccionAviso = "mantener" | "crear" | "reemplazar";
 
@@ -119,10 +120,11 @@ export function prepararAviso(
   if (!c) return null;
   const { tipo, nivel } = c;
 
-  // Pool 2: visualización en m.s.n.m. (Nivel absoluto = Nivel relativo + Cota)
-  const valorMostrado = esNivel && station.cota != null ? valorActual + station.cota : valorActual;
+  // Pool 2: si es nivel y hay cota, se muestra en m.s.n.m. (absoluto = relativo + cota);
+  // sin cota, el nivel relativo en m.
+  const mostrado = valorMostrado(valorActual, preferencia, station.cota);
   const variable = esNivel ? "NIVEL" : "CAUDAL";
-  const unidad = esNivel ? "m.s.n.m." : "m³/s";
+  const unidad = unidadMostrada(preferencia, station.cota);
   const hoy = mockNow ? new Date(mockNow.replace(" ", "T")) : new Date();
 
   const titulo = `SITUACIÓN ACTUAL DEL ${variable} DEL RÍO ${station.rio.toUpperCase()} - ESTACIÓN ${station.estacion.toUpperCase()}`;
@@ -138,7 +140,7 @@ export function prepararAviso(
   const vence = `${fin}T${String(finDate.getHours()).padStart(2, "0")}:${String(finDate.getMinutes()).padStart(2, "0")}`;
 
   const tendencia = tipo === "vaciante" ? "con tendencia descendente" : "con tendencia ascendente";
-  const descripcion = `El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del ${cuerpoAgua}. La estación hidrológica ${station.estacion.toUpperCase()}, registró un ${variable} de ${valorMostrado.toFixed(2)} ${unidad}, ${tendencia}, ubicándose en el umbral ${nivel}. Las potenciales áreas de afectación serían los centros poblados de ${station.poblados.map((p) => p.toUpperCase()).join(", ")}. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.`;
+  const descripcion = `El SENAMHI, organismo adscrito al Ministerio del Ambiente, informa sobre el comportamiento hidrológico del ${cuerpoAgua}. La estación hidrológica ${station.estacion.toUpperCase()}, registró un ${variable} de ${mostrado.toFixed(2)} ${unidad}, ${tendencia}, ubicándose en el umbral ${nivel}. Las potenciales áreas de afectación serían los centros poblados de ${station.poblados.map((p) => p.toUpperCase()).join(", ")}. Se recomienda a la población tomar las precauciones correspondientes y evitar realizar cualquier actividad cercana al río. El SENAMHI continuará vigilante al comportamiento del río y sugiere a la ciudadanía mantenerse informada a través de la web institucional y redes sociales.`;
 
   const recomendaciones = RECOMENDACION[tipo][nivel];
 
@@ -172,8 +174,8 @@ export function crearAviso(d: DatosCrearAviso): Alert {
 
   const esNivel = preferencia === "nivel";
   const cota = station.cota ?? null;
-  // Nivel absoluto (m.s.n.m.) = Nivel relativo + Cota
-  const nivelActual = esNivel && cota !== null ? (latestObs?.nivel ?? 0) + cota : undefined;
+  // Nivel tal como se muestra: absoluto (m.s.n.m.) si hay cota, relativo (m) si no.
+  const nivelActual = esNivel ? valorMostrado(latestObs?.nivel ?? 0, preferencia, cota) : undefined;
 
   return {
     nro,

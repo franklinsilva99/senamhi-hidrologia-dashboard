@@ -13,6 +13,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `Station.cota` es la elevación del **cero de la regla** (datum) en m.s.n.m.
 - **Nivel absoluto = Nivel relativo + Cota** (Pool 2 del flujo Bizagi).
 - La **detección de avisos (Pool 1) compara nivel relativo contra umbrales relativos — NO usa cota**. La cota solo se usa para visualización (hidrograma, tabla, descripción en m.s.n.m.).
+- Unidad y valor mostrados: **`lib/domain/unidades.ts`** (`unidadMostrada`, `valorMostrado`) es la única regla — caudal en m³/s; nivel con cota en m.s.n.m.; **nivel sin cota en m (relativo)**. No repetir la regla en componentes. Hoy El Tigre, Cirato y Santo Domingo no tienen cota en `data/cotas.json`.
 - Valores actuales del PoC: tomados de `Estaciones.xlsx` (columna `ALTITUD (m)`), con `cotaFuente: "inventario-altitud"`. Son una **aproximación** (altitud del terreno ≈ cota, error de pocos metros) y **no afectan el nivel de alerta**, solo el desplazamiento del eje. Las cotas viven en `data/cotas.json` y se resuelven en la ficha al leer (`lib/infra/cotas.ts`).
 - **En producción**: reemplazar por la cota oficial de la Dirección Zonal (cero de la regla, nivelación GNSS) y marcar `cotaFuente: "oficial"`.
 - Validación: `cota = nivel_msnm_publicado − lectura_relativa` si se cuenta con un aviso real.

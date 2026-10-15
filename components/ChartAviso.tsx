@@ -5,6 +5,7 @@ import {
 } from "recharts";
 import ChartTooltip from "@/components/ChartTooltip";
 import type { Observation, TipoAviso } from "@/lib/domain/types";
+import { unidadMostrada } from "@/lib/domain/unidades";
 
 const C_AMARILLO = "#ffeb3b";
 const C_NARANJA = "#fca326";
@@ -61,7 +62,7 @@ export default function ChartAviso({
   const isNivel = preferencia === "nivel";
   const tieneCota = isNivel && cota != null;
   const offset = tieneCota ? (cota as number) : 0;
-  const unidad = isNivel ? (tieneCota ? "m.s.n.m." : "m") : "m³/s";
+  const unidad = unidadMostrada(preferencia, cota);
   const varName = isNivel ? "Nivel" : "Caudal";
   const varTitle = isNivel ? "NIVEL" : "CAUDAL";
 

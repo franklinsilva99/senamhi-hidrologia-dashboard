@@ -7,6 +7,7 @@ import { getUmbralesActivos } from "@/lib/infra/umbrales";
 import { detectarSiCorresponde, ejecutarDeteccion, reiniciarDeteccion, ultimaHoraProcesada } from "@/lib/infra/deteccionHoraria";
 import { esPublicado, estaVencido, venceEn, existeAvisoPrevio, avisoPendiente, crearAviso, evaluarAccionAviso, siguienteNro, siguienteCA, aplicarAviso, aprobarAviso, descartarAviso } from "@/lib/domain/avisos";
 import type { Alert, DeteccionAviso, Station } from "@/lib/domain/types";
+import { unidadMostrada } from "@/lib/domain/unidades";
 import { USUARIO } from "@/lib/sesion";
 import ChartAviso from "@/components/ChartAviso";
 
@@ -194,8 +195,8 @@ export default function AdminAvisosPage() {
                     const previo = existeAvisoPrevio(d.stationId, alerts);
                     const pendiente = avisoPendiente(d.stationId, alerts);
                     const accion = evaluarAccionAviso(d.stationId, d.umbral ?? "", d.tipo, alerts);
-                    const valorMostrar = d.preferencia === "caudal" ? d.valorActual : d.valorAbsoluto ?? d.valorActual;
-                    const unidadMostrar = d.preferencia === "caudal" ? "m³/s" : "m.s.n.m.";
+                    const valorMostrar = d.valorAbsoluto ?? d.valorActual;
+                    const unidadMostrar = unidadMostrada(d.preferencia, st?.cota);
                     return (
                       <tr key={d.stationId} className="border-t hover:bg-slate-50">
                         <td className="p-2 font-semibold">{st?.estacion ?? d.stationId}</td>

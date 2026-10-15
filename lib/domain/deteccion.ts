@@ -6,6 +6,7 @@ import type {
   Variable,
 } from "./types";
 import { clasificarActivos } from "./umbrales";
+import { valorMostrado } from "./unidades";
 
 // Pool 1 (Bizagi) reducido: clasificar el último dato de cada estación contra sus umbrales.
 // Recibe todo por parámetro (dominio puro, sin localStorage ni JSON).
@@ -27,11 +28,8 @@ export function detectarAvisos(
     // Pool 1: la detección compara el valor RELATIVO contra umbrales relativos (sin cota).
     const valorActual = preferencia === "caudal" ? obs.caudal : obs.nivel;
     const c = clasificarActivos(valorActual, umbralesDe(s.id, preferencia, fecha));
-    // m.s.n.m. solo para visualización (Nivel absoluto = Nivel relativo + Cota).
-    const valorAbsoluto =
-      preferencia === "nivel" && s.cota != null
-        ? obs.nivel + s.cota
-        : valorActual;
+    // Solo para visualización: m.s.n.m. si hay cota, relativo si no.
+    const valorAbsoluto = valorMostrado(valorActual, preferencia, s.cota);
     return {
       stationId: s.id,
       valorActual,

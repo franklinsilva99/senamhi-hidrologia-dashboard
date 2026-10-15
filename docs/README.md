@@ -20,6 +20,12 @@ El PoC ya separa las capas (dominio puro / puertos / adaptadores), por lo que el
 | [05-flujo-avisos.md](./05-flujo-avisos.md) | Flujo y datos del módulo de Avisos (detección → compuertas → publicación). |
 | [06-mapeo-poc-produccion.md](./06-mapeo-poc-produccion.md) | Equivalencias PoC → producción, capa por capa. |
 
+### Propuestas (no implementadas)
+
+| Doc | Contenido |
+| --- | --- |
+| [propuestas/avisos-bandeja/](./propuestas/avisos-bandeja/README.md) | Rediseño de `/admin/avisos` para cientos de estaciones: ciclo de vida, pestañas, filtros, acciones en lote. Incluye maqueta interactiva (`maqueta.html`). |
+
 ## Reglas transversales importantes
 
 1. **Reloj del mock (`getMockNow`)**: es la fecha más reciente de la serie observada. Todo el dominio (avisos, pronóstico) deriva sus fechas de este reloj, **no** de `new Date()`, para que la línea de tiempo coincida con la data.

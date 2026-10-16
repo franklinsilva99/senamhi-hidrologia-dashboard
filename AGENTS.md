@@ -22,10 +22,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Pool 1 "Listar avisos": preferencia caudal/nivel → comparar último dato vs umbrales → compuerta "¿nivel del aviso vigente es diferente?" → "¿existe aviso previo?" → "¿publicación automática?".
 - Pool 2 "Preparación de Aviso": datos 72h → si nivel y hay cota, sumar cota → hidrograma, título, etiquetas → generar aviso (vigencia según configuración).
-- `lib/deteccion.ts`: `detectarAvisos` (usa `Station.preferencia` + umbrales activos de avenida y vaciante).
-- `lib/avisos.ts`: `evaluarAccionAviso` → `"mantener" | "crear" | "reemplazar"`, `prepararAviso`, `crearAviso`.
-- `lib/umbrales.ts`: `clasificarNivel` (avenida = mayor es peor; vaciante = menor es peor).
-- Modo de publicación por estación (`Station.modoPublicacion`, editable en Configuración general). En modo **manual** el aviso queda `Alert.estado = "pendiente"` (no público, no cuenta como previo); `aprobarAviso` lo publica y recién ahí desactiva el anterior. Las vistas públicas usan `loadAlertsPublicados()`.
+- `lib/domain/deteccion.ts`: `detectarAvisos` (usa `Station.preferencia` + umbrales activos de avenida y vaciante).
+- `lib/domain/avisos.ts`: `evaluarAccionAviso` → `"mantener" | "crear" | "reemplazar"`, `prepararAviso`, `crearAviso`.
+- `lib/domain/umbrales.ts`: `clasificarNivel` (avenida = mayor es peor; vaciante = menor es peor).
+- Modo de publicación por estación (`Station.modoPublicacion`, editable en Configuración general). En modo **manual** el aviso queda `Alert.estado = "pendiente"` (no público, no cuenta como previo); `aprobarAviso` lo publica y recién ahí desactiva el anterior. Las vistas públicas usan `avisosPublicadosActualizados()`.
 - **Disparo**: job horario simulado en `lib/infra/deteccionHoraria.ts` (primera lectura de cada hora de datos ejecuta detección + publicación). Las vistas leen avisos con `avisosActualizados()` / `avisosPublicadosActualizados()`, no con `loadAlerts` directo. En producción, reemplazar por scheduler/ingesta.
 - **Vigencia derivada al leer**: `Alert.vence` (emisión + `duracionHoras`); `getAlerts`/`loadAlerts` aplican `aplicarVencimiento` contra `getMockNow()`. Un aviso vencido no cuenta como previo. Al volver el río a la normalidad el aviso **no se cierra solo**: vence por su vigencia o el operador lo deshabilita (el admin lo marca "río normalizado").
 
